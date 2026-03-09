@@ -13,25 +13,26 @@
 4. [State Management — useState](#4-state-management--usestate)
 5. [Props vs State](#5-props-vs-state)
 6. [Event Handling](#6-event-handling)
-7. [API Calls — fetch / axios](#7-api-calls--fetch--axios)
-8. [useEffect — Component Lifecycle](#8-useeffect--component-lifecycle)
-9. [Project Structure](#9-project-structure)
-10. [React Router — Navigation](#10-react-router--navigation)
-11. [Context API — Global State](#11-context-api--global-state)
-12. [Protected Routes — Authorization](#12-protected-routes--authorization)
-13. [useRef — DOM Access and Mutable Values](#13-useref--dom-access-and-mutable-values)
-14. [useMemo and useCallback — Performance](#14-usememo-and-usecallback--performance)
-15. [Custom Hooks — Reusable Logic](#15-custom-hooks--reusable-logic)
-16. [Form Handling — React Hook Form](#16-form-handling--react-hook-form)
-17. [Lifting State Up and Composition](#17-lifting-state-up-and-composition)
-18. [Error Handling — Error Boundary](#18-error-handling--error-boundary)
-19. [Styling Approaches](#19-styling-approaches)
-20. [Deployment and Build](#20-deployment-and-build)
-21. [Redux Toolkit — State Management](#21-redux-toolkit--state-management)
-22. [CRUD Application Guide](#22-crud-application-guide)
+7. [useEffect — Component Lifecycle](#7-useeffect--component-lifecycle)
+8. [API Calls — fetch / axios](#8-api-calls--fetch--axios)
+9. [useReducer — Complex State Management](#9-usereducer--complex-state-management)
+10. [Project Structure](#10-project-structure)
+11. [React Router — Navigation](#11-react-router--navigation)
+12. [Context API — Global State](#12-context-api--global-state)
+13. [Protected Routes — Authorization](#13-protected-routes--authorization)
+14. [useRef — DOM Access and Mutable Values](#14-useref--dom-access-and-mutable-values)
+15. [useMemo and useCallback — Performance](#15-usememo-and-usecallback--performance)
+16. [Custom Hooks — Reusable Logic](#16-custom-hooks--reusable-logic)
+17. [Form Handling — React Hook Form](#17-form-handling--react-hook-form)
+18. [Lifting State Up and Composition](#18-lifting-state-up-and-composition)
+19. [Error Handling — Error Boundary](#19-error-handling--error-boundary)
+20. [Styling Approaches](#20-styling-approaches)
+21. [Deployment and Build](#21-deployment-and-build)
+22. [Redux Toolkit — State Management](#22-redux-toolkit--state-management)
 23. [Best Practices and Common Mistakes](#23-best-practices-and-common-mistakes)
 24. [Tips and Tricks](#24-tips-and-tricks)
 25. [Learning Path](#25-learning-path)
+26. [CRUD Application — Full Project](#26-crud-application--full-project)
 
 ---
 
@@ -402,7 +403,56 @@ onKeyDown   → React.KeyboardEvent<HTMLInputElement>
 
 ---
 
-## 7. API Calls — fetch / axios
+## 7. useEffect — Component Lifecycle
+
+### Lifecycle Comparison
+
+| Phase | C# | React useEffect |
+|---|---|---|
+| **Mount** | Constructor / OnInitialized | `useEffect(() => {}, [])` |
+| **Update** | Property setter | `useEffect(() => {}, [value])` |
+| **Unmount** | `Dispose()` | return function from useEffect |
+
+### Mount — Runs Once on Load
+
+```tsx
+useEffect(() => {
+  fetchData(); // API call on component load
+}, []); // Empty array = runs once
+```
+
+### Update — Runs When Dependency Changes
+
+```tsx
+useEffect(() => {
+  fetchProduct(selectedId);
+}, [selectedId]); // Runs when selectedId changes
+```
+
+### Unmount — Cleanup (Like IDisposable)
+
+```tsx
+useEffect(() => {
+  const timer = setInterval(() => {
+    setTime(new Date().toLocaleTimeString());
+  }, 1000);
+
+  return () => clearInterval(timer); // Cleanup on unmount
+}, []);
+```
+
+### Quick Reference
+
+```
+[]        →  Constructor     (runs once)
+[value]   →  Property Setter (runs when value changes)
+return fn →  Dispose         (cleanup)
+no array  →  Every render    (usually avoid)
+```
+
+---
+
+## 8. API Calls — fetch / axios
 
 ### Comparison
 
@@ -491,56 +541,189 @@ const handleDelete = async (id: number) => {
 
 ---
 
-## 8. useEffect — Component Lifecycle
+## 9. useReducer — Complex State Management
 
-### Lifecycle Comparison
+### Why useReducer?
 
-| Phase | C# | React useEffect |
+`useState` যখন simple state এর জন্য যথেষ্ট, তখন complex state logic এর জন্য `useReducer` better choice। এটা .NET এর **Command Pattern / CQRS** এর মতো কাজ করে।
+
+### Comparison
+
+| Aspect | C# | React useReducer |
 |---|---|---|
-| **Mount** | Constructor / OnInitialized | `useEffect(() => {}, [])` |
-| **Update** | Property setter | `useEffect(() => {}, [value])` |
-| **Unmount** | `Dispose()` | return function from useEffect |
+| State container | ViewModel / Entity | `state` object |
+| Command | Command class / MediatR Request | `action` object |
+| Handler | Command Handler | `reducer` function |
+| Dispatch | `mediator.Send(command)` | `dispatch(action)` |
 
-### Mount — Runs Once on Load
+### useState vs useReducer
 
-```tsx
-useEffect(() => {
-  fetchData(); // API call on component load
-}, []); // Empty array = runs once
-```
+| | useState | useReducer |
+|---|---|---|
+| Best for | Simple, independent values | Complex, related state |
+| Update logic | Inline in event handler | Centralized in reducer |
+| Multiple actions | Multiple `setState` calls | Single `dispatch` |
+| Debugging | Hard to trace | Easy — all logic in one place |
+| C# equivalent | Property setter | Command Handler |
 
-### Update — Runs When Dependency Changes
-
-```tsx
-useEffect(() => {
-  fetchProduct(selectedId);
-}, [selectedId]); // Runs when selectedId changes
-```
-
-### Unmount — Cleanup (Like IDisposable)
+### Basic Example — Counter
 
 ```tsx
-useEffect(() => {
-  const timer = setInterval(() => {
-    setTime(new Date().toLocaleTimeString());
-  }, 1000);
+import { useReducer } from "react";
 
-  return () => clearInterval(timer); // Cleanup on unmount
-}, []);
+// Action types — Command definitions
+type CounterAction =
+  | { type: "INCREMENT" }
+  | { type: "DECREMENT" }
+  | { type: "RESET" }
+  | { type: "SET"; payload: number };
+
+// State type
+interface CounterState {
+  count: number;
+}
+
+// Reducer — Command Handler (pure function)
+function counterReducer(state: CounterState, action: CounterAction): CounterState {
+  switch (action.type) {
+    case "INCREMENT":
+      return { count: state.count + 1 };
+    case "DECREMENT":
+      return { count: state.count - 1 };
+    case "RESET":
+      return { count: 0 };
+    case "SET":
+      return { count: action.payload };
+    default:
+      return state;
+  }
+}
+
+function Counter() {
+  const [state, dispatch] = useReducer(counterReducer, { count: 0 });
+
+  return (
+    <div>
+      <h2>Count: {state.count}</h2>
+      <button onClick={() => dispatch({ type: "INCREMENT" })}>+1</button>
+      <button onClick={() => dispatch({ type: "DECREMENT" })}>-1</button>
+      <button onClick={() => dispatch({ type: "RESET" })}>Reset</button>
+      <button onClick={() => dispatch({ type: "SET", payload: 100 })}>Set 100</button>
+    </div>
+  );
+}
 ```
 
-### Quick Reference
+### Real Example — Form State Management
+
+```tsx
+interface FormState {
+  name: string;
+  email: string;
+  isSubmitting: boolean;
+  error: string | null;
+}
+
+type FormAction =
+  | { type: "SET_FIELD"; field: string; value: string }
+  | { type: "SUBMIT_START" }
+  | { type: "SUBMIT_SUCCESS" }
+  | { type: "SUBMIT_ERROR"; error: string }
+  | { type: "RESET" };
+
+const initialState: FormState = {
+  name: "",
+  email: "",
+  isSubmitting: false,
+  error: null,
+};
+
+function formReducer(state: FormState, action: FormAction): FormState {
+  switch (action.type) {
+    case "SET_FIELD":
+      return { ...state, [action.field]: action.value, error: null };
+    case "SUBMIT_START":
+      return { ...state, isSubmitting: true, error: null };
+    case "SUBMIT_SUCCESS":
+      return { ...initialState }; // Reset form
+    case "SUBMIT_ERROR":
+      return { ...state, isSubmitting: false, error: action.error };
+    case "RESET":
+      return { ...initialState };
+    default:
+      return state;
+  }
+}
+
+function ContactForm() {
+  const [state, dispatch] = useReducer(formReducer, initialState);
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    dispatch({ type: "SUBMIT_START" });
+    try {
+      await axios.post("/api/contact", { name: state.name, email: state.email });
+      dispatch({ type: "SUBMIT_SUCCESS" });
+    } catch {
+      dispatch({ type: "SUBMIT_ERROR", error: "Failed to submit" });
+    }
+  };
+
+  return (
+    <form onSubmit={handleSubmit}>
+      {state.error && <p className="text-red-500">{state.error}</p>}
+      <input
+        value={state.name}
+        onChange={(e) => dispatch({ type: "SET_FIELD", field: "name", value: e.target.value })}
+      />
+      <input
+        value={state.email}
+        onChange={(e) => dispatch({ type: "SET_FIELD", field: "email", value: e.target.value })}
+      />
+      <button disabled={state.isSubmitting}>
+        {state.isSubmitting ? "Sending..." : "Submit"}
+      </button>
+    </form>
+  );
+}
+```
+
+### useReducer + Context — Scalable State Management
+
+```tsx
+// Context + useReducer = mini Redux (without extra library)
+const TodoContext = createContext<{
+  state: TodoState;
+  dispatch: React.Dispatch<TodoAction>;
+} | undefined>(undefined);
+
+export function TodoProvider({ children }: { children: ReactNode }) {
+  const [state, dispatch] = useReducer(todoReducer, { todos: [] });
+
+  return (
+    <TodoContext.Provider value={{ state, dispatch }}>
+      {children}
+    </TodoContext.Provider>
+  );
+}
+```
+
+### When to Use Which
 
 ```
-[]        →  Constructor     (runs once)
-[value]   →  Property Setter (runs when value changes)
-return fn →  Dispose         (cleanup)
-no array  →  Every render    (usually avoid)
+useState     →  Simple values (string, number, boolean)
+             →  Independent state (toggle, input value)
+             →  1-2 state variables
+
+useReducer   →  Complex objects with multiple fields
+             →  State transitions depend on previous state
+             →  Multiple related actions (CRUD operations)
+             →  Shared logic via Context + useReducer
 ```
 
 ---
 
-## 9. Project Structure
+## 10. Project Structure
 
 ### .NET vs React Project Comparison
 
@@ -666,7 +849,7 @@ export function useProducts() {
 
 ---
 
-## 10. React Router — Navigation
+## 11. React Router — Navigation
 
 ### Setup
 
@@ -772,7 +955,7 @@ import { NavLink } from "react-router-dom";
 
 ---
 
-## 11. Context API — Global State
+## 12. Context API — Global State
 
 ### Why Context API?
 
@@ -953,7 +1136,7 @@ Consider alternatives when:
 
 ---
 
-## 12. Protected Routes — Authorization
+## 13. Protected Routes — Authorization
 
 ### Comparison
 
@@ -1026,7 +1209,7 @@ export function RoleProtectedRoute({
 
 ---
 
-## 13. useRef — DOM Access and Mutable Values
+## 14. useRef — DOM Access and Mutable Values
 
 ### Comparison
 
@@ -1094,7 +1277,7 @@ function StopWatch() {
 
 ---
 
-## 14. useMemo and useCallback — Performance
+## 15. useMemo and useCallback — Performance
 
 ### useMemo — Cache Expensive Calculations
 
@@ -1157,7 +1340,7 @@ DON'T optimize:
 
 ---
 
-## 15. Custom Hooks — Reusable Logic
+## 16. Custom Hooks — Reusable Logic
 
 ### Comparison
 
@@ -1256,7 +1439,7 @@ const { value: theme, setValue: setTheme } = useLocalStorage("theme", "light");
 
 ---
 
-## 16. Form Handling — React Hook Form
+## 17. Form Handling — React Hook Form
 
 ### Setup
 
@@ -1339,7 +1522,7 @@ asp-validation-for      →  errors.name?.message
 
 ---
 
-## 17. Lifting State Up and Composition
+## 18. Lifting State Up and Composition
 
 ### Lifting State Up
 
@@ -1403,7 +1586,7 @@ function Card({ title, children }: CardProps) {
 
 ---
 
-## 18. Error Handling — Error Boundary
+## 19. Error Handling — Error Boundary
 
 ### Error Boundary Component
 
@@ -1488,7 +1671,7 @@ export function ToastProvider({ children }: { children: ReactNode }) {
 
 ---
 
-## 19. Styling Approaches
+## 20. Styling Approaches
 
 ### Comparison
 
@@ -1564,7 +1747,7 @@ const cardStyle: CSSProperties = {
 
 ---
 
-## 20. Deployment and Build
+## 21. Deployment and Build
 
 ### Comparison
 
@@ -1638,7 +1821,7 @@ export default defineConfig({
 
 ---
 
-## 21. Redux Toolkit — State Management
+## 22. Redux Toolkit — State Management
 
 ### When to Use Redux vs Context
 
@@ -1772,81 +1955,6 @@ extraReducers: (builder) => {
       state.error = action.error.message || "Failed";
     });
 },
-```
-
----
-
-## 22. CRUD Application Guide
-
-### Tech Stack
-
-- React + TypeScript + Vite
-- Context API for state management
-- json-server for mock backend
-- Tailwind CSS for styling
-- Manual useState for form handling
-
-### Project Structure
-
-```
-src/
-├── components/           — Reusable UI (Partial Views)
-│   ├── ProductCard.tsx
-│   ├── ProductForm.tsx
-│   └── Spinner.tsx
-├── context/              — Context API (DI Container)
-│   └── ProductContext.tsx
-├── pages/                — Pages (Controller + View)
-│   ├── ProductListPage.tsx
-│   ├── ProductCreatePage.tsx
-│   ├── ProductEditPage.tsx
-│   └── ProductDetailPage.tsx
-├── services/             — API calls (Service Layer)
-│   └── product.service.ts
-├── types/                — TypeScript interfaces (Models)
-│   └── product.types.ts
-├── App.tsx               — Router (Program.cs)
-├── main.tsx              — Entry point
-└── index.css             — Tailwind
-```
-
-### Setup Commands
-
-```bash
-npm create vite@latest product-crud -- --template react-ts
-cd product-crud
-npm install axios react-router-dom react-icons
-npm install -D tailwindcss @tailwindcss/vite json-server
-```
-
-### Data Flow
-
-```
-User clicks button
-  → Page component → handleSubmit(data)
-    → Context → addProduct(data)
-      → Service → axios.post("/products", data)
-        → json-server → saves to db.json
-      → Service → returns response
-    → Context → setProducts([...prev, newProduct])
-  → Component → auto re-render
-→ User sees updated UI
-```
-
-### .NET MVC to React Mapping
-
-```
-Models/Product.cs              →  types/product.types.ts
-Services/ProductService.cs     →  services/product.service.ts
-DI Container (Program.cs)     →  context/ProductContext.tsx
-ProductController              →  pages/ProductXxxPage.tsx
-Views/Product/Index.cshtml     →  pages/ProductListPage.tsx
-Views/Product/Create.cshtml    →  pages/ProductCreatePage.tsx
-Views/Product/Edit.cshtml      →  pages/ProductEditPage.tsx
-Views/Product/Details.cshtml   →  pages/ProductDetailPage.tsx
-Views/Shared/_Layout.cshtml    →  App.tsx (Navbar + Routes)
-Views/Shared/_ProductCard      →  components/ProductCard.tsx
-Program.cs MapRoute            →  App.tsx <Routes>
 ```
 
 ---
@@ -2161,6 +2269,900 @@ setTimeout(() => alert(countRef.current), 5000);
 - Design Patterns (Compound Components, Render Props, HOC)
 - Monorepo with Turborepo
 - Micro-frontend Architecture
+
+---
+
+## 26. CRUD Application — Full Project
+
+> এই section এ একটি complete Product CRUD application এর full code দেওয়া হলো।
+> সব concept যা আগের sections এ শেখা হয়েছে — সব এখানে practically apply করা হয়েছে।
+
+### Tech Stack
+
+- **React + TypeScript + Vite** — Frontend
+- **Context API** — State Management
+- **json-server** — Mock Backend (fake REST API)
+- **Tailwind CSS** — Styling
+- **React Router** — Navigation
+- **axios** — HTTP Calls
+
+### Project Structure
+
+```
+product-crud/
+├── db.json                   — json-server database
+├── package.json
+├── src/
+│   ├── types/
+│   │   └── product.types.ts  — Models (C# Model class)
+│   ├── services/
+│   │   └── product.service.ts — API calls (C# Service layer)
+│   ├── context/
+│   │   └── ProductContext.tsx — Global state (C# DI Container)
+│   ├── components/
+│   │   ├── Navbar.tsx        — Navigation bar
+│   │   ├── ProductCard.tsx   — Single product card (Partial View)
+│   │   ├── ProductForm.tsx   — Create/Edit form (shared)
+│   │   └── Spinner.tsx       — Loading indicator
+│   ├── pages/
+│   │   ├── ProductListPage.tsx   — Index (list all)
+│   │   ├── ProductCreatePage.tsx — Create new
+│   │   ├── ProductEditPage.tsx   — Edit existing
+│   │   └── ProductDetailPage.tsx — Details view
+│   ├── App.tsx               — Router setup (Program.cs)
+│   ├── main.tsx              — Entry point
+│   └── index.css             — Tailwind import
+```
+
+### .NET MVC to React Mapping
+
+```
+Models/Product.cs              →  types/product.types.ts
+Services/ProductService.cs     →  services/product.service.ts
+DI Container (Program.cs)     →  context/ProductContext.tsx
+ProductController              →  pages/ProductXxxPage.tsx
+Views/Product/Index.cshtml     →  pages/ProductListPage.tsx
+Views/Product/Create.cshtml    →  pages/ProductCreatePage.tsx
+Views/Product/Edit.cshtml      →  pages/ProductEditPage.tsx
+Views/Product/Details.cshtml   →  pages/ProductDetailPage.tsx
+Views/Shared/_Layout.cshtml    →  App.tsx (Navbar + Outlet)
+Views/Shared/_ProductCard      →  components/ProductCard.tsx
+Program.cs MapRoute            →  App.tsx <Routes>
+```
+
+### Setup Commands
+
+```bash
+npm create vite@latest product-crud -- --template react-ts
+cd product-crud
+npm install axios react-router-dom react-icons
+npm install -D tailwindcss @tailwindcss/vite json-server
+```
+
+### Data Flow
+
+```
+User clicks button
+  → Page component → handleSubmit(data)
+    → Context → addProduct(data)
+      → Service → axios.post("/products", data)
+        → json-server → saves to db.json
+      → Service → returns response
+    → Context → setProducts([...prev, newProduct])
+  → Component → auto re-render
+→ User sees updated UI
+```
+
+---
+
+### File 1: `db.json` — Mock Database
+
+```json
+{
+  "products": [
+    {
+      "id": 1,
+      "name": "Laptop",
+      "description": "High performance laptop for developers",
+      "price": 75000,
+      "inStock": true
+    },
+    {
+      "id": 2,
+      "name": "Wireless Mouse",
+      "description": "Ergonomic wireless mouse",
+      "price": 1500,
+      "inStock": true
+    },
+    {
+      "id": 3,
+      "name": "Mechanical Keyboard",
+      "description": "RGB mechanical keyboard with Cherry MX switches",
+      "price": 8500,
+      "inStock": false
+    }
+  ]
+}
+```
+
+**Run json-server:**
+
+```bash
+npx json-server db.json --port 3001
+```
+
+> এটা `http://localhost:3001/products` এ REST API দেবে — GET, POST, PUT, DELETE সব support করে।
+
+---
+
+### File 2: `src/types/product.types.ts` — Models
+
+```tsx
+// C# Model class equivalent
+export interface Product {
+  id: number;
+  name: string;
+  description: string;
+  price: number;
+  inStock: boolean;
+}
+
+// CreateProductDto — POST/PUT request body
+export interface ProductFormData {
+  name: string;
+  description: string;
+  price: number;
+  inStock: boolean;
+}
+```
+
+---
+
+### File 3: `src/services/product.service.ts` — API Layer
+
+```tsx
+// C# ProductService.cs equivalent
+import axios from "axios";
+import { Product, ProductFormData } from "../types/product.types";
+
+const API_URL = "http://localhost:3001/products";
+
+export const productService = {
+  // GET /products — GetAll()
+  getAll: async (): Promise<Product[]> => {
+    const res = await axios.get<Product[]>(API_URL);
+    return res.data;
+  },
+
+  // GET /products/:id — GetById(id)
+  getById: async (id: number): Promise<Product> => {
+    const res = await axios.get<Product>(`${API_URL}/${id}`);
+    return res.data;
+  },
+
+  // POST /products — Create(dto)
+  create: async (data: ProductFormData): Promise<Product> => {
+    const res = await axios.post<Product>(API_URL, data);
+    return res.data;
+  },
+
+  // PUT /products/:id — Update(id, dto)
+  update: async (id: number, data: ProductFormData): Promise<Product> => {
+    const res = await axios.put<Product>(`${API_URL}/${id}`, data);
+    return res.data;
+  },
+
+  // DELETE /products/:id — Delete(id)
+  delete: async (id: number): Promise<void> => {
+    await axios.delete(`${API_URL}/${id}`);
+  },
+};
+```
+
+---
+
+### File 4: `src/context/ProductContext.tsx` — Global State
+
+```tsx
+// C# DI Container + Service Registration equivalent
+import {
+  createContext,
+  useContext,
+  useState,
+  useEffect,
+  useCallback,
+  ReactNode,
+} from "react";
+import { Product, ProductFormData } from "../types/product.types";
+import { productService } from "../services/product.service";
+
+interface ProductContextType {
+  products: Product[];
+  loading: boolean;
+  error: string | null;
+  addProduct: (data: ProductFormData) => Promise<void>;
+  updateProduct: (id: number, data: ProductFormData) => Promise<void>;
+  deleteProduct: (id: number) => Promise<void>;
+  getProduct: (id: number) => Promise<Product>;
+}
+
+const ProductContext = createContext<ProductContextType | undefined>(undefined);
+
+export function ProductProvider({ children }: { children: ReactNode }) {
+  const [products, setProducts] = useState<Product[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+
+  // Load all products on mount — like Constructor/OnInitialized
+  useEffect(() => {
+    const load = async () => {
+      try {
+        const data = await productService.getAll();
+        setProducts(data);
+      } catch {
+        setError("Failed to load products");
+      } finally {
+        setLoading(false);
+      }
+    };
+    load();
+  }, []);
+
+  const addProduct = useCallback(async (data: ProductFormData) => {
+    const newProduct = await productService.create(data);
+    setProducts((prev) => [...prev, newProduct]);
+  }, []);
+
+  const updateProduct = useCallback(async (id: number, data: ProductFormData) => {
+    const updated = await productService.update(id, data);
+    setProducts((prev) =>
+      prev.map((p) => (p.id === id ? updated : p))
+    );
+  }, []);
+
+  const deleteProduct = useCallback(async (id: number) => {
+    await productService.delete(id);
+    setProducts((prev) => prev.filter((p) => p.id !== id));
+  }, []);
+
+  const getProduct = useCallback(async (id: number) => {
+    return await productService.getById(id);
+  }, []);
+
+  return (
+    <ProductContext.Provider
+      value={{ products, loading, error, addProduct, updateProduct, deleteProduct, getProduct }}
+    >
+      {children}
+    </ProductContext.Provider>
+  );
+}
+
+// Custom hook — useAuth() pattern এর মতো
+export function useProducts(): ProductContextType {
+  const context = useContext(ProductContext);
+  if (!context) throw new Error("useProducts must be used within ProductProvider");
+  return context;
+}
+```
+
+---
+
+### File 5: `src/components/Spinner.tsx` — Loading Component
+
+```tsx
+export default function Spinner() {
+  return (
+    <div className="flex justify-center items-center py-20">
+      <div className="w-10 h-10 border-4 border-blue-500 border-t-transparent rounded-full animate-spin"></div>
+    </div>
+  );
+}
+```
+
+---
+
+### File 6: `src/components/Navbar.tsx` — Navigation
+
+```tsx
+import { NavLink } from "react-router-dom";
+
+export default function Navbar() {
+  const linkClass = ({ isActive }: { isActive: boolean }) =>
+    isActive
+      ? "text-white bg-blue-700 px-4 py-2 rounded"
+      : "text-blue-200 hover:text-white px-4 py-2";
+
+  return (
+    <nav className="bg-blue-600 shadow-md">
+      <div className="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
+        <h1 className="text-white text-xl font-bold">Product CRUD</h1>
+        <div className="flex gap-2">
+          <NavLink to="/" className={linkClass}>Home</NavLink>
+          <NavLink to="/products" className={linkClass}>Products</NavLink>
+          <NavLink to="/products/create" className={linkClass}>Add New</NavLink>
+        </div>
+      </div>
+    </nav>
+  );
+}
+```
+
+---
+
+### File 7: `src/components/ProductCard.tsx` — Product Card
+
+```tsx
+import { Link } from "react-router-dom";
+import { Product } from "../types/product.types";
+import { FaEdit, FaTrash, FaEye } from "react-icons/fa";
+
+interface ProductCardProps {
+  product: Product;
+  onDelete: (id: number) => void;
+}
+
+export default function ProductCard({ product, onDelete }: ProductCardProps) {
+  const handleDelete = () => {
+    if (window.confirm(`"${product.name}" delete করতে চান?`)) {
+      onDelete(product.id);
+    }
+  };
+
+  return (
+    <div className="bg-white rounded-lg shadow-md p-5 hover:shadow-lg transition-shadow">
+      <div className="flex justify-between items-start mb-3">
+        <h3 className="text-lg font-semibold text-gray-800">{product.name}</h3>
+        <span
+          className={`text-xs px-2 py-1 rounded-full ${
+            product.inStock
+              ? "bg-green-100 text-green-700"
+              : "bg-red-100 text-red-700"
+          }`}
+        >
+          {product.inStock ? "In Stock" : "Out of Stock"}
+        </span>
+      </div>
+
+      <p className="text-gray-500 text-sm mb-3 line-clamp-2">
+        {product.description}
+      </p>
+
+      <p className="text-xl font-bold text-blue-600 mb-4">
+        {product.price.toLocaleString()} BDT
+      </p>
+
+      <div className="flex gap-2">
+        <Link
+          to={`/products/${product.id}`}
+          className="flex items-center gap-1 px-3 py-1.5 bg-gray-100 text-gray-700 rounded hover:bg-gray-200 text-sm"
+        >
+          <FaEye /> Details
+        </Link>
+        <Link
+          to={`/products/edit/${product.id}`}
+          className="flex items-center gap-1 px-3 py-1.5 bg-yellow-100 text-yellow-700 rounded hover:bg-yellow-200 text-sm"
+        >
+          <FaEdit /> Edit
+        </Link>
+        <button
+          onClick={handleDelete}
+          className="flex items-center gap-1 px-3 py-1.5 bg-red-100 text-red-700 rounded hover:bg-red-200 text-sm"
+        >
+          <FaTrash /> Delete
+        </button>
+      </div>
+    </div>
+  );
+}
+```
+
+---
+
+### File 8: `src/components/ProductForm.tsx` — Shared Form
+
+```tsx
+// Create এবং Edit দুই page এ same form use হয়
+// C# তে Partial View দিয়ে form reuse করতাম — same concept
+import { useState, FormEvent, useEffect } from "react";
+import { ProductFormData } from "../types/product.types";
+
+interface ProductFormProps {
+  initialData?: ProductFormData;       // Edit mode এ existing data আসবে
+  onSubmit: (data: ProductFormData) => Promise<void>;
+  submitLabel: string;                  // "Create" or "Update"
+}
+
+const emptyForm: ProductFormData = {
+  name: "",
+  description: "",
+  price: 0,
+  inStock: true,
+};
+
+export default function ProductForm({
+  initialData,
+  onSubmit,
+  submitLabel,
+}: ProductFormProps) {
+  const [form, setForm] = useState<ProductFormData>(initialData ?? emptyForm);
+  const [submitting, setSubmitting] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+
+  // initialData change হলে form update করো (Edit page এ async load হয়)
+  useEffect(() => {
+    if (initialData) setForm(initialData);
+  }, [initialData]);
+
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    const { name, value, type } = e.target;
+    setForm((prev) => ({
+      ...prev,
+      [name]:
+        type === "checkbox"
+          ? (e.target as HTMLInputElement).checked
+          : type === "number"
+          ? Number(value)
+          : value,
+    }));
+  };
+
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setError(null);
+
+    // Simple validation
+    if (!form.name.trim()) {
+      setError("Product name is required");
+      return;
+    }
+    if (form.price <= 0) {
+      setError("Price must be greater than 0");
+      return;
+    }
+
+    setSubmitting(true);
+    try {
+      await onSubmit(form);
+    } catch {
+      setError("Operation failed. Please try again.");
+    } finally {
+      setSubmitting(false);
+    }
+  };
+
+  return (
+    <form onSubmit={handleSubmit} className="max-w-lg mx-auto space-y-4">
+      {error && (
+        <div className="bg-red-100 text-red-700 px-4 py-2 rounded">{error}</div>
+      )}
+
+      <div>
+        <label className="block text-sm font-medium text-gray-700 mb-1">
+          Product Name
+        </label>
+        <input
+          type="text"
+          name="name"
+          value={form.name}
+          onChange={handleChange}
+          className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+          placeholder="Enter product name"
+        />
+      </div>
+
+      <div>
+        <label className="block text-sm font-medium text-gray-700 mb-1">
+          Description
+        </label>
+        <textarea
+          name="description"
+          value={form.description}
+          onChange={handleChange}
+          rows={3}
+          className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+          placeholder="Enter product description"
+        />
+      </div>
+
+      <div>
+        <label className="block text-sm font-medium text-gray-700 mb-1">
+          Price (BDT)
+        </label>
+        <input
+          type="number"
+          name="price"
+          value={form.price}
+          onChange={handleChange}
+          min={0}
+          className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+        />
+      </div>
+
+      <div className="flex items-center gap-2">
+        <input
+          type="checkbox"
+          name="inStock"
+          checked={form.inStock}
+          onChange={handleChange}
+          className="w-4 h-4 text-blue-600 rounded"
+        />
+        <label className="text-sm text-gray-700">In Stock</label>
+      </div>
+
+      <button
+        type="submit"
+        disabled={submitting}
+        className="w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 disabled:bg-blue-300 transition-colors"
+      >
+        {submitting ? "Saving..." : submitLabel}
+      </button>
+    </form>
+  );
+}
+```
+
+---
+
+### File 9: `src/pages/ProductListPage.tsx` — Index Page
+
+```tsx
+// C# — ProductController.Index() + Views/Product/Index.cshtml equivalent
+import { useProducts } from "../context/ProductContext";
+import ProductCard from "../components/ProductCard";
+import Spinner from "../components/Spinner";
+import { useState } from "react";
+
+export default function ProductListPage() {
+  const { products, loading, error, deleteProduct } = useProducts();
+  const [search, setSearch] = useState("");
+
+  if (loading) return <Spinner />;
+  if (error) return <p className="text-center text-red-500 py-10">{error}</p>;
+
+  const filtered = products.filter((p) =>
+    p.name.toLowerCase().includes(search.toLowerCase())
+  );
+
+  return (
+    <div>
+      <div className="flex justify-between items-center mb-6">
+        <h2 className="text-2xl font-bold text-gray-800">
+          Products ({filtered.length})
+        </h2>
+        <input
+          type="text"
+          placeholder="Search products..."
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
+          className="border border-gray-300 rounded-lg px-3 py-2 w-64 focus:ring-2 focus:ring-blue-500"
+        />
+      </div>
+
+      {filtered.length === 0 ? (
+        <p className="text-center text-gray-500 py-10">No products found.</p>
+      ) : (
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {filtered.map((product) => (
+            <ProductCard
+              key={product.id}
+              product={product}
+              onDelete={deleteProduct}
+            />
+          ))}
+        </div>
+      )}
+    </div>
+  );
+}
+```
+
+---
+
+### File 10: `src/pages/ProductCreatePage.tsx` — Create Page
+
+```tsx
+// C# — ProductController.Create() + Views/Product/Create.cshtml equivalent
+import { useNavigate } from "react-router-dom";
+import { useProducts } from "../context/ProductContext";
+import ProductForm from "../components/ProductForm";
+import { ProductFormData } from "../types/product.types";
+
+export default function ProductCreatePage() {
+  const { addProduct } = useProducts();
+  const navigate = useNavigate();
+
+  const handleSubmit = async (data: ProductFormData) => {
+    await addProduct(data);
+    navigate("/products"); // RedirectToAction("Index") equivalent
+  };
+
+  return (
+    <div>
+      <h2 className="text-2xl font-bold text-gray-800 mb-6 text-center">
+        Add New Product
+      </h2>
+      <ProductForm onSubmit={handleSubmit} submitLabel="Create Product" />
+    </div>
+  );
+}
+```
+
+---
+
+### File 11: `src/pages/ProductEditPage.tsx` — Edit Page
+
+```tsx
+// C# — ProductController.Edit(id) + Views/Product/Edit.cshtml equivalent
+import { useEffect, useState } from "react";
+import { useParams, useNavigate } from "react-router-dom";
+import { useProducts } from "../context/ProductContext";
+import ProductForm from "../components/ProductForm";
+import Spinner from "../components/Spinner";
+import { ProductFormData } from "../types/product.types";
+
+export default function ProductEditPage() {
+  const { id } = useParams<{ id: string }>();
+  const { updateProduct, getProduct } = useProducts();
+  const navigate = useNavigate();
+
+  const [initialData, setInitialData] = useState<ProductFormData | undefined>();
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    const load = async () => {
+      try {
+        const product = await getProduct(Number(id));
+        setInitialData({
+          name: product.name,
+          description: product.description,
+          price: product.price,
+          inStock: product.inStock,
+        });
+      } catch {
+        setError("Product not found");
+      } finally {
+        setLoading(false);
+      }
+    };
+    load();
+  }, [id, getProduct]);
+
+  const handleSubmit = async (data: ProductFormData) => {
+    await updateProduct(Number(id), data);
+    navigate("/products");
+  };
+
+  if (loading) return <Spinner />;
+  if (error) return <p className="text-center text-red-500 py-10">{error}</p>;
+
+  return (
+    <div>
+      <h2 className="text-2xl font-bold text-gray-800 mb-6 text-center">
+        Edit Product
+      </h2>
+      <ProductForm
+        initialData={initialData}
+        onSubmit={handleSubmit}
+        submitLabel="Update Product"
+      />
+    </div>
+  );
+}
+```
+
+---
+
+### File 12: `src/pages/ProductDetailPage.tsx` — Details Page
+
+```tsx
+// C# — ProductController.Details(id) + Views/Product/Details.cshtml equivalent
+import { useEffect, useState } from "react";
+import { useParams, Link, useNavigate } from "react-router-dom";
+import { useProducts } from "../context/ProductContext";
+import { Product } from "../types/product.types";
+import Spinner from "../components/Spinner";
+import { FaArrowLeft, FaEdit, FaTrash } from "react-icons/fa";
+
+export default function ProductDetailPage() {
+  const { id } = useParams<{ id: string }>();
+  const { getProduct, deleteProduct } = useProducts();
+  const navigate = useNavigate();
+
+  const [product, setProduct] = useState<Product | null>(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    const load = async () => {
+      try {
+        const data = await getProduct(Number(id));
+        setProduct(data);
+      } catch {
+        setError("Product not found");
+      } finally {
+        setLoading(false);
+      }
+    };
+    load();
+  }, [id, getProduct]);
+
+  const handleDelete = async () => {
+    if (!product) return;
+    if (window.confirm(`"${product.name}" delete করতে চান?`)) {
+      await deleteProduct(product.id);
+      navigate("/products");
+    }
+  };
+
+  if (loading) return <Spinner />;
+  if (error || !product) {
+    return <p className="text-center text-red-500 py-10">{error ?? "Not found"}</p>;
+  }
+
+  return (
+    <div className="max-w-2xl mx-auto">
+      <Link
+        to="/products"
+        className="inline-flex items-center gap-1 text-blue-600 hover:underline mb-6"
+      >
+        <FaArrowLeft /> Back to Products
+      </Link>
+
+      <div className="bg-white rounded-lg shadow-md p-6">
+        <div className="flex justify-between items-start mb-4">
+          <h2 className="text-2xl font-bold text-gray-800">{product.name}</h2>
+          <span
+            className={`px-3 py-1 rounded-full text-sm ${
+              product.inStock
+                ? "bg-green-100 text-green-700"
+                : "bg-red-100 text-red-700"
+            }`}
+          >
+            {product.inStock ? "In Stock" : "Out of Stock"}
+          </span>
+        </div>
+
+        <p className="text-gray-600 mb-4">{product.description}</p>
+
+        <p className="text-3xl font-bold text-blue-600 mb-6">
+          {product.price.toLocaleString()} BDT
+        </p>
+
+        <div className="flex gap-3">
+          <Link
+            to={`/products/edit/${product.id}`}
+            className="flex items-center gap-1 px-4 py-2 bg-yellow-500 text-white rounded-lg hover:bg-yellow-600"
+          >
+            <FaEdit /> Edit
+          </Link>
+          <button
+            onClick={handleDelete}
+            className="flex items-center gap-1 px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600"
+          >
+            <FaTrash /> Delete
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+}
+```
+
+---
+
+### File 13: `src/App.tsx` — Router Setup
+
+```tsx
+// C# — Program.cs route configuration equivalent
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import { ProductProvider } from "./context/ProductContext";
+import Navbar from "./components/Navbar";
+import ProductListPage from "./pages/ProductListPage";
+import ProductCreatePage from "./pages/ProductCreatePage";
+import ProductEditPage from "./pages/ProductEditPage";
+import ProductDetailPage from "./pages/ProductDetailPage";
+
+export default function App() {
+  return (
+    <BrowserRouter>
+      <ProductProvider>
+        <Navbar />
+        <main className="max-w-6xl mx-auto px-4 py-8">
+          <Routes>
+            <Route path="/" element={<Navigate to="/products" replace />} />
+            <Route path="/products" element={<ProductListPage />} />
+            <Route path="/products/create" element={<ProductCreatePage />} />
+            <Route path="/products/edit/:id" element={<ProductEditPage />} />
+            <Route path="/products/:id" element={<ProductDetailPage />} />
+            <Route path="*" element={<p className="text-center text-xl">404 — Page Not Found</p>} />
+          </Routes>
+        </main>
+      </ProductProvider>
+    </BrowserRouter>
+  );
+}
+```
+
+---
+
+### File 14: `src/main.tsx` — Entry Point
+
+```tsx
+import { StrictMode } from "react";
+import { createRoot } from "react-dom/client";
+import App from "./App";
+import "./index.css";
+
+createRoot(document.getElementById("root")!).render(
+  <StrictMode>
+    <App />
+  </StrictMode>
+);
+```
+
+---
+
+### File 15: `src/index.css` — Tailwind Import
+
+```css
+@import "tailwindcss";
+```
+
+---
+
+### File 16: `vite.config.ts`
+
+```typescript
+import { defineConfig } from "vite";
+import react from "@vitejs/plugin-react";
+import tailwindcss from "@tailwindcss/vite";
+
+export default defineConfig({
+  plugins: [react(), tailwindcss()],
+});
+```
+
+---
+
+### File 17: `package.json` — Scripts
+
+```json
+{
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc -b && vite build",
+    "preview": "vite preview",
+    "server": "json-server db.json --port 3001"
+  }
+}
+```
+
+> **Run করতে:** একটা terminal এ `npm run server` (API), আরেকটায় `npm run dev` (React app)
+
+---
+
+### Summary — কোন file কী কাজ করে
+
+```
+types/product.types.ts     →  Data structure define (Model)
+services/product.service.ts →  API calls (axios GET/POST/PUT/DELETE)
+context/ProductContext.tsx  →  Global state + business logic (DI Container)
+components/Spinner.tsx      →  Loading indicator
+components/Navbar.tsx       →  Navigation bar with active link
+components/ProductCard.tsx  →  Single product display (Partial View)
+components/ProductForm.tsx  →  Shared form for Create + Edit
+pages/ProductListPage.tsx   →  List all products with search
+pages/ProductCreatePage.tsx →  Create new product
+pages/ProductEditPage.tsx   →  Edit existing product
+pages/ProductDetailPage.tsx →  View product details
+App.tsx                     →  Router + Layout (Program.cs)
+main.tsx                    →  Entry point (renders App)
+db.json                     →  Fake database for json-server
+```
 
 ---
 
