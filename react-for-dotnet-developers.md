@@ -31,8 +31,9 @@
 22. [Redux Toolkit — State Management](#22-redux-toolkit--state-management)
 23. [Best Practices and Common Mistakes](#23-best-practices-and-common-mistakes)
 24. [Tips and Tricks](#24-tips-and-tricks)
-25. [Learning Path](#25-learning-path)
-26. [CRUD Application — Full Project](#26-crud-application--full-project)
+25. [VS Code Setup — Extensions and Shortcuts](#25-vs-code-setup--extensions-and-shortcuts)
+26. [Learning Path](#26-learning-path)
+27. [CRUD Application — Full Project](#27-crud-application--full-project)
 
 ---
 
@@ -2240,7 +2241,152 @@ setTimeout(() => alert(countRef.current), 5000);
 
 ---
 
-## 25. Learning Path
+## 25. VS Code Setup — Extensions and Shortcuts
+
+### Must-Have Extensions
+
+| Extension | কী করে | Install Command |
+| --- | --- | --- |
+| **ES7+ React/Redux/React-Native snippets** | React component snippets (`rafce`, `rfc` etc.) | `dsznajder.es7-react-js-snippets` |
+| **Prettier - Code formatter** | Auto format on save | `esbenp.prettier-vscode` |
+| **ESLint** | Code error ও warning দেখায় | `dbaeumer.vscode-eslint` |
+| **Tailwind CSS IntelliSense** | Tailwind class autocomplete | `bradlc.vscode-tailwindcss` |
+| **Auto Rename Tag** | Opening tag change করলে closing tag auto change | `formulahendry.auto-rename-tag` |
+| **Error Lens** | Error inline এ দেখায় (line এর পাশে) | `usernamehw.errorlens` |
+| **Thunder Client** | Postman alternative (VS Code এর ভিতরে API test) | `rangav.vscode-thunder-client` |
+| **Pretty TypeScript Errors** | TypeScript error সুন্দর করে দেখায় | `yoavbls.pretty-ts-errors` |
+
+> **Install করতে:** `Ctrl+Shift+X` → extension name search → Install
+
+### Optional But Useful Extensions
+
+| Extension | কী করে |
+| --- | --- |
+| **Import Cost** | Import এর size দেখায় (bundle size aware) |
+| **GitLens** | Git blame inline দেখায় |
+| **Console Ninja** | console.log output editor এর মধ্যে দেখায় |
+| **Turbo Console Log** | Shortcut দিয়ে console.log generate করে |
+
+### React Snippets — ES7+ Extension
+
+> এই snippets গুলো `ES7+ React/Redux/React-Native snippets` extension install করলে কাজ করবে।
+
+| Snippet | কী Generate করে |
+| --- | --- |
+| `rafce` | React Arrow Function Component (with export) |
+| `rfc` | React Function Component |
+| `rfce` | React Function Component (with export) |
+| `rcc` | React Class Component |
+| `imp` | `import moduleName from 'module'` |
+| `imd` | `import { destructured } from 'module'` |
+| `useState` → `usf` | `const [value, setValue] = useState(initial)` |
+| `useEffect` → `uef` | `useEffect(() => { }, [])` |
+| `useContext` → `ucx` | `const value = useContext(MyContext)` |
+| `useRef` → `urf` | `const ref = useRef(initial)` |
+| `useMemo` → `umm` | `const value = useMemo(() => compute, [deps])` |
+| `useCallback` → `ucb` | `const fn = useCallback(() => {}, [deps])` |
+
+**Example — `rafce` type করে Tab চাপলে:**
+
+```tsx
+const ComponentName = () => {
+  return (
+    <div>ComponentName</div>
+  );
+};
+
+export default ComponentName;
+```
+
+### Essential Keyboard Shortcuts
+
+| Shortcut | কাজ | Category |
+| --- | --- | --- |
+| `Ctrl+P` | Quick file open (file name search) | Navigation |
+| `Ctrl+Shift+P` | Command Palette (সব command) | Navigation |
+| `Ctrl+B` | Sidebar toggle | Layout |
+| `` Ctrl+` `` | Terminal toggle | Terminal |
+| `Ctrl+Shift+E` | Explorer panel focus | Navigation |
+| `Ctrl+Shift+F` | Search across all files | Search |
+| `Ctrl+Shift+H` | Search and Replace across files | Search |
+| `F12` | Go to Definition | Code Navigation |
+| `Alt+F12` | Peek Definition (inline preview) | Code Navigation |
+| `Shift+F12` | Find All References | Code Navigation |
+| `F2` | Rename Symbol (সব জায়গায় rename) | Refactor |
+| `Ctrl+D` | Select next occurrence (multi-cursor) | Multi-cursor |
+| `Ctrl+Shift+L` | Select ALL occurrences | Multi-cursor |
+| `Alt+Up/Down` | Move line up/down | Editing |
+| `Shift+Alt+Up/Down` | Copy line up/down | Editing |
+| `Ctrl+Shift+K` | Delete entire line | Editing |
+| `Ctrl+/` | Toggle line comment | Editing |
+| `Shift+Alt+F` | Format document (Prettier) | Formatting |
+| `Ctrl+Space` | Trigger IntelliSense | Autocomplete |
+| `Ctrl+.` | Quick Fix / Suggestions | Refactor |
+| `Ctrl+Shift+O` | Go to Symbol in file | Navigation |
+| `Ctrl+G` | Go to Line number | Navigation |
+| `Ctrl+W` | Close current tab | Tab |
+| `Ctrl+Tab` | Switch between open tabs | Tab |
+| `Ctrl+\` | Split editor | Layout |
+
+### Multi-Cursor Shortcuts — সবচেয়ে Powerful Feature
+
+```text
+Ctrl+D          →  Same word পরেরটা select করে (repeatedly press)
+Ctrl+Shift+L    →  Same word সব একবারে select
+Alt+Click       →  যেকোনো জায়গায় cursor add
+Shift+Alt+Down  →  নিচে cursor add
+Ctrl+U          →  Last cursor selection undo
+```
+
+**Use Case:** Variable rename, className change, multiple imports — একবারে সব জায়গায়।
+
+### Emmet Shortcuts — JSX তে কাজ করে
+
+| Shortcut | Output |
+| --- | --- |
+| `div.container` + Tab | `<div className="container"></div>` |
+| `ul>li*3` + Tab | `<ul><li></li><li></li><li></li></ul>` |
+| `button.btn.btn-primary` + Tab | `<button className="btn btn-primary"></button>` |
+| `input:text` + Tab | `<input type="text" />` |
+| `.card>.card-body>h5+p` + Tab | Nested structure with classes |
+
+> **Note:** Emmet React এ default কাজ করে। যদি না করে, `settings.json` এ add করুন:
+
+```json
+{
+  "emmet.includeLanguages": {
+    "javascript": "javascriptreact",
+    "typescript": "typescriptreact"
+  }
+}
+```
+
+### Recommended VS Code Settings
+
+```json
+{
+  "editor.formatOnSave": true,
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.tabSize": 2,
+  "editor.wordWrap": "on",
+  "editor.bracketPairColorization.enabled": true,
+  "editor.guides.bracketPairs": true,
+  "editor.minimap.enabled": false,
+  "explorer.confirmDelete": false,
+  "emmet.includeLanguages": {
+    "javascript": "javascriptreact",
+    "typescript": "typescriptreact"
+  },
+  "typescript.suggest.autoImports": true,
+  "typescript.updateImportsOnFileMove.enabled": "always"
+}
+```
+
+> `Ctrl+Shift+P` → "Open User Settings (JSON)" → paste করুন।
+
+---
+
+## 26. Learning Path
 
 ### Phase 1: Foundation
 
@@ -2272,7 +2418,7 @@ setTimeout(() => alert(countRef.current), 5000);
 
 ---
 
-## 26. CRUD Application — Full Project
+## 27. CRUD Application — Full Project
 
 > এই section এ একটি complete Product CRUD application এর full code দেওয়া হলো।
 > সব concept যা আগের sections এ শেখা হয়েছে — সব এখানে practically apply করা হয়েছে।
