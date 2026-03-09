@@ -33,7 +33,8 @@
 24. [Tips and Tricks](#24-tips-and-tricks)
 25. [VS Code Setup — Extensions and Shortcuts](#25-vs-code-setup--extensions-and-shortcuts)
 26. [Learning Path](#26-learning-path)
-27. [CRUD Application — Full Project](#27-crud-application--full-project)
+27. [CRUD Application — Full Project (Context API)](#27-crud-application--full-project-context-api)
+28. [CRUD Application — Without Context API (Props Version)](#28-crud-application--without-context-api-props-version)
 
 ---
 
@@ -2418,7 +2419,7 @@ Ctrl+U          →  Last cursor selection undo
 
 ---
 
-## 27. CRUD Application — Full Project
+## 27. CRUD Application — Full Project (Context API)
 
 > এই section এ একটি complete Product CRUD application এর full code দেওয়া হলো।
 > সব concept যা আগের sections এ শেখা হয়েছে — সব এখানে practically apply করা হয়েছে।
@@ -3309,6 +3310,477 @@ App.tsx                     →  Router + Layout (Program.cs)
 main.tsx                    →  Entry point (renders App)
 db.json                     →  Fake database for json-server
 ```
+
+---
+
+## 28. CRUD Application — Without Context API (Props Version)
+
+> এটা Section 27 এর same application — কিন্তু **Context API ছাড়া**।
+> সব state `App.tsx` এ থাকবে এবং props দিয়ে child components এ pass হবে।
+> দুইটা version compare করলে বুঝবেন কেন Context API দরকার হয়।
+
+### Context API vs Props — Key Difference
+
+```text
+Context API Version (Section 27):
+  App.tsx → ProductProvider wraps everything
+    → Pages use useProducts() hook — কোনো props লাগে না
+    → যেকোনো component সরাসরি data access করতে পারে
+
+Props Version (This Section):
+  App.tsx → সব state এখানে (products, loading, error)
+    → Props দিয়ে pages এ পাঠায়
+    → Pages আবার props দিয়ে components এ পাঠায়
+    → এটাই "Prop Drilling" — যত deep, তত বেশি props pass
+```
+
+### Project Structure
+
+```text
+product-crud-props/
+├── db.json                   — same as before
+├── src/
+│   ├── types/
+│   │   └── product.types.ts  — same as before
+│   ├── services/
+│   │   └── product.service.ts — same as before
+│   ├── components/
+│   │   ├── Navbar.tsx         — same as before
+│   │   ├── ProductCard.tsx    — same (already uses props)
+│   │   ├── ProductForm.tsx    — same (already uses props)
+│   │   └── Spinner.tsx        — same
+│   ├── pages/
+│   │   ├── ProductListPage.tsx   — props থেকে data নেয়
+│   │   ├── ProductCreatePage.tsx — props থেকে addProduct নেয়
+│   │   ├── ProductEditPage.tsx   — props থেকে updateProduct নেয়
+│   │   └── ProductDetailPage.tsx — props থেকে data নেয়
+│   ├── App.tsx               — সব state এখানে! (বড় পার্থক্য)
+│   └── main.tsx              — same
+```
+
+> **Note:** `types/`, `services/`, `components/` — এগুলো Section 27 এর সাথে exactly same। শুধু **App.tsx** এবং **pages/** গুলো আলাদা।
+
+---
+
+### File 1: `src/App.tsx` — All State Lives Here
+
+```tsx
+// Context API version এ state ছিল ProductContext.tsx তে
+// Props version এ সব state App.tsx তে — এটাই মূল পার্থক্য
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import { useState, useEffect, useCallback } from "react";
+import { Product, ProductFormData } from "./types/product.types";
+import { productService } from "./services/product.service";
+import Navbar from "./components/Navbar";
+import Spinner from "./components/Spinner";
+import ProductListPage from "./pages/ProductListPage";
+import ProductCreatePage from "./pages/ProductCreatePage";
+import ProductEditPage from "./pages/ProductEditPage";
+import ProductDetailPage from "./pages/ProductDetailPage";
+
+export default function App() {
+  // সব state এখানে — Context API তে এগুলো ProductContext.tsx তে ছিল
+  const [products, setProducts] = useState<Product[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+
+  // Load all products on mount
+  useEffect(() => {
+    const load = async () => {
+      try {
+        const data = await productService.getAll();
+        setProducts(data);
+      } catch {
+        setError("Failed to load products");
+      } finally {
+        setLoading(false);
+      }
+    };
+    load();
+  }, []);
+
+  // CRUD functions — Context API version এ এগুলো ProductContext এ ছিল
+  const addProduct = useCallback(async (data: ProductFormData) => {
+    const newProduct = await productService.create(data);
+    setProducts((prev) => [...prev, newProduct]);
+  }, []);
+
+  const updateProduct = useCallback(async (id: number, data: ProductFormData) => {
+    const updated = await productService.update(id, data);
+    setProducts((prev) => prev.map((p) => (p.id === id ? updated : p)));
+  }, []);
+
+  const deleteProduct = useCallback(async (id: number) => {
+    await productService.delete(id);
+    setProducts((prev) => prev.filter((p) => p.id !== id));
+  }, []);
+
+  const getProduct = useCallback(async (id: number) => {
+    return await productService.getById(id);
+  }, []);
+
+  // Loading state
+  if (loading) return <Spinner />;
+  if (error) return <p className="text-center text-red-500 py-10">{error}</p>;
+
+  return (
+    <BrowserRouter>
+      <Navbar />
+      <main className="max-w-6xl mx-auto px-4 py-8">
+        <Routes>
+          <Route path="/" element={<Navigate to="/products" replace />} />
+
+          {/* প্রতিটা page এ props pass করতে হচ্ছে — এটাই prop drilling */}
+          <Route
+            path="/products"
+            element={
+              <ProductListPage
+                products={products}
+                onDelete={deleteProduct}
+              />
+            }
+          />
+          <Route
+            path="/products/create"
+            element={<ProductCreatePage onAdd={addProduct} />}
+          />
+          <Route
+            path="/products/edit/:id"
+            element={
+              <ProductEditPage
+                onUpdate={updateProduct}
+                onGetProduct={getProduct}
+              />
+            }
+          />
+          <Route
+            path="/products/:id"
+            element={
+              <ProductDetailPage
+                onDelete={deleteProduct}
+                onGetProduct={getProduct}
+              />
+            }
+          />
+          <Route path="*" element={<p className="text-center text-xl">404 — Page Not Found</p>} />
+        </Routes>
+      </main>
+    </BrowserRouter>
+  );
+}
+```
+
+---
+
+### File 2: `src/pages/ProductListPage.tsx`
+
+```tsx
+// Context API version: const { products, deleteProduct } = useProducts();
+// Props version: products এবং onDelete props দিয়ে আসছে
+import { useState } from "react";
+import { Product } from "../types/product.types";
+import ProductCard from "../components/ProductCard";
+
+interface ProductListPageProps {
+  products: Product[];
+  onDelete: (id: number) => Promise<void>;
+}
+
+export default function ProductListPage({ products, onDelete }: ProductListPageProps) {
+  const [search, setSearch] = useState("");
+
+  const filtered = products.filter((p) =>
+    p.name.toLowerCase().includes(search.toLowerCase())
+  );
+
+  return (
+    <div>
+      <div className="flex justify-between items-center mb-6">
+        <h2 className="text-2xl font-bold text-gray-800">
+          Products ({filtered.length})
+        </h2>
+        <input
+          type="text"
+          placeholder="Search products..."
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
+          className="border border-gray-300 rounded-lg px-3 py-2 w-64 focus:ring-2 focus:ring-blue-500"
+        />
+      </div>
+
+      {filtered.length === 0 ? (
+        <p className="text-center text-gray-500 py-10">No products found.</p>
+      ) : (
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {filtered.map((product) => (
+            <ProductCard
+              key={product.id}
+              product={product}
+              onDelete={onDelete}
+            />
+          ))}
+        </div>
+      )}
+    </div>
+  );
+}
+```
+
+---
+
+### File 3: `src/pages/ProductCreatePage.tsx`
+
+```tsx
+// Context API version: const { addProduct } = useProducts();
+// Props version: onAdd prop দিয়ে আসছে
+import { useNavigate } from "react-router-dom";
+import { ProductFormData } from "../types/product.types";
+import ProductForm from "../components/ProductForm";
+
+interface ProductCreatePageProps {
+  onAdd: (data: ProductFormData) => Promise<void>;
+}
+
+export default function ProductCreatePage({ onAdd }: ProductCreatePageProps) {
+  const navigate = useNavigate();
+
+  const handleSubmit = async (data: ProductFormData) => {
+    await onAdd(data);
+    navigate("/products");
+  };
+
+  return (
+    <div>
+      <h2 className="text-2xl font-bold text-gray-800 mb-6 text-center">
+        Add New Product
+      </h2>
+      <ProductForm onSubmit={handleSubmit} submitLabel="Create Product" />
+    </div>
+  );
+}
+```
+
+---
+
+### File 4: `src/pages/ProductEditPage.tsx`
+
+```tsx
+// Context API version: const { updateProduct, getProduct } = useProducts();
+// Props version: onUpdate, onGetProduct props দিয়ে আসছে
+import { useEffect, useState } from "react";
+import { useParams, useNavigate } from "react-router-dom";
+import { Product, ProductFormData } from "../types/product.types";
+import ProductForm from "../components/ProductForm";
+import Spinner from "../components/Spinner";
+
+interface ProductEditPageProps {
+  onUpdate: (id: number, data: ProductFormData) => Promise<void>;
+  onGetProduct: (id: number) => Promise<Product>;
+}
+
+export default function ProductEditPage({ onUpdate, onGetProduct }: ProductEditPageProps) {
+  const { id } = useParams<{ id: string }>();
+  const navigate = useNavigate();
+
+  const [initialData, setInitialData] = useState<ProductFormData | undefined>();
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    const load = async () => {
+      try {
+        const product = await onGetProduct(Number(id));
+        setInitialData({
+          name: product.name,
+          description: product.description,
+          price: product.price,
+          inStock: product.inStock,
+        });
+      } catch {
+        setError("Product not found");
+      } finally {
+        setLoading(false);
+      }
+    };
+    load();
+  }, [id, onGetProduct]);
+
+  const handleSubmit = async (data: ProductFormData) => {
+    await onUpdate(Number(id), data);
+    navigate("/products");
+  };
+
+  if (loading) return <Spinner />;
+  if (error) return <p className="text-center text-red-500 py-10">{error}</p>;
+
+  return (
+    <div>
+      <h2 className="text-2xl font-bold text-gray-800 mb-6 text-center">
+        Edit Product
+      </h2>
+      <ProductForm
+        initialData={initialData}
+        onSubmit={handleSubmit}
+        submitLabel="Update Product"
+      />
+    </div>
+  );
+}
+```
+
+---
+
+### File 5: `src/pages/ProductDetailPage.tsx`
+
+```tsx
+// Context API version: const { getProduct, deleteProduct } = useProducts();
+// Props version: onGetProduct, onDelete props দিয়ে আসছে
+import { useEffect, useState } from "react";
+import { useParams, Link, useNavigate } from "react-router-dom";
+import { Product } from "../types/product.types";
+import Spinner from "../components/Spinner";
+import { FaArrowLeft, FaEdit, FaTrash } from "react-icons/fa";
+
+interface ProductDetailPageProps {
+  onDelete: (id: number) => Promise<void>;
+  onGetProduct: (id: number) => Promise<Product>;
+}
+
+export default function ProductDetailPage({ onDelete, onGetProduct }: ProductDetailPageProps) {
+  const { id } = useParams<{ id: string }>();
+  const navigate = useNavigate();
+
+  const [product, setProduct] = useState<Product | null>(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    const load = async () => {
+      try {
+        const data = await onGetProduct(Number(id));
+        setProduct(data);
+      } catch {
+        setError("Product not found");
+      } finally {
+        setLoading(false);
+      }
+    };
+    load();
+  }, [id, onGetProduct]);
+
+  const handleDelete = async () => {
+    if (!product) return;
+    if (window.confirm(`"${product.name}" delete করতে চান?`)) {
+      await onDelete(product.id);
+      navigate("/products");
+    }
+  };
+
+  if (loading) return <Spinner />;
+  if (error || !product) {
+    return <p className="text-center text-red-500 py-10">{error ?? "Not found"}</p>;
+  }
+
+  return (
+    <div className="max-w-2xl mx-auto">
+      <Link
+        to="/products"
+        className="inline-flex items-center gap-1 text-blue-600 hover:underline mb-6"
+      >
+        <FaArrowLeft /> Back to Products
+      </Link>
+
+      <div className="bg-white rounded-lg shadow-md p-6">
+        <div className="flex justify-between items-start mb-4">
+          <h2 className="text-2xl font-bold text-gray-800">{product.name}</h2>
+          <span
+            className={`px-3 py-1 rounded-full text-sm ${
+              product.inStock
+                ? "bg-green-100 text-green-700"
+                : "bg-red-100 text-red-700"
+            }`}
+          >
+            {product.inStock ? "In Stock" : "Out of Stock"}
+          </span>
+        </div>
+
+        <p className="text-gray-600 mb-4">{product.description}</p>
+
+        <p className="text-3xl font-bold text-blue-600 mb-6">
+          {product.price.toLocaleString()} BDT
+        </p>
+
+        <div className="flex gap-3">
+          <Link
+            to={`/products/edit/${product.id}`}
+            className="flex items-center gap-1 px-4 py-2 bg-yellow-500 text-white rounded-lg hover:bg-yellow-600"
+          >
+            <FaEdit /> Edit
+          </Link>
+          <button
+            onClick={handleDelete}
+            className="flex items-center gap-1 px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600"
+          >
+            <FaTrash /> Delete
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+}
+```
+
+---
+
+### Context API vs Props — Side by Side Comparison
+
+| বিষয় | Context API (Section 27) | Props (Section 28) |
+| --- | --- | --- |
+| State কোথায়? | `ProductContext.tsx` | `App.tsx` |
+| Data access | `useProducts()` hook call | Props দিয়ে pass |
+| Page component | Clean — no props needed | Props interface লাগে |
+| App.tsx | Clean — just Provider wrap | বড় — সব state + props |
+| New page add | শুধু `useProducts()` call | App.tsx এ নতুন props add |
+| Scalability | ভালো — decouple | Prop drilling সমস্যা |
+| Setup complexity | বেশি (Context + Provider) | কম |
+
+### কোনটা কখন Use করবেন?
+
+```text
+Props Version ভালো যখন:
+  - ছোট app (3-4 টা component)
+  - Simple parent → child data flow
+  - শেখার জন্য (basics বুঝতে)
+
+Context API ভালো যখন:
+  - বড় app (অনেক component)
+  - Deep nested components data চায়
+  - Multiple pages এ same data লাগে
+  - Prop drilling headache হচ্ছে
+```
+
+### Prop Drilling সমস্যা — Visual
+
+```text
+Props Version:
+  App.tsx (state owner)
+    ↓ products, onDelete, onAdd, onUpdate, onGetProduct (5 props!)
+    Routes
+      ↓ products, onDelete
+      ProductListPage
+        ↓ product, onDelete
+        ProductCard (finally uses it!)
+
+Context API Version:
+  App.tsx
+    ProductProvider (state owner)
+      Routes
+        ProductListPage
+          const { products, deleteProduct } = useProducts();  ← সরাসরি!
+          ProductCard
+```
+
+> **শেখার Tip:** আগে Props version বানান, তারপর Context API version এ convert করুন। তাহলে বুঝবেন কেন Context API দরকার হয়!
 
 ---
 
