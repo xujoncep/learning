@@ -3,7 +3,29 @@
     "allow": [
       "Bash(git add:*)",
       "Bash(git commit:*)",
-      "Bash(git push:*)"
+      "Bash(git push:*)",
+      "Bash(npx docsify-cli:*)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\" http://localhost:3001)",
+      "Bash(gh api:*)",
+      "Bash(gh run:*)",
+      "WebFetch(domain:sujoncep.github.io)",
+      "Bash(npx netlify-cli:*)"
+    ]
+  },
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "if": "Bash(git push:*)",
+            "command": "cd \"d:/Exp-Work/Learning\" && npx netlify-cli deploy --prod --dir . --message \"Auto deploy after push\" 2>/dev/null || true",
+            "timeout": 60,
+            "statusMessage": "Deploying to Netlify..."
+          }
+        ]
+      }
     ]
   }
 }

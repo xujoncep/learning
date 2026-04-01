@@ -15,5 +15,11 @@
 - Use logical progression: **What → Why → How → Details → Summary**
 - Use **Mermaid** diagrams for visual explanations in `.md` documents
 
+## Deployment
+
+- Site is hosted on **Netlify**: `https://reliable-moonbeam-bcdbd1.netlify.app`
+- A **PostToolUse hook** auto-deploys to Netlify after every `git push`
+- No manual deploy needed — just push to `main`
+
 ## Scope
 - These rules apply to ALL conversations in this directory

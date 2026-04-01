@@ -33,7 +33,11 @@
 
 ## 🚀 Live Site
 
-এই documentation site টি [Docsify](https://docsify.js.org/) দিয়ে তৈরি। locally চালাতে:
+**Live URL:** [reliable-moonbeam-bcdbd1.netlify.app](https://reliable-moonbeam-bcdbd1.netlify.app)
+
+এই documentation site টি [Docsify](https://docsify.js.org/) দিয়ে তৈরি এবং [Netlify](https://www.netlify.com/) তে hosted। `main` branch এ push করলে auto deploy হয়।
+
+Locally চালাতে:
 
 ```bash
 # Install docsify-cli (optional, for local preview)
