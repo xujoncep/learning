@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Software Engineering Learning Hub</title>
+  <meta name="description" content="Software Engineering concepts explained in Bangla — SSL/TLS, SSH, Authentication, React, C Programming and more.">
+
+  <!-- Theme -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsify-themeable@0/dist/css/theme-simple.css">
+
+  <!-- Custom Styles -->
+  <style>
+    :root {
+      --base-font-size: 16px;
+      --theme-color: #3F51B5;
+      --link-color: #3F51B5;
+      --sidebar-width: 280px;
+      --sidebar-nav-link-color--active: #3F51B5;
+      --sidebar-nav-link-border-color--active: #3F51B5;
+      --cover-background-color: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      --cover-heading-color: #fff;
+      --cover-color: #fff;
+      --cover-button-primary-color: #fff;
+      --cover-button-primary-background: #3F51B5;
+      --cover-blockquote-color: rgba(255,255,255,0.8);
+    }
+
+    /* Cover page tweaks */
+    .cover-main {
+      text-align: center;
+    }
+
+    /* Sidebar styling */
+    .sidebar-nav li a {
+      font-size: 14px;
+    }
+
+    .sidebar-nav li.active > a {
+      font-weight: 700;
+    }
+
+    /* Table styling */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1em 0;
+    }
+
+    th {
+      background-color: #f5f5f5;
+      font-weight: 600;
+    }
+
+    th, td {
+      padding: 10px 14px;
+      border: 1px solid #e0e0e0;
+      text-align: left;
+    }
+
+    /* Code block styling */
+    .markdown-section code {
+      border-radius: 4px;
+    }
+
+    /* Blockquote styling */
+    .markdown-section blockquote {
+      border-left: 4px solid #3F51B5;
+      background: #f8f9ff;
+      padding: 12px 20px;
+      margin: 1em 0;
+    }
+  </style>
+</head>
+<body>
+  <div id="app">Loading...</div>
+
+  <script>
+    window.$docsify = {
+      name: '📚 Learning Hub',
+      repo: 'https://github.com/sujoncep/learning',
+      loadSidebar: true,
+      coverpage: true,
+      auto2top: true,
+      maxLevel: 3,
+      subMaxLevel: 2,
+      search: {
+        placeholder: 'Search...',
+        noData: 'কিছু পাওয়া যায়নি!',
+        paths: 'auto'
+      },
+      pagination: {
+        previousText: '← আগের টপিক',
+        nextText: 'পরের টপিক →',
+        crossChapter: true,
+        crossChapterText: true
+      },
+      copyCode: {
+        buttonText: 'Copy',
+        errorText: 'Error',
+        successText: 'Copied!'
+      },
+      markdown: {
+        renderer: {
+          code: function(code, lang) {
+            if (lang === 'mermaid') {
+              return '<div class="mermaid">' + code + '</div>';
+            }
+            if (this.origin && typeof this.origin.code === 'function') {
+              return this.origin.code.apply(this, arguments);
+            }
+            return '<pre><code class="' + (lang || '') + '">' + code + '</code></pre>';
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Docsify core -->
+  <script src="https://cdn.jsdelivr.net/npm/docsify@4/lib/docsify.min.js"></script>
+
+  <!-- Plugins -->
+  <script src="https://cdn.jsdelivr.net/npm/docsify@4/lib/plugins/search.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/docsify-pagination/dist/docsify-pagination.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/docsify-copy-code/dist/docsify-copy-code.min.js"></script>
+
+  <!-- Syntax Highlighting -->
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-bash.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-csharp.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-c.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-json.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-typescript.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-jsx.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-tsx.min.js"></script>
+
+  <!-- Mermaid Diagrams -->
+  <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+  <script>
+    mermaid.initialize({ startOnLoad: false, theme: 'default' });
+
+    // Re-render mermaid on page change
+    const observer = new MutationObserver(() => {
+      document.querySelectorAll('.mermaid').forEach((el) => {
+        if (!el.getAttribute('data-processed')) {
+          try {
+            el.setAttribute('data-processed', 'true');
+            mermaid.run({ nodes: [el] });
+          } catch (e) {
+            console.warn('Mermaid render error:', e);
+          }
+        }
+      });
+    });
+
+    const target = document.getElementById('app');
+    if (target) {
+      observer.observe(target, { childList: true, subtree: true });
+    }
+  </script>
+</body>
+</html>
