@@ -18,6 +18,12 @@
 | ----- | ----------- |
 | [React for .NET Developers](react-for-dotnet-developers.md) | C#/.NET background থেকে React + TypeScript শেখার complete guide |
 
+### 🌐 Networking
+
+| Topic | Description |
+| ----- | ----------- |
+| [Computer Networking Handbook](computer-networking-hand-book.md) | 40 topics, 300+ MCQ, 150 Interview Q&A — OSI, TCP/IP, Subnetting, Routing, Security |
+
 ### 💻 Programming
 
 | Topic | Description |

@@ -9,5 +9,8 @@
 - **⚛️ Frontend**
   - [React for .NET Developers](react-for-dotnet-developers.md)
 
+- **🌐 Networking**
+  - [Computer Networking Handbook](computer-networking-hand-book.md)
+
 - **💻 Programming**
   - [C Programming Handbook](c-programming-hand-book.md)
