@@ -1,43 +1,48 @@
 <div align="center">
 
+<br>
+
+<img src="https://img.shields.io/badge/Language-C-blue?style=for-the-badge&logo=c&logoColor=white" alt="C Language" />
+<img src="https://img.shields.io/badge/Topics-37-green?style=for-the-badge" alt="37 Topics" />
+<img src="https://img.shields.io/badge/MCQ-300+-orange?style=for-the-badge" alt="300+ MCQ" />
+<img src="https://img.shields.io/badge/Interview_Q&A-100-red?style=for-the-badge" alt="100 Q&A" />
+
 <br><br>
 
-# 🖥️ C Programming
+# C Programming
 
-## Competitive Job Exam — Complete Guide
-
-<br>
-
-### সম্পূর্ণ বাংলায় | Keywords ইংরেজিতে
+### Competitive Job Exam — Complete Guide
 
 <br>
 
-```
- ██████╗    ██████╗ ██████╗  ██████╗  ██████╗
-██╔════╝    ██╔══██╗██╔══██╗██╔═══██╗██╔════╝
-██║         ██████╔╝██████╔╝██║   ██║██║  ███╗
-██║         ██╔═══╝ ██╔══██╗██║   ██║██║   ██║
-╚██████╗    ██║     ██║  ██║╚██████╔╝╚██████╔╝
- ╚═════╝    ╚═╝     ╚═╝  ╚═╝ ╚═════╝  ╚═════╝
-```
+> ***সম্পূর্ণ বাংলায় ব্যাখ্যা | Technical Keywords ইংরেজিতে***
 
 <br>
 
-**Basic → Advanced | 37 Topics | 300+ MCQ | 150+ Written Problems**
+| | |
+|---|---|
+| **Author** | **Md. Sahabuddin Hossain** |
+| **Version** | 1.0 |
+| **Last Updated** | April 2026 |
+| **Language** | বাংলা (Keywords in English) |
+| **Coverage** | Basic → Advanced (37 Topics) |
+| **Target** | BCS, Bank, IT Company, Govt & Private Job Exams |
+
+<br>
 
 ---
 
-**Version:** 1.0 | **Last Updated:** March 2026
+**37 Topics** | **300+ MCQ** | **150+ Written Problems** | **100 Interview Q&A**
 
-**Language:** বাংলা (Technical Keywords in English)
-
-**Target:** BCS, Bank, IT Company, Government & Private Job Exams
-
-<br><br>
+---
 
 </div>
 
----
+<br>
+
+<!-- ═══════════════════════════════════════════════════ -->
+<!-- HOW TO USE THIS BOOK                               -->
+<!-- ═══════════════════════════════════════════════════ -->
 
 <div align="center">
 
@@ -45,6 +50,7 @@
 
 </div>
 
+> [!TIP]
 > **প্রতিটি Topic এ যা পাবেন:**
 >
 > | Section | Icon | বিবরণ |
@@ -55,7 +61,8 @@
 > | **Written Problems** | ✍️ | Step-by-step solution |
 > | **Tricky Parts** | ⚠️ | Common mistakes & exam traps |
 > | **Summary** | 📝 | Descriptive bullet points |
->
+
+> [!NOTE]
 > **Formatting Guide:**
 > - **Bold text** = গুরুত্বপূর্ণ keyword বা concept
 > - `code format` = C code, function name, বা syntax
@@ -65,32 +72,37 @@
 
 ---
 
+<!-- ═══════════════════════════════════════════════════ -->
+<!-- PURPOSE OF THIS BOOK                               -->
+<!-- ═══════════════════════════════════════════════════ -->
+
 <div align="center">
 
 ## বইটি কেন পড়বেন?
 
 </div>
 
-### এই বইয়ের উদ্দেশ্য
-
 বাংলাদেশের **BCS, Bank Recruitment, সরকারি-বেসরকারি IT চাকরি পরীক্ষায়** C Programming থেকে প্রচুর প্রশ্ন আসে। কিন্তু বেশিরভাগ বই ইংরেজিতে এবং academic focus এ লেখা — **পরীক্ষা-কেন্দ্রিক** নয়।
 
-**এই বই আলাদা কারণ:**
-
-1. **পরীক্ষামুখী** — প্রতিটি topic এ কী ধরনের প্রশ্ন আসে, কোথায় trap থাকে — সেটাই focus
-2. **বাংলায় ব্যাখ্যা** — জটিল concept সহজ ভাষায়, কিন্তু technical keyword ইংরেজিতে
-3. **MCQ + Written** — শুধু theory নয়, প্রতিটি topic এ practice problem সহ
-4. **Tricky Parts** — exam এ সবচেয়ে বেশি যেখানে ভুল হয়, সেগুলো highlighted
-5. **Output Prediction** — কোড দেখে output বলার ক্ষমতা তৈরি হবে
-6. **Beginner to Advanced** — কোনো prior knowledge ছাড়াই শুরু করা যায়
+> [!IMPORTANT]
+> **এই বই আলাদা কারণ:**
+>
+> 1. **পরীক্ষামুখী** — প্রতিটি topic এ কী ধরনের প্রশ্ন আসে, কোথায় trap থাকে — সেটাই focus
+> 2. **বাংলায় ব্যাখ্যা** — জটিল concept সহজ ভাষায়, কিন্তু technical keyword ইংরেজিতে
+> 3. **MCQ + Written** — শুধু theory নয়, প্রতিটি topic এ practice problem সহ
+> 4. **Tricky Parts** — exam এ সবচেয়ে বেশি যেখানে ভুল হয়, সেগুলো highlighted
+> 5. **Output Prediction** — কোড দেখে output বলার ক্ষমতা তৈরি হবে
+> 6. **Beginner to Advanced** — কোনো prior knowledge ছাড়াই শুরু করা যায়
 
 ### কাদের জন্য এই বই?
 
-- BCS (General/Technical) পরীক্ষার্থী
-- Bank Recruitment (IT/ICT) পরীক্ষার্থী
-- সরকারি/বেসরকারি চাকরি পরীক্ষার্থী (CSE/IT background)
-- Software Company Interview প্রস্তুতি
-- University Admission / Semester Exam
+| Target Audience | |
+|---|---|
+| BCS (General/Technical) পরীক্ষার্থী | ✅ |
+| Bank Recruitment (IT/ICT) পরীক্ষার্থী | ✅ |
+| সরকারি/বেসরকারি চাকরি পরীক্ষার্থী (CSE/IT) | ✅ |
+| Software Company Interview প্রস্তুতি | ✅ |
+| University Admission / Semester Exam | ✅ |
 
 ---
 
@@ -102,99 +114,105 @@
 
 ### 📌 LEVEL 1: FUNDAMENTALS (ভিত্তি)
 
-| # | Topic | Page |
-|---|-------|------|
-| 01 | [Data Types, Variables & Constants](#topic-1-data-types-variables--constants) | — |
-| 02 | [Operators (Arithmetic, Relational, Logical, Bitwise, Ternary)](#topic-2-operators) | — |
-| 03 | [Format Specifiers & printf/scanf Tricks](#topic-3-format-specifiers--printfscanf-tricks) | — |
-| 04 | [Type Casting (Implicit & Explicit)](#topic-4-type-casting-implicit--explicit) | — |
+| # | Topic | Status |
+|:---:|-------|:---:|
+| 01 | [Data Types, Variables & Constants](#topic-1-data-types-variables--constants) | ✅ |
+| 02 | [Operators (Arithmetic, Relational, Logical, Bitwise, Ternary)](#topic-2-operators) | ✅ |
+| 03 | [Format Specifiers & printf/scanf Tricks](#topic-3-format-specifiers--printfscanf-tricks) | ✅ |
+| 04 | [Type Casting (Implicit & Explicit)](#topic-4-type-casting-implicit--explicit) | ✅ |
 
 ### 📌 LEVEL 2: CONTROL FLOW (নিয়ন্ত্রণ প্রবাহ)
 
-| # | Topic | Page |
-|---|-------|------|
-| 05 | [Conditional Statements (if, else, switch, nested)](#topic-5-conditional-statements) | — |
-| 06 | Loops (for, while, do-while, nested loops) | *upcoming* |
-| 07 | Break, Continue & Goto | *upcoming* |
-| 08 | Pattern Printing (Star, Number, Character) | *upcoming* |
+| # | Topic | Status |
+|:---:|-------|:---:|
+| 05 | [Conditional Statements (if, else, switch, nested)](#topic-5-conditional-statements) | ✅ |
+| 06 | [Loops (for, while, do-while, nested loops)](#topic-6-loops-for-while-do-while-nested) | ✅ |
+| 07 | [Break, Continue & Goto](#topic-7-break-continue--goto) | ✅ |
+| 08 | [Pattern Printing (Star, Number, Character)](#topic-8-pattern-printing) | ✅ |
 
 ### 📌 LEVEL 3: FUNCTIONS (ফাংশন)
 
-| # | Topic | Page |
-|---|-------|------|
-| 09 | Function Basics (Declaration, Definition, Call) | *upcoming* |
-| 10 | Recursion (Factorial, Fibonacci, Tower of Hanoi) | *upcoming* |
-| 11 | Storage Classes (auto, static, extern, register) | *upcoming* |
-| 12 | Scope & Lifetime of Variables | *upcoming* |
+| # | Topic | Status |
+|:---:|-------|:---:|
+| 09 | [Function Basics (Declaration, Definition, Call)](#topic-9-function-basics) | ✅ |
+| 10 | [Recursion (Factorial, Fibonacci, Tower of Hanoi)](#topic-10-recursion) | ✅ |
+| 11 | [Storage Classes (auto, static, extern, register)](#topic-11-storage-classes-auto-static-extern-register) | ✅ |
+| 12 | [Scope & Lifetime of Variables](#topic-12-scope--lifetime-of-variables) | ✅ |
 
 ### 📌 LEVEL 4: ARRAYS & STRINGS (অ্যারে ও স্ট্রিং)
 
-| # | Topic | Page |
-|---|-------|------|
-| 13 | 1D Array (Declaration, Traversal, Operations) | *upcoming* |
-| 14 | 2D Array & Matrix Operations | *upcoming* |
-| 15 | String Basics (char array, string functions) | *upcoming* |
-| 16 | String Problems (Reverse, Palindrome, Anagram) | *upcoming* |
+| # | Topic | Status |
+|:---:|-------|:---:|
+| 13 | [1D Array (Declaration, Traversal, Operations)](#topic-13-1d-array) | ✅ |
+| 14 | [2D Array & Matrix Operations](#topic-14-2d-array--matrix-operations) | ✅ |
+| 15 | [String Basics (char array, string functions)](#topic-15-string-basics) | ✅ |
+| 16 | [String Problems (Reverse, Palindrome, Anagram)](#topic-16-string-problems-advanced) | ✅ |
 
 ### 📌 LEVEL 5: POINTERS (পয়েন্টার)
 
-| # | Topic | Page |
-|---|-------|------|
-| 17 | Pointer Basics (Declaration, Dereferencing, Arithmetic) | *upcoming* |
-| 18 | Pointer with Array & String | *upcoming* |
-| 19 | Pointer to Pointer & Function Pointer | *upcoming* |
-| 20 | Dynamic Memory Allocation (malloc, calloc, realloc, free) | *upcoming* |
+| # | Topic | Status |
+|:---:|-------|:---:|
+| 17 | [Pointer Basics (Declaration, Dereferencing, Arithmetic)](#topic-17-pointer-basics) | ✅ |
+| 18 | [Pointer with Array & String](#topic-18-pointer-with-array--string) | ✅ |
+| 19 | [Pointer to Pointer & Function Pointer](#topic-19-pointer-to-pointer--function-pointer) | ✅ |
+| 20 | [Dynamic Memory Allocation (malloc, calloc, realloc, free)](#topic-20-dynamic-memory-allocation) | ✅ |
 
 ### 📌 LEVEL 6: STRUCTURES & UNIONS (স্ট্রাকচার ও ইউনিয়ন)
 
-| # | Topic | Page |
-|---|-------|------|
-| 21 | Structure (Declaration, Nested, Array of Structures) | *upcoming* |
-| 22 | Union & Enum | *upcoming* |
-| 23 | typedef & sizeof Operator | *upcoming* |
+| # | Topic | Status |
+|:---:|-------|:---:|
+| 21 | [Structure (Declaration, Nested, Array of Structures)](#topic-21-structure) | ✅ |
+| 22 | [Union & Enum](#topic-22-union--enum) | ✅ |
+| 23 | [typedef & sizeof Operator](#topic-23-typedef--sizeof-operator) | ✅ |
 
 ### 📌 LEVEL 7: FILE HANDLING (ফাইল হ্যান্ডলিং)
 
-| # | Topic | Page |
-|---|-------|------|
-| 24 | File Operations (fopen, fclose, fprintf, fscanf, fread, fwrite) | *upcoming* |
+| # | Topic | Status |
+|:---:|-------|:---:|
+| 24 | [File Operations (fopen, fclose, fprintf, fscanf, fread, fwrite)](#topic-24-file-operations) | ✅ |
 
 ### 📌 LEVEL 8: NUMBER THEORY & MATH (সংখ্যা তত্ত্ব)
 
-| # | Topic | Page |
-|---|-------|------|
-| 25 | Prime Number, GCD/LCM, Factorial | *upcoming* |
-| 26 | Number System Conversion (Binary, Octal, Hex) | *upcoming* |
-| 27 | Series & Sequences (Fibonacci, AP, GP, Special Series) | *upcoming* |
-| 28 | Digit Manipulation (Sum of digits, Reverse, Armstrong) | *upcoming* |
+| # | Topic | Status |
+|:---:|-------|:---:|
+| 25 | [Prime Number, GCD/LCM, Factorial](#topic-25-prime-number-gcdlcm-factorial) | ✅ |
+| 26 | [Number System Conversion (Binary, Octal, Hex)](#topic-26-number-system-conversion) | ✅ |
+| 27 | [Series & Sequences (Fibonacci, AP, GP)](#topic-27-series--sequences) | ✅ |
+| 28 | [Digit Manipulation (Sum of digits, Reverse, Armstrong)](#topic-28-digit-manipulation) | ✅ |
 
 ### 📌 LEVEL 9: SEARCHING & SORTING (সার্চিং ও সর্টিং)
 
-| # | Topic | Page |
-|---|-------|------|
-| 29 | Linear Search & Binary Search | *upcoming* |
-| 30 | Bubble Sort, Selection Sort, Insertion Sort | *upcoming* |
+| # | Topic | Status |
+|:---:|-------|:---:|
+| 29 | [Linear Search & Binary Search](#topic-29-linear-search--binary-search) | ✅ |
+| 30 | [Bubble Sort, Selection Sort, Insertion Sort](#topic-30-bubble-sort-selection-sort-insertion-sort) | ✅ |
 
 ### 📌 LEVEL 10: DATA STRUCTURES BASICS
 
-| # | Topic | Page |
-|---|-------|------|
-| 31 | Linked List (Singly) | *upcoming* |
-| 32 | Stack (Array-based) | *upcoming* |
-| 33 | Queue (Array-based) | *upcoming* |
+| # | Topic | Status |
+|:---:|-------|:---:|
+| 31 | [Linked List (Singly)](#topic-31-linked-list-singly) | ✅ |
+| 32 | [Stack (Array-based)](#topic-32-stack-array-based) | ✅ |
+| 33 | [Queue (Array-based)](#topic-33-queue-array-based) | ✅ |
 
 ### 📌 LEVEL 11: ADVANCED & TRICKY (উন্নত ও কৌশলী)
 
-| # | Topic | Page |
-|---|-------|------|
-| 34 | Bitwise Operations & Bit Manipulation | *upcoming* |
-| 35 | Preprocessor Directives (#define, #include, Macros) | *upcoming* |
-| 36 | Output Prediction (Tricky Code Reading) | *upcoming* |
-| 37 | Miscellaneous (Command Line Args, Variable Args, Volatile) | *upcoming* |
+| # | Topic | Status |
+|:---:|-------|:---:|
+| 34 | [Bitwise Operations & Bit Manipulation](#topic-34-bitwise-operations--bit-manipulation) | ✅ |
+| 35 | [Preprocessor Directives (#define, #include, Macros)](#topic-35-preprocessor-directives) | ✅ |
+| 36 | [Output Prediction (Tricky Code Reading)](#topic-36-output-prediction-tricky-code-reading) | ✅ |
+| 37 | [Miscellaneous (Command Line Args, Variable Args, Volatile)](#topic-37-miscellaneous) | ✅ |
+
+### 🎯 BONUS
+
+| # | Topic | Status |
+|:---:|-------|:---:|
+| 38 | [100 Interview Questions & Answers (Basic → Advanced)](#bonus-100-c-programming-interview-questions--answers) | ✅ |
 
 ---
 
-> **মোট Topics:** 37 | **আনুমানিক MCQ:** 300+ | **Written Problems:** 150+
+> **মোট Topics:** 37 + Bonus | **MCQ:** 300+ | **Written:** 150+ | **Interview Q&A:** 100
 
 ---
 ---
@@ -8894,14 +8912,26 @@ Preprocessor → Compiler → Assembler → **Linker** = final executable!
 
 **37 Topics + 100 Interview Q&A | 300+ MCQ | 150+ Written Problems**
 
----
-
-*Basic থেকে Advanced পর্যন্ত সম্পূর্ণ guide*
-
-*BCS, Bank, IT Company, Government & Private Job Exam এর জন্য*
+</div>
 
 ---
 
-**শুভকামনা! 🚀**
+<div align="center">
+
+**Author: Md. Sahabuddin Hossain**
+
+Version 1.0 | April 2026
+
+<br>
+
+<img src="https://img.shields.io/badge/Language-C-blue?style=flat-square&logo=c&logoColor=white" alt="C" />
+<img src="https://img.shields.io/badge/Topics-37-green?style=flat-square" alt="37" />
+<img src="https://img.shields.io/badge/License-Free_for_Learning-brightgreen?style=flat-square" alt="Free" />
+
+<br><br>
+
+*Basic থেকে Advanced পর্যন্ত সম্পূর্ণ guide — BCS, Bank, IT Company, Govt & Private Job Exam*
+
+**[Back to Top](#c-programming)**
 
 </div>
