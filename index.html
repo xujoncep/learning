@@ -213,26 +213,28 @@
     }
 
     th {
-      background-color: #3F51B5;
-      color: #ffffff;
+      background-color: #1e293b;
+      color: #f1f5f9;
       font-weight: 600;
       text-transform: uppercase;
-      font-size: 0.85em;
+      font-size: 0.82em;
       letter-spacing: 0.05em;
       padding: 12px 16px;
+      border-bottom: 2px solid #334155;
     }
 
     td {
       padding: 12px 16px;
-      border-bottom: 1px solid #eee;
+      border-bottom: 1px solid #e2e8f0;
+      color: #334155;
     }
 
     tr:nth-child(even) {
-      background-color: #f8f9ff;
+      background-color: #f8fafc;
     }
 
     tr:hover {
-      background-color: #e8eaf6;
+      background-color: #f1f5f9;
       transition: background-color 0.2s ease;
     }
 
@@ -379,7 +381,27 @@
   <!-- Mermaid (must load BEFORE docsify) -->
   <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
   <script>
-    mermaid.initialize({ startOnLoad: false, theme: 'default' });
+    mermaid.initialize({
+      startOnLoad: false,
+      theme: 'base',
+      themeVariables: {
+        primaryColor: '#e0e7ff',
+        primaryTextColor: '#1e293b',
+        primaryBorderColor: '#6366f1',
+        lineColor: '#64748b',
+        secondaryColor: '#f0fdf4',
+        tertiaryColor: '#fef3c7',
+        noteBkgColor: '#f8fafc',
+        noteTextColor: '#334155',
+        actorBkg: '#e0e7ff',
+        actorBorder: '#6366f1',
+        actorTextColor: '#1e293b',
+        signalColor: '#334155',
+        signalTextColor: '#1e293b',
+        labelBoxBkgColor: '#f1f5f9',
+        labelTextColor: '#1e293b'
+      }
+    });
   </script>
   <script src="https://cdn.jsdelivr.net/npm/docsify-mermaid@2/dist/docsify-mermaid.js"></script>
 

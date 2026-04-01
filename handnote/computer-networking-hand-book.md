@@ -2099,6 +2099,22 @@ Router NAT দিয়ে Private → Public convert করে Internet এ য
 
 **Subnetting** হলো একটা বড় network কে **ছোট ছোট sub-network (subnet)** এ ভাগ করার process। এতে IP address efficient ভাবে ব্যবহার হয় এবং network management সহজ হয়।
 
+### Subnetting Visual Overview
+
+```mermaid
+graph TD
+    A["192.168.1.0/24<br/>254 hosts"] -->|"/26 দিয়ে ভাগ"| B["Subnet 1<br/>192.168.1.0/26<br/>62 hosts"]
+    A --> C["Subnet 2<br/>192.168.1.64/26<br/>62 hosts"]
+    A --> D["Subnet 3<br/>192.168.1.128/26<br/>62 hosts"]
+    A --> E["Subnet 4<br/>192.168.1.192/26<br/>62 hosts"]
+
+    style A fill:#e0e7ff,stroke:#6366f1,stroke-width:2px
+    style B fill:#f0fdf4,stroke:#22c55e
+    style C fill:#f0fdf4,stroke:#22c55e
+    style D fill:#f0fdf4,stroke:#22c55e
+    style E fill:#f0fdf4,stroke:#22c55e
+```
+
 ### কেন Subnetting দরকার?
 
 ```
@@ -2728,6 +2744,18 @@ sequenceDiagram
 
 **UDP (User Datagram Protocol)** হলো **connectionless, unreliable** transport protocol। কোন connection establish করে না, কোন acknowledgement পাঠায় না — শুধু data পাঠিয়ে দেয়।
 
+```mermaid
+sequenceDiagram
+    participant C as Client
+    participant S as Server
+
+    Note over C,S: UDP - No Handshake!
+    C->>S: Data 1
+    C->>S: Data 2
+    C->>S: Data 3
+    Note right of S: কোন ACK নেই<br/>হারালে হারালো!
+```
+
 ### TCP vs UDP — Master Comparison
 
 | বৈশিষ্ট্য | TCP | UDP |
@@ -2954,6 +2982,20 @@ Server Socket: 93.184.216.34:80    (well-known port)
 ---
 
 ## 📖 17.1 ধারণা (Concept)
+
+```mermaid
+graph LR
+    subgraph "Flow Control Methods"
+        A["Stop-and-Wait<br/>1 frame, then wait"] --> B["Sliding Window<br/>N frames, then wait"]
+        B --> C["Go-Back-N<br/>Error থেকে সব retransmit"]
+        B --> D["Selective Repeat<br/>শুধু error frame retransmit"]
+    end
+    
+    style A fill:#fef3c7,stroke:#f59e0b
+    style B fill:#e0e7ff,stroke:#6366f1
+    style C fill:#fce7f3,stroke:#ec4899
+    style D fill:#f0fdf4,stroke:#22c55e
+```
 
 ### Flow Control
 
@@ -3296,6 +3338,21 @@ sequenceDiagram
 **HTTP (HyperText Transfer Protocol)** হলো **web communication** এর protocol — browser ও web server এর মধ্যে data আদান-প্রদান করে।
 
 **HTTPS = HTTP + TLS/SSL** (encrypted, secure)
+
+```mermaid
+sequenceDiagram
+    participant B as Browser
+    participant S as Web Server
+
+    B->>S: GET /index.html HTTP/1.1
+    S->>B: 200 OK + HTML content
+    B->>S: GET /api/users
+    S->>B: 200 OK + JSON data
+    B->>S: POST /api/login
+    S->>B: 401 Unauthorized
+    B->>S: GET /not-found
+    S->>B: 404 Not Found
+```
 
 ### HTTP Methods
 
@@ -3738,6 +3795,20 @@ graph TD
 ---
 
 ## 📖 25.1 ধারণা (Concept)
+
+```mermaid
+graph LR
+    A["PC-A<br/>192.168.1.10"] --> R1["Router 1"]
+    R1 -->|"Path 1<br/>2 hops"| R2["Router 2"]
+    R1 -->|"Path 2<br/>4 hops"| R3["Router 3"]
+    R2 --> R4["Router 4"]
+    R3 --> R5["Router 5"] --> R6["Router 6"] --> R4
+    R4 --> B["PC-B<br/>10.0.0.20"]
+
+    style R1 fill:#e0e7ff,stroke:#6366f1
+    style R4 fill:#e0e7ff,stroke:#6366f1
+    linkStyle 1 stroke:#22c55e,stroke-width:3px
+```
 
 **Routing** হলো **source থেকে destination পর্যন্ত best path select** করার process। Router **routing table** দেখে decide করে কোন interface দিয়ে packet forward করবে।
 
@@ -4872,19 +4943,26 @@ graph TD
 
 ### Troubleshooting Flowchart
 
-```
-Network সমস্যা?
-    │
-    ├── ping 127.0.0.1 (loopback) → Fail? → NIC/TCP stack সমস্যা
-    │
-    ├── ping নিজের IP → Fail? → NIC configuration সমস্যা
-    │
-    ├── ping default gateway → Fail? → Local network/cable সমস্যা
-    │
-    ├── ping external IP (8.8.8.8) → Fail? → Router/ISP সমস্যা
-    │
-    └── ping domain (google.com) → Fail? → DNS সমস্যা
-                                    └── nslookup দিয়ে confirm করুন
+```mermaid
+graph TD
+    A["Network Problem?"] --> B["ping 127.0.0.1<br/>Loopback"]
+    B -->|Fail| B1["NIC / TCP Stack<br/>Problem"]
+    B -->|Pass| C["ping Own IP"]
+    C -->|Fail| C1["NIC Config<br/>Problem"]
+    C -->|Pass| D["ping Gateway"]
+    D -->|Fail| D1["Local Network /<br/>Cable Problem"]
+    D -->|Pass| E["ping 8.8.8.8"]
+    E -->|Fail| E1["Router / ISP<br/>Problem"]
+    E -->|Pass| F["ping google.com"]
+    F -->|Fail| F1["DNS Problem<br/>nslookup verify"]
+    F -->|Pass| G["Network OK!"]
+
+    style B1 fill:#fecaca,stroke:#ef4444
+    style C1 fill:#fecaca,stroke:#ef4444
+    style D1 fill:#fecaca,stroke:#ef4444
+    style E1 fill:#fecaca,stroke:#ef4444
+    style F1 fill:#fecaca,stroke:#ef4444
+    style G fill:#f0fdf4,stroke:#22c55e
 ```
 
 ---
