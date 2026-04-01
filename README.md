@@ -8,27 +8,27 @@
 
 | Topic | Description |
 | ----- | ----------- |
-| [SSL/TLS Guide](ssl-tls.md) | Encryption, Certificates, TLS Handshake, HTTPS — সব কিছু বিস্তারিত |
-| [SSH Complete Guide](ssh.md) | Secure Shell, Key-based Auth, Tunneling, Agent Forwarding |
-| [Authentication & Authorization](authentication-authorization-dotnet.md) | .NET Identity, JWT, OAuth 2.0, Cookie Auth, Role/Policy-based Authorization |
+| [SSL/TLS Guide](handnote/ssl-tls.md) | Encryption, Certificates, TLS Handshake, HTTPS — সব কিছু বিস্তারিত |
+| [SSH Complete Guide](handnote/ssh.md) | Secure Shell, Key-based Auth, Tunneling, Agent Forwarding |
+| [Authentication & Authorization](handnote/authentication-authorization-dotnet.md) | .NET Identity, JWT, OAuth 2.0, Cookie Auth, Role/Policy-based Authorization |
 
 ### ⚛️ Frontend
 
 | Topic | Description |
 | ----- | ----------- |
-| [React for .NET Developers](react-for-dotnet-developers.md) | C#/.NET background থেকে React + TypeScript শেখার complete guide |
+| [React for .NET Developers](handnote/react-for-dotnet-developers.md) | C#/.NET background থেকে React + TypeScript শেখার complete guide |
 
 ### 🌐 Networking
 
 | Topic | Description |
 | ----- | ----------- |
-| [Computer Networking Handbook](computer-networking-hand-book.md) | 40 topics, 300+ MCQ, 150 Interview Q&A — OSI, TCP/IP, Subnetting, Routing, Security |
+| [Computer Networking Handbook](handnote/computer-networking-hand-book.md) | 40 topics, 300+ MCQ, 150 Interview Q&A — OSI, TCP/IP, Subnetting, Routing, Security |
 
 ### 💻 Programming
 
 | Topic | Description |
 | ----- | ----------- |
-| [C Programming Handbook](c-programming-hand-book.md) | Job exam preparation — 37 topics, 100+ interview Q&A |
+| [C Programming Handbook](handnote/c-programming-hand-book.md) | Job exam preparation — 37 topics, 100+ interview Q&A |
 
 ## 🌟 Features
 
