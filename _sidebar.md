@@ -14,3 +14,6 @@
 
 - **💻 Programming**
   - [C Programming Handbook](handnote/c-programming-hand-book.md)
+
+- **📝 Exams**
+  - [DataCamp SQL Exam Notes (2026-04-18)](handnote/exams-datacamp-sql-exam-2026-04-18.md)
