@@ -1,0 +1,5927 @@
+import { Mermaid } from '@/components/mdx/Mermaid';
+import { Callout } from '@/components/mdx/Callout';
+
+<div align="center">
+
+<br />
+
+<img src="https://img.shields.io/badge/Subject-Computer_Networking-blue?style=for-the-badge&logo=cisco&logoColor=white" alt="Computer Networking" />
+<img src="https://img.shields.io/badge/Topics-40-green?style=for-the-badge" alt="40 Topics" />
+<img src="https://img.shields.io/badge/MCQ-300+-orange?style=for-the-badge" alt="300+ MCQ" />
+<img src="https://img.shields.io/badge/Interview_Q&A-150-red?style=for-the-badge" alt="150 Q&A" />
+
+<br /><br />
+
+# Computer Networking
+
+### Software Engineer & IT Job Exam — Complete Handbook
+
+<br />
+
+> ***সম্পূর্ণ বাংলায় ব্যাখ্যা | Technical Keywords ইংরেজিতে***
+
+<br />
+
+| | |
+|---|---|
+| **Author** | **Md. Sahabuddin Hossain** |
+| **Version** | 1.0 |
+| **Last Updated** | April 2026 |
+| **Language** | বাংলা (Keywords in English) |
+| **Coverage** | Basic → Advanced (40 Topics) |
+| **Target** | Software Engineer, IT Job, Assistant Programmer, BCS, Bank IT |
+
+<br />
+
+---
+
+**40 Topics** | **300+ MCQ** | **150+ Written Problems** | **150 Interview Q&A** | **40+ Diagrams**
+
+---
+
+</div>
+
+<br />
+
+{/* ═══════════════════════════════════════════════════ */}
+{/* HOW TO USE THIS BOOK                               */}
+{/* ═══════════════════════════════════════════════════ */}
+
+<div align="center">
+
+## কীভাবে এই বই ব্যবহার করবেন
+
+</div>
+
+> [!TIP]
+> **প্রতিটি Topic এ যা পাবেন:**
+>
+> | Section | Icon | বিবরণ |
+> |---------|------|-------|
+> | **Concept** | 📖 | বিস্তারিত ব্যাখ্যা + Diagram |
+> | **Practical Examples** | 💻 | Real-world commands, configurations |
+> | **MCQ Problems** | ❓ | Answer + Explanation সহ |
+> | **Written Problems** | ✍️ | Descriptive Q&A |
+> | **Tricky Parts** | ⚠️ | Common mistakes & exam traps |
+> | **Summary** | 📝 | Quick revision bullet points |
+
+> [!NOTE]
+> **Formatting Guide:**
+> - **Bold text** = গুরুত্বপূর্ণ keyword বা concept
+> - `code format` = Command, protocol name, বা technical term
+> - ⚠️ = সতর্কতা / common mistake
+> - ✅ = সঠিক answer বা correct approach
+> - ❌ = ভুল / যা করা যাবে না
+
+---
+
+{/* ═══════════════════════════════════════════════════ */}
+{/* PURPOSE OF THIS BOOK                               */}
+{/* ═══════════════════════════════════════════════════ */}
+
+<div align="center">
+
+## বইটি কেন পড়বেন?
+
+</div>
+
+**Software Engineer, Assistant Programmer, IT Officer** সহ বিভিন্ন চাকরি পরীক্ষায় **Computer Networking** থেকে প্রচুর প্রশ্ন আসে। OSI Model, Subnetting, TCP/UDP, DNS — এগুলো প্রায় প্রতিটি পরীক্ষায় থাকে। কিন্তু বেশিরভাগ resource ইংরেজিতে এবং CCNA-focused — **চাকরি পরীক্ষা-কেন্দ্রিক** নয়।
+
+> [!IMPORTANT]
+> **এই বই আলাদা কারণ:**
+>
+> 1. **পরীক্ষামুখী** — কোন topic থেকে কী ধরনের প্রশ্ন আসে, কোথায় trap থাকে — সেটাই focus
+> 2. **বাংলায় ব্যাখ্যা** — জটিল networking concept সহজ ভাষায়, কিন্তু technical keyword ইংরেজিতে
+> 3. **MCQ + Written** — শুধু theory নয়, প্রতিটি topic এ practice problem সহ
+> 4. **Tricky Parts** — exam এ সবচেয়ে বেশি যেখানে ভুল হয়, সেগুলো highlighted
+> 5. **Developer Focused** — Software Engineer দের জন্য practical networking knowledge
+> 6. **Beginner to Advanced** — কোনো prior knowledge ছাড়াই শুরু করা যায়
+
+### কাদের জন্য এই বই?
+
+| Target Audience | |
+|---|---|
+| Software Engineer (Junior/Mid Level) | ✅ |
+| IT Job Seeker (Private Companies) | ✅ |
+| Assistant Programmer (Govt/PSC) | ✅ |
+| BCS (Technical/General) পরীক্ষার্থী | ✅ |
+| Bank IT Officer পরীক্ষার্থী | ✅ |
+| CCNA/Network+ aspirants (basic prep) | ✅ |
+
+---
+
+<div align="center">
+
+## 📚 সূচিপত্র (Table of Contents)
+
+</div>
+
+### 📌 LEVEL 1: FUNDAMENTALS (মৌলিক ধারণা)
+
+| # | Topic | Status |
+|:---:|-------|:---:|
+| 01 | [Computer Network কী ও কেন](#topic-1-computer-network-কী-ও-কেন) | ✅ |
+| 02 | [Network Devices (Hub, Switch, Router, Gateway)](#topic-2-network-devices) | ✅ |
+| 03 | [Transmission Media (Guided ও Unguided)](#topic-3-transmission-media) | ✅ |
+| 04 | [Network Topologies & Architectures](#topic-4-network-topologies--architectures) | ✅ |
+| 05 | [Data Transmission Modes](#topic-5-data-transmission-modes) | ✅ |
+
+### 📌 LEVEL 2: OSI & TCP/IP MODEL (রেফারেন্স মডেল)
+
+| # | Topic | Status |
+|:---:|-------|:---:|
+| 06 | [OSI Model (7 Layers Deep Dive)](#topic-6-osi-model) | ✅ |
+| 07 | [TCP/IP Model (4 Layers)](#topic-7-tcpip-model) | ✅ |
+| 08 | [Data Encapsulation & Decapsulation](#topic-8-data-encapsulation--decapsulation) | ✅ |
+
+### 📌 LEVEL 3: IP ADDRESSING & SUBNETTING (আইপি অ্যাড্রেসিং)
+
+| # | Topic | Status |
+|:---:|-------|:---:|
+| 09 | [IPv4 Addressing (Classes, Octets)](#topic-9-ipv4-addressing) | ✅ |
+| 10 | [Subnetting (Complete Guide)](#topic-10-subnetting) | ✅ |
+| 11 | [VLSM & Supernetting](#topic-11-vlsm--supernetting) | ✅ |
+| 12 | [IPv6 Basics](#topic-12-ipv6-basics) | ✅ |
+| 13 | [NAT & PAT](#topic-13-nat--pat) | ✅ |
+
+### 📌 LEVEL 4: TRANSPORT LAYER PROTOCOLS
+
+| # | Topic | Status |
+|:---:|-------|:---:|
+| 14 | [TCP (Transmission Control Protocol)](#topic-14-tcp) | ✅ |
+| 15 | [UDP (User Datagram Protocol)](#topic-15-udp) | ✅ |
+| 16 | [Port Numbers & Sockets](#topic-16-port-numbers--sockets) | ✅ |
+| 17 | [Flow Control & Error Control](#topic-17-flow-control--error-control) | ✅ |
+
+### 📌 LEVEL 5: APPLICATION LAYER PROTOCOLS
+
+| # | Topic | Status |
+|:---:|-------|:---:|
+| 18 | [DNS (Domain Name System)](#topic-18-dns) | ✅ |
+| 19 | [DHCP (Dynamic Host Configuration)](#topic-19-dhcp) | ✅ |
+| 20 | [HTTP/HTTPS](#topic-20-httphttps) | ✅ |
+| 21 | [Email Protocols (SMTP, POP3, IMAP)](#topic-21-email-protocols) | ✅ |
+| 22 | [FTP, SFTP, TFTP](#topic-22-ftp-sftp-tftp) | ✅ |
+| 23 | [ARP, RARP, ICMP](#topic-23-arp-rarp-icmp) | ✅ |
+
+### 📌 LEVEL 6: ROUTING & SWITCHING
+
+| # | Topic | Status |
+|:---:|-------|:---:|
+| 24 | [Switching Concepts](#topic-24-switching-concepts) | ✅ |
+| 25 | [Routing Basics](#topic-25-routing-basics) | ✅ |
+| 26 | [Routing Protocols (RIP, OSPF, BGP)](#topic-26-routing-protocols) | ✅ |
+| 27 | [VLAN & Inter-VLAN Routing](#topic-27-vlan--inter-vlan-routing) | ✅ |
+| 28 | [STP (Spanning Tree Protocol)](#topic-28-stp) | ✅ |
+
+### 📌 LEVEL 7: NETWORK SECURITY
+
+| # | Topic | Status |
+|:---:|-------|:---:|
+| 29 | [Network Security Basics (CIA Triad)](#topic-29-network-security-basics) | ✅ |
+| 30 | [Firewall & IDS/IPS](#topic-30-firewall--idsips) | ✅ |
+| 31 | [Cryptography Basics](#topic-31-cryptography-basics) | ✅ |
+| 32 | [VPN (Virtual Private Network)](#topic-32-vpn) | ✅ |
+| 33 | [SSL/TLS & HTTPS (Quick Recap)](#topic-33-ssltls--https) | ✅ |
+| 34 | [Common Network Attacks](#topic-34-common-network-attacks) | ✅ |
+
+### 📌 LEVEL 8: ADVANCED & PRACTICAL
+
+| # | Topic | Status |
+|:---:|-------|:---:|
+| 35 | [Wireless Networking (WiFi)](#topic-35-wireless-networking) | ✅ |
+| 36 | [Cloud Networking Basics](#topic-36-cloud-networking-basics) | ✅ |
+| 37 | [Network Troubleshooting Commands](#topic-37-network-troubleshooting-commands) | ✅ |
+| 38 | [Network Design & Best Practices](#topic-38-network-design--best-practices) | ✅ |
+| 39 | [Emerging Technologies (SDN, IoT, 5G)](#topic-39-emerging-technologies) | ✅ |
+| 40 | [Networking for Software Engineers](#topic-40-networking-for-software-engineers) | ✅ |
+
+### 🎯 BONUS
+
+| # | Topic | Status |
+|:---:|-------|:---:|
+| 41 | [150 Interview Questions & Answers (Basic → Advanced)](#bonus-150-interview-questions--answers) | ✅ |
+| 42 | [50 Most Repeated Exam MCQs with Explanation](#bonus-50-most-repeated-exam-mcqs) | ✅ |
+
+---
+
+> **মোট Topics:** 40 + Bonus | **MCQ:** 300+ | **Written:** 150+ | **Interview Q&A:** 150
+
+---
+---
+
+<div align="center">
+
+# LEVEL 1: FUNDAMENTALS (মৌলিক ধারণা)
+
+*Computer Networking এর মৌলিক ভিত্তি — এই অংশ না বুঝলে পরের কিছুই বোঝা যাবে না*
+
+</div>
+
+---
+---
+
+# Topic 1: Computer Network কী ও কেন
+
+<div align="center">
+
+*"দুই বা ততোধিক device যখন একে অপরের সাথে data আদান-প্রদান করতে পারে — সেটাই Network"*
+
+</div>
+
+---
+
+## 📖 1.1 ধারণা (Concept)
+
+**Computer Network** হলো দুই বা ততোধিক **computing device** এর সংযোগ যেখানে তারা নিজেদের মধ্যে **data, resource এবং information share** করতে পারে।
+
+সহজ ভাষায় — আপনার বাসার WiFi তে phone, laptop, printer সব connected থাকে এবং একে অপরের সাথে communicate করতে পারে — এটাই একটা **network**।
+
+### Network এর মূল উদ্দেশ্য
+
+| উদ্দেশ্য | উদাহরণ |
+|----------|--------|
+| **Resource Sharing** | একটা printer অনেকগুলো computer share করে |
+| **Data Communication** | Email, file transfer, video call |
+| **Centralized Management** | Server থেকে সব কিছু control করা |
+| **Cost Reduction** | প্রতিটি computer এ আলাদা printer না কিনে share করা |
+| **Reliability** | Data backup রাখা multiple location এ |
+
+### Network এর প্রকারভেদ (Types of Network)
+
+<Mermaid chart={`graph TD
+    A[Computer Network Types]
+    A --> B["PAN<br/>Personal Area Network"]
+    A --> C["LAN<br/>Local Area Network"]
+    A --> D["MAN<br/>Metropolitan Area Network"]
+    A --> E["WAN<br/>Wide Area Network"]
+
+    B --> B1["Range: ~10m<br/>Example: Bluetooth,<br/>USB connection"]
+    C --> C1["Range: ~1km<br/>Example: Office,<br/>School lab"]
+    D --> D1["Range: ~100km<br/>Example: City-wide<br/>cable TV network"]
+    E --> E1["Range: Worldwide<br/>Example: Internet,<br/>Bank ATM network"]
+`} />
+
+### বিস্তারিত তুলনা
+
+| বৈশিষ্ট্য | PAN | LAN | MAN | WAN |
+|-----------|-----|-----|-----|-----|
+| **Full Form** | Personal Area Network | Local Area Network | Metropolitan Area Network | Wide Area Network |
+| **Range** | ~10 মিটার | ~1 কিলোমিটার | ~100 কিলোমিটার | সারা বিশ্ব |
+| **Speed** | Low-Medium | High (1 Gbps+) | Medium-High | Low-Medium |
+| **Owner** | Individual | Organization | ISP/Govt | Multiple entities |
+| **Error Rate** | Very Low | Low | Medium | High |
+| **Cost** | Very Low | Low | High | Very High |
+| **Example** | Bluetooth headset | Office network | Cable TV in city | Internet |
+| **Maintenance** | Easy | Easy | Moderate | Difficult |
+
+### অন্যান্য Network Types
+
+| Type | বিবরণ |
+|------|-------|
+| **CAN (Campus Area Network)** | University campus এর মধ্যে — multiple LAN connected |
+| **SAN (Storage Area Network)** | শুধুমাত্র storage devices এর dedicated network |
+| **VPN (Virtual Private Network)** | Public network এর উপর private, encrypted tunnel |
+| **WLAN (Wireless LAN)** | WiFi based LAN — cable ছাড়া |
+
+---
+
+## 💻 1.2 Practical Examples
+
+```
+Real-world Network Examples:
+
+🏠 Home Network (LAN/WLAN):
+   Phone ──WiFi──┐
+   Laptop ──WiFi──├── Router ──── ISP ──── Internet
+   Smart TV ─WiFi─┘
+
+🏢 Office Network (LAN):
+   PC-1 ──┐                           ┌── File Server
+   PC-2 ──├── Switch ── Router ──┬────├── Mail Server
+   PC-3 ──┘                     │    └── Web Server
+   Printer ─────────────────────┘
+
+🌐 Internet (WAN):
+   Dhaka Office ──ISP──┐
+                       ├── Internet Backbone
+   Chittagong Office ──┘
+```
+
+---
+
+## ❓ 1.3 MCQ Problems
+
+**Q1.** LAN এর সর্বোচ্চ range সাধারণত কত?
+
+- (a) 10 মিটার
+- (b) 100 মিটার
+- (c) 1 কিলোমিটার ✅
+- (d) 100 কিলোমিটার
+
+> **ব্যাখ্যা:** LAN সাধারণত একটি building বা campus এর মধ্যে সীমাবদ্ধ, range প্রায় 1 km পর্যন্ত। 10m হলো PAN, 100km হলো MAN।
+
+**Q2.** Internet কোন ধরনের network?
+
+- (a) LAN
+- (b) MAN
+- (c) WAN ✅
+- (d) PAN
+
+> **ব্যাখ্যা:** Internet হলো সবচেয়ে বড় **WAN (Wide Area Network)** — সারা পৃথিবী জুড়ে বিস্তৃত।
+
+**Q3.** Bluetooth কোন ধরনের network তৈরি করে?
+
+- (a) LAN
+- (b) PAN ✅
+- (c) MAN
+- (d) WAN
+
+> **ব্যাখ্যা:** Bluetooth **Personal Area Network (PAN)** তৈরি করে — range মাত্র ~10 মিটার।
+
+**Q4.** কোনটি LAN এ সবচেয়ে বেশি ব্যবহৃত হয়?
+
+- (a) Coaxial cable
+- (b) Fiber optic
+- (c) Ethernet (UTP cable) ✅
+- (d) Satellite
+
+> **ব্যাখ্যা:** LAN এ **Ethernet (UTP/Cat5e/Cat6 cable)** সবচেয়ে বেশি ব্যবহৃত হয়। Fiber optic সাধারণত backbone বা WAN এ ব্যবহার হয়।
+
+**Q5.** SAN এর পূর্ণরূপ কী?
+
+- (a) Server Area Network
+- (b) Storage Area Network ✅
+- (c) Secure Area Network
+- (d) System Area Network
+
+> **ব্যাখ্যা:** **SAN = Storage Area Network** — এটা dedicated high-speed network যেটা শুধুমাত্র storage devices (disk array, tape library) কে server এর সাথে connect করে।
+
+**Q6.** কোন network এর error rate সবচেয়ে বেশি?
+
+- (a) PAN
+- (b) LAN
+- (c) MAN
+- (d) WAN ✅
+
+> **ব্যাখ্যা:** WAN এ data অনেক দূরত্ব অতিক্রম করে, অনেক device এবং medium এর মধ্য দিয়ে যায়, তাই **error rate সবচেয়ে বেশি**।
+
+---
+
+## ✍️ 1.4 Written Problems
+
+**W1. LAN ও WAN এর মধ্যে ৫টি পার্থক্য লিখুন।**
+
+| বিষয় | LAN | WAN |
+|-------|-----|-----|
+| **Range** | ছোট এলাকা (office/building) | বিশ্বব্যাপী |
+| **Speed** | High (1-10 Gbps) | Low-Medium (কয়েক Mbps) |
+| **Error Rate** | কম | বেশি |
+| **Ownership** | একটি organization এর | Multiple organization/ISP |
+| **Cost** | কম | অনেক বেশি |
+
+**W2. Computer Network ব্যবহারের ৪টি সুবিধা ও ২টি অসুবিধা লিখুন।**
+
+**সুবিধা:**
+1. **Resource Sharing** — printer, scanner, internet connection একাধিক user share করতে পারে
+2. **Communication** — email, video call, instant messaging সহজে সম্ভব
+3. **Data Backup** — centralized server এ data backup রাখা যায়
+4. **Cost Effective** — প্রতিটি computer এ আলাদা resource না কিনে share করা যায়
+
+**অসুবিধা:**
+1. **Security Risk** — network এ connected থাকলে hacking, virus attack এর সম্ভাবনা বাড়ে
+2. **Setup Cost** — প্রাথমিক setup (cable, switch, router, server) এর খরচ বেশি
+
+---
+
+## ⚠️ 1.5 Tricky Parts
+
+> ⚠️ **Trap 1:** "Internet কি LAN?" — **না**, Internet হলো **WAN**। অনেক LAN মিলে MAN, অনেক MAN মিলে WAN তৈরি হয়।
+
+> ⚠️ **Trap 2:** "WiFi মানেই Internet?" — **না**, WiFi হলো wireless LAN technology। WiFi connected মানে Internet connected না — Router এ Internet connection না থাকলে WiFi তে শুধু local network কাজ করবে।
+
+> ⚠️ **Trap 3:** MAN এবং WAN গুলিয়ে ফেলা — **MAN** হলো একটা **শহরের** মধ্যে (cable TV network), **WAN** হলো **দেশ/বিশ্ব** জুড়ে (Internet)।
+
+---
+
+## 📝 1.6 Summary
+
+- **Computer Network** = দুই বা ততোধিক device connected হয়ে data share করা
+- **PAN** = ব্যক্তিগত (~10m) — Bluetooth
+- **LAN** = Local (~1km) — Office, School — **সবচেয়ে common**
+- **MAN** = শহর (~100km) — Cable TV
+- **WAN** = বিশ্বব্যাপী — **Internet হলো সবচেয়ে বড় WAN**
+- **Speed:** LAN > MAN > WAN
+- **Error Rate:** WAN > MAN > LAN
+- **Cost:** WAN > MAN > LAN
+
+---
+---
+
+# Topic 2: Network Devices
+
+<div align="center">
+
+*"Network এ data কিভাবে যাবে সেটা নির্ধারণ করে Network Devices — প্রতিটি device এর কাজ আলাদা"*
+
+</div>
+
+---
+
+## 📖 2.1 ধারণা (Concept)
+
+Network device গুলো হলো সেই hardware যেগুলো computer এবং অন্যান্য device কে **connect, manage এবং data route** করে। প্রতিটি device **OSI Model এর নির্দিষ্ট layer** এ কাজ করে।
+
+### Network Devices এর শ্রেণীবিভাগ
+
+```
+Network Devices
+├── Layer 1 (Physical)
+│   ├── Hub          → সব port এ data পাঠায় (broadcast)
+│   ├── Repeater     → signal strengthen করে
+│   └── Modem        → analog ↔ digital convert করে
+│
+├── Layer 2 (Data Link)
+│   ├── Switch       → MAC address দেখে নির্দিষ্ট port এ পাঠায়
+│   ├── Bridge       → দুটো LAN segment connect করে
+│   └── NIC          → Network Interface Card
+│
+├── Layer 3 (Network)
+│   ├── Router       → IP address দেখে best path বের করে
+│   └── Layer 3 Switch → routing + switching একসাথে
+│
+└── Multi-Layer
+    ├── Gateway      → সম্পূর্ণ ভিন্ন network connect করে (protocol convert)
+    ├── Firewall     → security — traffic filter করে
+    └── Access Point → wireless devices কে wired network এ connect করে
+```
+
+### প্রতিটি Device বিস্তারিত
+
+#### Hub (হাব) — Layer 1
+
+**Hub** হলো সবচেয়ে সাধারণ networking device। এটা একটা port এ data পেলে **সব port এ** পাঠিয়ে দেয় (broadcasting)।
+
+| বৈশিষ্ট্য | বিবরণ |
+|-----------|-------|
+| **Layer** | Physical (Layer 1) |
+| **Intelligence** | না — কোন filtering নেই |
+| **Data Sending** | সব port এ broadcast করে |
+| **Collision** | বেশি — single collision domain |
+| **Speed** | Shared bandwidth |
+| **এখন ব্যবহার** | প্রায় বিলুপ্ত, Switch দ্বারা replaced |
+
+**Hub এর প্রকার:**
+- **Passive Hub** — শুধু signal pass করে, amplify করে না
+- **Active Hub** — signal amplify করে pass করে
+- **Intelligent Hub** — management features আছে
+
+#### Switch (সুইচ) — Layer 2
+
+**Switch** হলো Hub এর intelligent version। এটা **MAC address table** maintain করে এবং data শুধুমাত্র **destination port** এ পাঠায়।
+
+| বৈশিষ্ট্য | বিবরণ |
+|-----------|-------|
+| **Layer** | Data Link (Layer 2) |
+| **Intelligence** | হ্যাঁ — MAC address table দেখে |
+| **Data Sending** | শুধু destination port এ (unicast) |
+| **Collision** | কম — প্রতিটি port আলাদা collision domain |
+| **Speed** | Dedicated bandwidth per port |
+| **এখন ব্যবহার** | সবচেয়ে বেশি ব্যবহৃত LAN device |
+
+<Mermaid chart={`graph LR
+    subgraph "Hub (Broadcast)"
+        H[Hub]
+        A1[PC-A] --> H
+        H --> B1[PC-B]
+        H --> C1[PC-C]
+        H --> D1[PC-D]
+    end
+`} />
+
+<Mermaid chart={`graph LR
+    subgraph "Switch (Unicast)"
+        S[Switch<br/>MAC Table]
+        A2[PC-A] --> S
+        S --> B2["PC-B ✅<br/>(destination)"]
+        S -.- C2["PC-C ❌<br/>(skip)"]
+        S -.- D2["PC-D ❌<br/>(skip)"]
+    end
+`} />
+
+#### Router (রাউটার) — Layer 3
+
+**Router** হলো সবচেয়ে important networking device। এটা **IP address** দেখে **different network** এর মধ্যে data route করে। Router **best path** বের করতে **routing table** ব্যবহার করে।
+
+| বৈশিষ্ট্য | বিবরণ |
+|-----------|-------|
+| **Layer** | Network (Layer 3) |
+| **Uses** | IP address |
+| **Function** | Different network এর মধ্যে routing |
+| **Broadcast Domain** | আলাদা করে (blocks broadcast) |
+| **Routing Table** | হ্যাঁ — best path decision |
+| **NAT Support** | হ্যাঁ |
+
+#### Gateway — Multi-Layer
+
+**Gateway** হলো **"translator"** — সম্পূর্ণ ভিন্ন protocol ব্যবহার করে এমন দুটো network কে connect করে। যেমন: TCP/IP network কে SNA (IBM) network এর সাথে connect করা।
+
+#### Modem — Layer 1
+
+**Modem = MOdulator + DEModulator**
+
+| Direction | কাজ |
+|-----------|-----|
+| **Sending** | Digital signal → Analog signal (Modulation) |
+| **Receiving** | Analog signal → Digital signal (Demodulation) |
+
+ISP এর telephone line (analog) কে আপনার computer এর digital data তে convert করে।
+
+#### Bridge vs Switch
+
+| বিষয় | Bridge | Switch |
+|-------|--------|--------|
+| **Ports** | 2-4 টি | 8-48+ টি |
+| **Speed** | Slow (software-based) | Fast (hardware-based, ASIC) |
+| **Processing** | Software | Hardware (ASIC chip) |
+| **Use** | দুটো LAN segment connect | Multiple devices connect |
+| **এখন** | Almost obsolete | Widely used |
+
+### কোন Device কোন Layer এ — Master Table
+
+| Device | OSI Layer | কী দেখে কাজ করে | Broadcast Domain | Collision Domain |
+|--------|-----------|-----------------|-----------------|-----------------|
+| **Hub** | 1 (Physical) | কিছু দেখে না, সব জায়গায় পাঠায় | 1 | 1 |
+| **Repeater** | 1 (Physical) | কিছু না, signal boost করে | 1 | 1 |
+| **Bridge** | 2 (Data Link) | MAC Address | 1 | Separate |
+| **Switch** | 2 (Data Link) | MAC Address | 1 | Separate per port |
+| **Router** | 3 (Network) | IP Address | Separate | Separate |
+| **Gateway** | 7 (All Layers) | Protocol conversion | Separate | Separate |
+
+---
+
+## ❓ 2.2 MCQ Problems
+
+**Q1.** Switch কোন Layer এ কাজ করে?
+
+- (a) Physical Layer
+- (b) Data Link Layer ✅
+- (c) Network Layer
+- (d) Transport Layer
+
+> **ব্যাখ্যা:** Switch **Layer 2 (Data Link)** এ কাজ করে এবং **MAC address** দেখে data forward করে।
+
+**Q2.** Hub ও Switch এর মূল পার্থক্য কী?
+
+- (a) Hub বেশি port আছে
+- (b) Switch MAC address দেখে specific port এ data পাঠায় ✅
+- (c) Hub বেশি expensive
+- (d) Switch wireless কাজ করে
+
+> **ব্যাখ্যা:** Hub সব port এ **broadcast** করে, কিন্তু Switch **MAC address table** দেখে শুধু destination port এ **unicast** করে। এটাই মূল পার্থক্য।
+
+**Q3.** Router কী দেখে data forward করে?
+
+- (a) MAC Address
+- (b) IP Address ✅
+- (c) Port Number
+- (d) Hostname
+
+> **ব্যাখ্যা:** Router **Layer 3 (Network)** এ কাজ করে এবং **IP address** দেখে data route করে। MAC address দেখে Switch কাজ করে।
+
+**Q4.** Modem এর পূর্ণরূপ কী?
+
+- (a) Modern Electronic Machine
+- (b) Modulator-Demodulator ✅
+- (c) Modified Device Module
+- (d) Module Decoder
+
+> **ব্যাখ্যা:** **Modem = MOdulator + DEModulator**। এটা analog ↔ digital signal convert করে।
+
+**Q5.** কোন device broadcast domain আলাদা করে?
+
+- (a) Hub
+- (b) Switch
+- (c) Router ✅
+- (d) Repeater
+
+> **ব্যাখ্যা:** **Router** broadcast domain আলাদা করে। Hub ও Switch একই broadcast domain এ থাকে। Router broadcast traffic block করে, তাই আলাদা broadcast domain তৈরি হয়।
+
+**Q6.** Gateway কোন layer এ কাজ করে?
+
+- (a) Layer 1
+- (b) Layer 2
+- (c) Layer 3
+- (d) All Layers (Layer 7) ✅
+
+> **ব্যাখ্যা:** Gateway **সব layer** এ কাজ করে কারণ এটা complete **protocol conversion** করে — এক ধরনের network protocol কে অন্য ধরনে রূপান্তর করে।
+
+---
+
+## ✍️ 2.3 Written Problems
+
+**W1. Hub ও Switch এর মধ্যে ৫টি পার্থক্য লিখুন।**
+
+| বিষয় | Hub | Switch |
+|-------|-----|--------|
+| **Layer** | Layer 1 (Physical) | Layer 2 (Data Link) |
+| **Intelligence** | Dumb device — কোন filtering নেই | Smart — MAC address table maintain করে |
+| **Data Forwarding** | সব port এ broadcast | শুধু destination port এ unicast |
+| **Collision** | Single collision domain — বেশি collision | Per-port collision domain — কম collision |
+| **Bandwidth** | Shared — সবাই ভাগাভাগি | Dedicated — প্রতিটি port এ full speed |
+
+**W2. Router ও Switch এর মধ্যে পার্থক্য লিখুন।**
+
+| বিষয় | Switch | Router |
+|-------|--------|--------|
+| **Layer** | Layer 2 | Layer 3 |
+| **Address** | MAC Address ব্যবহার করে | IP Address ব্যবহার করে |
+| **Network** | Same network এর মধ্যে | Different network এর মধ্যে |
+| **Broadcast** | Broadcast forward করে | Broadcast block করে |
+| **Table** | MAC Address Table | Routing Table |
+
+---
+
+## ⚠️ 2.4 Tricky Parts
+
+> ⚠️ **Trap 1:** "Switch কি Router এর কাজ করতে পারে?" — সাধারণ **Layer 2 Switch পারে না**। কিন্তু **Layer 3 Switch** routing করতে পারে। Exam এ specify না করলে Layer 2 Switch ধরতে হবে।
+
+> ⚠️ **Trap 2:** "Gateway ও Router কি একই?" — **না**। Router শুধু **same protocol** এর different network connect করে (IP to IP)। Gateway **different protocol** convert করে (TCP/IP to SNA)। তবে কথ্য ভাষায় Router কে "default gateway" বলা হয়, সেটা ভিন্ন concept।
+
+> ⚠️ **Trap 3:** "Hub কি এখনো ব্যবহার হয়?" — প্রায় **না**। Switch সম্পূর্ণভাবে Hub কে replace করেছে। কিন্তু exam এ Hub সম্পর্কে প্রশ্ন **প্রচুর** আসে।
+
+---
+
+## 📝 2.5 Summary
+
+- **Hub** = Layer 1, broadcast, dumb, collision বেশি — **almost obsolete**
+- **Switch** = Layer 2, MAC address দেখে, unicast, smart — **most used**
+- **Router** = Layer 3, IP address দেখে, different network connect — **essential**
+- **Bridge** = Layer 2, Switch এর আদিরূপ — **obsolete**
+- **Gateway** = All layers, protocol conversion — **different protocol এর network connect**
+- **Modem** = Modulator + Demodulator — analog ↔ digital
+- **Router broadcast domain আলাদা করে**, Switch collision domain আলাদা করে
+
+---
+---
+
+# Topic 3: Transmission Media
+
+<div align="center">
+
+*"Network এ data পরিবহনের মাধ্যম — cable হোক বা wireless, প্রতিটির বৈশিষ্ট্য আলাদা"*
+
+</div>
+
+---
+
+## 📖 3.1 ধারণা (Concept)
+
+**Transmission Media** হলো সেই physical path বা মাধ্যম যেটার মধ্য দিয়ে data এক device থেকে অন্য device এ travel করে।
+
+<Mermaid chart={`graph TD
+    A[Transmission Media]
+    A --> B["Guided (Wired)<br/>তার দিয়ে যায়"]
+    A --> C["Unguided (Wireless)<br/>তার ছাড়া যায়"]
+
+    B --> B1["Twisted Pair Cable<br/>সবচেয়ে common"]
+    B --> B2["Coaxial Cable<br/>Cable TV"]
+    B --> B3["Fiber Optic Cable<br/>সবচেয়ে fast"]
+
+    C --> C1["Radio Wave<br/>WiFi, Bluetooth"]
+    C --> C2["Microwave<br/>Satellite, Telecom"]
+    C --> C3["Infrared<br/>TV Remote"]
+`} />
+
+### Guided Media (তার-ভিত্তিক)
+
+#### 1. Twisted Pair Cable
+
+দুটো insulated copper wire একসাথে পাকিয়ে (twist) তৈরি — **electromagnetic interference (EMI) কমাতে** twist করা হয়।
+
+| Type | Full Form | Shield | Speed | Use |
+|------|-----------|--------|-------|-----|
+| **UTP** | Unshielded Twisted Pair | নেই | 1 Gbps (Cat6) | LAN — সবচেয়ে common |
+| **STP** | Shielded Twisted Pair | আছে | 10 Gbps (Cat6a) | Noisy environment |
+
+**Category (Cat) Comparison:**
+
+| Category | Speed | Bandwidth | Use |
+|----------|-------|-----------|-----|
+| Cat5 | 100 Mbps | 100 MHz | পুরনো Ethernet |
+| Cat5e | 1 Gbps | 100 MHz | বর্তমান LAN standard |
+| Cat6 | 1 Gbps (10Gbps short) | 250 MHz | Modern office |
+| Cat6a | 10 Gbps | 500 MHz | Data center |
+| Cat7 | 10 Gbps | 600 MHz | High-performance |
+
+#### 2. Coaxial Cable
+
+কেন্দ্রে copper conductor, তারপর insulator, তারপর metallic shield, সবশেষে plastic jacket। **Cable TV** তে ব্যবহার হয়।
+
+| বৈশিষ্ট্য | বিবরণ |
+|-----------|-------|
+| **Structure** | Central conductor + Insulator + Shield + Jacket |
+| **Bandwidth** | Up to 1 GHz |
+| **Noise Resistance** | ভালো (shield আছে) |
+| **Use** | Cable TV, older Ethernet (10Base2, 10Base5) |
+
+#### 3. Fiber Optic Cable
+
+**আলোর pulse** (light signal) দিয়ে data পাঠায় — **সবচেয়ে দ্রুত এবং নির্ভরযোগ্য** transmission media।
+
+| Type | Core Size | Light Source | Distance | Use |
+|------|-----------|-------------|----------|-----|
+| **Single-mode** | 8-10 µm | Laser | 100+ km | WAN, undersea cable |
+| **Multi-mode** | 50-62.5 µm | LED | 2 km | LAN, data center |
+
+**Fiber Optic এর সুবিধা:**
+- ⚡ **অত্যন্ত দ্রুত** — 100 Gbps+
+- 🔒 **Secure** — tap করা কঠিন
+- 📏 **দূরপাল্লা** — 100+ km signal loss ছাড়া
+- 🛡️ **EMI immune** — electromagnetic interference প্রভাবিত করে না
+
+**Fiber Optic এর অসুবিধা:**
+- 💰 ব্যয়বহুল
+- 🔧 Installation কঠিন, বিশেষজ্ঞ লাগে
+- 💪 ভঙ্গুর — বাঁকালে ভেঙে যেতে পারে
+
+### Unguided Media (তারবিহীন)
+
+| Type | Frequency | Range | Use | Obstacle |
+|------|-----------|-------|-----|----------|
+| **Radio Wave** | 3 KHz - 1 GHz | Long | WiFi, FM Radio, Bluetooth | দেয়াল ভেদ করতে পারে |
+| **Microwave** | 1 GHz - 300 GHz | Line of sight | Satellite, mobile towers | দেয়াল ভেদ করতে পারে না |
+| **Infrared** | 300 GHz - 400 THz | Very short | TV Remote, short range | দেয়াল ভেদ করতে পারে না |
+
+### Master Comparison Table
+
+| বৈশিষ্ট্য | Twisted Pair | Coaxial | Fiber Optic | Radio Wave |
+|-----------|-------------|---------|-------------|------------|
+| **Speed** | 1-10 Gbps | ~1 Gbps | 100+ Gbps | Variable |
+| **Distance** | 100m | 500m | 100+ km | কয়েক km |
+| **Cost** | সবচেয়ে কম | মাঝারি | সবচেয়ে বেশি | Medium |
+| **EMI** | Affected | Less affected | Not affected | Affected |
+| **Security** | Low | Medium | Very High | Low |
+| **Installation** | Easy | Moderate | Difficult | Easy |
+
+---
+
+## ❓ 3.2 MCQ Problems
+
+**Q1.** Fiber Optic cable এ data কিসের মাধ্যমে travel করে?
+
+- (a) Electricity
+- (b) Radio wave
+- (c) Light ✅
+- (d) Sound
+
+> **ব্যাখ্যা:** Fiber Optic cable এ **light pulse (আলোর সংকেত)** দিয়ে data পাঠানো হয়। এটাই এত দ্রুত হওয়ার কারণ।
+
+**Q2.** LAN এ সবচেয়ে বেশি কোন cable ব্যবহার হয়?
+
+- (a) Coaxial
+- (b) Fiber Optic
+- (c) UTP (Unshielded Twisted Pair) ✅
+- (d) STP
+
+> **ব্যাখ্যা:** LAN এ **UTP cable (Cat5e/Cat6)** সবচেয়ে বেশি ব্যবহৃত হয় — সস্তা, install করা সহজ, এবং 1 Gbps speed দিতে পারে।
+
+**Q3.** Twisted Pair cable এ তার কেন পাকানো (twist) থাকে?
+
+- (a) বেশি data carry করতে
+- (b) Electromagnetic Interference (EMI) কমাতে ✅
+- (c) দেখতে সুন্দর করতে
+- (d) cable কে flexible করতে
+
+> **ব্যাখ্যা:** Twist করলে দুটো তারের electromagnetic field একে অপরকে cancel করে, ফলে **EMI/crosstalk কমে**। একে বলে **cancellation effect**।
+
+**Q4.** কোনটি সবচেয়ে বেশি secure transmission media?
+
+- (a) UTP
+- (b) Coaxial
+- (c) Fiber Optic ✅
+- (d) Radio Wave
+
+> **ব্যাখ্যা:** **Fiber Optic** সবচেয়ে secure — আলো দিয়ে data যায়, তাই wiretap করা প্রায় অসম্ভব। Copper cable এ electrical signal থাকায় tap করা সহজ।
+
+**Q5.** Single-mode এবং Multi-mode fiber এর মধ্যে কোনটি দূরপাল্লায় ব্যবহৃত হয়?
+
+- (a) Multi-mode
+- (b) Single-mode ✅
+- (c) দুটোই সমান
+- (d) কোনোটিই না
+
+> **ব্যাখ্যা:** **Single-mode** fiber এ laser ব্যবহার হয় এবং core অনেক চিকন (8-10µm), তাই signal দূরে (100+ km) যেতে পারে। Multi-mode সাধারণত 2 km পর্যন্ত।
+
+---
+
+## ⚠️ 3.3 Tricky Parts
+
+> ⚠️ **Trap 1:** "UTP vs STP — কোনটা ভালো?" — STP বেশি shielded, কিন্তু **UTP বেশি ব্যবহৃত** কারণ সস্তা এবং বেশিরভাগ office environment এ STP এর দরকার হয় না।
+
+> ⚠️ **Trap 2:** "Fiber Optic এ কোন ধরনের signal যায়?" — **Light signal (optical)**, electrical signal না। এটা exam এ গুলিয়ে দেয়।
+
+> ⚠️ **Trap 3:** "Cat5 আর Cat5e কি same?" — **না**। Cat5 = 100 Mbps, Cat5e = **1 Gbps**। "e" মানে "enhanced"।
+
+---
+
+## 📝 3.4 Summary
+
+- **Guided Media:** Twisted Pair (UTP/STP) → Coaxial → Fiber Optic
+- **Unguided Media:** Radio Wave → Microwave → Infrared
+- **LAN এ সবচেয়ে common:** UTP (Cat5e/Cat6)
+- **সবচেয়ে fast ও secure:** Fiber Optic (light signal)
+- **Twisted Pair এ twist করা হয়:** EMI কমাতে
+- **Single-mode fiber:** Long distance (laser), **Multi-mode:** Short distance (LED)
+- **Radio wave দেয়াল ভেদ করতে পারে**, Microwave ও Infrared পারে না
+
+---
+---
+
+# Topic 4: Network Topologies & Architectures
+
+<div align="center">
+
+*"Network এ device গুলো কিভাবে সাজানো/connected — সেটাই Topology"*
+
+</div>
+
+---
+
+## 📖 4.1 ধারণা (Concept)
+
+**Network Topology** হলো network এ device (node) গুলো কিভাবে physically বা logically connected/arranged সেটার layout বা map।
+
+**দুই ধরনের Topology:**
+- **Physical Topology** — cable গুলো physically কিভাবে connected
+- **Logical Topology** — data actually কিভাবে flow করে
+
+### Topology Types
+
+<Mermaid chart={`graph TD
+    T[Network Topologies]
+    T --> B["Bus<br/>একটা cable এ সবাই"]
+    T --> S["Star<br/>Central device এ সবাই"]
+    T --> R["Ring<br/>বৃত্তাকারে connected"]
+    T --> M["Mesh<br/>সবাই সবার সাথে"]
+    T --> TR["Tree<br/>Star + Bus মিশ্রণ"]
+    T --> H["Hybrid<br/>একাধিক topology মিশ্রণ"]
+`} />
+
+#### 1. Bus Topology
+
+সব device একটা **single cable (backbone/bus)** এ connected। Data bus দিয়ে সবার কাছে যায়, যার address match করে সে receive করে।
+
+```
+    ┌─────┐  ┌─────┐  ┌─────┐  ┌─────┐
+    │PC-1 │  │PC-2 │  │PC-3 │  │PC-4 │
+    └──┬──┘  └──┬──┘  └──┬──┘  └──┬──┘
+───────┴────────┴────────┴────────┴───────── Bus (Backbone Cable)
+  Terminator                         Terminator
+```
+
+| সুবিধা | অসুবিধা |
+|--------|---------|
+| সহজ ও সস্তা | Backbone fail = পুরো network down |
+| কম cable লাগে | Device বাড়লে performance কমে |
+| ছোট network এ ভালো | Troubleshooting কঠিন |
+
+#### 2. Star Topology
+
+সব device একটা **central device (Hub/Switch)** এর সাথে connected। **সবচেয়ে বেশি ব্যবহৃত** topology।
+
+```
+         ┌─────┐
+         │PC-1 │
+         └──┬──┘
+            │
+┌─────┐  ┌──┴──┐  ┌─────┐
+│PC-2 ├──┤Hub/ ├──┤PC-3 │
+└─────┘  │Switch│  └─────┘
+         └──┬──┘
+            │
+         ┌──┴──┐
+         │PC-4 │
+         └─────┘
+```
+
+| সুবিধা | অসুবিধা |
+|--------|---------|
+| একটা device fail হলে বাকিরা চলে | Central device fail = সব down |
+| নতুন device যোগ করা সহজ | বেশি cable লাগে |
+| Troubleshooting সহজ | Central device ব্যয়বহুল |
+
+#### 3. Ring Topology
+
+প্রতিটি device **পাশের device** এর সাথে connected হয়ে একটা **বৃত্ত (ring)** তৈরি করে। Data একদিকে (unidirectional) বা দুদিকে (bidirectional — dual ring) ঘোরে।
+
+```
+       ┌─────┐
+       │PC-1 │
+       └┬───┬┘
+        │   │
+   ┌────┘   └────┐
+   │             │
+┌──┴──┐      ┌───┴─┐
+│PC-4 │      │PC-2 │
+└──┬──┘      └───┬─┘
+   │             │
+   └────┐   ┌────┘
+        │   │
+       ┌┴───┴┐
+       │PC-3 │
+       └─────┘
+```
+
+| সুবিধা | অসুবিধা |
+|--------|---------|
+| Equal access — কোন collision নেই | একটা device/cable fail = পুরো ring down |
+| Token passing এ predictable performance | নতুন device যোগ করলে ring ভাঙতে হয় |
+| Heavy load এও ভালো perform করে | Troubleshooting কঠিন |
+
+#### 4. Mesh Topology
+
+প্রতিটি device **অন্য সব device** এর সাথে directly connected। **সবচেয়ে reliable** কিন্তু **সবচেয়ে ব্যয়বহুল**।
+
+**Full Mesh:** প্রতিটি device সবার সাথে connected
+**Partial Mesh:** কিছু device সবার সাথে, বাকিরা কিছু device এর সাথে
+
+**Full Mesh এ cable সংখ্যার formula:**
+
+```
+Links = n(n-1)/2
+যেখানে n = device সংখ্যা
+
+Example: 5 টি device হলে = 5(5-1)/2 = 10 টি cable
+```
+
+| সুবিধা | অসুবিধা |
+|--------|---------|
+| সবচেয়ে reliable — redundant paths | সবচেয়ে বেশি cable ও cost |
+| একটা link fail হলেও alternative আছে | Configuration complex |
+| Security ভালো — dedicated links | Scalable না — device বাড়লে cable অনেক বাড়ে |
+
+#### 5. Tree Topology (Hierarchical)
+
+**Star + Bus** এর combination। একটা root node থেকে branches বের হয়।
+
+#### 6. Hybrid Topology
+
+দুই বা ততোধিক topology এর **combination**। বাস্তবে বেশিরভাগ বড় network **hybrid** topology ব্যবহার করে।
+
+### Master Comparison Table
+
+| বৈশিষ্ট্য | Bus | Star | Ring | Mesh |
+|-----------|-----|------|------|------|
+| **Cable** | কম | মাঝারি | মাঝারি | সবচেয়ে বেশি |
+| **Cost** | কম | মাঝারি | মাঝারি | সবচেয়ে বেশি |
+| **Performance** | Decreases with load | Good | Good | Best |
+| **Reliability** | Low | Medium | Low | Very High |
+| **Failure Impact** | Backbone fail = all down | Central fail = all down | One fail = all down | One fail = others work |
+| **Scalability** | Limited | Easy | Difficult | Difficult |
+| **Troubleshooting** | Hard | Easy | Hard | Easy |
+| **Real Use** | Older networks | **Most common (LAN)** | Token Ring | WAN backbone, Internet |
+
+### Network Architectures
+
+| Architecture | বিবরণ | Example |
+|-------------|-------|---------|
+| **Client-Server** | একটা powerful server, বাকিরা client — server resource দেয় | Web browsing, Email |
+| **Peer-to-Peer (P2P)** | সবাই সমান — যেকোনো device server ও client হতে পারে | BitTorrent, file sharing |
+
+**Client-Server vs P2P:**
+
+| বিষয় | Client-Server | Peer-to-Peer |
+|-------|-------------|--------------|
+| **Central Server** | হ্যাঁ | না |
+| **Management** | সহজ (centralized) | কঠিন (decentralized) |
+| **Security** | ভালো | দুর্বল |
+| **Cost** | বেশি (server দরকার) | কম |
+| **Scalability** | ভালো | সীমিত |
+| **Example** | Website, Email | BitTorrent, Blockchain |
+
+---
+
+## ❓ 4.2 MCQ Problems
+
+**Q1.** কোন topology তে central device fail হলে পুরো network down হয়?
+
+- (a) Bus
+- (b) Star ✅
+- (c) Ring
+- (d) Mesh
+
+> **ব্যাখ্যা:** **Star topology** তে সব device central hub/switch এর সাথে connected। Central device fail হলে কেউ কারো সাথে communicate করতে পারে না।
+
+**Q2.** Full Mesh topology তে 6 টি device থাকলে কতটি cable লাগবে?
+
+- (a) 6
+- (b) 12
+- (c) 15 ✅
+- (d) 30
+
+> **ব্যাখ্যা:** Formula: **n(n-1)/2** = 6(6-1)/2 = 6×5/2 = **15**। এটা exam এ খুব common প্রশ্ন।
+
+**Q3.** বর্তমানে LAN এ সবচেয়ে বেশি কোন topology ব্যবহৃত হয়?
+
+- (a) Bus
+- (b) Ring
+- (c) Star ✅
+- (d) Mesh
+
+> **ব্যাখ্যা:** **Star topology** সবচেয়ে বেশি ব্যবহৃত কারণ — troubleshooting সহজ, নতুন device যোগ করা সহজ, এবং একটা device fail হলে বাকিরা চলতে থাকে।
+
+**Q4.** BitTorrent কোন architecture ব্যবহার করে?
+
+- (a) Client-Server
+- (b) Peer-to-Peer ✅
+- (c) Hybrid
+- (d) Master-Slave
+
+> **ব্যাখ্যা:** BitTorrent **P2P (Peer-to-Peer)** architecture ব্যবহার করে — প্রতিটি user একই সাথে file download ও upload করে, কোন central server নেই।
+
+**Q5.** কোন topology সবচেয়ে reliable?
+
+- (a) Bus
+- (b) Star
+- (c) Ring
+- (d) Mesh ✅
+
+> **ব্যাখ্যা:** **Mesh topology** সবচেয়ে reliable কারণ প্রতিটি device এর multiple path আছে। একটা path fail হলে alternative path দিয়ে data যায়।
+
+---
+
+## ⚠️ 4.3 Tricky Parts
+
+> ⚠️ **Trap 1:** "Star topology তে একটা PC fail হলে কী হবে?" — **কিছুই না**, বাকিরা চলবে। কিন্তু **central switch fail** হলে সব down। Exam এ "device fail" বললে কোন device সেটা carefully পড়তে হবে।
+
+> ⚠️ **Trap 2:** "Mesh topology formula" — **n(n-1)/2** মনে রাখতে হবে। Exam এ directly calculation দেয়। Port সংখ্যা: প্রতিটি device এ **(n-1)** port লাগবে।
+
+> ⚠️ **Trap 3:** "Ring topology তে collision হয় কি?" — **না**, কারণ **Token Passing** mechanism ব্যবহার হয়। Token যার কাছে থাকে শুধু সে data পাঠাতে পারে।
+
+---
+
+## 📝 4.4 Summary
+
+- **Bus** = একটা cable এ সবাই, সস্তা, backbone fail = সব down
+- **Star** = Central device, **সবচেয়ে বেশি ব্যবহৃত**, central fail = সব down
+- **Ring** = বৃত্তাকার, token passing, একটা fail = সব down
+- **Mesh** = সবাই সবার সাথে, **সবচেয়ে reliable**, cable formula = **n(n-1)/2**
+- **Tree** = Star + Bus combination
+- **Hybrid** = Real-world তে এটাই ব্যবহার হয়
+- **Client-Server** = centralized (web), **P2P** = decentralized (BitTorrent)
+
+---
+---
+
+# Topic 5: Data Transmission Modes
+
+<div align="center">
+
+*"Data কোন direction এ যায় — একদিকে, দুদিকে পালাক্রমে, নাকি দুদিকে একসাথে?"*
+
+</div>
+
+---
+
+## 📖 5.1 ধারণা (Concept)
+
+**Data Transmission Mode** বলতে বোঝায় দুটো device এর মধ্যে data **কোন direction** এ flow করে।
+
+<Mermaid chart={`graph LR
+    subgraph "Simplex"
+        A1["Sender"] -->|"একদিকে"| B1["Receiver"]
+    end
+
+    subgraph "Half-Duplex"
+        A2["Device A"] -->|"পালাক্রমে"| B2["Device B"]
+        B2 -->|"পালাক্রমে"| A2
+    end
+
+    subgraph "Full-Duplex"
+        A3["Device A"] <-->|"একসাথে দুদিকে"| B3["Device B"]
+    end
+`} />
+
+### তিন ধরনের Transmission Mode
+
+| Mode | Direction | একসাথে? | উদাহরণ |
+|------|-----------|---------|--------|
+| **Simplex** | একদিকে (Unidirectional) | - | Keyboard → CPU, TV broadcast |
+| **Half-Duplex** | দুদিকে, পালাক্রমে | না, একবারে একদিকে | Walkie-talkie, হ্যালো বললে অপরপক্ষ শোনে |
+| **Full-Duplex** | দুদিকে, একসাথে | হ্যাঁ, simultaneously | Telephone, Video call |
+
+### Serial vs Parallel Transmission
+
+| বৈশিষ্ট্য | Serial | Parallel |
+|-----------|--------|----------|
+| **Data Path** | একটা channel এ bit by bit | একাধিক channel এ multiple bits |
+| **Speed** | ধীর (কিন্তু long distance এ reliable) | দ্রুত (short distance এ) |
+| **Cable** | কম (1 wire) | বেশি (8+ wire) |
+| **Cost** | কম | বেশি |
+| **Distance** | Long distance | Short distance |
+| **Example** | USB, Ethernet | Printer port (LPT), old IDE |
+
+### Synchronous vs Asynchronous
+
+| বৈশিষ্ট্য | Synchronous | Asynchronous |
+|-----------|-------------|-------------|
+| **Clock** | Shared clock signal | No shared clock |
+| **Data Format** | Continuous stream (frame) | Character by character (start/stop bit) |
+| **Speed** | দ্রুত | ধীর |
+| **Overhead** | কম | বেশি (start/stop bit) |
+| **Efficiency** | বেশি | কম |
+| **Example** | HDLC, SDLC | UART, RS-232 |
+
+---
+
+## ❓ 5.2 MCQ Problems
+
+**Q1.** Walkie-talkie কোন transmission mode ব্যবহার করে?
+
+- (a) Simplex
+- (b) Half-Duplex ✅
+- (c) Full-Duplex
+- (d) Multiplex
+
+> **ব্যাখ্যা:** Walkie-talkie তে একজন কথা বলার সময় অন্যজন শুধু শুনতে পারে — **পালাক্রমে** দুদিকে যায়। এটাই **Half-Duplex**।
+
+**Q2.** Telephone call কোন mode?
+
+- (a) Simplex
+- (b) Half-Duplex
+- (c) Full-Duplex ✅
+- (d) Simplex + Half-Duplex
+
+> **ব্যাখ্যা:** Telephone এ দুজন **একসাথে কথা বলতে ও শুনতে পারে** — এটা **Full-Duplex**।
+
+**Q3.** Keyboard থেকে CPU তে data কোন mode এ যায়?
+
+- (a) Simplex ✅
+- (b) Half-Duplex
+- (c) Full-Duplex
+- (d) Parallel
+
+> **ব্যাখ্যা:** Keyboard থেকে data **শুধু CPU এর দিকে যায়**, CPU থেকে keyboard এ কিছু আসে না — এটা **Simplex (unidirectional)**।
+
+**Q4.** Serial transmission এ data কিভাবে যায়?
+
+- (a) একসাথে অনেক bit
+- (b) একটা একটা bit করে (bit by bit) ✅
+- (c) Byte by byte
+- (d) Frame by frame
+
+> **ব্যাখ্যা:** **Serial transmission** এ data **একটা bit করে** একটা single channel দিয়ে যায়। Parallel এ multiple bit একসাথে যায়।
+
+**Q5.** Asynchronous transmission এ কোন extra bit যোগ হয়?
+
+- (a) Parity bit only
+- (b) Start ও Stop bit ✅
+- (c) Checksum
+- (d) Header bit
+
+> **ব্যাখ্যা:** Asynchronous transmission এ প্রতিটি character এর আগে **start bit (0)** এবং পরে **stop bit (1)** যোগ হয় — যেন receiver বুঝতে পারে কখন data শুরু এবং শেষ।
+
+---
+
+## ⚠️ 5.3 Tricky Parts
+
+> ⚠️ **Trap 1:** "Half-Duplex এ কি দুদিকে data যায়?" — **হ্যাঁ**, কিন্তু **একসাথে না, পালাক্রমে**। অনেকে "দুদিকে" শুনে Full-Duplex ভাবে।
+
+> ⚠️ **Trap 2:** "Serial কি সবসময় Parallel এর চেয়ে ধীর?" — Short distance এ Parallel দ্রুত। কিন্তু **long distance এ Serial বেশি reliable** কারণ parallel এ wire গুলোর মধ্যে timing skew হয়। Modern USB (serial) অনেক পুরনো parallel port এর চেয়ে দ্রুত।
+
+---
+
+## 📝 5.4 Summary
+
+- **Simplex** = একদিকে (Keyboard, TV)
+- **Half-Duplex** = দুদিকে পালাক্রমে (Walkie-talkie)
+- **Full-Duplex** = দুদিকে একসাথে (Telephone, Ethernet)
+- **Serial** = bit by bit, long distance, কম cable (USB, Ethernet)
+- **Parallel** = multiple bits, short distance, বেশি cable (old printer port)
+- **Synchronous** = continuous stream, shared clock, efficient
+- **Asynchronous** = start/stop bit, no shared clock, less efficient
+
+---
+
+> **Level 1 সম্পূর্ণ!** 🎉 এখন আপনি Computer Network এর মৌলিক ধারণা — types, devices, media, topology এবং transmission modes সম্পর্কে জানেন।
+
+---
+---
+
+<div align="center">
+
+# LEVEL 2: OSI & TCP/IP MODEL (রেফারেন্স মডেল)
+
+*Networking এর সবচেয়ে গুরুত্বপূর্ণ concept — প্রতিটি পরীক্ষায় আসবেই*
+
+</div>
+
+---
+---
+
+# Topic 6: OSI Model
+
+<div align="center">
+
+*"OSI Model হলো networking এর blueprint — 7 টি layer এ সব কিছু ভাগ করা"*
+
+</div>
+
+---
+
+## 📖 6.1 ধারণা (Concept)
+
+**OSI (Open Systems Interconnection) Model** হলো **ISO (International Organization for Standardization)** কর্তৃক তৈরি একটা **7-layer reference model** যেটা বর্ণনা করে network এ data কিভাবে এক device থেকে অন্য device এ পৌঁছায়।
+
+> ⚠️ OSI Model একটা **theoretical/reference model** — বাস্তবে আমরা **TCP/IP model** ব্যবহার করি। কিন্তু networking বোঝার জন্য OSI Model **অপরিহার্য** এবং **exam এ সবচেয়ে বেশি প্রশ্ন** এখান থেকেই আসে।
+
+### 7 Layers মনে রাখার Trick
+
+```
+🔝 Layer 7: Application      ─┐
+   Layer 6: Presentation      │ Upper Layers
+   Layer 5: Session           ─┘ (Software)
+   ─────────────────────────
+   Layer 4: Transport         ── Heart of OSI
+   ─────────────────────────
+   Layer 3: Network           ─┐
+   Layer 2: Data Link          │ Lower Layers
+🔽 Layer 1: Physical          ─┘ (Hardware)
+```
+
+**মনে রাখার সূত্র (উপর থেকে নিচে):**
+
+> **A**ll **P**eople **S**eem **T**o **N**eed **D**ata **P**rocessing
+>
+> **A**pplication → **P**resentation → **S**ession → **T**ransport → **N**etwork → **D**ata Link → **P**hysical
+
+**নিচে থেকে উপরে:**
+
+> **P**lease **D**o **N**ot **T**hrow **S**ausage **P**izza **A**way
+
+### প্রতিটি Layer বিস্তারিত
+
+<Mermaid chart={`graph TB
+    subgraph "OSI 7 Layer Model"
+        L7["Layer 7: Application<br/>📧 HTTP, FTP, SMTP, DNS<br/>PDU: Data"]
+        L6["Layer 6: Presentation<br/>🔄 Encryption, Compression, Translation<br/>PDU: Data"]
+        L5["Layer 5: Session<br/>🤝 Session establish, maintain, terminate<br/>PDU: Data"]
+        L4["Layer 4: Transport<br/>📦 TCP, UDP, Segmentation<br/>PDU: Segment"]
+        L3["Layer 3: Network<br/>🗺️ IP, Routing, Logical Addressing<br/>PDU: Packet"]
+        L2["Layer 2: Data Link<br/>🔗 MAC, Switch, Framing, Error Detection<br/>PDU: Frame"]
+        L1["Layer 1: Physical<br/>⚡ Cables, Hubs, Bits, Signals<br/>PDU: Bits"]
+    end
+    L7 --> L6 --> L5 --> L4 --> L3 --> L2 --> L1
+`} />
+
+---
+
+### Layer 7: Application Layer
+
+**User এর সবচেয়ে কাছের layer** — end-user applications network access করে এই layer দিয়ে।
+
+| বিষয় | বিবরণ |
+|-------|-------|
+| **কাজ** | Network services provide করে user applications কে |
+| **PDU** | Data |
+| **Protocols** | HTTP, HTTPS, FTP, SMTP, POP3, IMAP, DNS, DHCP, Telnet, SSH, SNMP |
+| **Example** | Browser, Email client, File transfer |
+
+> ⚠️ **গুরুত্বপূর্ণ:** Application Layer মানে **application নিজে না**। Chrome browser হলো application, কিন্তু Chrome যখন HTTP protocol ব্যবহার করে server এ request পাঠায় — সেই **HTTP protocol টা** Application Layer এ কাজ করে।
+
+---
+
+### Layer 6: Presentation Layer
+
+**Data র "translator"** — data কে এমন format এ রূপান্তর করে যেটা application বুঝতে পারে।
+
+| বিষয় | বিবরণ |
+|-------|-------|
+| **কাজ** | Translation, Encryption/Decryption, Compression/Decompression |
+| **PDU** | Data |
+| **Protocols/Standards** | SSL/TLS (encryption), JPEG, GIF, PNG (image), MPEG (video), ASCII, Unicode |
+
+**তিনটি মূল কাজ:**
+
+```
+1. Translation    → EBCDIC ↔ ASCII রূপান্তর
+2. Encryption     → Data encrypt/decrypt করা (SSL/TLS)
+3. Compression    → Data ছোট করা (JPEG, ZIP)
+```
+
+---
+
+### Layer 5: Session Layer
+
+**Communication session manage** করে — শুরু, চালিয়ে যাওয়া, এবং শেষ করা।
+
+| বিষয় | বিবরণ |
+|-------|-------|
+| **কাজ** | Session establishment, maintenance, termination, synchronization |
+| **PDU** | Data |
+| **Protocols** | NetBIOS, PPTP, RPC, SQL sessions |
+| **Example** | Login session, video call session |
+
+**Session Layer এর কাজ:**
+- **Dialog Control** — কে কখন data পাঠাবে (half-duplex/full-duplex)
+- **Synchronization** — Checkpoint রাখে, connection ভাঙলে আবার checkpoint থেকে শুরু করে
+- **Session Recovery** — 100MB file download করতে গিয়ে 80MB তে connection ভাঙলে, আবার 80MB থেকে শুরু করে (0 থেকে না)
+
+---
+
+### Layer 4: Transport Layer
+
+**"Heart of OSI Model"** — end-to-end reliable data delivery নিশ্চিত করে।
+
+| বিষয় | বিবরণ |
+|-------|-------|
+| **কাজ** | Segmentation, Flow Control, Error Control, End-to-end delivery |
+| **PDU** | Segment (TCP) / Datagram (UDP) |
+| **Protocols** | TCP, UDP |
+| **Addressing** | Port Number |
+| **Device** | Firewall (some) |
+
+**Transport Layer এর কাজ:**
+
+```
+1. Segmentation     → বড় data কে ছোট ছোট segment এ ভাগ করে
+2. Reassembly       → Receiver end এ segment গুলো আবার জোড়া লাগায়
+3. Flow Control     → Receiver এর capacity অনুযায়ী data পাঠানোর speed control
+4. Error Control    → Segment হারিয়ে গেলে বা corrupt হলে retransmit
+5. Multiplexing     → Port number দিয়ে একাধিক application এর data আলাদা করে
+```
+
+---
+
+### Layer 3: Network Layer
+
+**Logical addressing (IP) এবং routing** — source থেকে destination পর্যন্ত **best path** বের করে।
+
+| বিষয় | বিবরণ |
+|-------|-------|
+| **কাজ** | Logical Addressing (IP), Routing, Packet forwarding |
+| **PDU** | Packet |
+| **Protocols** | IP (IPv4, IPv6), ICMP, ARP, RARP, IGMP |
+| **Addressing** | IP Address |
+| **Device** | Router, Layer 3 Switch |
+
+---
+
+### Layer 2: Data Link Layer
+
+**Physical addressing (MAC) এবং framing** — same network এর মধ্যে node-to-node data delivery।
+
+| বিষয় | বিবরণ |
+|-------|-------|
+| **কাজ** | Framing, Physical Addressing (MAC), Error Detection, Flow Control |
+| **PDU** | Frame |
+| **Protocols** | Ethernet, PPP, HDLC, Wi-Fi (802.11) |
+| **Addressing** | MAC Address (48-bit) |
+| **Device** | Switch, Bridge |
+
+**দুটি Sub-layer:**
+
+| Sub-layer | Full Form | কাজ |
+|-----------|-----------|-----|
+| **LLC** | Logical Link Control | Flow control, error detection, multiplexing |
+| **MAC** | Media Access Control | Physical addressing, media access (CSMA/CD) |
+
+---
+
+### Layer 1: Physical Layer
+
+**Bits কে physical signal এ রূপান্তর** — electrical, optical, বা radio signal।
+
+| বিষয় | বিবরণ |
+|-------|-------|
+| **কাজ** | Bit transmission, signal encoding, physical connections |
+| **PDU** | Bits (0 and 1) |
+| **Standards** | RS-232, RJ-45, V.35, DSL |
+| **Device** | Hub, Repeater, Modem, Cables |
+| **Concern** | Voltage levels, cable specifications, pin layout, data rates |
+
+---
+
+### OSI Layer Master Table (Exam এর জন্য সবচেয়ে গুরুত্বপূর্ণ)
+
+| Layer | নাম | PDU | Protocol Examples | Device | Addressing |
+|:---:|------|-----|-------------------|--------|-----------|
+| 7 | Application | Data | HTTP, FTP, SMTP, DNS | - | - |
+| 6 | Presentation | Data | SSL/TLS, JPEG, MPEG | - | - |
+| 5 | Session | Data | NetBIOS, RPC | - | - |
+| 4 | Transport | Segment | TCP, UDP | Firewall | Port Number |
+| 3 | Network | Packet | IP, ICMP, ARP | Router | IP Address |
+| 2 | Data Link | Frame | Ethernet, PPP, WiFi | Switch, Bridge | MAC Address |
+| 1 | Physical | Bits | RS-232, RJ-45 | Hub, Repeater | - |
+
+---
+
+## ❓ 6.2 MCQ Problems
+
+**Q1.** OSI Model এ কতটি layer আছে?
+
+- (a) 4
+- (b) 5
+- (c) 7 ✅
+- (d) 6
+
+> **ব্যাখ্যা:** OSI Model এ **7 টি layer** আছে — Physical, Data Link, Network, Transport, Session, Presentation, Application।
+
+**Q2.** Router কোন layer এ কাজ করে?
+
+- (a) Layer 1
+- (b) Layer 2
+- (c) Layer 3 ✅
+- (d) Layer 4
+
+> **ব্যাখ্যা:** Router **Layer 3 (Network Layer)** এ কাজ করে — IP address দেখে packet route করে।
+
+**Q3.** TCP কোন layer এর protocol?
+
+- (a) Application
+- (b) Network
+- (c) Transport ✅
+- (d) Data Link
+
+> **ব্যাখ্যা:** TCP হলো **Layer 4 (Transport Layer)** এর protocol — reliable, connection-oriented data delivery করে।
+
+**Q4.** MAC Address কোন layer এ ব্যবহৃত হয়?
+
+- (a) Physical Layer
+- (b) Data Link Layer ✅
+- (c) Network Layer
+- (d) Transport Layer
+
+> **ব্যাখ্যা:** **MAC Address** হলো **Layer 2 (Data Link Layer)** এর physical addressing। Switch MAC address দেখে frame forward করে।
+
+**Q5.** OSI Model এ কোন layer কে "Heart of OSI" বলা হয়?
+
+- (a) Network Layer
+- (b) Transport Layer ✅
+- (c) Session Layer
+- (d) Application Layer
+
+> **ব্যাখ্যা:** **Transport Layer (Layer 4)** কে "Heart of OSI" বলা হয় কারণ এটা end-to-end reliable delivery নিশ্চিত করে, segmentation করে, error ও flow control করে।
+
+**Q6.** Data Link Layer এর দুটি sub-layer কী কী?
+
+- (a) TCP ও UDP
+- (b) LLC ও MAC ✅
+- (c) IP ও ICMP
+- (d) HTTP ও FTP
+
+> **ব্যাখ্যা:** Data Link Layer দুটি sub-layer এ বিভক্ত — **LLC (Logical Link Control)** এবং **MAC (Media Access Control)**।
+
+**Q7.** Presentation Layer এর কাজ কোনটি?
+
+- (a) Routing
+- (b) Session management
+- (c) Encryption ও Data translation ✅
+- (d) Bit transmission
+
+> **ব্যাখ্যা:** **Presentation Layer (Layer 6)** — Translation (format convert), Encryption/Decryption, এবং Compression/Decompression করে।
+
+**Q8.** কোন layer packet তৈরি করে?
+
+- (a) Transport Layer
+- (b) Network Layer ✅
+- (c) Data Link Layer
+- (d) Physical Layer
+
+> **ব্যাখ্যা:** **Network Layer (Layer 3)** — PDU হলো **Packet**। Transport Layer এর PDU = Segment, Data Link = Frame, Physical = Bits।
+
+---
+
+## ✍️ 6.3 Written Problems
+
+**W1. OSI Model এর প্রতিটি layer এর নাম, PDU এবং একটি করে protocol লিখুন।**
+
+| Layer | নাম | PDU | Protocol |
+|:---:|------|-----|----------|
+| 7 | Application | Data | HTTP |
+| 6 | Presentation | Data | SSL/TLS |
+| 5 | Session | Data | NetBIOS |
+| 4 | Transport | Segment | TCP |
+| 3 | Network | Packet | IP |
+| 2 | Data Link | Frame | Ethernet |
+| 1 | Physical | Bits | RS-232 |
+
+**W2. Transport Layer ও Network Layer এর মধ্যে পার্থক্য লিখুন।**
+
+| বিষয় | Transport Layer (L4) | Network Layer (L3) |
+|-------|---------------------|-------------------|
+| **PDU** | Segment | Packet |
+| **Addressing** | Port Number | IP Address |
+| **Delivery** | End-to-end (process to process) | Host-to-host |
+| **Protocol** | TCP, UDP | IP, ICMP |
+| **Device** | - | Router |
+| **Responsibility** | Reliable delivery, flow control | Routing, logical addressing |
+
+---
+
+## ⚠️ 6.4 Tricky Parts
+
+> ⚠️ **Trap 1:** "Application Layer কি application?" — **না**। Chrome browser হলো application। Chrome যে **HTTP protocol** ব্যবহার করে সেটা Application Layer এ কাজ করে। Layer ≠ Software।
+
+> ⚠️ **Trap 2:** "ARP কোন layer?" — **Network Layer (L3)**। কিন্তু ARP MAC address (L2) resolve করে। তাই কেউ কেউ বলে L2, কেউ বলে L2.5। Exam এ **Layer 3** বলাই safe।
+
+> ⚠️ **Trap 3:** PDU গুলিয়ে ফেলা — মনে রাখুন: **Data → Segment → Packet → Frame → Bits** (উপর থেকে নিচে)। "`D-S-P-F-B`" = "**D**on't **S**ome **P**eople **F**orget **B**irthdays"
+
+> ⚠️ **Trap 4:** "OSI Model কি বাস্তবে ব্যবহৃত হয়?" — **না**, বাস্তবে **TCP/IP Model** ব্যবহৃত হয়। OSI হলো **reference/theoretical model** — networking বুঝতে ব্যবহৃত হয়।
+
+---
+
+## 📝 6.5 Summary
+
+- **OSI = 7 Layer** — ISO তৈরি করেছে, theoretical model
+- **মনে রাখার সূত্র:** "All People Seem To Need Data Processing"
+- **PDU:** Data → Segment → Packet → Frame → Bits
+- **Layer 7 (Application):** HTTP, FTP, DNS — user এর কাছের layer
+- **Layer 4 (Transport):** TCP/UDP — "Heart of OSI", port number
+- **Layer 3 (Network):** IP, routing — Router কাজ করে
+- **Layer 2 (Data Link):** MAC, framing — Switch কাজ করে, LLC + MAC sub-layer
+- **Layer 1 (Physical):** Bits, signals — Hub, cable
+
+---
+---
+
+# Topic 7: TCP/IP Model
+
+<div align="center">
+
+*"TCP/IP হলো Internet এর ভিত্তি — বাস্তবে এটাই ব্যবহৃত হয়"*
+
+</div>
+
+---
+
+## 📖 7.1 ধারণা (Concept)
+
+**TCP/IP (Transmission Control Protocol / Internet Protocol)** Model হলো **4-layer practical model** যেটা **Internet এর backbone**। OSI Model theoretical হলেও TCP/IP Model **বাস্তবে ব্যবহৃত** হয়।
+
+**DoD (Department of Defense)** এই model তৈরি করেছে।
+
+### TCP/IP এর 4 Layers
+
+<Mermaid chart={`graph TB
+    subgraph "TCP/IP Model (4 Layers)"
+        T4["Layer 4: Application<br/>HTTP, FTP, SMTP, DNS, SSH"]
+        T3["Layer 3: Transport<br/>TCP, UDP"]
+        T2["Layer 2: Internet<br/>IP, ICMP, ARP, IGMP"]
+        T1["Layer 1: Network Access<br/>Ethernet, WiFi, PPP"]
+    end
+    T4 --> T3 --> T2 --> T1
+`} />
+
+### OSI vs TCP/IP — সবচেয়ে গুরুত্বপূর্ণ Comparison
+
+<Mermaid chart={`graph LR
+    subgraph "OSI Model (7)"
+        O7["Application"]
+        O6["Presentation"]
+        O5["Session"]
+        O4["Transport"]
+        O3["Network"]
+        O2["Data Link"]
+        O1["Physical"]
+    end
+
+    subgraph "TCP/IP Model (4)"
+        T4a["Application"]
+        T3a["Transport"]
+        T2a["Internet"]
+        T1a["Network Access"]
+    end
+
+    O7 -.-> T4a
+    O6 -.-> T4a
+    O5 -.-> T4a
+    O4 -.-> T3a
+    O3 -.-> T2a
+    O2 -.-> T1a
+    O1 -.-> T1a
+`} />
+
+| বিষয় | OSI Model | TCP/IP Model |
+|-------|-----------|-------------|
+| **Layers** | 7 | 4 |
+| **Developed by** | ISO | DoD (DARPA) |
+| **Type** | Theoretical/Reference | Practical/Implementation |
+| **Approach** | Protocol independent | Protocol dependent |
+| **Transport** | Connection-oriented only | Both (TCP + UDP) |
+| **Used in** | Teaching, reference | Real-world Internet |
+| **Session + Presentation** | আলাদা layer | Application layer এ merged |
+| **Data Link + Physical** | আলাদা layer | Network Access layer এ merged |
+
+### TCP/IP প্রতিটি Layer বিস্তারিত
+
+#### Layer 4: Application Layer (OSI Layer 5+6+7)
+
+OSI Model এর Application, Presentation, Session — এই **তিনটি layer মিলিয়ে** TCP/IP তে একটি Application Layer।
+
+| Protocol | Port | কাজ |
+|----------|------|-----|
+| HTTP | 80 | Web page access |
+| HTTPS | 443 | Secure web |
+| FTP | 20/21 | File transfer |
+| SSH | 22 | Secure remote login |
+| Telnet | 23 | Remote login (insecure) |
+| SMTP | 25 | Email send |
+| DNS | 53 | Domain → IP resolve |
+| DHCP | 67/68 | Auto IP assign |
+| POP3 | 110 | Email receive |
+| IMAP | 143 | Email receive (advanced) |
+| SNMP | 161 | Network monitoring |
+
+#### Layer 3: Transport Layer
+
+OSI Layer 4 এর সমতুল্য।
+
+| Protocol | Type | কখন ব্যবহার |
+|----------|------|-------------|
+| **TCP** | Connection-oriented, reliable | Web, email, file transfer — যেখানে data loss acceptable না |
+| **UDP** | Connectionless, unreliable | Video streaming, gaming, DNS — যেখানে speed বেশি important |
+
+#### Layer 2: Internet Layer (OSI Layer 3)
+
+| Protocol | কাজ |
+|----------|-----|
+| **IP** | Logical addressing ও routing |
+| **ICMP** | Error reporting, ping, traceroute |
+| **ARP** | IP → MAC address resolve |
+| **IGMP** | Multicast group management |
+
+#### Layer 1: Network Access Layer (OSI Layer 1+2)
+
+Physical ও Data Link layer মিলিয়ে একটা layer। Hardware, cables, MAC addressing, framing সব এখানে।
+
+| Protocol/Standard | কাজ |
+|-------------------|-----|
+| **Ethernet (802.3)** | Wired LAN |
+| **Wi-Fi (802.11)** | Wireless LAN |
+| **PPP** | Point-to-Point Protocol (WAN) |
+| **ARP** | কেউ কেউ এটাকে এই layer এও রাখে |
+
+---
+
+## ❓ 7.2 MCQ Problems
+
+**Q1.** TCP/IP Model এ কতটি layer আছে?
+
+- (a) 3
+- (b) 4 ✅
+- (c) 5
+- (d) 7
+
+> **ব্যাখ্যা:** TCP/IP Model এ **4 টি layer** — Network Access, Internet, Transport, Application।
+
+**Q2.** OSI Model এর কোন তিনটি layer TCP/IP এর Application layer এ merge হয়েছে?
+
+- (a) Physical, Data Link, Network
+- (b) Application, Presentation, Session ✅
+- (c) Transport, Network, Data Link
+- (d) Session, Transport, Network
+
+> **ব্যাখ্যা:** OSI এর **Application (L7) + Presentation (L6) + Session (L5)** = TCP/IP এর **Application Layer**।
+
+**Q3.** TCP/IP Model কে কোন সংস্থা তৈরি করেছে?
+
+- (a) ISO
+- (b) IEEE
+- (c) DoD (DARPA) ✅
+- (d) ITU
+
+> **ব্যাখ্যা:** **DoD (Department of Defense)** এর গবেষণা সংস্থা **DARPA** TCP/IP model তৈরি করেছে। OSI model তৈরি করেছে **ISO**।
+
+**Q4.** TCP/IP Model এর Internet Layer, OSI Model এর কোন layer এর সমতুল্য?
+
+- (a) Transport Layer
+- (b) Network Layer ✅
+- (c) Data Link Layer
+- (d) Session Layer
+
+> **ব্যাখ্যা:** TCP/IP এর **Internet Layer** = OSI এর **Network Layer (L3)**। দুটোতেই IP, ICMP, routing কাজ করে।
+
+**Q5.** কোনটি TCP/IP Model এর বৈশিষ্ট্য?
+
+- (a) 7 টি layer আছে
+- (b) ISO তৈরি করেছে
+- (c) বাস্তবে ব্যবহৃত হয় ✅
+- (d) Theoretical model
+
+> **ব্যাখ্যা:** TCP/IP Model **বাস্তবে ব্যবহৃত (practical)** model — Internet এটার উপর based। OSI হলো theoretical/reference model।
+
+---
+
+## ⚠️ 7.3 Tricky Parts
+
+> ⚠️ **Trap 1:** "TCP/IP Model এ 4 না 5 layer?" — Original TCP/IP তে **4 layer**। কিছু textbook **5 layer** দেখায় (Network Access কে Physical + Data Link আলাদা করে)। Exam এ specific না বললে **4 layer** ধরুন।
+
+> ⚠️ **Trap 2:** "OSI Model বাস্তবে ব্যবহৃত হয়?" — **না**। OSI শুধু **reference/teaching purpose**। বাস্তবে **TCP/IP** ব্যবহৃত হয়। Exam এ জিজ্ঞেস করতে পারে "Which model is used in real Internet?"
+
+> ⚠️ **Trap 3:** "ARP কোন layer?" — TCP/IP Model এ ARP কে কেউ **Internet Layer** এ, কেউ **Network Access Layer** এ রাখে। Exam এ সাধারণত **Internet/Network Layer** বলাই safe।
+
+---
+
+## 📝 7.4 Summary
+
+- **TCP/IP = 4 Layer** — Application, Transport, Internet, Network Access
+- **DoD/DARPA** তৈরি করেছে — **বাস্তবে ব্যবহৃত** model
+- OSI এর L5+L6+L7 = TCP/IP এর **Application**
+- OSI এর L1+L2 = TCP/IP এর **Network Access**
+- **Internet Layer = Network Layer** (IP, ICMP, ARP)
+- OSI = **theoretical**, TCP/IP = **practical**
+
+---
+---
+
+# Topic 8: Data Encapsulation & Decapsulation
+
+<div align="center">
+
+*"Data পাঠানোর সময় প্রতিটি layer নিজের header যোগ করে — এটাই Encapsulation"*
+
+</div>
+
+---
+
+## 📖 8.1 ধারণা (Concept)
+
+**Encapsulation** হলো সেই process যেখানে data এক layer থেকে নিচের layer এ যাওয়ার সময় প্রতিটি layer নিজের **header (এবং কখনো trailer)** যোগ করে। Receiver end এ উল্টো process হয় — **Decapsulation**।
+
+<Mermaid chart={`graph TD
+    subgraph "Sender (Encapsulation ↓)"
+        S7["Application Layer<br/>📧 Data"] -->|"+ header"| S4["Transport Layer<br/>📦 Segment = Header + Data"]
+        S4 -->|"+ header"| S3["Network Layer<br/>📬 Packet = Header + Segment"]
+        S3 -->|"+ header + trailer"| S2["Data Link Layer<br/>🔗 Frame = Header + Packet + Trailer"]
+        S2 -->|"convert to signals"| S1["Physical Layer<br/>⚡ Bits = 0101010..."]
+    end
+`} />
+
+### Encapsulation Step-by-Step
+
+```
+Application Layer:  [          DATA          ]
+                             ↓ + TCP/UDP Header
+Transport Layer:    [TCP HDR][     DATA      ]  ← Segment
+                             ↓ + IP Header
+Network Layer:      [IP HDR][TCP HDR][ DATA  ]  ← Packet
+                             ↓ + MAC Header + Trailer (FCS)
+Data Link Layer:    [MAC HDR][IP][TCP][ DATA ][FCS]  ← Frame
+                             ↓ Convert to electrical/optical signals
+Physical Layer:     01010011101001010101...    ← Bits
+```
+
+### PDU (Protocol Data Unit) প্রতিটি Layer এ
+
+| Layer | PDU নাম | কী যোগ হয় |
+|:---:|---------|----------|
+| Application/Presentation/Session | **Data** | User data |
+| Transport | **Segment** (TCP) / **Datagram** (UDP) | Source/Destination Port |
+| Network | **Packet** | Source/Destination IP Address |
+| Data Link | **Frame** | Source/Destination MAC + FCS Trailer |
+| Physical | **Bits** | Electrical/optical signals |
+
+### Decapsulation (Receiver End)
+
+Receiver end এ **উল্টো process** হয় — প্রতিটি layer নিজের header পড়ে remove করে এবং উপরের layer কে data দেয়।
+
+```
+Physical:    01010011101001010101... → bits receive
+                    ↓ remove MAC header/trailer
+Data Link:   [MAC HDR][IP][TCP][ DATA ][FCS] → Frame check
+                    ↓ remove IP header
+Network:     [IP HDR][TCP HDR][ DATA ] → Route/deliver
+                    ↓ remove TCP header
+Transport:   [TCP HDR][ DATA ] → Reassemble
+                    ↓
+Application: [ DATA ] → User দেখে
+```
+
+---
+
+## ❓ 8.2 MCQ Problems
+
+**Q1.** Network Layer এ data এর PDU কে কী বলে?
+
+- (a) Segment
+- (b) Frame
+- (c) Packet ✅
+- (d) Bits
+
+> **ব্যাখ্যা:** Network Layer (L3) এর PDU = **Packet**। Transport = Segment, Data Link = Frame, Physical = Bits।
+
+**Q2.** Encapsulation process এ কোন layer সবার শেষে header যোগ করে?
+
+- (a) Application Layer
+- (b) Transport Layer
+- (c) Network Layer
+- (d) Data Link Layer ✅
+
+> **ব্যাখ্যা:** Encapsulation উপর থেকে নিচে যায়। **Data Link Layer** সবার শেষে MAC header ও FCS trailer যোগ করে frame তৈরি করে। Physical Layer শুধু bits এ convert করে, header যোগ করে না।
+
+**Q3.** Frame এর শেষে কোন trailer যোগ হয়?
+
+- (a) IP checksum
+- (b) TCP checksum
+- (c) FCS (Frame Check Sequence) ✅
+- (d) CRC header
+
+> **ব্যাখ্যা:** Data Link Layer **FCS (Frame Check Sequence)** trailer যোগ করে — error detection এর জন্য। FCS সাধারণত **CRC (Cyclic Redundancy Check)** algorithm ব্যবহার করে।
+
+**Q4.** Decapsulation কোন end এ হয়?
+
+- (a) Sender
+- (b) Receiver ✅
+- (c) Router
+- (d) Switch
+
+> **ব্যাখ্যা:** **Decapsulation** হলো Encapsulation এর উল্টো — **Receiver** end এ হয়। প্রতিটি layer নিজের header remove করে উপরের layer কে data পাঠায়।
+
+---
+
+## ⚠️ 8.3 Tricky Parts
+
+> ⚠️ **Trap 1:** "PDU sequence মনে রাখা" — **Data → Segment → Packet → Frame → Bits**। উল্টো করলেও আসতে পারে: Bits → Frame → Packet → Segment → Data (decapsulation order)।
+
+> ⚠️ **Trap 2:** "Physical Layer কি header যোগ করে?" — **না**। Physical Layer শুধু frame কে **bits (electrical/optical signals)** এ convert করে। কোন header/trailer যোগ করে না।
+
+> ⚠️ **Trap 3:** "Data Link Layer header আর trailer দুটোই যোগ করে" — এটা unique। অন্য layer শুধু **header** যোগ করে, কিন্তু Data Link Layer **header (MAC) + trailer (FCS)** দুটোই যোগ করে।
+
+---
+
+## 📝 8.4 Summary
+
+- **Encapsulation** = প্রতিটি layer header যোগ করে (sender side, top → bottom)
+- **Decapsulation** = প্রতিটি layer header remove করে (receiver side, bottom → top)
+- **PDU order:** Data → Segment → Packet → Frame → Bits
+- **Data Link Layer** = একমাত্র layer যেটা header **এবং** trailer (FCS) দুটোই যোগ করে
+- **Physical Layer** = কোন header যোগ করে না, শুধু bits এ convert করে
+- **FCS** = Frame Check Sequence — error detection এর জন্য CRC ব্যবহার করে
+
+---
+
+> **Level 2 সম্পূর্ণ!** 🎉 OSI Model (7 layers), TCP/IP Model (4 layers), এবং Encapsulation/Decapsulation — networking এর সবচেয়ে fundamental concepts শেখা হয়ে গেছে।
+
+---
+---
+
+<div align="center">
+
+# LEVEL 3: IP ADDRESSING & SUBNETTING (আইপি অ্যাড্রেসিং)
+
+*চাকরি পরীক্ষায় Subnetting calculation সবচেয়ে বেশি আসে — এই level মনোযোগ দিয়ে পড়ুন*
+
+</div>
+
+---
+---
+
+# Topic 9: IPv4 Addressing
+
+<div align="center">
+
+*"প্রতিটি device এর network এ একটা unique address লাগে — সেটাই IP Address"*
+
+</div>
+
+---
+
+## 📖 9.1 ধারণা (Concept)
+
+**IP Address (Internet Protocol Address)** হলো network এ প্রতিটি device এর **unique logical address**। ঠিক যেমন আপনার বাড়ির ঠিকানা আছে — network device এরও ঠিকানা আছে।
+
+### IPv4 Address Format
+
+**IPv4** = **32-bit** address, **4 octet** এ ভাগ করা, dot দিয়ে আলাদা।
+
+```
+IPv4 Format:    192.168.1.100
+                 │    │  │  │
+                 │    │  │  └── 4th Octet (8 bits)
+                 │    │  └───── 3rd Octet (8 bits)
+                 │    └──────── 2nd Octet (8 bits)
+                 └───────────── 1st Octet (8 bits)
+
+Binary:    11000000.10101000.00000001.01100100
+Decimal:      192   .  168   .   1    .  100
+
+Total: 4 × 8 = 32 bits
+```
+
+**প্রতিটি Octet এর range: 0-255** (কারণ 8 bit এ max = 2⁸-1 = 255)
+
+### IP Address এর দুটি অংশ
+
+প্রতিটি IP address এ **দুটো অংশ** থাকে:
+
+```
+IP Address = Network Part + Host Part
+
+Example: 192.168.1.100 / 255.255.255.0
+
+Network Part: 192.168.1     → কোন network এ আছে (রাস্তার নাম)
+Host Part:           .100   → network এর মধ্যে কোন device (বাড়ি নম্বর)
+```
+
+### IPv4 Address Classes
+
+<Mermaid chart={`graph TD
+    IP["IPv4 Address Classes"]
+    IP --> A["Class A<br/>1.0.0.0 - 126.255.255.255<br/>Large networks"]
+    IP --> B["Class B<br/>128.0.0.0 - 191.255.255.255<br/>Medium networks"]
+    IP --> C["Class C<br/>192.0.0.0 - 223.255.255.255<br/>Small networks"]
+    IP --> D["Class D<br/>224.0.0.0 - 239.255.255.255<br/>Multicasting"]
+    IP --> E["Class E<br/>240.0.0.0 - 255.255.255.255<br/>Research/Reserved"]
+`} />
+
+### Class Details — Master Table
+
+| বৈশিষ্ট্য | Class A | Class B | Class C |
+|-----------|---------|---------|---------|
+| **1st Octet Range** | 1 - 126 | 128 - 191 | 192 - 223 |
+| **1st Octet Binary** | 0xxxxxxx | 10xxxxxx | 110xxxxx |
+| **Default Subnet Mask** | 255.0.0.0 (/8) | 255.255.0.0 (/16) | 255.255.255.0 (/24) |
+| **Network Part** | 1st octet | 1st + 2nd octet | 1st + 2nd + 3rd octet |
+| **Host Part** | Last 3 octets | Last 2 octets | Last 1 octet |
+| **Networks সংখ্যা** | 126 | 16,384 | 2,097,152 |
+| **Hosts per Network** | 16,777,214 | 65,534 | 254 |
+| **Use Case** | Very large org (ISP) | Medium org | Small org / Home |
+
+> **Host formula:** `2^n - 2` (n = host bits সংখ্যা, -2 কারণ Network ID ও Broadcast address বাদ)
+
+### Special/Reserved IP Addresses
+
+| Address | ব্যবহার |
+|---------|--------|
+| **0.0.0.0** | Default route / "this network" |
+| **127.0.0.1** | **Loopback** (localhost) — নিজেকে test করা |
+| **127.0.0.0/8** | পুরো 127.x.x.x range loopback এ reserved |
+| **255.255.255.255** | Limited broadcast — same network এ সবাইকে |
+| **169.254.x.x** | APIPA (Automatic Private IP) — DHCP না পেলে |
+
+> ⚠️ **127.0.0.0 থেকে 127.255.255.255 পুরো range loopback এ reserved** — তাই Class A তে 1-126, 127 নেই!
+
+### Private vs Public IP Address
+
+**Private IP** — Internet এ directly accessible না, শুধু internal network এ ব্যবহৃত হয়।
+
+| Class | Private IP Range | Commonly Used |
+|-------|-----------------|---------------|
+| A | 10.0.0.0 - 10.255.255.255 | Large corporate |
+| B | 172.16.0.0 - 172.31.255.255 | Medium org |
+| C | 192.168.0.0 - 192.168.255.255 | **Home/Small office** |
+
+```
+Public IP:  আপনার ISP দেয়, Internet এ unique
+            Example: 103.145.50.200
+
+Private IP: আপনার router/DHCP দেয়, local network এ
+            Example: 192.168.1.100
+
+Router NAT দিয়ে Private → Public convert করে Internet এ যায়
+```
+
+---
+
+## ❓ 9.2 MCQ Problems
+
+**Q1.** IPv4 address কত bit এর?
+
+- (a) 16 bit
+- (b) 32 bit ✅
+- (c) 48 bit
+- (d) 128 bit
+
+> **ব্যাখ্যা:** IPv4 = **32 bit** (4 octet × 8 bit)। IPv6 = 128 bit। MAC address = 48 bit।
+
+**Q2.** 172.16.5.10 কোন class এর IP?
+
+- (a) Class A
+- (b) Class B ✅
+- (c) Class C
+- (d) Class D
+
+> **ব্যাখ্যা:** 1st octet = 172, যেটা **128-191** range এ — তাই **Class B**।
+
+**Q3.** Class C এর default subnet mask কোনটি?
+
+- (a) 255.0.0.0
+- (b) 255.255.0.0
+- (c) 255.255.255.0 ✅
+- (d) 255.255.255.255
+
+> **ব্যাখ্যা:** Class A = 255.0.0.0 (/8), Class B = 255.255.0.0 (/16), **Class C = 255.255.255.0 (/24)**।
+
+**Q4.** 127.0.0.1 কিসের জন্য reserved?
+
+- (a) Default Gateway
+- (b) Broadcast
+- (c) Loopback (localhost) ✅
+- (d) DNS Server
+
+> **ব্যাখ্যা:** **127.0.0.1** হলো **loopback address / localhost** — device নিজেকে test করতে ব্যবহার করে। `ping 127.0.0.1` করলে নিজের machine এ ping করে।
+
+**Q5.** Class C network এ সর্বোচ্চ কতটি host থাকতে পারে?
+
+- (a) 256
+- (b) 255
+- (c) 254 ✅
+- (d) 252
+
+> **ব্যাখ্যা:** Class C তে host bits = 8, তাই hosts = **2⁸ - 2 = 254**। (-2 কারণ Network ID ও Broadcast address বাদ)।
+
+**Q6.** 192.168.1.0 কোন ধরনের IP?
+
+- (a) Public IP
+- (b) Private IP ✅
+- (c) Loopback
+- (d) Broadcast
+
+> **ব্যাখ্যা:** **192.168.x.x** range হলো **Class C Private IP**। এটা Internet এ directly route হয় না, শুধু internal/local network এ ব্যবহৃত।
+
+**Q7.** DHCP server থেকে IP না পেলে device কোন IP নেয়?
+
+- (a) 0.0.0.0
+- (b) 127.0.0.1
+- (c) 169.254.x.x ✅
+- (d) 255.255.255.255
+
+> **ব্যাখ্যা:** **169.254.x.x (APIPA — Automatic Private IP Addressing)** — DHCP server না পেলে device নিজে এই range থেকে একটা IP assign করে। Internet access থাকবে না, তবে local communication সম্ভব।
+
+---
+
+## ⚠️ 9.3 Tricky Parts
+
+> ⚠️ **Trap 1:** "Class A তে 0 ও 127 নেই কেন?" — **0.x.x.x** reserved for "this network", **127.x.x.x** reserved for loopback। তাই Class A range **1-126**।
+
+> ⚠️ **Trap 2:** "Host per network calculate" — Formula: **2^n - 2** (n = host bits)। **-2 কেন?** প্রতি network এ 1st address = **Network ID** (host part সব 0), last address = **Broadcast** (host part সব 1) — এদুটো device কে assign করা যায় না।
+
+> ⚠️ **Trap 3:** "MAC Address আর IP Address গুলিয়ে ফেলা" — **MAC = 48 bit, physical, Layer 2, hardware burned-in**। **IP = 32 bit (IPv4), logical, Layer 3, changeable**।
+
+---
+
+## 📝 9.4 Summary
+
+- **IPv4 = 32 bit**, 4 octet, dotted decimal
+- **Class A:** 1-126, /8, large network, **16M hosts**
+- **Class B:** 128-191, /16, medium, **65K hosts**
+- **Class C:** 192-223, /24, small, **254 hosts**
+- **Class D:** 224-239, multicasting
+- **Class E:** 240-255, research
+- **127.0.0.1** = Loopback, **169.254.x.x** = APIPA
+- **Private IP:** 10.x.x.x, 172.16-31.x.x, 192.168.x.x
+- **Host formula:** `2^n - 2`
+
+---
+---
+
+# Topic 10: Subnetting
+
+<div align="center">
+
+*"বড় network কে ছোট ছোট ভাগে ভাগ করা — পরীক্ষায় calculation সবচেয়ে বেশি আসে"*
+
+</div>
+
+---
+
+## 📖 10.1 ধারণা (Concept)
+
+**Subnetting** হলো একটা বড় network কে **ছোট ছোট sub-network (subnet)** এ ভাগ করার process। এতে IP address efficient ভাবে ব্যবহার হয় এবং network management সহজ হয়।
+
+### Subnetting Visual Overview
+
+<Mermaid chart={`graph TD
+    A["192.168.1.0/24<br/>254 hosts"] -->|"/26 দিয়ে ভাগ"| B["Subnet 1<br/>192.168.1.0/26<br/>62 hosts"]
+    A --> C["Subnet 2<br/>192.168.1.64/26<br/>62 hosts"]
+    A --> D["Subnet 3<br/>192.168.1.128/26<br/>62 hosts"]
+    A --> E["Subnet 4<br/>192.168.1.192/26<br/>62 hosts"]
+
+    style A fill:#e0e7ff,stroke:#6366f1,stroke-width:2px
+    style B fill:#f0fdf4,stroke:#22c55e
+    style C fill:#f0fdf4,stroke:#22c55e
+    style D fill:#f0fdf4,stroke:#22c55e
+    style E fill:#f0fdf4,stroke:#22c55e
+`} />
+
+### কেন Subnetting দরকার?
+
+```
+Without Subnetting:                  With Subnetting:
+┌──────────────────────┐            ┌────────────┐
+│   একটাই বড় Network  │            │ Subnet 1   │ HR Department
+│   500 hosts          │    →       ├────────────┤
+│   সব broadcast সবাই  │            │ Subnet 2   │ IT Department
+│   পায় — slow!        │            ├────────────┤
+└──────────────────────┘            │ Subnet 3   │ Sales
+                                    └────────────┘
+                                    প্রতিটিতে আলাদা broadcast domain
+```
+
+### Subnet Mask কী?
+
+**Subnet Mask** নির্ধারণ করে IP address এর কতটুকু **Network part** আর কতটুকু **Host part**।
+
+```
+IP:          192.168.1.100
+Subnet Mask: 255.255.255.0
+
+Binary:
+IP:     11000000.10101000.00000001.01100100
+Mask:   11111111.11111111.11111111.00000000
+        ├── Network (1s) ──────────┤├─Host─┤
+
+1 = Network portion
+0 = Host portion
+```
+
+### CIDR Notation
+
+**CIDR (Classless Inter-Domain Routing)** — subnet mask কে সংক্ষেপে লেখার পদ্ধতি।
+
+| Subnet Mask | CIDR | Network Bits | Host Bits | Usable Hosts |
+|-------------|------|-------------|-----------|-------------|
+| 255.0.0.0 | /8 | 8 | 24 | 16,777,214 |
+| 255.255.0.0 | /16 | 16 | 16 | 65,534 |
+| 255.255.255.0 | /24 | 24 | 8 | 254 |
+| 255.255.255.128 | /25 | 25 | 7 | 126 |
+| 255.255.255.192 | /26 | 26 | 6 | 62 |
+| 255.255.255.224 | /27 | 27 | 5 | 30 |
+| 255.255.255.240 | /28 | 28 | 4 | 14 |
+| 255.255.255.248 | /29 | 29 | 3 | 6 |
+| 255.255.255.252 | /30 | 30 | 2 | 2 |
+
+### Subnetting Calculation — Step by Step
+
+**Problem:** 192.168.1.0/26 network এর subnet details বের করুন।
+
+**Step 1:** CIDR /26 মানে 26 bits network, বাকি 32-26 = **6 bits host**
+
+**Step 2:** Usable hosts = 2⁶ - 2 = **62**
+
+**Step 3:** Total addresses per subnet = 2⁶ = **64**
+
+**Step 4:** Subnet mask = 255.255.255.**192** (কারণ 11000000 = 192)
+
+**Step 5:** Subnets:
+
+| Subnet | Network ID | First Usable | Last Usable | Broadcast |
+|--------|-----------|-------------|------------|-----------|
+| 1st | 192.168.1.0 | 192.168.1.1 | 192.168.1.62 | 192.168.1.63 |
+| 2nd | 192.168.1.64 | 192.168.1.65 | 192.168.1.126 | 192.168.1.127 |
+| 3rd | 192.168.1.128 | 192.168.1.129 | 192.168.1.190 | 192.168.1.191 |
+| 4th | 192.168.1.192 | 192.168.1.193 | 192.168.1.254 | 192.168.1.255 |
+
+**মূল formula:**
+```
+Block Size (increment) = 256 - subnet mask value of the interesting octet
+/26 → mask = 192 → Block size = 256 - 192 = 64
+
+Subnet 1: 0, 64, 128, 192 (starts at multiples of 64)
+Network ID = start of block
+Broadcast = next block start - 1
+First usable = Network ID + 1
+Last usable = Broadcast - 1
+```
+
+### Quick Subnetting Cheat Sheet
+
+| CIDR | Mask | Block Size | Subnets (Class C) | Hosts/Subnet |
+|------|------|-----------|-------------------|-------------|
+| /24 | .0 | 256 | 1 | 254 |
+| /25 | .128 | 128 | 2 | 126 |
+| /26 | .192 | 64 | 4 | 62 |
+| /27 | .224 | 32 | 8 | 30 |
+| /28 | .240 | 16 | 16 | 14 |
+| /29 | .248 | 8 | 32 | 6 |
+| /30 | .252 | 4 | 64 | 2 |
+
+---
+
+## ❓ 10.2 MCQ Problems
+
+**Q1.** 192.168.1.0/27 network এ কতটি usable host possible?
+
+- (a) 32
+- (b) 30 ✅
+- (c) 28
+- (d) 62
+
+> **ব্যাখ্যা:** /27 মানে host bits = 32-27 = 5। Usable hosts = **2⁵ - 2 = 30**।
+
+**Q2.** /26 subnet mask কত?
+
+- (a) 255.255.255.128
+- (b) 255.255.255.192 ✅
+- (c) 255.255.255.224
+- (d) 255.255.255.240
+
+> **ব্যাখ্যা:** /26 = 26 ones + 6 zeros = 11111111.11111111.11111111.**11**000000 = 255.255.255.**192**।
+
+**Q3.** 10.0.0.0/8 network এ কতটি host possible?
+
+- (a) 254
+- (b) 65,534
+- (c) 16,777,214 ✅
+- (d) 16,777,216
+
+> **ব্যাখ্যা:** /8 = host bits 24, hosts = **2²⁴ - 2 = 16,777,214**। -2 কারণ Network ID ও Broadcast address বাদ।
+
+**Q4.** 192.168.1.130/26 IP এর Network ID কত?
+
+- (a) 192.168.1.0
+- (b) 192.168.1.64
+- (c) 192.168.1.128 ✅
+- (d) 192.168.1.192
+
+> **ব্যাখ্যা:** /26 = block size 64। 130 ÷ 64 = 2.03... → 2nd block start = 2×64 = **128**। তাই Network ID = **192.168.1.128**।
+
+**Q5.** Subnet mask 255.255.255.240 এর CIDR notation কত?
+
+- (a) /26
+- (b) /27
+- (c) /28 ✅
+- (d) /29
+
+> **ব্যাখ্যা:** 240 = **11110000** = 4 ones। পুরো mask এ ones = 24 + 4 = **/28**।
+
+---
+
+## ⚠️ 10.3 Tricky Parts
+
+> ⚠️ **Trap 1:** "Host সংখ্যায় -2 করতে ভুলে যাওয়া" — **সবসময় 2^n - 2** করতে হবে। Network ID ও Broadcast address device কে assign করা যায় না।
+
+> ⚠️ **Trap 2:** "Block size formula" — **256 - subnet mask** (interesting octet)। /26 = mask 192, block = 256-192 = **64**।
+
+> ⚠️ **Trap 3:** "Network ID বের করা" — IP address কে block size দিয়ে ভাগ করে, ভাগফল × block size = **Network ID**।
+
+---
+
+## 📝 10.4 Summary
+
+- **Subnetting** = বড় network কে ছোট subnet এ ভাগ করা
+- **Subnet Mask** = কতটুকু network, কতটুকু host সেটা নির্ধারণ
+- **CIDR /n** = n bits network, (32-n) bits host
+- **Hosts = 2^(host bits) - 2**
+- **Block Size = 256 - subnet mask value**
+- **Network ID** = block এর 1st address, **Broadcast** = block এর last address
+
+---
+---
+
+# Topic 11: VLSM & Supernetting
+
+<div align="center">
+
+*"VLSM = প্রতিটি subnet এ আলাদা size, Supernetting = ছোট network গুলো জোড়া লাগানো"*
+
+</div>
+
+---
+
+## 📖 11.1 ধারণা (Concept)
+
+### VLSM (Variable Length Subnet Mask)
+
+সাধারণ subnetting এ সব subnet **সমান size** এর হয়। কিন্তু বাস্তবে প্রতিটি department এ **ভিন্ন সংখ্যক** host থাকে। **VLSM** এ প্রতিটি subnet এ **আলাদা আলাদা subnet mask** ব্যবহার করা যায়।
+
+```
+Fixed Subnetting (Waste):          VLSM (Efficient):
+┌──────────────────┐               ┌──────────────────┐
+│ Subnet 1: /26    │ 62 hosts      │ Subnet 1: /25    │ 126 hosts (IT: 100 জন)
+│ IT: 100 জন ❌    │ কম পড়ে!      │                   │
+├──────────────────┤               ├──────────────────┤
+│ Subnet 2: /26    │ 62 hosts      │ Subnet 2: /27    │ 30 hosts (HR: 20 জন)
+│ HR: 20 জন        │ 42 waste!     │                   │
+├──────────────────┤               ├──────────────────┤
+│ Subnet 3: /26    │ 62 hosts      │ Subnet 3: /30    │ 2 hosts (WAN link)
+│ WAN: 2 জন        │ 60 waste!     │                   │
+└──────────────────┘               └──────────────────┘
+```
+
+**VLSM Rule:** সবসময় **বড় subnet আগে** allocate করুন, তারপর ছোট গুলো।
+
+### Supernetting (Route Summarization)
+
+Subnetting এর **উল্টো** — একাধিক ছোট network কে **একটা বড় network** হিসেবে represent করা। Routing table ছোট রাখতে ব্যবহৃত।
+
+```
+Before Supernetting:                After Supernetting:
+192.168.0.0/24  ─┐                 192.168.0.0/22  ← একটা entry
+192.168.1.0/24   │ 4 routes        (4 টা network কে 1 টা
+192.168.2.0/24   │                  entry তে summarize)
+192.168.3.0/24  ─┘
+```
+
+---
+
+## ❓ 11.2 MCQ Problems
+
+**Q1.** VLSM এর পূর্ণরূপ কী?
+
+- (a) Virtual LAN Subnet Mask
+- (b) Variable Length Subnet Mask ✅
+- (c) Very Large Subnet Mode
+- (d) Virtual Length Subnet Method
+
+**Q2.** Supernetting এ CIDR prefix কি বাড়ে না কমে?
+
+- (a) বাড়ে (larger prefix)
+- (b) কমে (smaller prefix) ✅
+
+> **ব্যাখ্যা:** Supernetting এ একাধিক network merge হয়, তাই network bits **কমে** এবং host bits **বাড়ে**। যেমন: 4 টা /24 merge হলে /22 হয় (24 → 22, prefix কমলো)।
+
+---
+
+## 📝 11.3 Summary
+
+- **VLSM** = প্রতিটি subnet এ **ভিন্ন subnet mask** — waste কমায়
+- **Supernetting** = ছোট network গুলো **merge করে** বড় network — routing table ছোট রাখে
+- VLSM এ **বড় subnet আগে** allocate করতে হয়
+- Supernetting এ CIDR prefix **কমে** (/24 → /22)
+
+---
+---
+
+# Topic 12: IPv6 Basics
+
+<div align="center">
+
+*"IPv4 এর address শেষ হয়ে যাচ্ছে — IPv6 হলো ভবিষ্যত"*
+
+</div>
+
+---
+
+## 📖 12.1 ধারণা (Concept)
+
+**IPv6 (Internet Protocol version 6)** হলো **128-bit** address system যেটা IPv4 এর **address exhaustion** সমস্যা সমাধান করতে তৈরি।
+
+### কেন IPv6 দরকার?
+
+```
+IPv4: 2³² = ~4.3 billion addresses  ← শেষ হয়ে যাচ্ছে
+IPv6: 2¹²⁸ = ~340 undecillion addresses ← পৃথিবীর প্রতিটি বালুকণায় ঠিকানা দেওয়া যায়
+```
+
+### IPv6 Format
+
+```
+IPv6:  2001:0db8:85a3:0000:0000:8a2e:0370:7334
+       ├──┤:├──┤:├──┤:├──┤:├──┤:├──┤:├──┤:├──┤
+       8 groups × 4 hex digits = 32 hex = 128 bits
+
+Shortening Rules:
+1. Leading zeros remove: 0db8 → db8, 0000 → 0
+2. Consecutive all-zero groups → :: (once only)
+
+Full:    2001:0db8:0000:0000:0000:0000:0000:0001
+Short:   2001:db8::1
+```
+
+### IPv4 vs IPv6 Comparison
+
+| বিষয় | IPv4 | IPv6 |
+|-------|------|------|
+| **Address Size** | 32-bit | 128-bit |
+| **Format** | Decimal (192.168.1.1) | Hexadecimal (2001:db8::1) |
+| **Address Space** | ~4.3 billion | ~340 undecillion |
+| **Header** | Variable length, complex | Fixed 40 bytes, simplified |
+| **Broadcast** | আছে | **নেই** (Multicast ও Anycast দিয়ে replace) |
+| **NAT** | প্রয়োজন (address কম) | প্রয়োজন নেই (address অনেক) |
+| **IPSec** | Optional | **Built-in** (mandatory) |
+| **Configuration** | Manual / DHCP | Auto (SLAAC) / DHCPv6 |
+| **Checksum** | Header এ আছে | Header এ **নেই** (efficiency বাড়াতে) |
+
+### IPv6 Address Types
+
+| Type | বিবরণ | Example |
+|------|-------|---------|
+| **Unicast** | একটা নির্দিষ্ট device | 2001:db8::1 |
+| **Multicast** | একটা group এর সবাই (broadcast এর replacement) | ff02::1 |
+| **Anycast** | Group এর সবচেয়ে কাছের device | Routing এ ব্যবহৃত |
+
+> ⚠️ **IPv6 তে Broadcast নেই!** — Multicast দিয়ে replace হয়েছে।
+
+---
+
+## ❓ 12.2 MCQ Problems
+
+**Q1.** IPv6 address কত bit এর?
+
+- (a) 32
+- (b) 64
+- (c) 128 ✅
+- (d) 256
+
+**Q2.** IPv6 তে কোনটি নেই?
+
+- (a) Unicast
+- (b) Multicast
+- (c) Broadcast ✅
+- (d) Anycast
+
+> **ব্যাখ্যা:** IPv6 তে **Broadcast নেই** — Multicast দিয়ে replace হয়েছে।
+
+**Q3.** IPv6 address কোন number system এ লেখা হয়?
+
+- (a) Binary
+- (b) Decimal
+- (c) Hexadecimal ✅
+- (d) Octal
+
+**Q4.** IPv6 এ IPSec কি optional?
+
+- (a) হ্যাঁ
+- (b) না, built-in/mandatory ✅
+
+> **ব্যাখ্যা:** IPv6 তে **IPSec built-in** — security by design। IPv4 তে IPSec optional ছিল।
+
+---
+
+## 📝 12.3 Summary
+
+- **IPv6 = 128-bit**, hexadecimal format, 8 groups of 4 hex digits
+- IPv4 address শেষ হয়ে যাচ্ছে — IPv6 তে **340 undecillion** addresses
+- **No Broadcast** in IPv6 — Multicast দিয়ে replace
+- **IPSec built-in**, simplified header (fixed 40 bytes)
+- **:: দিয়ে consecutive zeros** শূন্য শুধু **একবার** short করা যায়
+
+---
+---
+
+# Topic 13: NAT & PAT
+
+<div align="center">
+
+*"Private IP দিয়ে কিভাবে Internet access করেন? — NAT এর কৃতিত্ব!"*
+
+</div>
+
+---
+
+## 📖 13.1 ধারণা (Concept)
+
+**NAT (Network Address Translation)** হলো এমন একটা technique যেটা **Private IP address কে Public IP address এ translate** করে, যাতে internal network এর device গুলো Internet access করতে পারে।
+
+<Mermaid chart={`graph LR
+    subgraph "Private Network"
+        A["PC-1<br/>192.168.1.10"]
+        B["PC-2<br/>192.168.1.20"]
+        C["PC-3<br/>192.168.1.30"]
+    end
+
+    R["Router<br/>(NAT)<br/>Private: 192.168.1.1<br/>Public: 203.0.113.5"]
+
+    S["Internet<br/>Server"]
+
+    A --> R
+    B --> R
+    C --> R
+    R -->|"All appear as<br/>203.0.113.5"| S
+`} />
+
+### NAT এর প্রকারভেদ
+
+| Type | বিবরণ | Use Case |
+|------|-------|----------|
+| **Static NAT** | 1 Private = 1 Public (fixed mapping) | Web server host করা |
+| **Dynamic NAT** | Private IP pool → Public IP pool (dynamic mapping) | Multiple public IPs থাকলে |
+| **PAT / NAT Overload** | অনেক Private → **1 Public** (port দিয়ে আলাদা) | **Home/office — সবচেয়ে common** |
+
+### PAT (Port Address Translation) — সবচেয়ে গুরুত্বপূর্ণ
+
+**PAT** = অনেকগুলো private IP কে **একটাই public IP** দিয়ে Internet access — **port number** দিয়ে আলাদা করে।
+
+```
+PC-1 (192.168.1.10:5001) ──┐                    ┌── 203.0.113.5:10001
+PC-2 (192.168.1.20:5002) ──┼── Router (PAT) ────┼── 203.0.113.5:10002
+PC-3 (192.168.1.30:5003) ──┘                    └── 203.0.113.5:10003
+
+সবাই একই Public IP (203.0.113.5) ব্যবহার করে
+কিন্তু port number আলাদা — তাই router বুঝতে পারে কোন reply কার
+```
+
+### কেন NAT দরকার?
+
+1. **IPv4 address সংকট** — public IP address সীমিত, NAT দিয়ে অনেক device একটা public IP share করে
+2. **Security** — internal IP address বাইরে থেকে দেখা যায় না
+3. **Flexibility** — ISP change করলে internal IP change করতে হয় না
+
+---
+
+## ❓ 13.2 MCQ Problems
+
+**Q1.** আপনার বাসায় 5 টি device একটি router দিয়ে Internet ব্যবহার করে। Router কোন ধরনের NAT ব্যবহার করে?
+
+- (a) Static NAT
+- (b) Dynamic NAT
+- (c) PAT (NAT Overload) ✅
+- (d) No NAT
+
+> **ব্যাখ্যা:** বাসায় ISP সাধারণত **একটাই public IP** দেয়। সেই একটা IP দিয়ে সব device Internet use করে — এটা **PAT/NAT Overload**।
+
+**Q2.** NAT কোন device এ configure করা হয়?
+
+- (a) Switch
+- (b) Hub
+- (c) Router ✅
+- (d) Modem
+
+**Q3.** Static NAT এ কতটি Private IP কতটি Public IP তে map হয়?
+
+- (a) Many to Many
+- (b) Many to One
+- (c) One to One ✅
+- (d) One to Many
+
+---
+
+## 📝 13.3 Summary
+
+- **NAT** = Private → Public IP translation
+- **Static NAT** = 1:1 mapping (server এর জন্য)
+- **Dynamic NAT** = pool থেকে dynamic mapping
+- **PAT** = Many:1 (port দিয়ে আলাদা) — **সবচেয়ে common, বাসায় এটাই ব্যবহৃত**
+- NAT = **security** (internal IP hide) + **address conservation**
+
+---
+
+> **Level 3 সম্পূর্ণ!** 🎉 IPv4, Subnetting, VLSM, IPv6, NAT — IP addressing এর সব core concepts শেখা হয়ে গেছে।
+
+---
+---
+
+<div align="center">
+
+# LEVEL 4: TRANSPORT LAYER PROTOCOLS
+
+*End-to-end data delivery — TCP ও UDP হলো Internet এর দুই মূল transport protocol*
+
+</div>
+
+---
+---
+
+# Topic 14: TCP (Transmission Control Protocol)
+
+<div align="center">
+
+*"TCP = Reliable delivery — data হারালে আবার পাঠাবে, order ঠিক রাখবে"*
+
+</div>
+
+---
+
+## 📖 14.1 ধারণা (Concept)
+
+**TCP (Transmission Control Protocol)** হলো **connection-oriented, reliable** transport protocol। Data পাঠানোর আগে connection establish করে এবং প্রতিটি data সঠিকভাবে পৌঁছেছে কিনা verify করে।
+
+### TCP এর বৈশিষ্ট্য
+
+| বৈশিষ্ট্য | বিবরণ |
+|-----------|-------|
+| **Connection** | Connection-oriented (আগে connection, পরে data) |
+| **Reliability** | Reliable — acknowledgement ও retransmission |
+| **Ordering** | Sequence number দিয়ে order maintain |
+| **Flow Control** | Sliding Window protocol |
+| **Error Control** | Checksum + retransmission |
+| **Speed** | UDP এর চেয়ে ধীর (overhead বেশি) |
+| **Header Size** | 20-60 bytes |
+| **Use** | HTTP, FTP, SMTP, SSH — যেখানে data loss acceptable না |
+
+### TCP 3-Way Handshake (Connection Establishment)
+
+TCP connection establish করতে **3-way handshake** ব্যবহার হয়:
+
+<Mermaid chart={`sequenceDiagram
+    participant C as Client
+    participant S as Server
+
+    Note over C,S: TCP 3-Way Handshake
+    C->>S: 1. SYN (seq=100)
+    Note right of S: "আমি connect করতে চাই"
+    S->>C: 2. SYN-ACK (seq=300, ack=101)
+    Note left of C: "ঠিক আছে, আমিও রাজি"
+    C->>S: 3. ACK (ack=301)
+    Note right of S: "Connection established!"
+    Note over C,S: ✅ Data Transfer শুরু
+`} />
+
+**মনে রাখুন: SYN → SYN-ACK → ACK**
+
+### TCP 4-Way Termination (Connection Close)
+
+<Mermaid chart={`sequenceDiagram
+    participant C as Client
+    participant S as Server
+
+    Note over C,S: TCP 4-Way Termination
+    C->>S: 1. FIN
+    Note right of S: "আমি close করতে চাই"
+    S->>C: 2. ACK
+    Note left of C: "OK, পেয়েছি"
+    S->>C: 3. FIN
+    Note left of C: "আমিও close করতে চাই"
+    C->>S: 4. ACK
+    Note right of S: "OK, Connection closed"
+    Note over C,S: ❌ Connection Terminated
+`} />
+
+### TCP Header গুরুত্বপূর্ণ Fields
+
+| Field | Size | কাজ |
+|-------|------|-----|
+| **Source Port** | 16 bits | Sender এর port |
+| **Destination Port** | 16 bits | Receiver এর port |
+| **Sequence Number** | 32 bits | Data ordering |
+| **Acknowledgement Number** | 32 bits | কোন data পর্যন্ত পেয়েছে |
+| **Flags** | 6 bits | SYN, ACK, FIN, RST, PSH, URG |
+| **Window Size** | 16 bits | Flow control (কত data পাঠাতে পারবে) |
+| **Checksum** | 16 bits | Error detection |
+
+### TCP Flags
+
+| Flag | পূর্ণরূপ | কাজ |
+|------|---------|-----|
+| **SYN** | Synchronize | Connection শুরু |
+| **ACK** | Acknowledgement | Data পেয়েছি confirm |
+| **FIN** | Finish | Connection শেষ |
+| **RST** | Reset | Connection force close |
+| **PSH** | Push | Data immediately deliver করো |
+| **URG** | Urgent | Urgent data আছে |
+
+---
+
+## ❓ 14.2 MCQ Problems
+
+**Q1.** TCP 3-way handshake এর সঠিক sequence কোনটি?
+
+- (a) ACK → SYN → SYN-ACK
+- (b) SYN → SYN-ACK → ACK ✅
+- (c) SYN → ACK → SYN-ACK
+- (d) FIN → ACK → FIN-ACK
+
+**Q2.** TCP কি connection-oriented?
+
+- (a) হ্যাঁ ✅
+- (b) না
+
+> **ব্যাখ্যা:** TCP **connection-oriented** — data পাঠানোর আগে 3-way handshake দিয়ে connection establish করে। UDP হলো connectionless।
+
+**Q3.** TCP connection terminate করতে কয়টি step লাগে?
+
+- (a) 2
+- (b) 3
+- (c) 4 ✅
+- (d) 5
+
+> **ব্যাখ্যা:** TCP connection close করতে **4-way termination** (FIN → ACK → FIN → ACK) লাগে।
+
+**Q4.** TCP header এর minimum size কত?
+
+- (a) 8 bytes
+- (b) 16 bytes
+- (c) 20 bytes ✅
+- (d) 32 bytes
+
+> **ব্যাখ্যা:** TCP header minimum **20 bytes** (options ছাড়া), maximum 60 bytes (options সহ)।
+
+**Q5.** TCP তে data ordering কিসের মাধ্যমে হয়?
+
+- (a) Port Number
+- (b) Sequence Number ✅
+- (c) Checksum
+- (d) Window Size
+
+---
+
+## ⚠️ 14.3 Tricky Parts
+
+> ⚠️ **Trap 1:** "3-way handshake vs 4-way termination" — Connection **establish = 3 step**, connection **close = 4 step**। গুলিয়ে ফেলা common।
+
+> ⚠️ **Trap 2:** "SYN-ACK একটা step না দুটা?" — **একটা step**। Server একসাথে SYN (নিজের) + ACK (client এর SYN এর response) পাঠায়।
+
+---
+
+## 📝 14.4 Summary
+
+- **TCP = Connection-oriented, reliable, ordered delivery**
+- **3-Way Handshake:** SYN → SYN-ACK → ACK
+- **4-Way Termination:** FIN → ACK → FIN → ACK
+- **Header:** Min 20 bytes, Sequence number, ACK number, flags, window size
+- **Flags:** SYN, ACK, FIN, RST, PSH, URG
+- **Use:** HTTP, FTP, SMTP, SSH — যেখানে **reliability** দরকার
+
+---
+---
+
+# Topic 15: UDP (User Datagram Protocol)
+
+<div align="center">
+
+*"UDP = Fast but unreliable — data হারালে চিন্তা নেই, speed important"*
+
+</div>
+
+---
+
+## 📖 15.1 ধারণা (Concept)
+
+**UDP (User Datagram Protocol)** হলো **connectionless, unreliable** transport protocol। কোন connection establish করে না, কোন acknowledgement পাঠায় না — শুধু data পাঠিয়ে দেয়।
+
+<Mermaid chart={`sequenceDiagram
+    participant C as Client
+    participant S as Server
+
+    Note over C,S: UDP - No Handshake!
+    C->>S: Data 1
+    C->>S: Data 2
+    C->>S: Data 3
+    Note right of S: কোন ACK নেই<br/>হারালে হারালো!
+`} />
+
+### TCP vs UDP — Master Comparison
+
+| বৈশিষ্ট্য | TCP | UDP |
+|-----------|-----|-----|
+| **Connection** | Connection-oriented | Connectionless |
+| **Reliability** | Reliable (ACK + retransmit) | Unreliable (no ACK) |
+| **Ordering** | Ordered (sequence number) | Unordered |
+| **Speed** | Slower | **Faster** |
+| **Header Size** | 20-60 bytes | **8 bytes only** |
+| **Flow Control** | Yes (sliding window) | No |
+| **Error Control** | Yes (retransmission) | Optional checksum only |
+| **Overhead** | High | Low |
+| **Broadcasting** | No | Yes |
+| **Use Case** | Web, Email, File transfer | **Streaming, Gaming, DNS, VoIP** |
+
+### UDP Header (মাত্র 8 bytes!)
+
+| Field | Size | কাজ |
+|-------|------|-----|
+| Source Port | 16 bits | Sender port |
+| Destination Port | 16 bits | Receiver port |
+| Length | 16 bits | Total datagram length |
+| Checksum | 16 bits | Error detection (optional in IPv4) |
+
+### কখন TCP, কখন UDP?
+
+```
+TCP ব্যবহার করুন:                    UDP ব্যবহার করুন:
+✅ Web browsing (HTTP/HTTPS)          ✅ Video streaming (YouTube)
+✅ Email (SMTP, POP3, IMAP)           ✅ Online gaming
+✅ File transfer (FTP)                ✅ Voice/Video call (VoIP)
+✅ SSH, Telnet                        ✅ DNS queries
+✅ Database connections               ✅ DHCP
+                                      ✅ Live broadcast
+→ Data হারালে problem!                → কিছু data হারালেও চলে!
+```
+
+---
+
+## ❓ 15.2 MCQ Problems
+
+**Q1.** UDP header কত bytes?
+
+- (a) 4 bytes
+- (b) 8 bytes ✅
+- (c) 20 bytes
+- (d) 32 bytes
+
+> **ব্যাখ্যা:** UDP header মাত্র **8 bytes** — Source Port (2) + Dest Port (2) + Length (2) + Checksum (2)। TCP header minimum 20 bytes।
+
+**Q2.** Video streaming এ কোন protocol ব্যবহৃত হয়?
+
+- (a) TCP
+- (b) UDP ✅
+- (c) ICMP
+- (d) ARP
+
+> **ব্যাখ্যা:** Video streaming এ **UDP** ব্যবহৃত কারণ — speed important, কিছু frame হারালে সামান্য glitch হয় কিন্তু video চলতে থাকে। TCP হলে buffering হতো।
+
+**Q3.** DNS কোন protocol ব্যবহার করে?
+
+- (a) শুধু TCP
+- (b) শুধু UDP
+- (c) সাধারণত UDP, বড় response হলে TCP ✅
+- (d) কোনোটিই না
+
+> **ব্যাখ্যা:** DNS সাধারণত **UDP port 53** ব্যবহার করে (fast)। কিন্তু response 512 bytes এর বেশি হলে বা zone transfer হলে **TCP** ব্যবহার করে।
+
+---
+
+## 📝 15.3 Summary
+
+- **UDP = Connectionless, unreliable, fast, 8-byte header**
+- **No handshake**, no ACK, no retransmission, no ordering
+- **Use:** Streaming, gaming, VoIP, DNS, DHCP
+- **TCP vs UDP:** Reliability vs Speed — choose based on application need
+- **DNS** সাধারণত UDP, কিন্তু বড় data হলে TCP
+
+---
+---
+
+# Topic 16: Port Numbers & Sockets
+
+<div align="center">
+
+*"IP address device চেনায়, Port number application চেনায়"*
+
+</div>
+
+---
+
+## 📖 16.1 ধারণা (Concept)
+
+**Port Number** হলো 16-bit number (0-65535) যেটা **কোন application/service** এর জন্য data এসেছে সেটা identify করে।
+
+```
+IP Address = কোন Device     (বাড়ির ঠিকানা)
+Port Number = কোন Application (বাড়ির Room number)
+
+Example: 192.168.1.100:80
+         ├── IP ──────┤ ├Port┤
+         Device         Web Server (HTTP)
+```
+
+### Port Number Ranges
+
+| Range | নাম | বিবরণ |
+|-------|-----|-------|
+| **0 - 1023** | Well-Known Ports | Reserved for standard services (HTTP, FTP, SSH) |
+| **1024 - 49151** | Registered Ports | Registered for specific applications |
+| **49152 - 65535** | Dynamic/Private | Temporary/ephemeral ports, client side |
+
+### Must-Know Port Numbers (পরীক্ষায় আসবেই)
+
+| Port | Protocol | Service | TCP/UDP |
+|------|----------|---------|---------|
+| **20** | FTP Data | File transfer data | TCP |
+| **21** | FTP Control | File transfer control | TCP |
+| **22** | SSH | Secure remote login | TCP |
+| **23** | Telnet | Remote login (insecure) | TCP |
+| **25** | SMTP | Email send | TCP |
+| **53** | DNS | Domain name resolution | TCP/UDP |
+| **67/68** | DHCP | IP address assignment | UDP |
+| **69** | TFTP | Trivial file transfer | UDP |
+| **80** | HTTP | Web (unsecure) | TCP |
+| **110** | POP3 | Email receive | TCP |
+| **143** | IMAP | Email receive (advanced) | TCP |
+| **161** | SNMP | Network monitoring | UDP |
+| **443** | HTTPS | Web (secure) | TCP |
+| **3306** | MySQL | Database | TCP |
+| **3389** | RDP | Remote Desktop | TCP |
+
+### Socket কী?
+
+**Socket = IP Address + Port Number** — network communication এর endpoint।
+
+```
+Socket = 192.168.1.100 : 80
+         ├── IP ──────┤   ├── Port
+         
+Client Socket: 192.168.1.10:50234 (ephemeral port)
+Server Socket: 93.184.216.34:80    (well-known port)
+
+একটা connection identify হয়:
+(Source IP, Source Port, Dest IP, Dest Port, Protocol)
+```
+
+---
+
+## ❓ 16.2 MCQ Problems
+
+**Q1.** HTTP কোন port এ কাজ করে?
+
+- (a) 21
+- (b) 22
+- (c) 80 ✅
+- (d) 443
+
+**Q2.** HTTPS এর port number কত?
+
+- (a) 80
+- (b) 8080
+- (c) 443 ✅
+- (d) 8443
+
+**Q3.** SSH কোন port ব্যবহার করে?
+
+- (a) 21
+- (b) 22 ✅
+- (c) 23
+- (d) 25
+
+**Q4.** Well-known port এর range কত?
+
+- (a) 0-255
+- (b) 0-1023 ✅
+- (c) 0-49151
+- (d) 1024-65535
+
+**Q5.** Socket কী?
+
+- (a) শুধু IP address
+- (b) শুধু Port number
+- (c) IP Address + Port Number ✅
+- (d) MAC Address + IP Address
+
+**Q6.** DNS কোন port ব্যবহার করে?
+
+- (a) 25
+- (b) 53 ✅
+- (c) 80
+- (d) 110
+
+---
+
+## ⚠️ 16.3 Tricky Parts
+
+> ⚠️ **Trap 1:** "FTP এর port 20 না 21?" — **দুটোই!** Port 20 = **Data transfer**, Port 21 = **Control/Command**। Exam এ "FTP port" বললে সাধারণত **21** বলতে হয়।
+
+> ⚠️ **Trap 2:** "HTTP vs HTTPS port" — HTTP = **80**, HTTPS = **443**। গুলিয়ে ফেলা common।
+
+> ⚠️ **Trap 3:** "Telnet (23) vs SSH (22)" — দুটোই remote login, কিন্তু **Telnet insecure** (plain text), **SSH secure** (encrypted)।
+
+---
+
+## 📝 16.4 Summary
+
+- **Port** = application identifier (0-65535)
+- **Well-known:** 0-1023, **Registered:** 1024-49151, **Dynamic:** 49152-65535
+- **Must remember:** HTTP=80, HTTPS=443, FTP=20/21, SSH=22, DNS=53, SMTP=25
+- **Socket = IP + Port** — communication endpoint
+
+---
+---
+
+# Topic 17: Flow Control & Error Control
+
+<div align="center">
+
+*"Sender যদি receiver এর চেয়ে দ্রুত data পাঠায় — তাহলে data হারাবে। Flow Control এটা সমাধান করে"*
+
+</div>
+
+---
+
+## 📖 17.1 ধারণা (Concept)
+
+<Mermaid chart={`graph LR
+    subgraph "Flow Control Methods"
+        A["Stop-and-Wait<br/>1 frame, then wait"] --> B["Sliding Window<br/>N frames, then wait"]
+        B --> C["Go-Back-N<br/>Error থেকে সব retransmit"]
+        B --> D["Selective Repeat<br/>শুধু error frame retransmit"]
+    end
+    
+    style A fill:#fef3c7,stroke:#f59e0b
+    style B fill:#e0e7ff,stroke:#6366f1
+    style C fill:#fce7f3,stroke:#ec4899
+    style D fill:#f0fdf4,stroke:#22c55e
+`} />
+
+### Flow Control
+
+**Flow Control** = Sender এর data পাঠানোর speed কে receiver এর processing speed এর সাথে match করা — যাতে receiver **overwhelm** না হয়।
+
+#### 1. Stop-and-Wait
+
+সবচেয়ে সহজ method — **একটা frame পাঠাও, ACK এর জন্য অপেক্ষা করো, তারপর পরেরটা পাঠাও**।
+
+```
+Sender          Receiver
+  │── Frame 1 ──→│
+  │              │ Process
+  │←── ACK 1 ───│
+  │── Frame 2 ──→│
+  │              │ Process
+  │←── ACK 2 ───│
+  
+❌ Problem: প্রচুর idle time — ধীর!
+```
+
+#### 2. Sliding Window
+
+**একসাথে multiple frame পাঠায়** ACK এর অপেক্ষা না করে — **window size** অনুযায়ী।
+
+```
+Window Size = 4
+
+Sender          Receiver
+  │── Frame 1 ──→│
+  │── Frame 2 ──→│
+  │── Frame 3 ──→│
+  │── Frame 4 ──→│ (window full, wait)
+  │←── ACK 1 ───│ (window slides)
+  │── Frame 5 ──→│
+  
+✅ Much faster — less idle time
+```
+
+**Sliding Window এর দুটি variant:**
+
+| Method | কিভাবে কাজ করে | Efficiency |
+|--------|----------------|-----------|
+| **Go-Back-N** | Error হলে error point থেকে **সব** frame আবার পাঠায় | Less efficient |
+| **Selective Repeat** | শুধু **error হওয়া frame** আবার পাঠায় | More efficient |
+
+### Error Control
+
+**Error Detection Methods:**
+
+| Method | কিভাবে কাজ করে | কোথায় ব্যবহৃত |
+|--------|----------------|---------------|
+| **Parity Bit** | Single bit যোগ করে odd/even check | Simple serial comm |
+| **Checksum** | Data এর sum calculate করে | TCP, UDP, IP |
+| **CRC (Cyclic Redundancy Check)** | Polynomial division এ remainder check | **Ethernet (FCS)**, disk |
+
+---
+
+## ❓ 17.2 MCQ Problems
+
+**Q1.** Sliding Window protocol এ window size 4 হলে, ACK ছাড়া সর্বোচ্চ কতটি frame পাঠানো যায়?
+
+- (a) 1
+- (b) 3
+- (c) 4 ✅
+- (d) 8
+
+**Q2.** Go-Back-N ও Selective Repeat এর মধ্যে কোনটি বেশি efficient?
+
+- (a) Go-Back-N
+- (b) Selective Repeat ✅
+
+> **ব্যাখ্যা:** **Selective Repeat** বেশি efficient কারণ শুধু error হওয়া frame retransmit করে। Go-Back-N সব frame error point থেকে আবার পাঠায়।
+
+**Q3.** Ethernet frame এ error detection এ কোন method ব্যবহৃত হয়?
+
+- (a) Parity
+- (b) Checksum
+- (c) CRC ✅
+- (d) Hamming Code
+
+> **ব্যাখ্যা:** Ethernet **CRC (Cyclic Redundancy Check)** ব্যবহার করে — Frame Check Sequence (FCS) field এ CRC value থাকে।
+
+---
+
+## 📝 17.4 Summary
+
+- **Flow Control** = sender speed কে receiver capacity এর সাথে match করা
+- **Stop-and-Wait** = একটা পাঠাও, ACK এর জন্য অপেক্ষা করো — ধীর
+- **Sliding Window** = একসাথে n টা frame পাঠাও — দ্রুত
+- **Go-Back-N** = error থেকে সব retransmit, **Selective Repeat** = শুধু error frame retransmit
+- **Error Detection:** Parity &lt; Checksum &lt; **CRC** (সবচেয়ে reliable)
+
+---
+
+> **Level 4 সম্পূর্ণ!** 🎉 TCP, UDP, Ports, Flow/Error Control — Transport Layer এর সব concept শেখা হয়ে গেছে।
+
+---
+---
+
+<div align="center">
+
+# LEVEL 5: APPLICATION LAYER PROTOCOLS
+
+*আমরা প্রতিদিন যেসব protocol ব্যবহার করি — DNS, HTTP, Email — সব এখানে*
+
+</div>
+
+---
+---
+
+# Topic 18: DNS (Domain Name System)
+
+<div align="center">
+
+*"DNS = Internet এর phonebook — নাম বললে number দেয়"*
+
+</div>
+
+---
+
+## 📖 18.1 ধারণা (Concept)
+
+**DNS (Domain Name System)** হলো **domain name কে IP address এ translate** করার system। মানুষ domain name মনে রাখে (google.com), কিন্তু computer IP address বোঝে (142.250.190.78)।
+
+<Mermaid chart={`sequenceDiagram
+    participant U as User Browser
+    participant R as Recursive Resolver
+    participant Root as Root DNS Server
+    participant TLD as TLD Server (.com)
+    participant Auth as Authoritative Server
+
+    U->>R: "google.com এর IP কত?"
+    R->>Root: "google.com?"
+    Root->>R: ".com TLD server এ জিজ্ঞেস করো"
+    R->>TLD: "google.com?"
+    TLD->>R: "google.com এর authoritative server এ যাও"
+    R->>Auth: "google.com?"
+    Auth->>R: "142.250.190.78"
+    R->>U: "142.250.190.78"
+    Note over U: Website loads!
+`} />
+
+### DNS Hierarchy
+
+```
+                    . (Root)
+                   / | \
+               .com .org .net .bd    ← TLD (Top Level Domain)
+              / |
+        google  facebook             ← Second Level Domain
+          |
+         www                         ← Subdomain
+         
+FQDN: www.google.com.
+       │    │      │  │
+       │    │      │  └── Root (.)
+       │    │      └───── TLD
+       │    └──────────── Second Level Domain
+       └───────────────── Subdomain
+```
+
+### DNS Record Types (পরীক্ষায় আসবেই)
+
+| Record | পূর্ণরূপ | কাজ | Example |
+|--------|---------|-----|---------|
+| **A** | Address | Domain → **IPv4** address | google.com → 142.250.190.78 |
+| **AAAA** | - | Domain → **IPv6** address | google.com → 2607:f8b0::200e |
+| **CNAME** | Canonical Name | Domain → **another domain** (alias) | www.google.com → google.com |
+| **MX** | Mail Exchange | Domain → **mail server** | gmail.com → smtp.google.com |
+| **NS** | Name Server | Domain → **authoritative DNS server** | google.com → ns1.google.com |
+| **PTR** | Pointer | **IP → Domain** (reverse DNS) | 142.250.190.78 → google.com |
+| **SOA** | Start of Authority | Zone এর primary info | Serial, refresh, retry |
+| **TXT** | Text | Arbitrary text (SPF, DKIM verification) | v=spf1 include:... |
+
+### Recursive vs Iterative Query
+
+| বিষয় | Recursive | Iterative |
+|-------|-----------|-----------|
+| **কে করে** | Client → Resolver | Resolver → DNS servers |
+| **কিভাবে** | Resolver পুরো answer বের করে দেয় | প্রতিটি server "আমি জানি না, ওকে জিজ্ঞেস করো" বলে |
+| **কাজ কার বেশি** | Resolver এর | Client/Resolver এর |
+
+---
+
+## ❓ 18.2 MCQ Problems
+
+**Q1.** DNS কোন port এ কাজ করে?
+
+- (a) 80
+- (b) 25
+- (c) 53 ✅
+- (d) 443
+
+**Q2.** A record কী করে?
+
+- (a) Domain কে IPv6 address এ map করে
+- (b) Domain কে IPv4 address এ map করে ✅
+- (c) IP কে Domain এ map করে
+- (d) Domain কে mail server এ map করে
+
+**Q3.** Reverse DNS lookup কোন record ব্যবহার করে?
+
+- (a) A
+- (b) AAAA
+- (c) CNAME
+- (d) PTR ✅
+
+> **ব্যাখ্যা:** **PTR (Pointer)** record = IP → Domain name resolve করে — এটা **reverse DNS lookup**।
+
+**Q4.** MX record কিসের জন্য?
+
+- (a) Web server
+- (b) Mail server ✅
+- (c) FTP server
+- (d) DNS server
+
+**Q5.** DNS সাধারণত কোন transport protocol ব্যবহার করে?
+
+- (a) TCP
+- (b) UDP ✅
+- (c) ICMP
+- (d) ARP
+
+---
+
+## 📝 18.3 Summary
+
+- **DNS** = Domain → IP translation, **port 53**
+- **Hierarchy:** Root → TLD → Second Level → Subdomain
+- **A record** = Domain → IPv4, **AAAA** = Domain → IPv6
+- **CNAME** = alias, **MX** = mail server, **PTR** = reverse DNS
+- **NS** = authoritative DNS server, **TXT** = SPF/DKIM
+- সাধারণত **UDP**, বড় response হলে **TCP**
+
+---
+---
+
+# Topic 19: DHCP (Dynamic Host Configuration)
+
+<div align="center">
+
+*"Device plug-in করলেই automatically IP পায় — এটাই DHCP এর কাজ"*
+
+</div>
+
+---
+
+## 📖 19.1 ধারণা (Concept)
+
+**DHCP (Dynamic Host Configuration Protocol)** automatically network device কে **IP address, subnet mask, default gateway, DNS server** assign করে। Manual configuration এর দরকার হয় না।
+
+### DORA Process (DHCP 4-Step)
+
+<Mermaid chart={`sequenceDiagram
+    participant C as Client (No IP yet)
+    participant S as DHCP Server
+
+    C->>S: 1. DISCOVER (broadcast)
+    Note right of C: "কেউ কি আমাকে IP দিতে পারবে?"
+    S->>C: 2. OFFER (unicast/broadcast)
+    Note left of S: "এই IP নাও: 192.168.1.100"
+    C->>S: 3. REQUEST (broadcast)
+    Note right of C: "ঠিক আছে, আমি এই IP নিচ্ছি"
+    S->>C: 4. ACKNOWLEDGE (unicast/broadcast)
+    Note left of S: "OK, confirmed! Lease time: 24h"
+    Note over C,S: ✅ Client now has IP address
+`} />
+
+**মনে রাখুন: DORA = Discover → Offer → Request → Acknowledge**
+
+### DHCP কী কী তথ্য দেয়?
+
+| তথ্য | উদাহরণ |
+|------|--------|
+| **IP Address** | 192.168.1.100 |
+| **Subnet Mask** | 255.255.255.0 |
+| **Default Gateway** | 192.168.1.1 |
+| **DNS Server** | 8.8.8.8 |
+| **Lease Time** | 24 hours |
+
+### DHCP Port Numbers
+
+| | Port |
+|--|------|
+| **DHCP Server** | UDP **67** |
+| **DHCP Client** | UDP **68** |
+
+---
+
+## ❓ 19.2 MCQ Problems
+
+**Q1.** DHCP DORA process এর সঠিক sequence কোনটি?
+
+- (a) Discover → Acknowledge → Request → Offer
+- (b) Discover → Offer → Request → Acknowledge ✅
+- (c) Request → Discover → Offer → Acknowledge
+- (d) Offer → Discover → Acknowledge → Request
+
+**Q2.** DHCP server কোন port ব্যবহার করে?
+
+- (a) UDP 53
+- (b) TCP 67
+- (c) UDP 67 ✅
+- (d) UDP 68
+
+**Q3.** DHCP server না পেলে Windows কোন IP assign করে?
+
+- (a) 0.0.0.0
+- (b) 127.0.0.1
+- (c) 169.254.x.x (APIPA) ✅
+- (d) 255.255.255.255
+
+---
+
+## 📝 19.3 Summary
+
+- **DHCP** = Automatic IP assignment, UDP port **67** (server) / **68** (client)
+- **DORA:** Discover → Offer → Request → Acknowledge
+- IP, Subnet Mask, Gateway, DNS, Lease Time — সব auto assign হয়
+- DHCP না পেলে → **APIPA (169.254.x.x)**
+
+---
+---
+
+# Topic 20: HTTP/HTTPS
+
+<div align="center">
+
+*"Web এর ভিত্তি — HTTP দিয়েই আপনি এই page পড়ছেন"*
+
+</div>
+
+---
+
+## 📖 20.1 ধারণা (Concept)
+
+**HTTP (HyperText Transfer Protocol)** হলো **web communication** এর protocol — browser ও web server এর মধ্যে data আদান-প্রদান করে।
+
+**HTTPS = HTTP + TLS/SSL** (encrypted, secure)
+
+<Mermaid chart={`sequenceDiagram
+    participant B as Browser
+    participant S as Web Server
+
+    B->>S: GET /index.html HTTP/1.1
+    S->>B: 200 OK + HTML content
+    B->>S: GET /api/users
+    S->>B: 200 OK + JSON data
+    B->>S: POST /api/login
+    S->>B: 401 Unauthorized
+    B->>S: GET /not-found
+    S->>B: 404 Not Found
+`} />
+
+### HTTP Methods
+
+| Method | কাজ | Example |
+|--------|-----|---------|
+| **GET** | Data **চাওয়া** (read) | Web page load করা |
+| **POST** | Data **পাঠানো** (create) | Form submit, login |
+| **PUT** | Data **পুরো update** করা | Profile update |
+| **PATCH** | Data **আংশিক update** | শুধু name change |
+| **DELETE** | Data **মুছে ফেলা** | Account delete |
+| **HEAD** | শুধু header চাওয়া (body ছাড়া) | File size check |
+| **OPTIONS** | Server কোন methods support করে | CORS preflight |
+
+### HTTP Status Codes (পরীক্ষায় আসবেই)
+
+| Code Range | Category | Common Codes |
+|-----------|----------|-------------|
+| **1xx** | Informational | 100 Continue |
+| **2xx** | **Success** | **200 OK**, 201 Created, 204 No Content |
+| **3xx** | **Redirection** | **301 Moved Permanently**, 302 Found, 304 Not Modified |
+| **4xx** | **Client Error** | **400 Bad Request**, **401 Unauthorized**, **403 Forbidden**, **404 Not Found**, 405 Method Not Allowed |
+| **5xx** | **Server Error** | **500 Internal Server Error**, **502 Bad Gateway**, **503 Service Unavailable** |
+
+### HTTP Version Comparison
+
+| বৈশিষ্ট্য | HTTP/1.1 | HTTP/2 | HTTP/3 |
+|-----------|---------|--------|--------|
+| **Year** | 1997 | 2015 | 2022 |
+| **Connection** | Multiple TCP connections | Single TCP, multiplexing | **QUIC (UDP-based)** |
+| **Header** | Text | Binary + compression | Binary + compression |
+| **Server Push** | No | Yes | Yes |
+| **Performance** | Slowest | Fast | **Fastest** |
+
+### HTTP vs HTTPS
+
+| বিষয় | HTTP | HTTPS |
+|-------|------|-------|
+| **Port** | 80 | 443 |
+| **Security** | No encryption | TLS/SSL encrypted |
+| **URL** | http:// | https:// |
+| **Certificate** | না | SSL/TLS Certificate দরকার |
+| **SEO** | Lower ranking | Google prefers HTTPS |
+
+---
+
+## ❓ 20.2 MCQ Problems
+
+**Q1.** HTTP 404 error মানে কী?
+
+- (a) Server error
+- (b) Unauthorized
+- (c) Page Not Found ✅
+- (d) Bad Request
+
+**Q2.** HTTPS কোন port ব্যবহার করে?
+
+- (a) 80
+- (b) 8080
+- (c) 443 ✅
+- (d) 22
+
+**Q3.** HTTP/3 কোন transport protocol ব্যবহার করে?
+
+- (a) TCP
+- (b) UDP (QUIC) ✅
+- (c) ICMP
+- (d) SCTP
+
+> **ব্যাখ্যা:** HTTP/3 **QUIC** protocol ব্যবহার করে যেটা **UDP-based** — TCP এর overhead এড়িয়ে faster connection।
+
+**Q4.** কোন HTTP method data create করে?
+
+- (a) GET
+- (b) POST ✅
+- (c) DELETE
+- (d) HEAD
+
+**Q5.** HTTP 500 কোন ধরনের error?
+
+- (a) Client Error
+- (b) Server Error ✅
+- (c) Redirection
+- (d) Success
+
+---
+
+## 📝 20.3 Summary
+
+- **HTTP** = Web communication protocol, **port 80**
+- **HTTPS** = HTTP + TLS/SSL, **port 443**, encrypted
+- **Methods:** GET (read), POST (create), PUT (update), DELETE (remove)
+- **Status:** 2xx = Success, 3xx = Redirect, 4xx = Client error, 5xx = Server error
+- **HTTP/3** = QUIC (UDP-based) — fastest
+
+---
+---
+
+# Topic 21: Email Protocols (SMTP, POP3, IMAP)
+
+<div align="center">
+
+*"Email পাঠাতে SMTP, receive করতে POP3 বা IMAP"*
+
+</div>
+
+---
+
+## 📖 21.1 ধারণা (Concept)
+
+<Mermaid chart={`graph LR
+    A["Sender<br/>(Gmail)"] -->|"SMTP<br/>Port 25/587"| B["Sender's<br/>Mail Server"]
+    B -->|"SMTP"| C["Receiver's<br/>Mail Server"]
+    C -->|"POP3 (110)<br/>or IMAP (143)"| D["Receiver<br/>(Outlook)"]
+`} />
+
+### তিনটি Email Protocol
+
+| Protocol | Port | কাজ | Direction |
+|----------|------|-----|-----------|
+| **SMTP** | 25 (587 secure) | Email **পাঠানো** | Client → Server, Server → Server |
+| **POP3** | 110 (995 secure) | Email **receive** করা | Server → Client |
+| **IMAP** | 143 (993 secure) | Email **receive** করা (advanced) | Server → Client |
+
+### POP3 vs IMAP
+
+| বিষয় | POP3 | IMAP |
+|-------|------|------|
+| **Download** | Server থেকে download করে **delete** করে | Server এ **রেখে দেয়** |
+| **Multiple Device** | ❌ একটা device থেকেই access | ✅ একাধিক device |
+| **Storage** | Local device এ | Server এ (cloud) |
+| **Offline** | হ্যাঁ (download করা থাকে) | সীমিত |
+| **Use** | পুরনো, কম ব্যবহৃত | **আধুনিক, বেশি ব্যবহৃত** |
+
+---
+
+## ❓ 21.2 MCQ Problems
+
+**Q1.** Email পাঠাতে কোন protocol ব্যবহৃত হয়?
+
+- (a) POP3
+- (b) IMAP
+- (c) SMTP ✅
+- (d) HTTP
+
+**Q2.** IMAP কোন port ব্যবহার করে?
+
+- (a) 25
+- (b) 110
+- (c) 143 ✅
+- (d) 993
+
+> **ব্যাখ্যা:** IMAP = **143** (unsecure), **993** (secure/SSL)। POP3 = 110/995।
+
+**Q3.** Multiple device এ email sync রাখতে কোন protocol ভালো?
+
+- (a) SMTP
+- (b) POP3
+- (c) IMAP ✅
+- (d) FTP
+
+---
+
+## 📝 21.3 Summary
+
+- **SMTP** = Email send, port **25/587**
+- **POP3** = Email receive + download + delete from server, port **110/995**
+- **IMAP** = Email receive + keep on server + multi-device sync, port **143/993**
+- **IMAP** আধুনিক ও বেশি ব্যবহৃত
+
+---
+---
+
+# Topic 22: FTP, SFTP, TFTP
+
+<div align="center">
+
+*"File transfer এর তিনটি protocol — কোনটা কখন ব্যবহার হয়?"*
+
+</div>
+
+---
+
+## 📖 22.1 ধারণা (Concept)
+
+| Protocol | Port | Security | Connection | Speed | Use |
+|----------|------|----------|-----------|-------|-----|
+| **FTP** | 20 (data), 21 (control) | ❌ Insecure (plain text) | TCP | Medium | Traditional file transfer |
+| **SFTP** | 22 | ✅ Secure (SSH encrypted) | TCP | Slower | Secure file transfer |
+| **TFTP** | 69 | ❌ Insecure | **UDP** | Fast | Firmware upload, PXE boot |
+
+### FTP Active vs Passive Mode
+
+| Mode | কিভাবে কাজ করে | Firewall |
+|------|----------------|----------|
+| **Active** | Server client এর কাছে data connection initiate করে | Firewall block করতে পারে |
+| **Passive** | Client server এর কাছে data connection initiate করে | Firewall-friendly |
+
+---
+
+## ❓ 22.2 MCQ Problems
+
+**Q1.** SFTP কোন port ব্যবহার করে?
+
+- (a) 20
+- (b) 21
+- (c) 22 ✅
+- (d) 69
+
+> **ব্যাখ্যা:** **SFTP** = SSH File Transfer Protocol — SSH এর port **22** ব্যবহার করে।
+
+**Q2.** TFTP কোন transport protocol ব্যবহার করে?
+
+- (a) TCP
+- (b) UDP ✅
+
+**Q3.** কোনটি সবচেয়ে secure file transfer protocol?
+
+- (a) FTP
+- (b) SFTP ✅
+- (c) TFTP
+- (d) সবই সমান
+
+---
+
+## 📝 22.3 Summary
+
+- **FTP** = Port 20/21, TCP, insecure — traditional
+- **SFTP** = Port 22, TCP, **SSH encrypted** — secure
+- **TFTP** = Port 69, **UDP**, insecure — fast, simple (firmware)
+
+---
+---
+
+# Topic 23: ARP, RARP, ICMP
+
+<div align="center">
+
+*"ARP = IP থেকে MAC বের করে, ICMP = ping/traceroute"*
+
+</div>
+
+---
+
+## 📖 23.1 ধারণা (Concept)
+
+### ARP (Address Resolution Protocol)
+
+**IP address → MAC address** resolve করে। Network Layer (IP) জানে destination IP, কিন্তু Data Link Layer (Ethernet) MAC address চায় — ARP এই gap fill করে।
+
+<Mermaid chart={`sequenceDiagram
+    participant A as PC-A (192.168.1.10)
+    participant B as PC-B (192.168.1.20)
+
+    A->>B: 1. ARP Request (broadcast)
+    Note right of A: "192.168.1.20 এর MAC কত?"
+    B->>A: 2. ARP Reply (unicast)
+    Note left of B: "আমার MAC: AA:BB:CC:DD:EE:FF"
+    Note over A: ARP Cache এ save করে
+`} />
+
+**ARP Table/Cache:** device তার জানা IP-MAC mapping গুলো cache এ রাখে — বারবার ARP request না করতে হয়।
+
+### RARP (Reverse ARP)
+
+**MAC address → IP address** resolve করে (ARP এর উল্টো)। পুরনো — এখন **DHCP** দিয়ে replace হয়েছে।
+
+### ICMP (Internet Control Message Protocol)
+
+**Error reporting ও diagnostic** — network সমস্যা জানাতে ব্যবহৃত হয়।
+
+| ICMP Tool | কাজ |
+|-----------|-----|
+| **ping** | Destination reachable কিনা check করে (Echo Request/Reply) |
+| **traceroute/tracert** | Source → Destination পথে কোন কোন router আছে দেখায় |
+
+**ICMP Message Types:**
+
+| Type | Name | কখন |
+|------|------|------|
+| 0 | Echo Reply | ping reply |
+| 3 | Destination Unreachable | destination পৌঁছানো যাচ্ছে না |
+| 5 | Redirect | better route আছে |
+| 8 | Echo Request | ping request |
+| 11 | Time Exceeded | TTL expired (traceroute এ ব্যবহৃত) |
+
+---
+
+## ❓ 23.2 MCQ Problems
+
+**Q1.** ARP কী করে?
+
+- (a) IP → MAC ✅
+- (b) MAC → IP
+- (c) Domain → IP
+- (d) IP → Domain
+
+**Q2.** ping command কোন protocol ব্যবহার করে?
+
+- (a) TCP
+- (b) UDP
+- (c) ICMP ✅
+- (d) ARP
+
+**Q3.** ARP Request কোন ধরনের?
+
+- (a) Unicast
+- (b) Broadcast ✅
+- (c) Multicast
+- (d) Anycast
+
+> **ব্যাখ্যা:** ARP Request হলো **broadcast** — "কার IP 192.168.1.20?" সবাইকে জিজ্ঞেস করে। Reply হলো **unicast** — শুধু requester কে answer পাঠায়।
+
+**Q4.** RARP এর replacement কোনটি?
+
+- (a) ARP
+- (b) DNS
+- (c) DHCP ✅
+- (d) ICMP
+
+---
+
+## 📝 23.3 Summary
+
+- **ARP** = IP → MAC address, request = broadcast, reply = unicast
+- **RARP** = MAC → IP (obsolete, replaced by **DHCP**)
+- **ICMP** = Error reporting ও diagnostics
+- **ping** = ICMP Echo Request/Reply (reachability check)
+- **traceroute** = ICMP Time Exceeded (path discovery)
+
+---
+
+> **Level 5 সম্পূর্ণ!** 🎉 DNS, DHCP, HTTP, Email, FTP, ARP/ICMP — Application Layer এর সব commonly used protocols শেখা হয়ে গেছে।
+
+---
+---
+
+<div align="center">
+
+# LEVEL 6: ROUTING & SWITCHING
+
+*Data network এর মধ্যে কিভাবে চলাচল করে — Switching ও Routing এর core concepts*
+
+</div>
+
+---
+---
+
+# Topic 24: Switching Concepts
+
+<div align="center">
+
+*"Data এক point থেকে অন্য point এ কিভাবে পৌঁছায় — তিনটি switching technique"*
+
+</div>
+
+---
+
+## 📖 24.1 ধারণা (Concept)
+
+**Switching** হলো network এ data কে source থেকে destination পর্যন্ত পৌঁছানোর technique।
+
+<Mermaid chart={`graph TD
+    S[Switching Techniques]
+    S --> CS["Circuit Switching<br/>আগে পুরো path reserve"]
+    S --> PS["Packet Switching<br/>data ভেঙে packet এ পাঠায়"]
+    S --> MS["Message Switching<br/>পুরো message store & forward"]
+`} />
+
+### তিন ধরনের Switching
+
+| বৈশিষ্ট্য | Circuit Switching | Packet Switching | Message Switching |
+|-----------|------------------|-----------------|-------------------|
+| **কিভাবে** | পুরো path আগে reserve করে | Data ভেঙে packet এ, আলাদা path এ যেতে পারে | পুরো message store করে forward |
+| **Path** | Dedicated, fixed | Dynamic, packet ভিন্ন path নিতে পারে | Store-and-forward |
+| **Bandwidth** | Reserved (waste হতে পারে) | Shared (efficient) | Shared |
+| **Delay** | Connection setup এ delay | কম delay | বেশি delay |
+| **Reliability** | High | Medium | Low |
+| **Example** | **Telephone call** | **Internet (IP)** | **Email (old)** |
+| **Real-time** | ✅ ভালো | Medium | ❌ খারাপ |
+
+### Packet Switching এর দুটি Type
+
+| Type | কিভাবে কাজ করে | Protocol |
+|------|----------------|----------|
+| **Datagram** | প্রতিটি packet স্বাধীন, ভিন্ন path নিতে পারে, unordered আসতে পারে | **IP** |
+| **Virtual Circuit** | আগে virtual path setup, সব packet same path এ, ordered | **ATM, MPLS** |
+
+---
+
+## ❓ 24.2 MCQ Problems
+
+**Q1.** Telephone call কোন switching ব্যবহার করে?
+
+- (a) Packet Switching
+- (b) Circuit Switching ✅
+- (c) Message Switching
+- (d) Cell Switching
+
+> **ব্যাখ্যা:** Traditional telephone call **Circuit Switching** ব্যবহার করে — call এর সময় পুরো path dedicated থাকে।
+
+**Q2.** Internet কোন switching technique ব্যবহার করে?
+
+- (a) Circuit Switching
+- (b) Packet Switching ✅
+- (c) Message Switching
+- (d) Manual Switching
+
+**Q3.** কোন switching এ bandwidth সবচেয়ে efficiently ব্যবহৃত হয়?
+
+- (a) Circuit Switching
+- (b) Packet Switching ✅
+- (c) Message Switching
+- (d) সবই সমান
+
+> **ব্যাখ্যা:** **Packet Switching** এ bandwidth shared — data না পাঠালে bandwidth অন্যরা ব্যবহার করতে পারে। Circuit Switching এ reserved থাকে, ব্যবহার না হলেও waste হয়।
+
+---
+
+## 📝 24.3 Summary
+
+- **Circuit Switching** = dedicated path, telephone call, bandwidth waste
+- **Packet Switching** = data ভেঙে packet, **Internet**, efficient bandwidth
+- **Message Switching** = store-and-forward, old email, বেশি delay
+- Packet Switching > Circuit Switching (efficiency তে)
+
+---
+---
+
+# Topic 25: Routing Basics
+
+<div align="center">
+
+*"Router কিভাবে decide করে data কোন পথে পাঠাবে?"*
+
+</div>
+
+---
+
+## 📖 25.1 ধারণা (Concept)
+
+<Mermaid chart={`graph LR
+    A["PC-A<br/>192.168.1.10"] --> R1["Router 1"]
+    R1 -->|"Path 1<br/>2 hops"| R2["Router 2"]
+    R1 -->|"Path 2<br/>4 hops"| R3["Router 3"]
+    R2 --> R4["Router 4"]
+    R3 --> R5["Router 5"] --> R6["Router 6"] --> R4
+    R4 --> B["PC-B<br/>10.0.0.20"]
+
+    style R1 fill:#e0e7ff,stroke:#6366f1
+    style R4 fill:#e0e7ff,stroke:#6366f1
+    linkStyle 1 stroke:#22c55e,stroke-width:3px
+`} />
+
+**Routing** হলো **source থেকে destination পর্যন্ত best path select** করার process। Router **routing table** দেখে decide করে কোন interface দিয়ে packet forward করবে।
+
+### Routing Table
+
+```
+Destination Network    Subnet Mask        Next Hop         Interface    Metric
+192.168.1.0           255.255.255.0      0.0.0.0          eth0         0
+10.0.0.0              255.0.0.0          192.168.1.1      eth0         1
+0.0.0.0               0.0.0.0           192.168.1.1      eth0         10
+(default route)
+```
+
+### Static vs Dynamic Routing
+
+| বিষয় | Static Routing | Dynamic Routing |
+|-------|---------------|-----------------|
+| **Configuration** | Admin manually করে | Router নিজে শেখে |
+| **Update** | Manual change | Automatic update |
+| **Scalability** | ❌ বড় network এ কঠিন | ✅ বড় network এ ভালো |
+| **Bandwidth** | Routing traffic নেই | Routing protocol traffic আছে |
+| **CPU Usage** | কম | বেশি |
+| **Security** | বেশি (admin control) | কম (routing attacks possible) |
+| **Use** | ছোট network, stub network | বড় network, enterprise |
+| **Convergence** | Instant (manual) | Time লাগে |
+
+### Routing Metrics
+
+| Metric | কী measure করে |
+|--------|----------------|
+| **Hop Count** | কতটি router পার করতে হবে (RIP) |
+| **Bandwidth** | Link এর speed (OSPF) |
+| **Delay** | Data পৌঁছাতে কত সময় লাগে |
+| **Load** | Link কতটুকু busy |
+| **Reliability** | Link কতটুকু reliable |
+| **Cost** | Administrative cost |
+
+---
+
+## ❓ 25.2 MCQ Problems
+
+**Q1.** Static routing এ route কে configure করে?
+
+- (a) Router নিজে
+- (b) Network administrator ✅
+- (c) DHCP server
+- (d) DNS server
+
+**Q2.** Default route এর destination কত?
+
+- (a) 127.0.0.1
+- (b) 255.255.255.255
+- (c) 0.0.0.0 ✅
+- (d) 192.168.1.1
+
+> **ব্যাখ্যা:** **0.0.0.0/0** হলো **default route** — routing table এ specific match না পেলে এই route ব্যবহার হয়।
+
+**Q3.** RIP কোন metric ব্যবহার করে?
+
+- (a) Bandwidth
+- (b) Delay
+- (c) Hop Count ✅
+- (d) Cost
+
+---
+
+## 📝 25.3 Summary
+
+- **Routing** = best path selection, **routing table** ব্যবহার করে
+- **Static** = manual, ছোট network, **Dynamic** = automatic, বড় network
+- **Default route** = 0.0.0.0/0 (catch-all)
+- **Metrics:** Hop count (RIP), bandwidth (OSPF), delay, cost
+
+---
+---
+
+# Topic 26: Routing Protocols
+
+<div align="center">
+
+*"RIP, OSPF, BGP — প্রতিটি protocol ভিন্ন ভাবে best path বের করে"*
+
+</div>
+
+---
+
+## 📖 26.1 ধারণা (Concept)
+
+### Routing Protocol Categories
+
+<Mermaid chart={`graph TD
+    RP[Routing Protocols]
+    RP --> IGP["IGP<br/>Interior Gateway Protocol<br/>(একটা organization এর মধ্যে)"]
+    RP --> EGP["EGP<br/>Exterior Gateway Protocol<br/>(organizations এর মধ্যে)"]
+
+    IGP --> DV["Distance Vector<br/>RIP, EIGRP"]
+    IGP --> LS["Link State<br/>OSPF, IS-IS"]
+    EGP --> PV["Path Vector<br/>BGP"]
+`} />
+
+### প্রধান Routing Protocols
+
+| Protocol | Type | Algorithm | Metric | Max Hop | Use |
+|----------|------|-----------|--------|---------|-----|
+| **RIP** | Distance Vector | Bellman-Ford | Hop Count | 15 | ছোট network |
+| **RIPv2** | Distance Vector | Bellman-Ford | Hop Count | 15 | ছোট network + VLSM |
+| **OSPF** | Link State | Dijkstra (SPF) | Cost (bandwidth) | No limit | **Enterprise — সবচেয়ে বেশি ব্যবহৃত IGP** |
+| **EIGRP** | Hybrid/Advanced DV | DUAL | Composite | 255 | Cisco proprietary |
+| **BGP** | Path Vector | Best Path | Path attributes | No limit | **Internet — ISP গুলোর মধ্যে** |
+
+### Distance Vector vs Link State
+
+| বিষয় | Distance Vector (RIP) | Link State (OSPF) |
+|-------|----------------------|-------------------|
+| **জানে** | শুধু neighbors এর info | পুরো network এর map |
+| **Update** | পুরো routing table পাঠায় | শুধু change পাঠায় |
+| **Timer** | Periodic (30 sec) | Event-driven (change হলে) |
+| **Convergence** | ধীর | দ্রুত |
+| **Bandwidth Usage** | বেশি | কম |
+| **CPU/Memory** | কম | বেশি |
+| **Loop Prevention** | Split Horizon, Route Poisoning | SPF algorithm |
+| **Scalability** | ❌ Limited | ✅ Excellent |
+| **Analogy** | "রাস্তায় পথচারীকে জিজ্ঞেস করা" | "Google Maps এ পুরো map দেখা" |
+
+### RIP (Routing Information Protocol)
+
+| বৈশিষ্ট্য | বিবরণ |
+|-----------|-------|
+| **Type** | Distance Vector |
+| **Metric** | Hop Count (max **15**, 16 = unreachable) |
+| **Update Timer** | 30 seconds |
+| **Transport** | UDP port 520 |
+| **Algorithm** | Bellman-Ford |
+| **Problem** | Slow convergence, routing loops |
+
+### OSPF (Open Shortest Path First)
+
+| বৈশিষ্ট্য | বিবরণ |
+|-----------|-------|
+| **Type** | Link State |
+| **Metric** | Cost (based on bandwidth) — `Cost = 10⁸ / Bandwidth` |
+| **Update** | Event-driven (change হলেই) |
+| **Transport** | IP Protocol 89 |
+| **Algorithm** | Dijkstra's SPF (Shortest Path First) |
+| **Areas** | Area 0 = backbone, hierarchical design |
+| **Advantage** | Fast convergence, scalable, no hop limit |
+
+### BGP (Border Gateway Protocol)
+
+| বৈশিষ্ট্য | বিবরণ |
+|-----------|-------|
+| **Type** | Path Vector |
+| **Use** | **Internet backbone** — ISP গুলোর মধ্যে routing |
+| **Transport** | TCP port **179** |
+| **Metric** | Path attributes (AS path, weight, local pref) |
+| **Nickname** | "Protocol of the Internet" |
+
+---
+
+## ❓ 26.2 MCQ Problems
+
+**Q1.** RIP এর maximum hop count কত?
+
+- (a) 10
+- (b) 15 ✅
+- (c) 30
+- (d) 255
+
+> **ব্যাখ্যা:** RIP এ max hop count **15**। 16 মানে **unreachable/infinity**। তাই RIP বড় network এ ব্যবহার করা যায় না।
+
+**Q2.** OSPF কোন algorithm ব্যবহার করে?
+
+- (a) Bellman-Ford
+- (b) Dijkstra (SPF) ✅
+- (c) DUAL
+- (d) Floyd-Warshall
+
+**Q3.** Internet এ ISP গুলো কোন routing protocol ব্যবহার করে?
+
+- (a) RIP
+- (b) OSPF
+- (c) BGP ✅
+- (d) EIGRP
+
+**Q4.** কোনটি Link State routing protocol?
+
+- (a) RIP
+- (b) BGP
+- (c) OSPF ✅
+- (d) EIGRP
+
+**Q5.** OSPF cost calculation formula কোনটি?
+
+- (a) 10⁶ / Bandwidth
+- (b) 10⁸ / Bandwidth ✅
+- (c) Bandwidth / 10⁸
+- (d) Hop Count
+
+**Q6.** BGP কোন port ব্যবহার করে?
+
+- (a) UDP 520
+- (b) TCP 179 ✅
+- (c) TCP 80
+- (d) UDP 53
+
+---
+
+## ⚠️ 26.3 Tricky Parts
+
+> ⚠️ **Trap 1:** "RIP কি বড় network এ ব্যবহৃত হয়?" — **না**, max 15 hop limit। বড় network এ **OSPF** ব্যবহৃত হয়।
+
+> ⚠️ **Trap 2:** "EIGRP কি open standard?" — **না**, EIGRP **Cisco proprietary** (though partially opened later)। OSPF হলো **open standard**।
+
+> ⚠️ **Trap 3:** "BGP কি IGP?" — **না**, BGP হলো **EGP (Exterior Gateway Protocol)** — different autonomous systems (ISPs) এর মধ্যে routing করে।
+
+---
+
+## 📝 26.4 Summary
+
+- **RIP** = Distance Vector, hop count (max 15), ছোট network, ধীর
+- **OSPF** = Link State, Dijkstra, cost (bandwidth), **enterprise standard**, দ্রুত
+- **BGP** = Path Vector, TCP 179, **Internet backbone**, ISP-to-ISP
+- **Distance Vector** = neighbors থেকে শেখে, **Link State** = পুরো map জানে
+- **IGP** = organization এর মধ্যে (RIP, OSPF), **EGP** = organization এর বাইরে (BGP)
+
+---
+---
+
+# Topic 27: VLAN & Inter-VLAN Routing
+
+<div align="center">
+
+*"একটাই physical switch, কিন্তু logically আলাদা আলাদা network — এটাই VLAN"*
+
+</div>
+
+---
+
+## 📖 27.1 ধারণা (Concept)
+
+**VLAN (Virtual LAN)** হলো একটা physical switch কে **logically আলাদা আলাদা network (broadcast domain)** এ ভাগ করা।
+
+```
+Without VLAN:                      With VLAN:
+┌──────────────────────┐          ┌──────────────────────┐
+│      One Switch      │          │      One Switch      │
+│ All 24 ports = 1     │          │ VLAN 10: Port 1-8    │ HR
+│ broadcast domain     │          │ VLAN 20: Port 9-16   │ IT
+│ (সবাই সবার broadcast │          │ VLAN 30: Port 17-24  │ Sales
+│  পায় — slow, unsafe) │          │ (আলাদা broadcast)    │
+└──────────────────────┘          └──────────────────────┘
+```
+
+### কেন VLAN দরকার?
+
+| সুবিধা | বিবরণ |
+|--------|-------|
+| **Security** | HR এর data IT department দেখতে পারবে না |
+| **Performance** | Broadcast domain ছোট = কম broadcast traffic |
+| **Flexibility** | Physical location change না করেই VLAN change করা যায় |
+| **Cost** | আলাদা switch না কিনে একটা switch এই কাজ হয় |
+
+### VLAN Port Types
+
+| Port Type | কাজ |
+|-----------|-----|
+| **Access Port** | একটা VLAN এ belong করে, end device connected (PC, printer) |
+| **Trunk Port** | **Multiple VLAN** এর traffic carry করে (switch-to-switch connection) |
+
+### Trunk এ VLAN Tagging (802.1Q)
+
+Trunk port এ data যাওয়ার সময় frame এ **VLAN tag** যোগ হয় — যাতে অন্য switch বুঝতে পারে এই frame কোন VLAN এর।
+
+```
+Normal Frame:  [MAC Header][Data][FCS]
+Tagged Frame:  [MAC Header][802.1Q Tag (VLAN ID)][Data][FCS]
+                            ├── 4 bytes ──┤
+                            VLAN ID = 12 bits (1-4094)
+```
+
+### Inter-VLAN Routing
+
+VLAN গুলো আলাদা broadcast domain — তাই **একটা VLAN থেকে অন্য VLAN এ যেতে Router দরকার**।
+
+**পদ্ধতি:**
+1. **Router-on-a-Stick** — একটা router interface এ sub-interfaces তৈরি করে trunk port দিয়ে connect
+2. **Layer 3 Switch** — Switch নিজেই routing করে (SVI — Switch Virtual Interface)
+
+---
+
+## ❓ 27.2 MCQ Problems
+
+**Q1.** VLAN কী করে?
+
+- (a) Speed বাড়ায়
+- (b) Broadcast domain ভাগ করে ✅
+- (c) IP address assign করে
+- (d) Encryption করে
+
+**Q2.** Trunk port কিসের জন্য ব্যবহৃত হয়?
+
+- (a) একটাই VLAN এর traffic carry করতে
+- (b) Multiple VLAN এর traffic carry করতে ✅
+- (c) Internet connection এর জন্য
+- (d) Wireless device connect করতে
+
+**Q3.** 802.1Q কী?
+
+- (a) WiFi standard
+- (b) VLAN tagging protocol ✅
+- (c) Routing protocol
+- (d) Encryption standard
+
+**Q4.** দুটি VLAN এর মধ্যে communication করতে কোন device দরকার?
+
+- (a) Hub
+- (b) Switch (Layer 2)
+- (c) Router বা Layer 3 Switch ✅
+- (d) Repeater
+
+---
+
+## 📝 27.3 Summary
+
+- **VLAN** = logical network division, broadcast domain আলাদা করে
+- **Access Port** = একটা VLAN, **Trunk Port** = multiple VLAN traffic
+- **802.1Q** = VLAN tagging standard, frame এ VLAN ID যোগ করে
+- **Inter-VLAN Routing** = Router বা Layer 3 Switch দিয়ে VLAN গুলোর মধ্যে communication
+
+---
+---
+
+# Topic 28: STP (Spanning Tree Protocol)
+
+<div align="center">
+
+*"Switch network এ loop হলে network crash করে — STP loop prevent করে"*
+
+</div>
+
+---
+
+## 📖 28.1 ধারণা (Concept)
+
+**STP (Spanning Tree Protocol — IEEE 802.1D)** হলো Layer 2 protocol যেটা switch network এ **loop prevent** করে redundant links কে logically block করে।
+
+### কেন Loop সমস্যা?
+
+```
+Without STP:
+Switch A ←──→ Switch B
+  ↑              ↑
+  └──────────────┘   ← Redundant link = LOOP!
+
+Loop হলে কী হয়?
+1. Broadcast Storm — broadcast packet অনন্তকাল ঘুরতে থাকে
+2. MAC Table Instability — MAC address table ক্রমাগত change হয়
+3. Network Crash — bandwidth 100% consumed
+```
+
+### STP কিভাবে কাজ করে
+
+1. **Root Bridge Election** — সবচেয়ে কম **Bridge ID** (Priority + MAC) যার, সে root
+2. **Root Port Selection** — প্রতিটি non-root switch এ root এর কাছে যাওয়ার shortest path এর port
+3. **Designated Port** — প্রতিটি segment এ একটা port designated (forwarding)
+4. **Blocked Port** — বাকি redundant port গুলো blocked (no forwarding)
+
+### STP Port States
+
+| State | কী করে | Duration |
+|-------|--------|----------|
+| **Blocking** | Data forward করে না, BPDU শোনে | - |
+| **Listening** | BPDU পাঠায়/শোনে, data forward করে না | 15 sec |
+| **Learning** | MAC address শেখে, data forward করে না | 15 sec |
+| **Forwarding** | Data forward করে — **normal operation** | - |
+| **Disabled** | Port বন্ধ | - |
+
+> **Total convergence time: ~30-50 seconds** (STP এর বড় সমস্যা — ধীর)
+
+### RSTP (Rapid STP — 802.1w)
+
+STP এর faster version — convergence time **1-2 seconds**।
+
+---
+
+## ❓ 28.2 MCQ Problems
+
+**Q1.** STP এর main purpose কী?
+
+- (a) Routing
+- (b) VLAN তৈরি
+- (c) Loop prevention ✅
+- (d) Encryption
+
+**Q2.** STP Root Bridge কিভাবে elect হয়?
+
+- (a) সবচেয়ে বেশি MAC address
+- (b) সবচেয়ে কম Bridge ID ✅
+- (c) সবচেয়ে বেশি port
+- (d) Random
+
+**Q3.** STP convergence time প্রায় কত?
+
+- (a) 1-2 seconds
+- (b) 5-10 seconds
+- (c) 30-50 seconds ✅
+- (d) 2-3 minutes
+
+> **ব্যাখ্যা:** STP (802.1D) convergence **30-50 seconds**। RSTP (802.1w) অনেক দ্রুত — **1-2 seconds**।
+
+---
+
+## 📝 28.3 Summary
+
+- **STP (802.1D)** = Loop prevention in Layer 2 switch networks
+- **Loop হলে:** Broadcast storm, MAC instability, network crash
+- **Root Bridge** = lowest Bridge ID (Priority + MAC)
+- **Port States:** Blocking → Listening → Learning → **Forwarding**
+- **Convergence:** STP = 30-50 sec (slow), **RSTP = 1-2 sec** (fast)
+
+---
+
+> **Level 6 সম্পূর্ণ!** 🎉 Switching, Routing, Routing Protocols, VLAN, STP — network infrastructure এর core concepts শেখা হয়ে গেছে।
+
+---
+---
+
+<div align="center">
+
+# LEVEL 7: NETWORK SECURITY
+
+*Network কে attacks থেকে রক্ষা করার concepts ও techniques*
+
+</div>
+
+---
+---
+
+# Topic 29: Network Security Basics
+
+<div align="center">
+
+*"CIA Triad — network security এর তিনটি মূল স্তম্ভ"*
+
+</div>
+
+---
+
+## 📖 29.1 ধারণা (Concept)
+
+### CIA Triad
+
+<Mermaid chart={`graph TD
+    CIA["CIA Triad<br/>(Network Security এর ভিত্তি)"]
+    CIA --> C["🔒 Confidentiality<br/>গোপনীয়তা"]
+    CIA --> I["✅ Integrity<br/>অখণ্ডতা"]
+    CIA --> A["⚡ Availability<br/>প্রাপ্যতা"]
+
+    C --> C1["শুধুমাত্র authorized<br/>ব্যক্তি data দেখতে পারবে"]
+    I --> I1["Data modify/tamper<br/>করা যাবে না"]
+    A --> A1["System সবসময়<br/>available থাকবে"]
+`} />
+
+| Principle | মানে | Attack Example | Protection |
+|-----------|------|---------------|------------|
+| **Confidentiality** | Data শুধু authorized user দেখবে | Eavesdropping, data theft | Encryption, access control |
+| **Integrity** | Data modify করা হয়নি guarantee | MITM, data tampering | Hashing, digital signatures |
+| **Availability** | System সবসময় চালু ও accessible | DoS/DDoS attack | Redundancy, load balancing |
+
+### Common Security Threats
+
+| Threat Type | বিবরণ |
+|-------------|-------|
+| **Malware** | Virus, Worm, Trojan, Ransomware |
+| **Phishing** | ভুয়া email/website দিয়ে তথ্য চুরি |
+| **DoS/DDoS** | Server কে overwhelm করে down করা |
+| **MITM** | দুই পক্ষের মাঝখানে বসে data চুরি/modify |
+| **Social Engineering** | মানুষকে manipulate করে info বের করা |
+| **Zero-Day** | Unknown vulnerability exploit |
+
+### AAA Framework
+
+| Component | কাজ | Example |
+|-----------|-----|---------|
+| **Authentication** | আপনি কে? (identity verify) | Username/Password, Biometric |
+| **Authorization** | আপনি কী করতে পারবেন? (permission) | Admin vs User roles |
+| **Accounting** | আপনি কী করলেন? (logging) | Audit logs, session tracking |
+
+---
+
+## ❓ 29.2 MCQ Problems
+
+**Q1.** CIA Triad এর "I" কী বোঝায়?
+
+- (a) Intelligence
+- (b) Integrity ✅
+- (c) Internet
+- (d) Infrastructure
+
+**Q2.** DDoS attack কোন CIA principle violate করে?
+
+- (a) Confidentiality
+- (b) Integrity
+- (c) Availability ✅
+- (d) Authentication
+
+> **ব্যাখ্যা:** DDoS attack server কে **unavailable** করে — তাই **Availability** violate হয়।
+
+**Q3.** AAA তে প্রথম "A" কী?
+
+- (a) Authorization
+- (b) Authentication ✅
+- (c) Accounting
+- (d) Availability
+
+---
+
+## 📝 29.3 Summary
+
+- **CIA Triad:** Confidentiality (গোপনীয়তা), Integrity (অখণ্ডতা), Availability (প্রাপ্যতা)
+- **AAA:** Authentication → Authorization → Accounting
+- **Common Threats:** Malware, Phishing, DoS/DDoS, MITM, Social Engineering
+
+---
+---
+
+# Topic 30: Firewall & IDS/IPS
+
+<div align="center">
+
+*"Firewall = দরজায় guard, IDS = CCTV camera, IPS = armed guard"*
+
+</div>
+
+---
+
+## 📖 30.1 ধারণা (Concept)
+
+### Firewall
+
+**Firewall** হলো network security device যেটা **incoming ও outgoing traffic filter** করে predefined rules অনুযায়ী। Trusted (internal) ও untrusted (external/internet) network এর মাঝে বসে।
+
+### Firewall Types
+
+| Type | কিভাবে কাজ করে | Layer | Pros | Cons |
+|------|----------------|-------|------|------|
+| **Packet Filter** | Header (IP, port) দেখে allow/deny | L3-L4 | Fast, simple | Content দেখে না |
+| **Stateful Inspection** | Connection state track করে | L3-L4 | Better security | Slower |
+| **Proxy/Application** | Application level traffic inspect | L7 | Deep inspection | Slowest |
+| **NGFW** | All of above + DPI, IPS, malware detect | L3-L7 | **Best security** | Expensive |
+
+### IDS vs IPS
+
+| বিষয় | IDS | IPS |
+|-------|-----|-----|
+| **Full Form** | Intrusion Detection System | Intrusion Prevention System |
+| **Action** | **Detect** করে ও **alert** দেয় | **Detect** করে ও **block** করে |
+| **Placement** | Network tap (passive) | Inline (active) |
+| **Analogy** | CCTV camera — দেখে জানায় | Armed guard — দেখে থামায় |
+| **Impact on traffic** | None | Slight latency |
+
+```
+Network Traffic Flow:
+
+With IDS (passive):
+Traffic ──→ Switch ──→ Destination
+                 └──→ IDS (monitor & alert)
+
+With IPS (inline):
+Traffic ──→ IPS ──→ Switch ──→ Destination
+            │
+            └── Block malicious traffic ❌
+```
+
+---
+
+## ❓ 30.2 MCQ Problems
+
+**Q1.** কোন firewall application layer এ কাজ করে?
+
+- (a) Packet Filter
+- (b) Stateful
+- (c) Proxy/Application Firewall ✅
+- (d) Hub
+
+**Q2.** IDS ও IPS এর মূল পার্থক্য কী?
+
+- (a) IDS বেশি expensive
+- (b) IPS traffic block করতে পারে, IDS শুধু alert দেয় ✅
+- (c) IDS faster
+- (d) কোন পার্থক্য নেই
+
+**Q3.** NGFW এর পূর্ণরূপ কী?
+
+- (a) Network Gateway Firewall
+- (b) Next Generation Firewall ✅
+- (c) New Global Firewall
+- (d) Network Guard Firewall
+
+---
+
+## 📝 30.3 Summary
+
+- **Firewall** = traffic filter by rules (allow/deny)
+- **Types:** Packet Filter &lt; Stateful &lt; Proxy &lt; **NGFW** (best)
+- **IDS** = detect + alert (passive), **IPS** = detect + **block** (active)
+
+---
+---
+
+# Topic 31: Cryptography Basics
+
+<div align="center">
+
+*"Data কে unreadable করা encryption, readable করা decryption"*
+
+</div>
+
+---
+
+## 📖 31.1 ধারণা (Concept)
+
+**Cryptography** হলো data কে **encrypt (unreadable)** করে **secure** করার বিজ্ঞান।
+
+### Symmetric vs Asymmetric Encryption
+
+<Mermaid chart={`graph LR
+    subgraph "Symmetric (একই key)"
+        A1["Plain Text"] -->|"Key 🔑"| B1["Cipher Text"]
+        B1 -->|"Same Key 🔑"| C1["Plain Text"]
+    end
+
+    subgraph "Asymmetric (দুটো key)"
+        A2["Plain Text"] -->|"Public Key 🔓"| B2["Cipher Text"]
+        B2 -->|"Private Key 🔐"| C2["Plain Text"]
+    end
+`} />
+
+| বিষয় | Symmetric | Asymmetric |
+|-------|-----------|-----------|
+| **Key** | একটাই key (shared secret) | দুটো key (public + private) |
+| **Speed** | **Fast** | Slow |
+| **Key Distribution** | কঠিন (key share করতে হয়) | সহজ (public key সবাইকে দেওয়া যায়) |
+| **Use** | Bulk data encryption | Key exchange, digital signatures |
+| **Examples** | AES, DES, 3DES, Blowfish | **RSA**, ECC, Diffie-Hellman |
+
+### Hashing
+
+**Hashing** = data কে fixed-length **hash value** তে convert করা — **one-way** (decrypt করা যায় না)।
+
+| Algorithm | Output Size | Use |
+|-----------|-------------|-----|
+| **MD5** | 128-bit | ❌ Broken, use not recommended |
+| **SHA-1** | 160-bit | ❌ Deprecated |
+| **SHA-256** | 256-bit | ✅ Password storage, SSL certificates |
+| **SHA-512** | 512-bit | ✅ High security |
+
+### Digital Signature
+
+**Sender** তার **private key** দিয়ে message sign করে, **receiver** sender এর **public key** দিয়ে verify করে।
+
+```
+Sender:   Hash(Message) + Encrypt(Hash, Private Key) = Digital Signature
+Receiver: Decrypt(Signature, Public Key) → Hash → Compare with Hash(Message)
+Match = ✅ Authentic    No match = ❌ Tampered
+```
+
+---
+
+## ❓ 31.2 MCQ Problems
+
+**Q1.** AES কোন ধরনের encryption?
+
+- (a) Asymmetric
+- (b) Symmetric ✅
+- (c) Hashing
+- (d) Digital Signature
+
+**Q2.** RSA কোন ধরনের encryption?
+
+- (a) Symmetric
+- (b) Asymmetric ✅
+- (c) Hashing
+- (d) Encoding
+
+**Q3.** SHA-256 কত bit output দেয়?
+
+- (a) 128
+- (b) 160
+- (c) 256 ✅
+- (d) 512
+
+**Q4.** Digital Signature কিসের guarantee দেয়?
+
+- (a) শুধু Confidentiality
+- (b) Authentication ও Integrity ✅
+- (c) শুধু Availability
+- (d) শুধু Speed
+
+---
+
+## 📝 31.3 Summary
+
+- **Symmetric** = একটা key, fast (AES, DES)
+- **Asymmetric** = public + private key, slow (RSA, ECC)
+- **Hashing** = one-way, fixed output (SHA-256)
+- **Digital Signature** = private key দিয়ে sign, public key দিয়ে verify
+
+---
+---
+
+# Topic 32: VPN (Virtual Private Network)
+
+<div align="center">
+
+*"Public network (Internet) এর উপর secure, private tunnel — এটাই VPN"*
+
+</div>
+
+---
+
+## 📖 32.1 ধারণা (Concept)
+
+**VPN** = Public network (Internet) এর উপর দিয়ে **encrypted tunnel** তৈরি করে private network এ securely connect করা।
+
+<Mermaid chart={`graph LR
+    A["Remote User<br/>☕ Coffee Shop"] -->|"Encrypted<br/>VPN Tunnel"| B["VPN Server"]
+    B --> C["Corporate<br/>Network 🏢"]
+
+    D["Attacker 👤"] -.->|"❌ Can't read<br/>encrypted data"| A
+`} />
+
+### VPN Types
+
+| Type | বিবরণ | Use |
+|------|-------|-----|
+| **Site-to-Site** | দুটো office network permanently connected | Branch offices |
+| **Remote Access** | Individual user remote এ office network এ connect | Work from home |
+| **Client-to-Site** | Same as Remote Access | Employee VPN |
+
+### VPN Protocols
+
+| Protocol | Security | Speed | Port | Use |
+|----------|----------|-------|------|-----|
+| **IPSec** | Very High | Medium | UDP 500/4500 | Corporate VPN |
+| **OpenVPN** | High | Medium | UDP 1194 / TCP 443 | Most versatile |
+| **WireGuard** | High | **Fast** | UDP 51820 | Modern, simple |
+| **L2TP/IPSec** | High | Slow | UDP 1701 | Legacy |
+| **PPTP** | ❌ Weak | Fast | TCP 1723 | ❌ Deprecated |
+
+---
+
+## ❓ 32.2 MCQ Problems
+
+**Q1.** VPN কী করে?
+
+- (a) Internet speed বাড়ায়
+- (b) Public network এ encrypted private tunnel তৈরি করে ✅
+- (c) Virus remove করে
+- (d) WiFi signal বাড়ায়
+
+**Q2.** কোন VPN protocol সবচেয়ে আধুনিক ও দ্রুত?
+
+- (a) PPTP
+- (b) L2TP
+- (c) OpenVPN
+- (d) WireGuard ✅
+
+**Q3.** Site-to-Site VPN কিসের জন্য?
+
+- (a) একজন ব্যক্তি remote access
+- (b) দুটো office network permanently connect ✅
+- (c) WiFi security
+- (d) Email encryption
+
+---
+
+## 📝 32.3 Summary
+
+- **VPN** = encrypted tunnel over public Internet
+- **Site-to-Site** = office-to-office, **Remote Access** = user-to-office
+- **IPSec** = corporate, **OpenVPN** = versatile, **WireGuard** = modern & fast
+- **PPTP** = ❌ deprecated, insecure
+
+---
+---
+
+# Topic 33: SSL/TLS & HTTPS
+
+<div align="center">
+
+*"Quick recap — বিস্তারিত জানতে [SSL/TLS Guide](ssl-tls) পড়ুন"*
+
+</div>
+
+---
+
+## 📖 33.1 Quick Summary
+
+| বিষয় | বিবরণ |
+|-------|-------|
+| **SSL** | Secure Sockets Layer — **deprecated** |
+| **TLS** | Transport Layer Security — SSL এর successor, **বর্তমানে ব্যবহৃত** |
+| **HTTPS** | HTTP + TLS = encrypted web communication |
+| **Port** | 443 |
+| **Certificate** | CA (Certificate Authority) থেকে issue হয় |
+
+### TLS Handshake (Simplified)
+
+```
+Client ──→ ClientHello (supported ciphers) ──→ Server
+Client ←── ServerHello + Certificate ←────── Server
+Client ──→ Key Exchange (Pre-Master Secret) ──→ Server
+Both compute Session Key
+Client ──→ Finished (encrypted) ──→ Server
+Client ←── Finished (encrypted) ←── Server
+✅ Secure connection established
+```
+
+> 📖 **বিস্তারিত পড়ুন:** [SSL/TLS Complete Guide](ssl-tls)
+
+---
+
+## ❓ 33.2 MCQ Problems
+
+**Q1.** TLS কোন layer এ কাজ করে?
+
+- (a) Network Layer
+- (b) Transport Layer
+- (c) Between Transport ও Application Layer ✅
+- (d) Physical Layer
+
+**Q2.** HTTPS এ "S" মানে কী?
+
+- (a) Simple
+- (b) Secure ✅
+- (c) Standard
+- (d) Server
+
+---
+---
+
+# Topic 34: Common Network Attacks
+
+<div align="center">
+
+*"পরীক্ষায় প্রায়ই জিজ্ঞেস করে — কোন attack কিভাবে কাজ করে?"*
+
+</div>
+
+---
+
+## 📖 34.1 ধারণা (Concept)
+
+### Attack Types Master Table
+
+| Attack | কিভাবে কাজ করে | Target (CIA) | Prevention |
+|--------|----------------|-------------|-----------|
+| **DoS** | Server কে excessive request দিয়ে overwhelm | Availability | Rate limiting, firewall |
+| **DDoS** | অনেক machine (botnet) থেকে DoS | Availability | CDN, DDoS mitigation |
+| **MITM** | দুই পক্ষের মাঝে বসে data intercept/modify | Confidentiality, Integrity | HTTPS, VPN, certificate pinning |
+| **Phishing** | ভুয়া email/website দিয়ে credential চুরি | Confidentiality | User awareness, email filters |
+| **DNS Spoofing** | DNS response জাল করে fake site এ redirect | Integrity | DNSSEC |
+| **ARP Poisoning** | ভুয়া ARP reply দিয়ে traffic redirect | Confidentiality | Static ARP, DAI |
+| **SQL Injection** | Malicious SQL query inject করে database hack | Confidentiality, Integrity | Parameterized queries, input validation |
+| **XSS** | Malicious script inject করে user browser এ | Confidentiality | Input sanitization, CSP |
+| **Brute Force** | সব সম্ভাব্য password try করে | Confidentiality | Account lockout, MFA, strong passwords |
+| **Spoofing** | নিজের identity ভুয়া দেখানো (IP, MAC, Email) | Integrity | Authentication, filtering |
+
+### DoS vs DDoS
+
+```
+DoS:                              DDoS:
+  Attacker ──→ Server              Bot1 ──┐
+  (1 machine)                      Bot2 ──┼──→ Server
+                                   Bot3 ──┤
+                                   Bot4 ──┘
+                                   (Botnet = thousands of machines)
+```
+
+---
+
+## ❓ 34.2 MCQ Problems
+
+**Q1.** DDoS attack এ কী ব্যবহৃত হয়?
+
+- (a) Firewall
+- (b) Botnet ✅
+- (c) VPN
+- (d) Antivirus
+
+**Q2.** MITM attack কিসের মাঝখানে বসে?
+
+- (a) Two routers
+- (b) Two communicating parties ✅
+- (c) Two switches
+- (d) Two firewalls
+
+**Q3.** ARP Poisoning কোন layer এ attack?
+
+- (a) Layer 1
+- (b) Layer 2 ✅
+- (c) Layer 3
+- (d) Layer 7
+
+**Q4.** SQL Injection prevent করার সবচেয়ে ভালো উপায় কী?
+
+- (a) Firewall
+- (b) Antivirus
+- (c) Parameterized queries / Prepared statements ✅
+- (d) VPN
+
+---
+
+## 📝 34.3 Summary
+
+- **DoS/DDoS** = server overwhelm করে unavailable করা (Availability attack)
+- **MITM** = মাঝখানে বসে data intercept (Confidentiality + Integrity)
+- **Phishing** = fake site/email দিয়ে credential চুরি
+- **ARP Poisoning** = fake ARP reply, Layer 2 attack
+- **SQL Injection** = malicious query দিয়ে database hack
+- **Prevention:** Encryption, Firewall, IDS/IPS, MFA, Input validation
+
+---
+
+> **Level 7 সম্পূর্ণ!** 🎉 CIA Triad, Firewall, IDS/IPS, Cryptography, VPN, SSL/TLS, Common Attacks — Network Security এর core concepts শেখা হয়ে গেছে।
+
+---
+---
+
+<div align="center">
+
+# LEVEL 8: ADVANCED & PRACTICAL
+
+*আধুনিক networking, troubleshooting, এবং software engineer দের জন্য practical concepts*
+
+</div>
+
+---
+---
+
+# Topic 35: Wireless Networking
+
+<div align="center">
+
+*"WiFi = IEEE 802.11 — তারবিহীন networking এর standard"*
+
+</div>
+
+---
+
+## 📖 35.1 ধারণা (Concept)
+
+### WiFi Standards (IEEE 802.11)
+
+| Standard | Name | Frequency | Max Speed | Year |
+|----------|------|-----------|-----------|------|
+| 802.11a | WiFi 1 | 5 GHz | 54 Mbps | 1999 |
+| 802.11b | WiFi 2 | 2.4 GHz | 11 Mbps | 1999 |
+| 802.11g | WiFi 3 | 2.4 GHz | 54 Mbps | 2003 |
+| **802.11n** | **WiFi 4** | 2.4/5 GHz | **600 Mbps** | 2009 |
+| **802.11ac** | **WiFi 5** | 5 GHz | **6.9 Gbps** | 2013 |
+| **802.11ax** | **WiFi 6** | 2.4/5/6 GHz | **9.6 Gbps** | 2019 |
+
+### WiFi Security Protocols
+
+| Protocol | Security Level | Encryption | Status |
+|----------|---------------|------------|--------|
+| **WEP** | ❌ Very Weak | RC4 | ❌ Deprecated, easily cracked |
+| **WPA** | ⚠️ Moderate | TKIP | ⚠️ Legacy |
+| **WPA2** | ✅ Good | **AES** | ✅ Current standard |
+| **WPA3** | ✅✅ Best | AES-256 | ✅ Latest, most secure |
+
+### Key Terms
+
+| Term | বিবরণ |
+|------|-------|
+| **SSID** | Network name (যেটা WiFi list এ দেখা যায়) |
+| **BSSID** | Access Point এর MAC address |
+| **Channel** | Radio frequency band (2.4 GHz: channels 1-14) |
+| **Access Point (AP)** | Wireless device কে wired network এ connect করে |
+
+---
+
+## ❓ 35.2 MCQ Problems
+
+**Q1.** WiFi 6 এর IEEE standard কোনটি?
+
+- (a) 802.11n
+- (b) 802.11ac
+- (c) 802.11ax ✅
+- (d) 802.11g
+
+**Q2.** WPA2 কোন encryption ব্যবহার করে?
+
+- (a) RC4
+- (b) TKIP
+- (c) AES ✅
+- (d) DES
+
+**Q3.** কোন WiFi security protocol সবচেয়ে দুর্বল?
+
+- (a) WPA3
+- (b) WPA2
+- (c) WPA
+- (d) WEP ✅
+
+---
+
+## 📝 35.3 Summary
+
+- **WiFi = IEEE 802.11**, latest = **802.11ax (WiFi 6)**
+- **Security:** WEP (broken) → WPA (legacy) → **WPA2 (AES)** → **WPA3** (best)
+- **SSID** = network name, **AP** = wireless ↔ wired bridge
+
+---
+---
+
+# Topic 36: Cloud Networking Basics
+
+<div align="center">
+
+*"Software Engineer হিসেবে cloud networking জানা অত্যাবশ্যক"*
+
+</div>
+
+---
+
+## 📖 36.1 ধারণা (Concept)
+
+### Cloud Service Models
+
+<Mermaid chart={`graph TD
+    C[Cloud Service Models]
+    C --> I["IaaS<br/>Infrastructure as a Service<br/>VM, Storage, Network"]
+    C --> P["PaaS<br/>Platform as a Service<br/>Runtime, DB, Dev tools"]
+    C --> S["SaaS<br/>Software as a Service<br/>Ready-to-use applications"]
+
+    I --> I1["AWS EC2, Azure VM,<br/>Google Compute Engine"]
+    P --> P1["Heroku, Azure App Service,<br/>Google App Engine"]
+    S --> S1["Gmail, Office 365,<br/>Slack, Salesforce"]
+`} />
+
+| আপনি manage করেন | IaaS | PaaS | SaaS |
+|------------------|------|------|------|
+| Application | ✅ | ✅ | ❌ |
+| Data | ✅ | ✅ | ❌ |
+| Runtime | ✅ | ❌ | ❌ |
+| OS | ✅ | ❌ | ❌ |
+| Networking | ✅ | ❌ | ❌ |
+| Storage | ✅ | ❌ | ❌ |
+| Server | ❌ | ❌ | ❌ |
+
+### Cloud Networking Components
+
+| Component | কাজ |
+|-----------|-----|
+| **VPC (Virtual Private Cloud)** | Cloud এ isolated private network |
+| **Load Balancer** | Traffic multiple servers এ distribute করে |
+| **CDN (Content Delivery Network)** | Content কে user এর কাছের server থেকে serve |
+| **API Gateway** | API traffic manage, rate limiting, auth |
+| **DNS (Route 53, Cloud DNS)** | Cloud-based DNS service |
+
+---
+
+## ❓ 36.2 MCQ Problems
+
+**Q1.** Gmail কোন cloud model?
+
+- (a) IaaS
+- (b) PaaS
+- (c) SaaS ✅
+- (d) FaaS
+
+**Q2.** AWS EC2 কোন cloud model?
+
+- (a) IaaS ✅
+- (b) PaaS
+- (c) SaaS
+- (d) DaaS
+
+**Q3.** CDN কী করে?
+
+- (a) Data encrypt করে
+- (b) Content user এর কাছের server থেকে serve করে ✅
+- (c) Virus scan করে
+- (d) Database manage করে
+
+---
+
+## 📝 36.3 Summary
+
+- **IaaS** = VM, storage (AWS EC2) — আপনি সব manage করেন
+- **PaaS** = platform ready (Heroku) — শুধু code deploy
+- **SaaS** = ready app (Gmail) — শুধু ব্যবহার
+- **VPC** = cloud private network, **CDN** = fast content delivery, **Load Balancer** = traffic distribution
+
+---
+---
+
+# Topic 37: Network Troubleshooting Commands
+
+<div align="center">
+
+*"Network সমস্যা হলে এই commands দিয়ে debug করুন — পরীক্ষায়ও আসে"*
+
+</div>
+
+---
+
+## 📖 37.1 Commands Master Table
+
+| Command | কাজ | Example | Protocol |
+|---------|-----|---------|----------|
+| **ping** | Destination reachable কিনা check | `ping google.com` | ICMP |
+| **tracert / traceroute** | Source → Destination পথের routers দেখায় | `tracert google.com` | ICMP |
+| **nslookup** | DNS query — domain → IP | `nslookup google.com` | DNS |
+| **ipconfig / ifconfig** | নিজের IP, subnet, gateway দেখায় | `ipconfig /all` | - |
+| **netstat** | Active connections ও listening ports | `netstat -an` | - |
+| **arp -a** | ARP cache (IP → MAC mapping) দেখায় | `arp -a` | ARP |
+| **telnet** | Port open কিনা check | `telnet server 80` | TCP |
+| **curl** | HTTP request পাঠায় | `curl https://api.example.com` | HTTP |
+| **nmap** | Port scan ও network discovery | `nmap 192.168.1.0/24` | TCP/UDP |
+| **dig** | Advanced DNS query | `dig google.com A` | DNS |
+| **route print** | Routing table দেখায় | `route print` | - |
+| **pathping** | ping + tracert combined (Windows) | `pathping google.com` | ICMP |
+
+### Troubleshooting Flowchart
+
+<Mermaid chart={`graph TD
+    A["Network Problem?"] --> B["ping 127.0.0.1<br/>Loopback"]
+    B -->|Fail| B1["NIC / TCP Stack<br/>Problem"]
+    B -->|Pass| C["ping Own IP"]
+    C -->|Fail| C1["NIC Config<br/>Problem"]
+    C -->|Pass| D["ping Gateway"]
+    D -->|Fail| D1["Local Network /<br/>Cable Problem"]
+    D -->|Pass| E["ping 8.8.8.8"]
+    E -->|Fail| E1["Router / ISP<br/>Problem"]
+    E -->|Pass| F["ping google.com"]
+    F -->|Fail| F1["DNS Problem<br/>nslookup verify"]
+    F -->|Pass| G["Network OK!"]
+
+    style B1 fill:#fecaca,stroke:#ef4444
+    style C1 fill:#fecaca,stroke:#ef4444
+    style D1 fill:#fecaca,stroke:#ef4444
+    style E1 fill:#fecaca,stroke:#ef4444
+    style F1 fill:#fecaca,stroke:#ef4444
+    style G fill:#f0fdf4,stroke:#22c55e
+`} />
+
+---
+
+## ❓ 37.2 MCQ Problems
+
+**Q1.** Domain name এর IP বের করতে কোন command ব্যবহৃত হয়?
+
+- (a) ping
+- (b) tracert
+- (c) nslookup ✅
+- (d) netstat
+
+**Q2.** ping command কোন protocol ব্যবহার করে?
+
+- (a) TCP
+- (b) UDP
+- (c) ICMP ✅
+- (d) ARP
+
+**Q3.** Active network connections দেখতে কোন command?
+
+- (a) ipconfig
+- (b) netstat ✅
+- (c) nslookup
+- (d) tracert
+
+**Q4.** ARP cache দেখতে কোন command?
+
+- (a) arp -a ✅
+- (b) arp -d
+- (c) ipconfig /all
+- (d) netstat -a
+
+---
+
+## 📝 37.3 Summary
+
+- **ping** = reachability check (ICMP), **tracert** = path trace
+- **nslookup/dig** = DNS query, **ipconfig** = own network info
+- **netstat** = connections & ports, **arp -a** = ARP cache
+- **Troubleshooting order:** Loopback → Self → Gateway → External IP → DNS
+
+---
+---
+
+# Topic 38: Network Design & Best Practices
+
+<div align="center">
+
+*"ভালো network design = reliable, scalable, secure"*
+
+</div>
+
+---
+
+## 📖 38.1 ধারণা (Concept)
+
+### Three-Tier Architecture (Enterprise Standard)
+
+```
+┌─────────────────────────────────────────┐
+│           CORE Layer                     │  High-speed backbone
+│     (Core Switches/Routers)              │  Redundant links
+├─────────────────────────────────────────┤
+│       DISTRIBUTION Layer                 │  Routing, VLAN, ACL
+│    (Distribution Switches)               │  Policy enforcement
+├─────────────────────────────────────────┤
+│         ACCESS Layer                     │  End devices connect
+│      (Access Switches, APs)              │  Port security
+└─────────────────────────────────────────┘
+```
+
+### Best Practices
+
+| Practice | বিবরণ |
+|----------|-------|
+| **Redundancy** | Single point of failure avoid করুন — dual links, dual switches |
+| **VLAN** | Department-wise VLAN — security ও performance |
+| **Documentation** | Network diagram, IP scheme, device inventory |
+| **Monitoring** | SNMP, Nagios, Zabbix — 24/7 monitoring |
+| **Backup** | Config backup, automated |
+| **Security** | Firewall, ACL, port security, 802.1X |
+| **Scalability** | ভবিষ্যতে growth এর জন্য plan |
+
+---
+
+## 📝 38.2 Summary
+
+- **Three-Tier:** Core (speed) → Distribution (policy) → Access (users)
+- **Redundancy** = no single point of failure
+- **VLAN, Firewall, ACL** = security layers
+- **Monitor + Document + Backup** = operational excellence
+
+---
+---
+
+# Topic 39: Emerging Technologies
+
+<div align="center">
+
+*"Networking এর ভবিষ্যত — SDN, IoT, 5G, Zero Trust"*
+
+</div>
+
+---
+
+## 📖 39.1 ধারণা (Concept)
+
+### SDN (Software-Defined Networking)
+
+**Traditional:** প্রতিটি switch/router নিজে decide করে (control plane + data plane একসাথে)
+**SDN:** একটা **central controller** সব decision নেয়, switch/router শুধু execute করে
+
+| বিষয় | Traditional | SDN |
+|-------|------------|-----|
+| **Control** | Distributed (প্রতিটি device এ) | **Centralized** (controller) |
+| **Configuration** | Device by device | Programmatically, API দিয়ে |
+| **Flexibility** | কম | অনেক বেশি |
+| **Example** | Cisco IOS | OpenFlow, Cisco ACI, VMware NSX |
+
+### IoT Networking
+
+**IoT (Internet of Things)** = everyday devices (AC, ফ্রিজ, light) Internet এ connected।
+
+| Challenge | সমাধান |
+|-----------|--------|
+| Billions of devices | IPv6, LPWAN |
+| Low power | Zigbee, LoRa, BLE |
+| Security | Network segmentation, firmware update |
+
+### 5G
+
+| বৈশিষ্ট্য | 4G | 5G |
+|-----------|----|----|
+| **Speed** | ~100 Mbps | **~10 Gbps** |
+| **Latency** | ~50 ms | **~1 ms** |
+| **Devices/km²** | ~100K | **~1M** |
+| **Use** | Mobile, streaming | IoT, autonomous cars, AR/VR |
+
+### Zero Trust Architecture
+
+**Traditional:** "Network এর ভেতরে সবাইকে trust করো"
+**Zero Trust:** **"কাউকেই trust করো না, সবসময় verify করো"**
+
+```
+Principles:
+1. Never trust, always verify
+2. Least privilege access
+3. Assume breach
+4. Micro-segmentation
+5. Continuous monitoring
+```
+
+---
+
+## ❓ 39.2 MCQ Problems
+
+**Q1.** SDN এ control plane কোথায় থাকে?
+
+- (a) প্রতিটি switch এ
+- (b) Centralized controller এ ✅
+- (c) Cloud এ
+- (d) Firewall এ
+
+**Q2.** 5G এর theoretical max speed কত?
+
+- (a) 1 Gbps
+- (b) 5 Gbps
+- (c) 10 Gbps ✅
+- (d) 100 Gbps
+
+**Q3.** Zero Trust এর মূল নীতি কী?
+
+- (a) Internal users কে trust করো
+- (b) Never trust, always verify ✅
+- (c) Firewall enough
+- (d) VPN ব্যবহার করো
+
+---
+
+## 📝 39.3 Summary
+
+- **SDN** = centralized control, programmable networking
+- **IoT** = billions of smart devices networked, needs IPv6
+- **5G** = 10 Gbps, 1ms latency, massive IoT support
+- **Zero Trust** = never trust anyone, always verify, least privilege
+
+---
+---
+
+# Topic 40: Networking for Software Engineers
+
+<div align="center">
+
+*"Developer হিসেবে এই networking concepts প্রতিদিন কাজে লাগে"*
+
+</div>
+
+---
+
+## 📖 40.1 ধারণা (Concept)
+
+### REST API Networking
+
+```
+Client ──HTTP Request──→ Server
+        GET /api/users
+        Host: api.example.com
+        Authorization: Bearer token123
+
+Server ──HTTP Response──→ Client
+        200 OK
+        Content-Type: application/json
+        {"users": [...]}
+```
+
+### WebSocket vs HTTP
+
+| বিষয় | HTTP | WebSocket |
+|-------|------|-----------|
+| **Connection** | Request-Response (close হয়ে যায়) | Persistent (open থাকে) |
+| **Direction** | Client → Server (one way per request) | Bidirectional (দুদিকে) |
+| **Use Case** | REST API, web pages | Real-time chat, live updates, gaming |
+| **Overhead** | প্রতি request এ header | একবার handshake, পরে minimal |
+| **Protocol** | HTTP/HTTPS | ws:// / wss:// |
+
+### gRPC vs REST
+
+| বিষয় | REST | gRPC |
+|-------|------|------|
+| **Format** | JSON (text) | Protocol Buffers (binary) |
+| **Speed** | Slower | **Much faster** |
+| **Streaming** | Limited | Bidirectional streaming |
+| **Contract** | OpenAPI/Swagger | .proto files (strict) |
+| **Transport** | HTTP/1.1 mainly | HTTP/2 |
+| **Use** | Public APIs, web | **Microservices**, internal APIs |
+
+### CORS (Cross-Origin Resource Sharing)
+
+```
+Browser (localhost:3000) ──→ API (api.example.com:8080)
+                              ↑
+                     Different origin!
+                     Browser blocks by default.
+
+Solution: Server adds header:
+Access-Control-Allow-Origin: http://localhost:3000
+```
+
+### DNS for Developers
+
+```
+Your app uses DNS constantly:
+1. Database connection: db.internal.company.com → 10.0.1.50
+2. API calls: api.stripe.com → 52.xx.xx.xx
+3. Service discovery: user-service.k8s.local → cluster IP
+4. CDN: assets.yourapp.com → CDN edge server IP
+
+DNS caching can cause issues:
+- TTL too high → DNS change slow to propagate
+- TTL too low → more DNS queries, slower
+- Recommended: 300 seconds (5 min) for most services
+```
+
+### Developer's Must-Know Network Concepts
+
+| Concept | কেন জানা দরকার |
+|---------|----------------|
+| **HTTP Status Codes** | API response handle করতে |
+| **TCP vs UDP** | কোন protocol কখন ব্যবহার করবেন |
+| **DNS** | Domain management, service discovery |
+| **TLS/HTTPS** | Secure API communication |
+| **WebSocket** | Real-time features build করতে |
+| **CORS** | Frontend-backend communication |
+| **Load Balancing** | High availability design |
+| **CDN** | Static asset delivery optimize |
+| **Rate Limiting** | API abuse prevention |
+| **Connection Pooling** | Database performance optimization |
+
+---
+
+## ❓ 40.2 MCQ Problems
+
+**Q1.** WebSocket কোন ধরনের connection?
+
+- (a) Request-Response
+- (b) Persistent, bidirectional ✅
+- (c) UDP-based
+- (d) One-way only
+
+**Q2.** gRPC কোন format এ data serialize করে?
+
+- (a) JSON
+- (b) XML
+- (c) Protocol Buffers ✅
+- (d) YAML
+
+**Q3.** CORS কী?
+
+- (a) A type of attack
+- (b) Cross-Origin Resource Sharing ✅
+- (c) A routing protocol
+- (d) A type of DNS record
+
+**Q4.** REST API সাধারণত কোন data format ব্যবহার করে?
+
+- (a) XML
+- (b) JSON ✅
+- (c) Protocol Buffers
+- (d) CSV
+
+---
+
+## 📝 40.3 Summary
+
+- **REST** = HTTP-based, JSON, simple, public APIs
+- **gRPC** = HTTP/2, Protocol Buffers, fast, **microservices**
+- **WebSocket** = persistent, bidirectional, **real-time apps**
+- **CORS** = browser security for cross-origin requests
+- **DNS** = service discovery, caching — affects app performance
+- Developer must know: HTTP codes, TCP/UDP, DNS, TLS, WebSocket, CORS
+
+---
+
+> **Level 8 সম্পূর্ণ!** 🎉 WiFi, Cloud, Troubleshooting, Network Design, SDN, IoT, 5G, এবং Developer-focused networking — সব advanced topics শেখা হয়ে গেছে।
+
+---
+---
+
+<div align="center">
+
+# 🎯 BONUS SECTION
+
+</div>
+
+---
+---
+
+# BONUS: 150 Interview Questions & Answers
+
+<div align="center">
+
+*Basic → Advanced — চাকরি interview এ সবচেয়ে বেশি জিজ্ঞেস করা প্রশ্ন ও উত্তর*
+
+</div>
+
+---
+
+## 🟢 Basic Level (Q1-50)
+
+**Q1. Computer Network কী?**
+দুই বা ততোধিক computing device এর সংযোগ যেখানে তারা data, resource share করতে পারে।
+
+**Q2. LAN ও WAN এর পার্থক্য কী?**
+LAN = ছোট এলাকা (office), high speed, low cost। WAN = বিশ্বব্যাপী (Internet), lower speed, high cost।
+
+**Q3. OSI Model কী? কয়টি layer?**
+ISO কর্তৃক তৈরি 7-layer reference model — networking কিভাবে কাজ করে সেটার theoretical framework।
+
+**Q4. TCP/IP Model কী? কয়টি layer?**
+DoD/DARPA তৈরি 4-layer practical model — Internet এর foundation। Application, Transport, Internet, Network Access।
+
+**Q5. IP Address কী?**
+Network এ প্রতিটি device এর unique logical address। IPv4 = 32 bit, IPv6 = 128 bit।
+
+**Q6. MAC Address কী?**
+Network Interface Card (NIC) এর unique physical address। 48 bit, hexadecimal format (AA:BB:CC:DD:EE:FF)।
+
+**Q7. IP Address ও MAC Address এর পার্থক্য?**
+IP = logical, Layer 3, changeable, 32/128 bit। MAC = physical, Layer 2, hardware burned-in, 48 bit।
+
+**Q8. Hub ও Switch এর পার্থক্য?**
+Hub = Layer 1, broadcast to all ports, dumb। Switch = Layer 2, MAC table দেখে specific port এ unicast, smart।
+
+**Q9. Router কী করে?**
+Layer 3 device — IP address দেখে different networks এর মধ্যে packet route করে, best path নির্বাচন করে।
+
+**Q10. TCP ও UDP এর পার্থক্য?**
+TCP = connection-oriented, reliable, slow (HTTP, FTP)। UDP = connectionless, unreliable, fast (streaming, DNS)।
+
+**Q11. HTTP ও HTTPS এর পার্থক্য?**
+HTTP = port 80, unencrypted। HTTPS = port 443, TLS/SSL encrypted, secure।
+
+**Q12. DNS কী?**
+Domain Name System — domain name (google.com) কে IP address (142.250.190.78) এ translate করে।
+
+**Q13. DHCP কী?**
+Dynamic Host Configuration Protocol — automatically IP address, subnet mask, gateway, DNS assign করে।
+
+**Q14. Firewall কী?**
+Network security device — rules অনুযায়ী incoming/outgoing traffic filter (allow/deny) করে।
+
+**Q15. VPN কী?**
+Virtual Private Network — public Internet এর উপর encrypted tunnel তৈরি করে private communication।
+
+**Q16. Subnet Mask কী?**
+IP address এর Network part ও Host part আলাদা করে। Example: 255.255.255.0 = /24।
+
+**Q17. Default Gateway কী?**
+Local network এর বাইরে data পাঠাতে যে router ব্যবহৃত হয়। সাধারণত router এর IP address।
+
+**Q18. Ping command কী করে?**
+ICMP Echo Request/Reply দিয়ে destination device reachable কিনা check করে।
+
+**Q19. Bandwidth ও Throughput এর পার্থক্য?**
+Bandwidth = theoretical maximum capacity (100 Mbps link)। Throughput = actual data transfer rate (80 Mbps received)।
+
+**Q20. Latency কী?**
+Data source থেকে destination পর্যন্ত পৌঁছাতে যে সময় লাগে। কম latency = better performance।
+
+**Q21. Protocol কী?**
+Network communication এর rules/standards এর set। Example: HTTP, TCP, IP।
+
+**Q22. Port Number কী?**
+16-bit number (0-65535) — কোন application/service এর জন্য data এসেছে সেটা identify করে।
+
+**Q23. Well-known ports এর range কত?**
+0-1023। Example: HTTP=80, HTTPS=443, FTP=21, SSH=22, DNS=53।
+
+**Q24. ARP কী?**
+Address Resolution Protocol — IP address থেকে MAC address resolve করে।
+
+**Q25. Broadcast ও Unicast এর পার্থক্য?**
+Broadcast = সব device কে পাঠায়। Unicast = specific একটা device কে পাঠায়।
+
+**Q26. Full-Duplex ও Half-Duplex এর পার্থক্য?**
+Full-Duplex = একসাথে দুদিকে data (telephone)। Half-Duplex = পালাক্রমে দুদিকে (walkie-talkie)।
+
+**Q27. Star Topology কেন সবচেয়ে জনপ্রিয়?**
+Easy troubleshooting, easy to add/remove devices, one device fail হলে বাকিরা চলে।
+
+**Q28. Fiber Optic কেন সবচেয়ে ভালো media?**
+Fastest (100+ Gbps), longest distance (100+ km), EMI immune, most secure (hard to tap)।
+
+**Q29. NAT কেন দরকার?**
+IPv4 address সীমিত। NAT দিয়ে অনেক private IP device একটা public IP share করে Internet access করে।
+
+**Q30. 127.0.0.1 কী?**
+Loopback address / localhost — device নিজেকে test করতে ব্যবহার করে।
+
+**Q31. APIPA কী?**
+Automatic Private IP Addressing — DHCP server না পেলে device নিজে 169.254.x.x range থেকে IP নেয়।
+
+**Q32. Class A, B, C এর 1st octet range কত?**
+A = 1-126, B = 128-191, C = 192-223।
+
+**Q33. Private IP range কী কী?**
+10.0.0.0/8, 172.16.0.0/12, 192.168.0.0/16।
+
+**Q34. OSI Layer 4 এর PDU কী?**
+Segment (TCP) / Datagram (UDP)।
+
+**Q35. Encapsulation কী?**
+Data এক layer থেকে নিচের layer এ যাওয়ার সময় header যোগ হওয়ার process।
+
+**Q36. Circuit Switching ও Packet Switching এর পার্থক্য?**
+Circuit = dedicated path (telephone)। Packet = data ভেঙে packet, shared path (Internet)।
+
+**Q37. SMTP কী?**
+Simple Mail Transfer Protocol — email পাঠানোর protocol, port 25/587।
+
+**Q38. POP3 ও IMAP এর পার্থক্য?**
+POP3 = download & delete from server, single device। IMAP = keep on server, multi-device sync।
+
+**Q39. FTP ও SFTP এর পার্থক্য?**
+FTP = port 20/21, insecure (plain text)। SFTP = port 22, SSH encrypted, secure।
+
+**Q40. Collision Domain ও Broadcast Domain কী?**
+Collision domain = যেখানে data collide হতে পারে (hub)। Broadcast domain = broadcast যেখানে পৌঁছায় (VLAN/router boundary)।
+
+**Q41. Switch collision domain আলাদা করে কেন?**
+প্রতিটি port আলাদা collision domain — একসাথে multiple port এ data যেতে পারে collision ছাড়া।
+
+**Q42. Router broadcast domain আলাদা করে কেন?**
+Router broadcast traffic forward করে না — তাই প্রতিটি interface আলাদা broadcast domain।
+
+**Q43. Subnetting কেন করা হয়?**
+Broadcast domain ছোট করা, IP address efficient ব্যবহার, security improve, management সহজ।
+
+**Q44. CIDR কী?**
+Classless Inter-Domain Routing — subnet mask কে /n notation এ লেখা। Example: /24 = 255.255.255.0।
+
+**Q45. TCP 3-way handshake এর steps কী?**
+SYN → SYN-ACK → ACK। Connection establish করতে ব্যবহৃত।
+
+**Q46. DNS A Record কী?**
+Domain name কে IPv4 address এ map করে। Example: google.com → 142.250.190.78।
+
+**Q47. DHCP DORA process কী?**
+Discover → Offer → Request → Acknowledge — client automatically IP পাওয়ার 4 steps।
+
+**Q48. Traceroute কী করে?**
+Source থেকে destination পর্যন্ত path এ কোন কোন router আছে তা দেখায়। ICMP Time Exceeded ব্যবহার করে।
+
+**Q49. Socket কী?**
+IP Address + Port Number = Socket। Network communication এর endpoint।
+
+**Q50. IPv4 ও IPv6 এর মূল পার্থক্য?**
+IPv4 = 32-bit, ~4.3 billion addresses। IPv6 = 128-bit, virtually unlimited addresses, no broadcast, IPSec built-in।
+
+---
+
+## 🟡 Intermediate Level (Q51-100)
+
+**Q51. OSI Model এর প্রতিটি layer এ কোন device কাজ করে?**
+L1=Hub/Repeater, L2=Switch/Bridge, L3=Router, L4+=Firewall, L7=Gateway/Proxy।
+
+**Q52. RIP ও OSPF এর পার্থক্য?**
+RIP = Distance Vector, hop count (max 15), slow convergence। OSPF = Link State, Dijkstra, cost (bandwidth), fast convergence, scalable।
+
+**Q53. BGP কী ও কোথায় ব্যবহৃত?**
+Border Gateway Protocol — Internet backbone এ ISP গুলোর মধ্যে routing। Path Vector, TCP 179।
+
+**Q54. VLAN কেন ব্যবহার করা হয়?**
+Logical network separation — security (isolation), performance (smaller broadcast domain), flexibility।
+
+**Q55. STP কেন দরকার?**
+Switch network এ redundant links থাকলে loop হয় → broadcast storm → network crash। STP loop prevent করে।
+
+**Q56. Sliding Window protocol কী?**
+Flow control mechanism — sender একসাথে window size অনুযায়ী multiple frames পাঠায় ACK ছাড়াই।
+
+**Q57. Go-Back-N ও Selective Repeat এর পার্থক্য?**
+Go-Back-N = error point থেকে সব retransmit। Selective Repeat = শুধু error frame retransmit (more efficient)।
+
+**Q58. CRC কী?**
+Cyclic Redundancy Check — error detection method। Ethernet Frame Check Sequence (FCS) এ ব্যবহৃত।
+
+**Q59. Symmetric ও Asymmetric Encryption এর পার্থক্য?**
+Symmetric = একটা key, fast (AES)। Asymmetric = public+private key, slow (RSA)।
+
+**Q60. Digital Signature কিভাবে কাজ করে?**
+Sender private key দিয়ে hash sign করে। Receiver sender এর public key দিয়ে verify করে। Authentication + Integrity guarantee।
+
+**Q61. IDS ও IPS এর পার্থক্য?**
+IDS = detect + alert (passive)। IPS = detect + block (active, inline)।
+
+**Q62. DDoS attack কিভাবে কাজ করে?**
+Attacker botnet (হাজারো compromised machine) দিয়ে target server এ massive traffic পাঠায় — server overwhelm হয়ে unavailable হয়।
+
+**Q63. ARP Poisoning কী?**
+Attacker fake ARP reply পাঠিয়ে নিজের MAC কে gateway এর IP এর সাথে associate করায় — সব traffic attacker এর কাছে আসে (MITM)।
+
+**Q64. WPA2 ও WPA3 এর পার্থক্য?**
+WPA2 = AES encryption, vulnerable to KRACK। WPA3 = stronger encryption (AES-256), SAE handshake, forward secrecy।
+
+**Q65. SDN কী?**
+Software-Defined Networking — control plane centralized, network programmable via API, flexible।
+
+**Q66. Load Balancer কী করে?**
+Incoming traffic কে multiple servers এ distribute করে — availability ও performance বাড়ায়।
+
+**Q67. CDN কিভাবে কাজ করে?**
+Content (images, JS, CSS) কে worldwide edge servers এ cache করে — user এর সবচেয়ে কাছের server থেকে serve।
+
+**Q68. WebSocket কেন ব্যবহার হয়?**
+Persistent bidirectional connection — real-time chat, live updates, gaming এর জন্য। HTTP এর মতো request-response না।
+
+**Q69. REST vs gRPC কী?**
+REST = HTTP/JSON, simple, public APIs। gRPC = HTTP/2, Protocol Buffers (binary), faster, microservices।
+
+**Q70. CORS কী?**
+Cross-Origin Resource Sharing — browser security mechanism। Different origin থেকে API call করতে server এর permission লাগে।
+
+**Q71. TTL কী?**
+Time To Live — packet কতটি router পার করতে পারবে। প্রতি hop এ 1 কমে, 0 হলে discard হয়। Routing loop prevention।
+
+**Q72. MTU কী?**
+Maximum Transmission Unit — network link এ একবারে সর্বোচ্চ কত size data পাঠানো যায়। Ethernet = 1500 bytes।
+
+**Q73. Fragmentation কী?**
+Packet MTU এর চেয়ে বড় হলে ছোট ছোট ভাগে ভাগ করা হয়। Receiver end এ reassemble হয়।
+
+**Q74. Proxy Server কী?**
+Client ও server এর মাঝে intermediary — content caching, filtering, anonymity provide করে।
+
+**Q75. Reverse Proxy কী?**
+Server side proxy — client থেকে request receive করে backend servers এ distribute করে। Example: Nginx, HAProxy।
+
+**Q76. DNS Caching কেন গুরুত্বপূর্ণ?**
+Same domain বারবার resolve না করে cache থেকে answer — faster response, less DNS traffic।
+
+**Q77. 802.1Q কী?**
+VLAN tagging standard — trunk link এ frame এ VLAN ID tag যোগ করে identify করতে।
+
+**Q78. Trunk Port ও Access Port এর পার্থক্য?**
+Access = একটা VLAN, end device connect। Trunk = multiple VLAN traffic carry, switch-to-switch।
+
+**Q79. ICMP কোন layer এ কাজ করে?**
+Network Layer (Layer 3) — error reporting ও diagnostics (ping, traceroute)।
+
+**Q80. Multicast কী?**
+Data একটা group এর সবাইকে পাঠানো (broadcast = everyone, unicast = one, multicast = group)।
+
+**Q81. IaaS, PaaS, SaaS এর পার্থক্য?**
+IaaS = infrastructure (VM, storage)। PaaS = platform (runtime, DB)। SaaS = ready software (Gmail)।
+
+**Q82. VPC কী?**
+Virtual Private Cloud — cloud এ isolated private network তৈরি করা। AWS VPC, Azure VNet।
+
+**Q83. Network Address Translation (NAT) এর types কী?**
+Static NAT (1:1), Dynamic NAT (pool), PAT/NAT Overload (many:1, port দিয়ে আলাদা)।
+
+**Q84. Zero Trust Architecture কী?**
+"Never trust, always verify" — network এর ভেতরে হলেও সবাইকে authenticate ও authorize করতে হবে।
+
+**Q85. 5G ও 4G এর মূল পার্থক্য?**
+5G = ~10 Gbps speed (100× faster), ~1ms latency, 1M devices/km²। AR/VR, IoT, autonomous vehicles।
+
+**Q86. TCP Window Size কী?**
+Flow control — receiver কত data receive করতে পারবে (buffer size) সেটা sender কে জানায়।
+
+**Q87. TCP Congestion Control কী?**
+Network congestion হলে sender data পাঠানোর rate কমায়। Algorithms: Slow Start, Congestion Avoidance।
+
+**Q88. DNS Zone Transfer কী?**
+Primary DNS server থেকে secondary server এ DNS records copy করা। TCP port 53 ব্যবহার করে।
+
+**Q89. DNSSEC কী?**
+DNS Security Extensions — DNS response authenticate করে DNS spoofing prevent করতে। Digital signature ব্যবহার করে।
+
+**Q90. HTTP/2 এর মূল improvement কী?**
+Multiplexing (একটা TCP connection এ multiple request), header compression, server push, binary protocol।
+
+**Q91. QUIC protocol কী?**
+Google এর UDP-based transport protocol — HTTP/3 এর foundation। TCP+TLS এর কাজ একসাথে, faster connection।
+
+**Q92. BGP Hijacking কী?**
+Attacker ভুল BGP route announce করে traffic নিজের দিকে redirect করে — Internet-scale attack।
+
+**Q93. Network Segmentation কেন important?**
+Attack blast radius limit করে। একটা segment compromise হলে পুরো network affected হয় না।
+
+**Q94. 802.1X কী?**
+Port-based Network Access Control — network এ connect করার আগে authenticate করতে হয়। RADIUS server ব্যবহার করে।
+
+**Q95. SNMP কী?**
+Simple Network Management Protocol — network devices monitor ও manage করার standard। Port 161 (UDP)।
+
+**Q96. Syslog কী?**
+Network devices থেকে log messages centrally collect করার protocol। Troubleshooting ও security audit এ ব্যবহৃত।
+
+**Q97. QoS (Quality of Service) কী?**
+Network traffic prioritize করা — voice/video কে higher priority, download কে lower। Bandwidth management।
+
+**Q98. MPLS কী?**
+Multi-Protocol Label Switching — packet এ label দিয়ে faster forwarding। IP lookup না করে label দেখে route করে।
+
+**Q99. Anycast কী?**
+একটা IP address একাধিক server এ assign — request সবচেয়ে কাছের server এ যায়। DNS root servers ও CDN এ ব্যবহৃত।
+
+**Q100. Network Jitter কী?**
+Packet arrival time এর variation। High jitter = VoIP/video call এ quality খারাপ হয়। QoS দিয়ে manage করা যায়।
+
+---
+
+## 🔴 Advanced Level (Q101-150)
+
+**Q101. TCP Fast Open কী?**
+TLS handshake এ data পাঠানো শুরু করে — connection setup time কমায়। Cookie-based।
+
+**Q102. Anycast ও Multicast এর পার্থক্য?**
+Anycast = group এর সবচেয়ে কাছের একজনকে। Multicast = group এর সবাইকে।
+
+**Q103. eBPF networking এ কিভাবে ব্যবহৃত হয়?**
+Linux kernel এ programmable packet processing — XDP, tc। High-performance load balancing, filtering। Cilium ব্যবহার করে।
+
+**Q104. Service Mesh কী?**
+Microservice architecture এ service-to-service communication manage করার dedicated infrastructure layer। Example: Istio, Linkerd।
+
+**Q105. Kubernetes Networking কিভাবে কাজ করে?**
+Pod-to-Pod communication, Services (ClusterIP, NodePort, LoadBalancer), Ingress controller, CNI plugins (Calico, Flannel)।
+
+**Q106. TCP BBR কী?**
+Google এর congestion control algorithm — bandwidth ও RTT measure করে optimal rate বের করে। Traditional loss-based এর চেয়ে better।
+
+**Q107. DPDK কী?**
+Data Plane Development Kit — kernel bypass করে userspace এ high-performance packet processing। ~10x faster than kernel networking।
+
+**Q108. BGP Route Reflector কেন দরকার?**
+Full mesh iBGP scalable না (n² connections)। Route Reflector central point হিসেবে routes reflect করে — কম connections লাগে।
+
+**Q109. ECMP কী?**
+Equal-Cost Multi-Path — same destination এ multiple equal-cost paths থাকলে traffic distribute করে। Load balancing।
+
+**Q110. Segment Routing কী?**
+Source routing — packet header এ পুরো path encode করা থাকে। MPLS/IPv6 extension। SDN-friendly।
+
+**Q111. Network Function Virtualization (NFV) কী?**
+Network functions (firewall, load balancer, router) কে dedicated hardware এর বদলে VMs/containers এ run করা।
+
+**Q112. VXLAN কী?**
+Virtual Extensible LAN — Layer 2 overlay over Layer 3 network। Data center networking, cloud multi-tenancy।
+
+**Q113. GRE Tunnel কী?**
+Generic Routing Encapsulation — one protocol এর packet কে another protocol এ encapsulate করে tunnel দিয়ে পাঠায়।
+
+**Q114. IPSec Tunnel ও Transport Mode এর পার্থক্য?**
+Tunnel = পুরো IP packet encrypt + new IP header। Transport = শুধু payload encrypt, original IP header রাখে।
+
+**Q115. mTLS কী?**
+Mutual TLS — client ও server দুজনেই certificate verify করে। Zero Trust, microservices এ ব্যবহৃত।
+
+**Q116. DNS over HTTPS (DoH) কী?**
+DNS queries HTTPS এর মধ্য দিয়ে পাঠায় — privacy improve, ISP DNS query দেখতে পারে না।
+
+**Q117. TCP SYN Flood attack কী?**
+Attacker অনেক SYN packet পাঠায় কিন্তু ACK দেয় না — server এর connection table full হয়ে যায়। DoS attack।
+
+**Q118. Rate Limiting কিভাবে implement করা হয়?**
+Token Bucket বা Leaky Bucket algorithm — per IP/user request limit set করে। API abuse prevention।
+
+**Q119. Connection Pooling কেন দরকার?**
+প্রতি request এ নতুন TCP connection (3-way handshake) expensive। Pool এ connections reuse করে — database ও HTTP connection এ ব্যবহৃত।
+
+**Q120. HTTP Keep-Alive কী?**
+একটা TCP connection multiple HTTP request/response এ reuse করে — connection overhead কমে।
+
+**Q121. Graceful Degradation networking এ কী?**
+Service এর কিছু part fail হলেও বাকি service চালু থাকা। Example: CDN fail হলে origin server থেকে serve।
+
+**Q122. Circuit Breaker pattern networking এ কী?**
+Downstream service fail হলে further requests block করে — cascading failure prevent। States: Closed, Open, Half-Open।
+
+**Q123. Network Namespace কী?**
+Linux feature — isolated network stack (interfaces, routing table, iptables)। Containers (Docker) এটা ব্যবহার করে।
+
+**Q124. Overlay vs Underlay Network কী?**
+Underlay = physical network infrastructure। Overlay = underlay এর উপর virtual network (VXLAN, GRE)।
+
+**Q125. Spine-Leaf Architecture কী?**
+Modern data center topology — every leaf switch connects to every spine switch। Predictable latency, scalable।
+
+**Q126. ARP Spoofing prevent করার উপায় কী?**
+Dynamic ARP Inspection (DAI), static ARP entries, port security, 802.1X।
+
+**Q127. TCP TIME_WAIT state কেন থাকে?**
+Connection close হওয়ার পর 2×MSL সময় wait করে — delayed segments handle করতে এবং last ACK lost হলে retransmit করতে।
+
+**Q128. Nagle's Algorithm কী?**
+ছোট ছোট TCP segment buffer করে একটা বড় segment এ পাঠায় — bandwidth efficient। কিন্তু latency বাড়ে (real-time app এ disable করা হয়)।
+
+**Q129. TCP_NODELAY কী?**
+Nagle's algorithm disable করে — প্রতিটি write() immediately send হয়। Low-latency apps (gaming, trading) এ ব্যবহৃত।
+
+**Q130. Jumbo Frames কী?**
+MTU 1500 bytes এর বদলে 9000 bytes — data center internal traffic এ throughput বাড়ায়, header overhead কমায়।
+
+**Q131. LACP কী?**
+Link Aggregation Control Protocol — multiple physical links কে একটা logical link এ bundle করে। Bandwidth বাড়ে + redundancy।
+
+**Q132. Gratuitous ARP কী?**
+Device নিজের IP এর জন্য ARP request পাঠায় — IP conflict detection এবং অন্যদের ARP cache update করতে।
+
+**Q133. DHCP Snooping কী?**
+Switch level DHCP security — unauthorized DHCP server block করে। Rogue DHCP attack prevention।
+
+**Q134. Port Security কী?**
+Switch port এ allowed MAC address limit করা — unauthorized device connect করতে পারে না।
+
+**Q135. ACL (Access Control List) কী?**
+Router/firewall এ rules — specific IP, port, protocol based traffic allow/deny। Standard ACL (source IP only), Extended ACL (source+dest IP+port)।
+
+**Q136. NAT64 কী?**
+IPv6 device কে IPv4 resource access করতে দেয় — IPv6 → IPv4 translation। Transition mechanism।
+
+**Q137. Dual Stack কী?**
+Device একসাথে IPv4 ও IPv6 দুটোই support করে। সবচেয়ে common IPv4→IPv6 transition strategy।
+
+**Q138. Multipath TCP (MPTCP) কী?**
+একটা TCP connection multiple paths (WiFi + cellular) দিয়ে একসাথে data পাঠায় — bandwidth aggregation + resilience।
+
+**Q139. TCP Selective ACK (SACK) কী?**
+Receiver specifically বলে কোন segments পেয়েছে, কোনটা missing — sender শুধু missing segments retransmit করে। Efficient।
+
+**Q140. SRv6 কী?**
+Segment Routing over IPv6 — IPv6 extension headers এ routing instructions encode করে। SDN ও programmable networking এ।
+
+**Q141. Intent-Based Networking কী?**
+Admin "what" বলে (intent), system "how" নিজে বের করে। AI/ML driven network automation। Cisco DNA Center।
+
+**Q142. Network Telemetry কী?**
+Real-time network data collection — streaming telemetry (gNMI, gRPC) traditional polling (SNMP) এর চেয়ে better।
+
+**Q143. P4 Programming কী?**
+Protocol-Independent Packet Processor programming language — switch/router এর data plane programmable করে। Custom protocols define করা যায়।
+
+**Q144. SmartNIC কী?**
+Network card with programmable processor — network functions (encryption, filtering) NIC level এ offload করে। CPU load কমায়।
+
+**Q145. Network Slicing কী?**
+5G concept — একটা physical network কে multiple virtual networks (slices) এ ভাগ করা, প্রতিটির আলাদা QoS।
+
+**Q146. Time-Sensitive Networking (TSN) কী?**
+IEEE 802.1 standards — deterministic, low-latency Ethernet। Industrial automation, automotive networking।
+
+**Q147. SASE কী?**
+Secure Access Service Edge — networking (SD-WAN) + security (firewall, CASB, ZTNA) কে cloud-delivered service হিসেবে combine করা।
+
+**Q148. XDP (eXpress Data Path) কী?**
+Linux kernel এ eBPF-based programmable packet processing — NIC driver level এ, kernel stack এর আগেই। Ultra-fast filtering, DDoS mitigation।
+
+**Q149. Network Digital Twin কী?**
+Physical network এর virtual replica — "what-if" scenarios simulate করা, change এর impact test করা production এ apply করার আগে।
+
+**Q150. Quantum Networking কী?**
+Quantum entanglement ও quantum key distribution (QKD) ব্যবহার করে theoretically unhackable communication। Research stage।
+
+---
+---
+
+# BONUS: 50 Most Repeated Exam MCQs
+
+<div align="center">
+
+*বিগত পরীক্ষাগুলোতে সবচেয়ে বেশি বার এসেছে এমন MCQ — Explanation সহ*
+
+</div>
+
+---
+
+**1.** OSI Model এ কতটি layer আছে?
+**Answer:** 7 ✅
+
+**2.** TCP/IP Model এ কতটি layer আছে?
+**Answer:** 4 ✅
+
+**3.** Router কোন layer এ কাজ করে?
+**Answer:** Layer 3 (Network) ✅
+
+**4.** Switch কোন layer এ কাজ করে?
+**Answer:** Layer 2 (Data Link) ✅
+
+**5.** Hub কোন layer এ কাজ করে?
+**Answer:** Layer 1 (Physical) ✅
+
+**6.** IPv4 address কত bit?
+**Answer:** 32 bit ✅
+
+**7.** IPv6 address কত bit?
+**Answer:** 128 bit ✅
+
+**8.** MAC address কত bit?
+**Answer:** 48 bit ✅
+
+**9.** HTTP কোন port?
+**Answer:** 80 ✅
+
+**10.** HTTPS কোন port?
+**Answer:** 443 ✅
+
+**11.** FTP কোন port?
+**Answer:** 20 (data), 21 (control) ✅
+
+**12.** SSH কোন port?
+**Answer:** 22 ✅
+
+**13.** DNS কোন port?
+**Answer:** 53 ✅
+
+**14.** SMTP কোন port?
+**Answer:** 25 ✅
+
+**15.** Telnet কোন port?
+**Answer:** 23 ✅
+
+**16.** Class A IP এর range?
+**Answer:** 1-126 ✅ (127 loopback)
+
+**17.** Class B IP এর range?
+**Answer:** 128-191 ✅
+
+**18.** Class C IP এর range?
+**Answer:** 192-223 ✅
+
+**19.** 127.0.0.1 কী?
+**Answer:** Loopback / localhost ✅
+
+**20.** TCP কি connection-oriented?
+**Answer:** হ্যাঁ ✅
+
+**21.** UDP কি connection-oriented?
+**Answer:** না, connectionless ✅
+
+**22.** TCP 3-way handshake?
+**Answer:** SYN → SYN-ACK → ACK ✅
+
+**23.** DNS কী করে?
+**Answer:** Domain name → IP address resolve ✅
+
+**24.** DHCP কী করে?
+**Answer:** Automatically IP address assign ✅
+
+**25.** ARP কী করে?
+**Answer:** IP → MAC address resolve ✅
+
+**26.** ping কোন protocol ব্যবহার করে?
+**Answer:** ICMP ✅
+
+**27.** Firewall কী করে?
+**Answer:** Network traffic filter (allow/deny) ✅
+
+**28.** VPN কী?
+**Answer:** Public network এ encrypted private tunnel ✅
+
+**29.** NAT কী করে?
+**Answer:** Private IP → Public IP translate ✅
+
+**30.** Subnet mask 255.255.255.0 এর CIDR?
+**Answer:** /24 ✅
+
+**31.** /26 subnet mask কত?
+**Answer:** 255.255.255.192 ✅
+
+**32.** Class C network এ max hosts?
+**Answer:** 254 (2⁸ - 2) ✅
+
+**33.** OSI Layer 3 এর PDU?
+**Answer:** Packet ✅
+
+**34.** OSI Layer 2 এর PDU?
+**Answer:** Frame ✅
+
+**35.** OSI Layer 4 এর PDU?
+**Answer:** Segment ✅
+
+**36.** RIP এর max hop count?
+**Answer:** 15 ✅
+
+**37.** OSPF কোন algorithm?
+**Answer:** Dijkstra (SPF) ✅
+
+**38.** BGP কোন port?
+**Answer:** TCP 179 ✅
+
+**39.** VLAN কী করে?
+**Answer:** Broadcast domain logically ভাগ করে ✅
+
+**40.** Star topology তে central device fail হলে?
+**Answer:** পুরো network down ✅
+
+**41.** Mesh topology তে n device এ cable সংখ্যা?
+**Answer:** n(n-1)/2 ✅
+
+**42.** Fiber Optic এ কিসের মাধ্যমে data যায়?
+**Answer:** Light (আলো) ✅
+
+**43.** CIA Triad এর C কী?
+**Answer:** Confidentiality ✅
+
+**44.** DDoS attack কিসে আঘাত করে?
+**Answer:** Availability ✅
+
+**45.** WPA2 কোন encryption?
+**Answer:** AES ✅
+
+**46.** IDS ও IPS এর পার্থক্য?
+**Answer:** IDS = detect + alert, IPS = detect + block ✅
+
+**47.** Full-duplex example?
+**Answer:** Telephone call ✅
+
+**48.** Half-duplex example?
+**Answer:** Walkie-talkie ✅
+
+**49.** Simplex example?
+**Answer:** Keyboard → CPU, TV broadcast ✅
+
+**50.** Internet কোন ধরনের network?
+**Answer:** WAN (Wide Area Network) ✅
+
+---
+---
+
+<div align="center">
+
+---
+
+**🎉 Congratulations! আপনি Computer Networking Handbook সম্পূর্ণ করেছেন! 🎉**
+
+**40 Topics** | **300+ MCQ** | **150+ Written Problems** | **150 Interview Q&A** | **40+ Diagrams**
+
+---
+
+*Made with ❤️ for Bangladeshi Software Engineers, IT Job Seekers & Assistant Programmer Candidates*
+
+</div>
+

@@ -1,0 +1,616 @@
+import { Mermaid } from '@/components/mdx/Mermaid';
+import { Callout } from '@/components/mdx/Callout';
+
+# Computer Organization & Architecture — GATE CSE 🖥️
+
+> **Priority:** 🟡 Medium | **Avg Marks:** 7 | **Difficulty:** Medium
+> COA এ calculations বেশি। Formulas ঠিক রাখলে সহজ marks।
+
+---
+
+## 📚 1. Syllabus Overview
+
+1. **Machine Instructions and Addressing Modes**
+2. **ALU, Data-path and Control Unit**
+3. **Instruction Pipelining** — Hazards
+4. **Memory Hierarchy** — Cache, Main memory, Secondary storage
+5. **I/O Interface** — Interrupt and DMA mode
+
+---
+
+## 📊 2. Weightage Analysis
+
+| Year | Marks | Most Asked |
+|------|-------|------------|
+| 2024 | 7 | Cache, Pipelining |
+| 2023 | 8 | Addressing modes, Cache |
+| 2022 | 7 | Pipelining hazards |
+| 2021 | 6 | Memory hierarchy |
+| 2020 | 7 | Cache mapping |
+
+<Mermaid chart={`pie title COA — Topic Frequency
+    "Cache Memory" : 30
+    "Pipelining" : 25
+    "Addressing Modes" : 15
+    "Main Memory" : 10
+    "I/O" : 10
+    "Others" : 10
+`} />
+
+---
+
+## 🧠 3. Core Concepts
+
+### 3.1 Number Systems
+
+#### Representations
+
+| Decimal | Binary | Octal | Hex |
+|---------|--------|-------|-----|
+| 10 | 1010 | 12 | A |
+| 15 | 1111 | 17 | F |
+| 255 | 11111111 | 377 | FF |
+
+#### Signed Number Representations
+
+For n bits:
+
+| System | Range |
+|--------|-------|
+| **Sign-Magnitude** | -(2^(n-1)-1) to +(2^(n-1)-1) |
+| **1's Complement** | -(2^(n-1)-1) to +(2^(n-1)-1) |
+| **2's Complement** | -2^(n-1) to +(2^(n-1)-1) |
+
+**Why 2's complement?** Only one zero, arithmetic consistent।
+
+#### 2's Complement
+
+**To find 2's complement:** Invert bits + add 1।
+
+**Example:** +5 = 0101 (4-bit)
+- 1's complement: 1010
+- 2's complement: 1011 = -5
+
+---
+
+### 3.2 Floating Point (IEEE 754)
+
+#### Single Precision (32 bits)
+
+| Sign | Exponent | Mantissa |
+|------|----------|----------|
+| 1 bit | 8 bits | 23 bits |
+
+- **Bias:** 127
+- **Value:** `(-1)^S × 1.M × 2^(E-127)`
+
+#### Example
+
+25.375 in IEEE 754:
+- Binary: `11001.011`
+- Normalize: `1.1001011 × 2⁴`
+- Exponent: 4+127 = 131 = 10000011
+- Mantissa: 1001011 (23 bits total with trailing 0s)
+- Sign: 0
+
+Result: `0 10000011 10010110000000000000000`
+
+---
+
+### 3.3 Addressing Modes
+
+| Mode | Description | Example |
+|------|-------------|---------|
+| **Immediate** | Operand in instruction | `MOV R1, #5` |
+| **Direct** | Address in instruction | `MOV R1, [100]` |
+| **Indirect** | Address of address | `MOV R1, [[100]]` |
+| **Register** | Register holds operand | `MOV R1, R2` |
+| **Register indirect** | Register holds address | `MOV R1, [R2]` |
+| **Indexed** | Base + Index | `MOV R1, [R2+5]` |
+| **Relative** | PC + offset | Branch instructions |
+
+---
+
+### 3.4 Instruction Pipelining
+
+**Without pipelining:** Each instruction takes k cycles। N instructions = N×k cycles।
+
+**With k-stage pipelining:** N instructions = (k + N - 1) cycles।
+
+**Speedup:** `S = N×k / (k + N - 1)` → approaches k as N increases।
+
+<Mermaid chart={`gantt
+    title 4-stage Pipeline
+    dateFormat  X
+    axisFormat %s
+    section I1
+    IF : 0, 1
+    ID : 1, 2
+    EX : 2, 3
+    WB : 3, 4
+    section I2
+    IF : 1, 2
+    ID : 2, 3
+    EX : 3, 4
+    WB : 4, 5
+`} />
+
+#### Pipeline Hazards
+
+1. **Structural hazard** — resource conflict
+2. **Data hazard** — instruction depends on earlier instruction's result
+3. **Control hazard** — branch instructions
+
+#### Data Hazard Types
+
+- **RAW (Read After Write)** — true dependency
+- **WAR (Write After Read)** — anti-dependency
+- **WAW (Write After Write)** — output dependency
+
+**Solutions:** Forwarding, pipeline stall, reordering
+
+---
+
+### 3.5 Cache Memory
+
+#### Why Cache?
+
+Memory এর speed CPU এর চেয়ে slow। Frequently used data cache এ রেখে speed বাড়ানো হয়।
+
+#### Memory Hierarchy
+
+```
+Register → L1 Cache → L2 Cache → L3 Cache → RAM → Disk
+Fast/Small                              Slow/Large
+```
+
+#### Cache Mapping
+
+##### 1. Direct Mapping
+
+Each memory block maps to **exactly one** cache line।
+
+`Cache line = (Block address) mod (Number of cache lines)`
+
+##### 2. Fully Associative
+
+Any block can go to **any** cache line। Expensive lookup।
+
+##### 3. Set Associative (n-way)
+
+Cache divided into sets, each set has n lines। Block maps to specific set, any line within।
+
+#### Address Breakdown
+
+For cache of `C` lines, block size `B`, memory `M`:
+
+**Direct mapping:**
+- Offset = log₂(B)
+- Line = log₂(C)
+- Tag = log₂(M) - log₂(C) - log₂(B)
+
+**n-way set associative:**
+- Sets = C/n
+- Set index = log₂(C/n)
+- Tag = remaining bits
+
+#### Hit and Miss
+
+- **Hit rate (h):** fraction of accesses found in cache
+- **Miss rate (1-h)**
+
+#### Average Memory Access Time (AMAT)
+
+`AMAT = Hit_time + Miss_rate × Miss_penalty`
+
+Or for multi-level:
+`AMAT = h × T_cache + (1-h) × T_mem`
+
+---
+
+### 3.6 Main Memory
+
+#### Types
+
+- **DRAM** — slower, cheaper, needs refresh
+- **SRAM** — faster, expensive, used in cache
+
+#### Memory Interleaving
+
+Memory banks parallel access। k-way interleaving → access k words in 1 memory cycle।
+
+---
+
+### 3.7 I/O Interface
+
+#### Modes
+
+1. **Programmed I/O** — CPU polls, slow
+2. **Interrupt-driven I/O** — Device interrupts CPU
+3. **DMA (Direct Memory Access)** — Device transfers directly to memory, CPU free
+
+---
+
+## 📐 4. Formulas & Shortcuts
+
+### Number System Conversions
+
+- Binary to Decimal: positional sum
+- Decimal to Binary: repeated division by 2
+- Binary to Hex: group 4 bits from right
+
+### Floating Point
+
+- Single precision bias = 127
+- Double precision bias = 1023
+
+### Pipelining
+
+- Speedup S = k / (1 + (k-1)/N)
+- Throughput = N / (k+N-1) × clock rate
+- Ideal speedup = k (number of stages)
+
+### Cache
+
+- Block = memory bytes transferred at once
+- Cache size = Number of lines × Block size
+- AMAT = h × t_hit + (1-h) × t_miss
+
+### Memory Access
+
+- `Effective Access Time (EAT)` = h × t_cache + (1-h) × t_memory
+
+---
+
+## 🎯 5. Common Question Patterns
+
+1. **Number conversion** — decimal ↔ binary ↔ hex
+2. **2's complement** and ranges
+3. **Cache address breakdown** — tag/index/offset bits
+4. **Cache mapping type** — hit/miss sequence
+5. **Pipeline speedup** calculation
+6. **Pipeline hazards identification**
+7. **AMAT calculation**
+8. **Instruction format** — bits for opcode, registers
+
+---
+
+## 📜 6. Previous Year Questions (PYQ)
+
+### 🔹 Number System Questions
+
+#### PYQ 1 (GATE 2023) — 2's Complement
+
+8-bit 2's complement। -45 এর binary?
+
+**Solution:**
+45 = 00101101
+1's complement: 11010010
+2's complement: **11010011** ✅
+
+---
+
+#### PYQ 2 (GATE 2022) — Range
+
+8-bit 2's complement range?
+
+**Answer:** -128 to +127 ✅
+
+---
+
+#### PYQ 3 (GATE 2020) — Floating Point
+
+IEEE 754 single precision এ 32-bit। Largest positive normalized?
+
+**Answer:** Exponent all 1s reserved, so max exp = 254, bias 127. Value ≈ (2 - 2⁻²³) × 2¹²⁷ ≈ 3.4 × 10³⁸ ✅
+
+---
+
+### 🔹 Addressing Modes
+
+#### PYQ 4 (GATE 2024) — Addressing
+
+`MOV R1, [R2+10]` কোন addressing?
+
+**Answer:** **Indexed** (Base + offset) ✅
+
+---
+
+#### PYQ 5 (GATE 2021) — Modes
+
+Immediate vs Direct addressing — difference?
+
+**Answer:**
+- Immediate: operand value itself
+- Direct: address of operand ✅
+
+---
+
+### 🔹 Pipelining Questions
+
+#### PYQ 6 (GATE 2024) — Speedup
+
+5-stage pipeline, 100 instructions। Speedup over non-pipelined?
+
+**Solution:**
+Non-pipelined: 100 × 5 = 500 cycles
+Pipelined: 5 + 99 = 104 cycles
+Speedup = 500 / 104 ≈ **4.81** ✅
+
+---
+
+#### PYQ 7 (GATE 2023) — Stall
+
+Pipeline with data hazard, 1 stall cycle per hazard. 20% instructions have hazard. Effective CPI?
+
+**Solution:**
+CPI = 1 + 0.20 × 1 = **1.2** ✅
+
+---
+
+#### PYQ 8 (GATE 2022) — Pipeline Cycles
+
+4-stage pipeline, stages take 10, 8, 10, 12 ns. 10 instructions total time?
+
+**Solution:**
+Max stage time = 12 ns (clock period)
+Total time = (4 + 10 - 1) × 12 = 13 × 12 = **156 ns** ✅
+
+---
+
+#### PYQ 9 (GATE 2021) — Hazard Type
+
+```
+I1: ADD R1, R2, R3
+I2: SUB R4, R1, R5
+```
+Type of hazard?
+
+**Answer:** **RAW (Read After Write)** — I2 needs R1 written by I1 ✅
+
+---
+
+### 🔹 Cache Questions
+
+#### PYQ 10 (GATE 2024) — Cache Mapping
+
+16 KB direct-mapped cache, 32-byte blocks, 32-bit address। Tag bits?
+
+**Solution:**
+- Block offset = log₂(32) = **5 bits**
+- Number of lines = 16 KB / 32 B = 512 = 2^9 → **9 bits** index
+- Tag = 32 - 5 - 9 = **18 bits** ✅
+
+---
+
+#### PYQ 11 (GATE 2023) — Set Associative
+
+32 KB, 4-way set associative, 64 B blocks। Set index bits?
+
+**Solution:**
+- Lines = 32 KB / 64 = 512
+- Sets = 512 / 4 = 128 = 2^7 → **7 bits** ✅
+
+---
+
+#### PYQ 12 (GATE 2022) — AMAT
+
+Cache hit time 2 ns, miss penalty 50 ns, hit rate 95%। AMAT?
+
+**Solution:**
+AMAT = 2 + 0.05 × 50 = 2 + 2.5 = **4.5 ns** ✅
+
+---
+
+#### PYQ 13 (GATE 2021) — Hit Rate
+
+Memory access time 100 ns, cache 10 ns, hit rate 0.9। EAT?
+
+**Solution:**
+EAT = 0.9 × 10 + 0.1 × (10 + 100) = 9 + 11 = **20 ns** ✅
+
+---
+
+#### PYQ 14 (GATE 2020) — Cache Size
+
+Cache size 64 KB, block 32 B। Lines?
+
+**Solution:**
+64 KB / 32 B = **2048 lines** ✅
+
+---
+
+### 🔹 Memory Questions
+
+#### PYQ 15 (GATE 2024) — Memory Address
+
+32-bit address, 4 GB addressable。 Byte-addressable।
+
+---
+
+#### PYQ 16 (GATE 2023) — Main Memory
+
+1 MB memory, byte-addressable। Address bits?
+
+**Solution:** log₂(2^20) = **20 bits** ✅
+
+---
+
+#### PYQ 17 (GATE 2021) — Interleaving
+
+4-way memory interleaving, each bank 100 ns, 4 consecutive accesses time?
+
+**Solution:**
+Ideal: All 4 banks in parallel = 100 ns + 3 × 25 ns = **175 ns** (approx)
+Or: All 4 in parallel → 100 ns
+
+---
+
+### 🔹 I/O Questions
+
+#### PYQ 18 (GATE 2022) — DMA
+
+DMA vs Interrupt — which faster for large data?
+
+**Answer:** **DMA** (bypasses CPU for data transfer) ✅
+
+---
+
+#### PYQ 19 (GATE 2020) — Interrupt
+
+Interrupt handling এ কী save করে?
+
+**Answer:** PC, registers, flags (CPU state) ✅
+
+---
+
+### 🔹 ALU & Control Unit
+
+#### PYQ 20 (GATE 2023) — ALU
+
+ALU কী operations করে?
+
+**Answer:** Arithmetic (add, sub, mul) + Logic (AND, OR, NOT, XOR) + Compare ✅
+
+---
+
+#### PYQ 21 (GATE 2022) — Control Unit Types
+
+Hardwired vs Microprogrammed?
+
+**Answer:**
+- **Hardwired:** Fast, complex circuit, hard to modify
+- **Microprogrammed:** Slower, flexible, uses micro-instructions ✅
+
+---
+
+### 🔹 Instruction Format
+
+#### PYQ 22 (GATE 2021) — Instruction Bits
+
+8 operations, 4 registers, 32-bit address. Instruction format (2-operand)?
+
+**Solution:**
+- Opcode = log₂(8) = 3 bits
+- Register = log₂(4) = 2 bits each → 4 bits
+- Address = 32 bits
+**Total = 3 + 4 + 32 = 39 bits** ✅
+
+---
+
+#### PYQ 23 (GATE 2020) — Program Counter
+
+PC কী track করে?
+
+**Answer:** Next instruction address ✅
+
+---
+
+### 🔹 Miscellaneous
+
+#### PYQ 24 (GATE 2024) — RISC vs CISC
+
+RISC এর feature?
+
+**Answer:** Simple instructions, fixed format, large register file, pipelining-friendly ✅
+
+---
+
+#### PYQ 25 (GATE 2022) — Booth's Algorithm
+
+Booth's algorithm কী করে?
+
+**Answer:** Signed multiplication efficiently (handles negatives) ✅
+
+---
+
+## 🏋️ 7. Practice Problems
+
+1. 8-bit 2's complement এ -35 + 22 calculate।
+2. IEEE 754 single precision এ 7.5 represent।
+3. Cache 64 KB, 4-way set assoc, 32-byte blocks, 32-bit address. Tag bits?
+4. 4-stage pipeline, 50 instructions, 10 ns clock। Total time?
+5. 20% branch instructions, 20% data hazard (1 stall each)। CPI?
+6. `ADD R1, (R2)+` — addressing mode?
+7. Memory interleaving: 8 banks, 50 ns access। 8 consecutive words time?
+
+<details>
+<summary>💡 Answers</summary>
+
+1. -35 = 11011101, 22 = 00010110. Sum = 11110011 = -13 ✓
+2. Sign 0, Exp 10000001 (129), Mantissa 11100000... = `0 10000001 11100000000000000000000`
+3. Offset 5, index 9 (sets=512), tag 18
+4. (4 + 49) × 10 = 530 ns
+5. CPI = 1 + 0.2×stall + 0.2×1 = depends on branch stall
+6. Auto-increment indirect
+7. 50 + 7×(50/8) ≈ 50 + 6.25 × 7 ≈ 94 ns (approx)
+
+</details>
+
+---
+
+## ⚠️ 8. Traps & Common Mistakes
+
+- ❌ **Byte vs Word** addressable — read carefully
+- ❌ **Cache line = block**, often confused
+- ❌ **Direct mapped: line = block mod C**, not block / C
+- ❌ **Pipelining clock = slowest stage**, not average
+- ❌ **First instruction doesn't get speedup** — only subsequent
+- ❌ **Branch taken/not taken** — both need considered for CPI
+- ❌ **AMAT formula** — miss penalty includes cache access sometimes
+- ❌ **2's complement range asymmetric:** -128 to +127 (not -127)
+- ❌ **Register indirect vs Indirect** — different modes
+- ❌ **RISC = fewer instructions, simpler, fixed length**
+
+---
+
+## 📝 9. Quick Revision Summary
+
+### Must-Remember Formulas
+
+```
+Pipeline speedup = N×k / (k+N-1)
+AMAT = hit_time + miss_rate × miss_penalty
+EAT = h × t_cache + (1-h) × t_memory
+CPI = 1 + Σ(freq × stall)
+
+Direct mapped cache bits:
+  offset = log₂(block_size)
+  index = log₂(num_lines)
+  tag = addr_bits - offset - index
+
+Set associative:
+  sets = num_lines / ways
+  index = log₂(sets)
+```
+
+### Key Numbers
+
+- IEEE 754 single: 1+8+23, bias 127
+- IEEE 754 double: 1+11+52, bias 1023
+- 8-bit signed range: -128 to +127
+- 16-bit signed: -32768 to +32767
+- 32-bit unsigned: 0 to 4,294,967,295
+
+### Addressing Modes Summary
+
+| Mode | Access |
+|------|--------|
+| Immediate | operand in instr |
+| Direct | memory[addr] |
+| Indirect | memory[memory[addr]] |
+| Register | register content |
+| Indexed | register + offset |
+
+---
+
+## 🔗 Navigation
+
+- [🏠 Master Index](00-master-index)
+- [◀ Previous: Digital Logic](02-digital-logic)
+- [▶ Next: Programming & DS](04-programming-data-structures)
+
+---
+
+**Tip:** COA এ formulas and cache calculations বেশি হবে। নিয়মিত practice করলে fast solve করা যায়। 🎯
+
