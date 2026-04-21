@@ -1,0 +1,637 @@
+# Programming & Data Structures — GATE CSE 💻
+
+> **Priority:** 🟡 Medium | **Avg Marks:** 6 | **Difficulty:** Easy-Medium
+> C এর basics + classic data structures। Practice করলে scoring subject।
+
+---
+
+## 📚 1. Syllabus Overview
+
+1. **C Programming** — Pointers, Structures, Recursion
+2. **Arrays, Stacks, Queues, Linked Lists**
+3. **Trees** — Binary tree, BST, AVL
+4. **Hashing**
+5. **Heaps**
+6. **Graphs** — Representations
+
+---
+
+## 📊 2. Weightage Analysis
+
+| Year | Marks | Most Asked |
+|------|-------|------------|
+| 2024 | 6 | Pointers, Recursion |
+| 2023 | 7 | Trees, Linked List |
+| 2022 | 5 | BST, Stack |
+| 2021 | 6 | Recursion |
+| 2020 | 6 | Hashing |
+
+---
+
+## 🧠 3. Core Concepts
+
+### 3.1 C Programming Fundamentals
+
+#### Pointers
+
+Pointer = variable যা অন্য variable এর address রাখে।
+
+```c
+int x = 10;
+int *p = &x;      // p holds address of x
+printf("%d", *p); // prints 10 (value at p)
+```
+
+#### Pointer Arithmetic
+
+`p + 1` pointer কে **sizeof(type)** byte এগোয়।
+
+```c
+int arr[5];
+int *p = arr;
+p++;  // now points to arr[1]
+```
+
+#### Array and Pointer
+
+- `arr[i]` equivalent to `*(arr + i)`
+- Function parameter `int arr[]` = `int *arr` (decay)
+
+#### Pass by Value vs Reference
+
+- C এ **পুরোটাই pass by value**
+- Pointer pass করে "reference-like" behavior পাওয়া যায়
+
+```c
+void swap(int *a, int *b) {
+    int t = *a;
+    *a = *b;
+    *b = t;
+}
+```
+
+#### Recursion
+
+Function নিজেকে call করে। Base case must থাকবে।
+
+```c
+int factorial(int n) {
+    if (n == 0) return 1;    // base case
+    return n * factorial(n-1); // recursive call
+}
+```
+
+---
+
+### 3.2 Arrays
+
+- Contiguous memory
+- Random access O(1)
+- Insert/delete middle O(n)
+
+#### 2D Array Address
+
+Row-major: `A[i][j] = Base + (i × cols + j) × size`
+Column-major: `A[i][j] = Base + (j × rows + i) × size`
+
+---
+
+### 3.3 Stacks
+
+**LIFO** (Last In First Out)।
+
+**Operations:**
+- `push(x)` — top এ add
+- `pop()` — top থেকে remove
+- `peek/top()` — top দেখা
+- `isEmpty()`
+
+**Uses:** Expression evaluation, parenthesis matching, function calls, DFS।
+
+#### Stack using Array
+
+```c
+int stack[MAX], top = -1;
+void push(int x) { stack[++top] = x; }
+int pop() { return stack[top--]; }
+```
+
+---
+
+### 3.4 Queues
+
+**FIFO** (First In First Out)।
+
+**Operations:**
+- `enqueue(x)` — rear এ add
+- `dequeue()` — front থেকে remove
+
+#### Circular Queue
+
+Array এর শেষে পৌঁছালে beginning এ wrap around।
+
+#### Priority Queue
+
+Elements এর priority অনুযায়ী remove (highest first)। Implemented via heap।
+
+---
+
+### 3.5 Linked Lists
+
+#### Singly Linked List
+
+```c
+struct Node {
+    int data;
+    struct Node *next;
+};
+```
+
+**Operations:**
+- Insert at beginning: O(1)
+- Insert at end: O(n) [or O(1) with tail pointer]
+- Search: O(n)
+- Delete: O(n)
+
+#### Doubly Linked List
+
+প্রতিটা node এর **prev** ও **next** pointer আছে।
+
+```c
+struct Node {
+    int data;
+    struct Node *prev, *next;
+};
+```
+
+#### Circular Linked List
+
+শেষ node first এ point করে।
+
+---
+
+### 3.6 Trees
+
+#### Binary Tree
+
+প্রতিটা node এর **≤ 2 children**।
+
+**Terminology:**
+- Root, Leaf, Parent, Child
+- Height = longest root-to-leaf path
+- Depth = distance from root
+
+#### Tree Traversals
+
+**DFS-based:**
+- **Preorder:** Root → Left → Right
+- **Inorder:** Left → Root → Right
+- **Postorder:** Left → Right → Root
+
+**BFS-based:**
+- **Level-order** (uses queue)
+
+#### BST (Binary Search Tree)
+
+- Left subtree < Root
+- Right subtree > Root
+- **Inorder of BST = sorted**
+
+**Operations:**
+- Search: O(h) average O(log n), worst O(n)
+- Insert, Delete: same
+
+#### AVL Tree
+
+Self-balancing BST। Balance factor = height(left) - height(right) ∈ {-1, 0, 1}।
+
+**Rotations:** LL, RR, LR, RL।
+
+**Height:** O(log n)।
+
+---
+
+### 3.7 Heap
+
+Complete binary tree, parent > children (max-heap)।
+
+**Array representation:**
+- Parent of `i` = `(i-1)/2`
+- Left child of `i` = `2i+1`
+- Right child = `2i+2`
+
+**Operations:**
+- `insert`: O(log n)
+- `extractMax`: O(log n)
+- `buildHeap`: O(n)
+
+---
+
+### 3.8 Hashing
+
+**Hash function:** key → index।
+
+#### Collision Resolution
+
+1. **Separate chaining** — each bucket is linked list
+2. **Open addressing** — find alternate slot
+   - Linear probing: `(h+i) mod m`
+   - Quadratic probing: `(h+i²) mod m`
+   - Double hashing: `(h1(k) + i×h2(k)) mod m`
+
+#### Load Factor
+
+α = n/m। Expected probes O(1/(1-α)) for open addressing।
+
+---
+
+### 3.9 Graph Representations
+
+#### Adjacency Matrix
+
+`V×V` matrix. `A[i][j] = 1` if edge।
+- Space: O(V²)
+- Edge check: O(1)
+
+#### Adjacency List
+
+Each vertex → list of neighbors।
+- Space: O(V+E)
+- Iterate neighbors: O(degree)
+
+---
+
+## 📐 4. Formulas & Shortcuts
+
+### Tree Properties
+
+- Binary tree with `n` nodes has `n-1` edges
+- Complete binary tree with `n` nodes: height = ⌊log₂n⌋
+- Full binary tree with height h: 2^(h+1) - 1 nodes
+- Leaves in full binary tree: 2^h
+
+### Heap
+
+- Array size n → leaves start at ⌊n/2⌋
+- Build heap O(n), not O(n log n)
+
+### Array
+
+- Row-major: `addr(i,j) = base + (i×cols + j) × size`
+- Column-major: `addr(i,j) = base + (j×rows + i) × size`
+
+---
+
+## 🎯 5. Common Question Patterns
+
+1. **C output prediction** — pointers, arrays
+2. **Recursion trace** — function call count
+3. **BST operations** — insert sequence, traversals
+4. **Tree traversal** — given inorder+preorder, find postorder
+5. **Hashing collision** — probe count
+6. **Heap operations** — build, insert, delete
+7. **Linked list manipulation** — reverse, merge
+8. **Graph traversal** — BFS/DFS order
+
+---
+
+## 📜 6. Previous Year Questions (PYQ)
+
+### 🔹 C Programming / Pointers
+
+#### PYQ 1 (GATE 2024) — Pointer Output
+
+```c
+int a = 10, *p = &a;
+*p = 20;
+printf("%d", a);
+```
+
+**Answer:** **20** (p modifies a) ✅
+
+---
+
+#### PYQ 2 (GATE 2023) — Array Pointer
+
+```c
+int arr[] = {1,2,3,4,5};
+int *p = arr + 2;
+printf("%d", *(p+1));
+```
+
+**Answer:** **4** (p points to arr[2]=3, p+1 to arr[3]=4) ✅
+
+---
+
+#### PYQ 3 (GATE 2022) — Recursion
+
+```c
+int f(int n) {
+    if (n <= 1) return 1;
+    return f(n-1) + f(n-2);
+}
+```
+f(5)?
+
+**Solution:**
+f(5) = f(4)+f(3) = (f(3)+f(2)) + (f(2)+f(1)) = ...
+= 1,1,2,3,5,8 → f(5) = **8** ✅
+
+---
+
+#### PYQ 4 (GATE 2021) — Pointer
+
+```c
+char s[] = "hello";
+char *p = s;
+printf("%c", *(p+2));
+```
+
+**Answer:** **l** (index 2 = 'l') ✅
+
+---
+
+#### PYQ 5 (GATE 2020) — Call Count
+
+```c
+int f(int n) {
+    if (n == 0) return 0;
+    return f(n-1) + f(n-1);
+}
+```
+f(3) total calls?
+
+**Solution:**
+Each call spawns 2 calls: T(n) = 2T(n-1) + 1
+T(3) = 15 total calls (including initial) = **2^4 - 1 = 15** ✅
+
+---
+
+### 🔹 Stack / Queue
+
+#### PYQ 6 (GATE 2023) — Stack
+
+Expression: `a+b*c-d/e`. Postfix?
+
+**Solution:** `abc*+de/-` ✅
+
+---
+
+#### PYQ 7 (GATE 2022) — Parenthesis
+
+Balance check algorithm uses?
+
+**Answer:** **Stack** ✅
+
+---
+
+#### PYQ 8 (GATE 2021) — Queue
+
+Circular queue size 5, front=1, rear=4. Enqueue 2 more — possible?
+
+**Answer:** Current count = 4. Space for 1 more (size-1 rule in circular queue)। **1 possible** ✅
+
+---
+
+### 🔹 Linked List
+
+#### PYQ 9 (GATE 2024) — Linked List Reverse
+
+Reverse singly linked list में time complexity?
+
+**Answer:** O(n), iterative or recursive ✅
+
+---
+
+#### PYQ 10 (GATE 2022) — LL Operations
+
+Doubly linked list এ node deletion (given pointer)? Time?
+
+**Answer:** **O(1)** (direct prev and next access) ✅
+
+---
+
+### 🔹 Trees / BST
+
+#### PYQ 11 (GATE 2024) — BST Insert
+
+Insert 50, 30, 70, 20, 40 in BST. Inorder traversal?
+
+**Answer:** **20, 30, 40, 50, 70** (inorder = sorted) ✅
+
+---
+
+#### PYQ 12 (GATE 2023) — Traversal
+
+Inorder: DBEAFC, Preorder: ABDECF. Postorder?
+
+**Solution:**
+Root = A (first of preorder).
+Left of A in inorder: DBE. Right: FC.
+Build tree → Postorder: **DEBFCA** ✅
+
+---
+
+#### PYQ 13 (GATE 2022) — Tree Height
+
+Complete binary tree with 1000 nodes. Height?
+
+**Solution:** ⌊log₂1000⌋ = **9** ✅
+
+---
+
+#### PYQ 14 (GATE 2021) — AVL Rotation
+
+AVL tree এ insert 30, 20, 10. রোটেশন?
+
+**Answer:** **LL rotation (right rotation at 30)** ✅
+
+---
+
+#### PYQ 15 (GATE 2020) — BST Search
+
+BST with n nodes, worst case search?
+
+**Answer:** **O(n)** (skewed tree) ✅
+
+---
+
+### 🔹 Heap Questions
+
+#### PYQ 16 (GATE 2023) — Heap Insert
+
+Max-heap: [50, 30, 40, 20, 10]। Insert 60। Resulting heap?
+
+**Solution:**
+Insert at end: [50,30,40,20,10,60]
+Bubble up: swap 60 with 40 → [50,30,60,20,10,40]
+Swap with 50 → [60,30,50,20,10,40] ✅
+
+---
+
+#### PYQ 17 (GATE 2022) — Build Heap
+
+Build max-heap of [3,9,2,1,4,5] time complexity?
+
+**Answer:** **O(n)**, not O(n log n) ✅
+
+---
+
+### 🔹 Hashing
+
+#### PYQ 18 (GATE 2024) — Linear Probing
+
+Hash table size 7, hash(x) = x mod 7. Insert 15, 11, 27, 8. Final position of 8?
+
+**Solution:**
+- 15 mod 7 = 1 → slot 1
+- 11 mod 7 = 4 → slot 4
+- 27 mod 7 = 6 → slot 6
+- 8 mod 7 = 1 → collision, try 2 ✓
+
+Position of 8 = **slot 2** ✅
+
+---
+
+#### PYQ 19 (GATE 2021) — Collision
+
+Separate chaining vs linear probing — memory use?
+
+**Answer:**
+- Chaining: extra pointers
+- Probing: fixed slots
+- Chaining more flexible, probing more cache-friendly ✅
+
+---
+
+### 🔹 Graph Representation
+
+#### PYQ 20 (GATE 2022) — Adjacency
+
+Dense graph এর জন্য best representation?
+
+**Answer:** **Adjacency matrix** (O(V²) space, but O(1) edge check) ✅
+
+---
+
+#### PYQ 21 (GATE 2020) — Space
+
+Graph with V=100, E=200. Adj list vs matrix space?
+
+**Solution:**
+- Matrix: 100² = 10,000
+- List: V + 2E = 500
+- **Matrix much bigger for sparse graph** ✅
+
+---
+
+### 🔹 Miscellaneous
+
+#### PYQ 22 (GATE 2024) — Array Allocation
+
+int A[10][20]. A[5][5] address if base 1000, int=4 bytes, row-major?
+
+**Solution:**
+Address = 1000 + (5 × 20 + 5) × 4 = 1000 + 420 = **1420** ✅
+
+---
+
+#### PYQ 23 (GATE 2023) — String Length
+
+```c
+char s[] = "hello";
+printf("%d", sizeof(s));
+```
+
+**Answer:** **6** (includes null terminator) ✅
+
+---
+
+#### PYQ 24 (GATE 2022) — Struct Size
+
+```c
+struct S {
+    char c;
+    int i;
+};
+```
+Size on 32-bit system?
+
+**Answer:** **8 bytes** (padding: c=1+3 pad, i=4) ✅
+
+---
+
+## 🏋️ 7. Practice Problems
+
+1. f(n) = 2*f(n-1) + 1, f(0)=0। f(5)?
+2. BST insert order 10,5,15,3,7,12,20। Preorder?
+3. Build min-heap of [6,3,9,1,7,4]।
+4. Reverse linked list: O(n) time, O(1) space algorithm?
+5. Hash table size 10, h(k)=k mod 10। Insert 42,22,32,12 with linear probing।
+6. Stack to implement queue (two stacks)। Operations?
+7. Binary tree with 15 nodes — max height?
+
+<details>
+<summary>💡 Answers</summary>
+
+1. f(5) = 2^6 - 1 = 63 (close form)
+2. Preorder: 10, 5, 3, 7, 15, 12, 20
+3. Min-heap: [1, 3, 4, 6, 7, 9]
+4. Iterative with 3 pointers (prev, curr, next)
+5. 42→2, 22→2 collision→3, 32→2 coll→3 coll→4, 12→2 coll→3 coll→4 coll→5
+6. Push to stack1, for dequeue move all to stack2 and pop
+7. Max height = 14 (skewed tree), min = 3 (complete)
+
+</details>
+
+---
+
+## ⚠️ 8. Traps & Common Mistakes
+
+- ❌ **sizeof(pointer) = 4 or 8 bytes**, not array size
+- ❌ **arr[i] = *(arr+i)**, remember pointer arithmetic scales by type
+- ❌ **Null terminator** adds 1 to string size
+- ❌ **BST worst case O(n)**, not O(log n) (skewed)
+- ❌ **Heap vs BST** — heap has NO order between left/right
+- ❌ **Inorder of BST = sorted**, use this
+- ❌ **Build heap O(n)**, not O(n log n)
+- ❌ **Linked list reverse** — be careful with pointers
+- ❌ **Struct padding** affects size
+- ❌ **Recursion stack** adds O(depth) space
+
+---
+
+## 📝 9. Quick Revision Summary
+
+### Data Structure Operations Summary
+
+| DS | Access | Search | Insert | Delete |
+|----|--------|--------|--------|--------|
+| Array | O(1) | O(n) | O(n) | O(n) |
+| Linked List | O(n) | O(n) | O(1) at head | O(1) if node given |
+| Stack | O(1) top | O(n) | O(1) | O(1) |
+| Queue | O(1) front/back | O(n) | O(1) | O(1) |
+| Hash Table | — | O(1) avg | O(1) | O(1) |
+| BST avg | — | O(log n) | O(log n) | O(log n) |
+| BST worst | — | O(n) | O(n) | O(n) |
+| AVL | — | O(log n) | O(log n) | O(log n) |
+| Heap | — | O(n) | O(log n) | O(log n) |
+
+### Traversal Summary
+
+- Preorder: Root, Left, Right
+- Inorder: Left, Root, Right (sorted for BST)
+- Postorder: Left, Right, Root
+- BFS/Level-order: uses queue
+
+---
+
+## 🔗 Navigation
+
+- [🏠 Master Index](00-master-index.md)
+- [◀ Previous: Computer Organization](03-computer-organization.md)
+- [▶ Next: Algorithms](05-algorithms.md)
+
+---
+
+**Tip:** C programming এ pointer, array দিয়ে output prediction practice করুন। Tree traversals ও BST properties must clear। 💻
