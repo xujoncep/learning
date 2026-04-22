@@ -8,7 +8,7 @@ interface SeoHeadProps {
   type?: 'website' | 'article';
 }
 
-const SITE_URL = 'https://reliable-moonbeam-bcdbd1.netlify.app';
+const SITE_URL = 'https://learning-hub-3gw.pages.dev';
 const DEFAULT_OG = `${SITE_URL}/og-default.png`;
 
 export function SeoHead({

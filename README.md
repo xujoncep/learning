@@ -2,9 +2,7 @@
 
 > বাংলায় Software Engineering এর Core Concepts — GATE CSE প্রস্তুতি, Networking, Security, Frontend, সব একসাথে।
 
-**Live sites:**
-- Cloudflare Pages: <https://learning-hub-3gw.pages.dev>
-- Netlify: <https://reliable-moonbeam-bcdbd1.netlify.app>
+**Live site:** <https://learning-hub-3gw.pages.dev> (Cloudflare Pages)
 
 ---
 
@@ -70,7 +68,6 @@ learning/
 │
 ├── Dockerfile + .dockerignore      # 🐳 Multi-stage docker build
 ├── nginx.conf + nginx-security-headers.conf
-├── netlify.toml                    # 🟢 Netlify deploy config
 └── wrangler.toml                   # 🟧 Cloudflare Pages deploy config
 ```
 
@@ -121,12 +118,6 @@ npx wrangler pages deploy dist --project-name=learning-hub --branch=main --commi
 ```
 
 Headers/redirects come from `app/public/_headers` and `app/public/_redirects`.
-
----
-
-## 🟢 Netlify
-
-`netlify.toml` sets `base = "app"` and builds from `app/dist`. Push to `main` → auto deploy.
 
 ---
 

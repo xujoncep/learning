@@ -17,9 +17,9 @@
 
 ## Deployment
 
-- Site is hosted on **Netlify**: `https://reliable-moonbeam-bcdbd1.netlify.app`
-- A **PostToolUse hook** auto-deploys to Netlify after every `git push`
-- No manual deploy needed — just push to `main`
+- Site is hosted on **Cloudflare Pages**: `https://learning-hub-3gw.pages.dev`
+- Deploy via: `cd app && npm run build && npx wrangler pages deploy dist --project-name=learning-hub --branch=main --commit-dirty=true`
+- Docker deploy is also available via the root `Dockerfile` (nginx static serve)
 
 ## Scope
 - These rules apply to ALL conversations in this directory

@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://reliable-moonbeam-bcdbd1.netlify.app/sitemap.xml
+Sitemap: https://learning-hub-3gw.pages.dev/sitemap.xml
