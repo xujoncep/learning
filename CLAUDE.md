@@ -16,6 +16,23 @@ Conventions that apply to **all** work in this directory.
 - Use **Mermaid** diagrams generously for visual explanation
 - Use **KaTeX** for math (`$...$` inline, `$$...$$` block)
 
+## Design System
+
+Warm-sand editorial palette (Porhi). All new UI should speak this vocabulary:
+
+| Token | Role |
+|-------|------|
+| `sand` / `sand-2` / `sand-3` | Page + subtle panel backgrounds |
+| `surface` / `surface-2` | Card surfaces |
+| `ink` / `ink-2..5` | Text hierarchy (headings → body → muted → placeholder) |
+| `amber` / `amber-50..700` | Brand accent (italic emphasis, primary CTA in dark mode) |
+| `clay` / `sage` / `ink-blue` | Secondary accents |
+| `line` / `line-2` | Hairlines and stronger borders |
+
+Fonts: **Fraunces** (serif headings) · **Geist** (sans body) · **Geist Mono** (code) · **Tiro Bangla** (Bangla serif; applied via `.bn` class inside prose).
+
+Utility classes defined in `index.css`: `.serif`, `.bn`, `.mono-font`, `.dots`, `.hairline`, `.chip`, `.chip-amber`, `.chip-ink`, `.chip-outline`, `.btn`, `.btn-primary`, `.btn-amber`, `.btn-ghost`, `.btn-sm`, `.btn-lg`, `.card-surface`, `.meta`.
+
 ## Content Layout Rules
 
 Two kinds of content, two folder placements:
@@ -26,6 +43,29 @@ Two kinds of content, two folder placements:
 | Standalone handbook | `handnote/<slug>.md` | Article layout (no sidebar, no Prev/Next, clean reader) |
 
 The site auto-detects which layout to use based on whether the `.md` lives in a subfolder or at the root of `handnote/`.
+
+## Authentication (client-side gate)
+
+The site uses a **shared-password** gate — no backend. All content is client-side; this is a UX gate, not real security.
+
+- **Shared password constant:** `SHARED_PASSWORD` in `app/src/lib/auth.tsx`
+- **Current value:** `learning2026` — to rotate, edit the constant + redeploy
+- **Session storage:** localStorage keys `learning:auth`, `learning:display-name`, `learning:logged-in-at`
+- **Login flow:** user types a display name + shared password → session set → redirect to `?next=` or `/dashboard`
+
+### Route gate map
+
+| Path | Access |
+|------|--------|
+| `/` | 🌐 public |
+| `/handbooks` | 🌐 public |
+| `/docs/<handbook-slug>` (root handbooks like ssh, ssl-tls) | 🌐 public |
+| `/login` | 🌐 public |
+| `/sections/gate-cse` | 🔒 login required |
+| `/docs/gate-cse/*` | 🔒 login required |
+| `/dashboard` | 🔒 login required |
+
+Gating is done inside `SectionPage` and `DocPage` based on `doc.section === 'gate-cse'`; `/dashboard` uses `<ProtectedRoute>` wrapper from `lib/auth.tsx`.
 
 ## Build & Publish Flow
 
