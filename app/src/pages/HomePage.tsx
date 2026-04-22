@@ -1,189 +1,343 @@
 import { Link } from 'react-router-dom';
-import { ArrowRight, BookOpen, Code2, Sparkles, Mail, Layers, ChevronRight } from 'lucide-react';
-import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Badge } from '@/components/ui/badge';
-import { docs, sections } from '@/lib/content';
-
-// Inline Brand Icons since lucide-react 1.0+ removed them
-const Github = (props: React.SVGProps<SVGSVGElement>) => (
-  <svg {...props} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
-);
-const Linkedin = (props: React.SVGProps<SVGSVGElement>) => (
-  <svg {...props} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>
-);
-const Facebook = (props: React.SVGProps<SVGSVGElement>) => (
-  <svg {...props} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg>
-);
+import {
+  ArrowRight,
+  BookOpen,
+  Sparkles,
+  Code2,
+  Network,
+  Lock,
+  ArrowUpRight,
+  Flame,
+  Bookmark as BookmarkIcon,
+  Share2,
+} from 'lucide-react';
+import { docs, sections, cleanChapterTitle } from '@/lib/content';
+import { useAuth } from '@/lib/auth';
 
 export function HomePage() {
-  const totalDocs = docs.length;
-  const writtenQuestions = "250+";
-  const mcqs = "1500+";
-  const totalTopics = sections.length + docs.filter(d => d.section === 'root').length;
+  const { isAuthenticated } = useAuth();
+  const gateSection = sections.find((s) => s.id === 'gate-cse');
+  const rootDocs = docs.filter((d) => d.section === 'root');
 
-  // Separate pure topics (root) from major sections (e.g. gate-cse)
-  const groupedSections = sections.filter(s => s.id !== 'root');
-  const rootDocs = docs.filter(s => s.section === 'root');
-
-  const scrollToExplore = () => {
-    const element = document.getElementById('explore');
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
-    }
-  };
+  const totalChapters = gateSection?.docs.length ?? 0;
+  const totalHandbooks = rootDocs.length;
 
   return (
-    <div className="animate-fade-in pb-20">
-      {/* Hero */}
-      <section className="relative overflow-hidden border-b border-border/40 bg-slate-50/30 dark:bg-slate-900/10">
-        <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-background to-background" />
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_50%,hsl(var(--primary)/0.12),transparent_50%)]" />
-
-        <div className="relative max-w-5xl mx-auto px-6 pt-24 pb-32 lg:pt-32 lg:pb-40 text-center">
-          <Badge variant="outline" className="mb-8 gap-2 px-3 py-1 bg-background/50 backdrop-blur-sm border-primary/20 text-primary">
-            <Sparkles className="h-3.5 w-3.5" />
-            Modern Learning Platform
-          </Badge>
-
-          <h1 className="text-5xl md:text-7xl lg:text-8xl font-black tracking-tight mb-8 leading-[1.1]">
-            <span className="block text-foreground whitespace-nowrap">
-              Software Engineering
-            </span>
-            <span className="block mt-2 bg-gradient-to-r from-primary via-primary/90 to-blue-500 bg-clip-text text-transparent">
-              শেখার Hub
-            </span>
-          </h1>
-
-          <p className="mt-8 max-w-3xl mx-auto text-xl md:text-2xl text-muted-foreground leading-relaxed font-medium">
-            বাংলায় ব্যাখ্যা, <span className="text-foreground">English keywords</span>, practical examples, এবং ডায়াগ্রাম দিয়ে
-            তৈরি এক complete রিলেশনশিপ গাইড।
-          </p>
-
-          <div className="mt-12 flex flex-col sm:flex-row items-center justify-center gap-4">
-            <Button size="lg" className="h-12 px-8 text-lg font-semibold rounded-full shadow-lg shadow-primary/20 hover:shadow-primary/30 transition-all gap-2" onClick={scrollToExplore}>
-              Start Learning <ArrowRight className="h-5 w-5" />
-            </Button>
-            <a
-              href="https://github.com/sujoncep/learning"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="w-full sm:w-auto"
-            >
-              <Button size="lg" variant="outline" className="h-12 px-8 text-lg font-semibold rounded-full border-2 hover:bg-muted/50 transition-all w-full">
-                View Repository
-              </Button>
-            </a>
-          </div>
-
-          <div className="mt-10 flex flex-wrap justify-center gap-6 text-muted-foreground/80">
-             <a href="https://github.com/xujoncep" target="_blank" rel="noreferrer" className="p-2.5 hover:text-foreground hover:bg-primary/10 rounded-xl transition-all"><Github className="w-6 h-6"/></a>
-             <a href="https://www.linkedin.com/in/sujoncep/" target="_blank" rel="noreferrer" className="p-2.5 hover:text-[#0a66c2] hover:bg-primary/10 rounded-xl transition-all"><Linkedin className="w-6 h-6"/></a>
-             <a href="https://facebook.com/sujoncep" target="_blank" rel="noreferrer" className="p-2.5 hover:text-[#1877F2] hover:bg-primary/10 rounded-xl transition-all"><Facebook className="w-6 h-6"/></a>
-             <a href="mailto:sujoncep@gmail.com" className="p-2.5 hover:text-red-500 hover:bg-primary/10 rounded-xl transition-all"><Mail className="w-6 h-6"/></a>
-          </div>
-        </div>
-      </section>
-
-      {/* Info Stats Section - Positioned Overlapping */}
-      <section className="relative z-20 -mt-16 sm:-mt-20 max-w-6xl mx-auto px-6">
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
-          <StatCard icon={<BookOpen className="h-6 w-6" />} value={String(totalDocs)} label="Total Document" color="blue" />
-          <StatCard icon={<Code2 className="h-6 w-6" />} value={writtenQuestions} label="Written Question" color="purple" />
-          <StatCard icon={<Layers className="h-6 w-6" />} value={mcqs} label="MCQ Practices" color="orange" />
-          <StatCard icon={<Sparkles className="h-6 w-6" />} value={String(totalTopics)} label="Topics & Sections" color="green" />
-        </div>
-      </section>
-
-      {/* Explore Sections & Topics */}
-      <section id="explore" className="max-w-7xl mx-auto px-6 py-24 lg:py-32 scroll-mt-20">
-        <header className="mb-16">
-          <h2 className="text-4xl md:text-5xl font-extrabold mb-4 tracking-tight">Explore the <span className="text-primary">Library</span></h2>
-          <p className="text-xl text-muted-foreground max-w-3xl leading-relaxed">
-            Professional documentation and interview-oriented materials organized for deep understanding and quick revision.
-          </p>
-        </header>
-
-        {/* Section Modules */}
-        {groupedSections.length > 0 && (
-          <div className="mb-20">
-            <div className="flex items-center justify-between mb-8 pb-4 border-b border-border/60">
-              <h3 className="text-2xl font-bold flex items-center gap-3">
-                <span className="w-2 h-8 bg-primary rounded-full" />
-                Comprehensive Learning Guides
-              </h3>
-            </div>
-            <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-              {groupedSections.map((section) => (
-                <ProfessionalCard
-                  key={section.id}
-                  icon={section.icon}
-                  title={section.title}
-                  description={`Complete module for ${section.title}. Focused on core fundamentals and exam-specific deep dives.`}
-                  badge={`${section.docs.length} Chapters`}
-                  link={`/sections/${section.id}`}
-                  actionText="Explore Modules"
-                  isSection
-                />
-              ))}
-            </div>
-          </div>
-        )}
-
-        {/* Individual Topics */}
-        {rootDocs.length > 0 && (
+    <div className="animate-fade-in">
+      {/* ════════════════════════════════════════════════════════════════
+          HERO — 2-column editorial
+          ════════════════════════════════════════════════════════════════ */}
+      <section className="relative overflow-hidden">
+        <div className="max-w-[1280px] mx-auto px-6 md:px-10 pt-14 md:pt-20 pb-16 md:pb-24 grid md:grid-cols-[1.15fr_1fr] gap-10 md:gap-16 items-center">
+          {/* LEFT */}
           <div>
-             <div className="flex items-center justify-between mb-8 pb-4 border-b border-border/60">
-              <h3 className="text-2xl font-bold flex items-center gap-3">
-                <span className="w-2 h-8 bg-slate-400 rounded-full" />
-                Individual Handbooks
-              </h3>
+            <div className="flex flex-wrap gap-2 mb-5">
+              <span className="chip chip-amber">
+                <Sparkles className="h-3 w-3" /> New · GATE CSE 2026 cohort open
+              </span>
+              <span className="chip chip-outline">{totalChapters} chapters · {totalHandbooks} handbooks</span>
             </div>
-            <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-              {rootDocs.map((doc) => (
-                <ProfessionalCard
-                  key={doc.slug}
-                  icon="📄"
-                  title={doc.title}
-                  description="Detailed technical handbook with concepts and examples."
-                  badge="Handbook"
-                  link={doc.path}
-                  actionText="Read Handbook"
-                />
-              ))}
+
+            <h1 className="font-serif text-[48px] md:text-[68px] leading-[1.02] tracking-[-0.03em] text-ink">
+              বাংলায় CS শেখো,<br />
+              <em className="italic text-amber-700">
+                সহজে বুঝে
+              </em>—<br />
+              নিজের গতিতে।
+            </h1>
+
+            <p className="mt-6 text-[16px] md:text-[17px] text-ink-3 leading-[1.55] max-w-[540px]">
+              Learning Hub একটা focused study site — GATE CSE-র জন্য প্রতিটা subject
+              depth-এ cover করা, সাথে SSH, SSL/TLS, Networking, C programming-এর
+              standalone handbook। ছোট ছোট পাঠ, বড় অগ্রগতি।
+            </p>
+
+            <div className="flex flex-wrap items-center gap-3 mt-8">
+              {isAuthenticated ? (
+                <Link to="/dashboard" className="btn btn-lg btn-primary">
+                  Go to dashboard <ArrowRight className="h-4 w-4" />
+                </Link>
+              ) : (
+                <Link to="/login" className="btn btn-lg btn-primary">
+                  Start learning free <ArrowRight className="h-4 w-4" />
+                </Link>
+              )}
+              <Link to="/handbooks" className="btn btn-lg btn-ghost">
+                <BookOpen className="h-3.5 w-3.5" /> Browse handbooks
+              </Link>
+            </div>
+
+            {/* Stats row */}
+            <div className="flex items-center gap-8 mt-10">
+              <Stat value={totalChapters.toString()} label="GATE chapters" />
+              <Divider />
+              <Stat value={totalHandbooks.toString()} label="handbooks" />
+              <Divider />
+              <Stat value="500+" label="PYQs solved" />
+              <Divider />
+              <Stat
+                value={
+                  <>
+                    4.8
+                    <span className="text-amber text-[16px]">★</span>
+                  </>
+                }
+                label="reader rating"
+              />
             </div>
           </div>
-        )}
+
+          {/* RIGHT — lesson preview card stack */}
+          <div className="relative h-[480px] md:h-[540px] hidden md:block">
+            {/* Back card */}
+            <div
+              aria-hidden
+              className="absolute card-surface shadow-soft-2"
+              style={{
+                inset: '40px -20px 40px 40px',
+                background: 'hsl(var(--bg-3))',
+                borderColor: 'hsl(var(--amber-100))',
+                transform: 'rotate(2deg)',
+                zIndex: 0,
+              }}
+            />
+            {/* Main card */}
+            <div
+              className="absolute card-surface bg-surface-2 shadow-soft-3 overflow-hidden flex flex-col"
+              style={{ inset: '0 20px 0 0', zIndex: 1 }}
+            >
+              <div className="flex items-center justify-between px-5 py-4 border-b border-line">
+                <div className="flex items-center gap-2.5">
+                  <span className="chip chip-amber text-[10.5px] h-[22px]">
+                    Chapter 08 · Reading 4
+                  </span>
+                  <span className="meta">18 min read · 6 exercises</span>
+                </div>
+                <div className="flex items-center gap-2 text-ink-4">
+                  <BookmarkIcon className="h-4 w-4" />
+                  <Share2 className="h-4 w-4" />
+                </div>
+              </div>
+
+              <div className="px-7 py-6 flex-1">
+                <div className="meta">Operating System · GATE CSE</div>
+                <h3 className="font-serif text-[26px] mt-1 leading-[1.2] tracking-tight text-ink">
+                  <em className="italic text-amber-700">Deadlock</em> — চারটা শর্ত,
+                  একটা এড়িয়ে যাও।
+                </h3>
+                <p className="text-[13.5px] text-ink-3 mt-2.5 leading-relaxed">
+                  Mutual exclusion, Hold &amp; Wait, No Preemption, Circular Wait — এই
+                  চারটা একসাথে হলেই system আটকে যায়। একটা ভাঙলেই deadlock এড়ানো যায়।
+                </p>
+
+                {/* Code preview */}
+                <div
+                  className="mt-4 rounded-[10px] p-3.5 font-mono text-[12px] leading-[1.65]"
+                  style={{ background: '#1C1917', color: '#E7DFD1' }}
+                >
+                  <div style={{ color: '#A39584' }}>{'// deadlock.c'}</div>
+                  <div>
+                    <span style={{ color: '#D97706' }}>if</span> (mutex &amp;&amp; hold_wait &amp;&amp;
+                  </div>
+                  <div>&nbsp;&nbsp;&nbsp;&nbsp;no_preempt &amp;&amp; circular) {'{'}</div>
+                  <div>&nbsp;&nbsp;<span style={{ color: '#A39584' }}>{'// deadlock possible'}</span></div>
+                  <div>&nbsp;&nbsp;system.deadlock = <span style={{ color: '#D97706' }}>true</span>;</div>
+                  <div>{'}'}</div>
+                </div>
+
+                {/* Progress */}
+                <div className="mt-5">
+                  <div className="flex items-center justify-between text-[11.5px] text-ink-4 mb-1.5">
+                    <span>Chapter progress</span>
+                    <span>4 / 8 readings</span>
+                  </div>
+                  <div className="h-1.5 rounded-full bg-sand-2 overflow-hidden">
+                    <div className="h-full bg-amber rounded-full" style={{ width: '50%' }} />
+                  </div>
+                </div>
+
+                <div className="flex items-center justify-between mt-5">
+                  <div className="flex items-center gap-2">
+                    <div className="h-7 w-7 rounded-full flex items-center justify-center text-white font-serif text-[11px] bg-ink-blue">
+                      LH
+                    </div>
+                    <div className="leading-tight">
+                      <div className="text-[12px] text-ink">Learning Hub</div>
+                      <div className="meta text-[11px]">Bilingual study material</div>
+                    </div>
+                  </div>
+                  <Link
+                    to={isAuthenticated ? '/docs/gate-cse/08-operating-system' : '/login?next=/docs/gate-cse/08-operating-system'}
+                    className="btn btn-sm btn-amber"
+                  >
+                    Resume <ArrowRight className="h-3 w-3" />
+                  </Link>
+                </div>
+              </div>
+            </div>
+
+            {/* Floating streak chip */}
+            <div
+              className="card-surface bg-surface-2 shadow-soft-2 flex items-center gap-2.5 absolute"
+              style={{ right: -16, top: 60, padding: '10px 14px', zIndex: 2 }}
+            >
+              <div className="h-8 w-8 rounded-md bg-amber-50 text-amber-700 flex items-center justify-center">
+                <Flame className="h-4 w-4" />
+              </div>
+              <div className="leading-tight">
+                <div className="text-[13px] text-ink font-medium">12-day streak</div>
+                <div className="meta">Keep it going ✨</div>
+              </div>
+            </div>
+          </div>
+        </div>
       </section>
 
-      {/* Features - Clean AWS Look */}
-      <section className="bg-slate-50/50 dark:bg-slate-900/20 py-24 border-y border-border/60">
-        <div className="max-w-6xl mx-auto px-6">
-          <div className="text-center mb-16 px-4">
-             <h2 className="text-4xl font-extrabold mb-4">Engineered for Success</h2>
-             <p className="text-xl text-muted-foreground">High-quality technical content designed for the modern engineer.</p>
+      {/* ════════════════════════════════════════════════════════════════
+          TRACKS — two tracks
+          ════════════════════════════════════════════════════════════════ */}
+      <div className="dots mx-6 md:mx-10" />
+
+      <section className="max-w-[1280px] mx-auto px-6 md:px-10 py-16 md:py-20">
+        <div className="flex items-end justify-between mb-10 flex-wrap gap-4">
+          <div>
+            <div className="meta text-[12px] uppercase tracking-[0.04em]">
+              Two tracks, one calm pace
+            </div>
+            <h2 className="font-serif text-[36px] md:text-[44px] mt-2 tracking-[-0.02em] text-ink">
+              কী শিখতে চাও?
+            </h2>
           </div>
-          <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-4">
-            <FeatureItem
-              icon="🌐"
-              title="Bilingual Approach"
-              desc="Bangla for deeper conceptual clarity and English for technical precision."
-            />
-            <FeatureItem
-              icon="📊"
-              title="Visual Schematics"
-              desc="System diagrams and flowcharts for complex architectural understanding."
-            />
-            <FeatureItem
-              icon="📝"
-              title="Exam Ready"
-              desc="Curated previous year questions and practice sets for top certifications."
-            />
-            <FeatureItem
-              icon="📱"
-              title="PWA Ready"
-              desc="Access your learning hub from any device, anytime with offline support."
-            />
+          <Link
+            to="/handbooks"
+            className="text-[13.5px] text-ink border-b border-line-2 hover:border-ink transition-colors pb-[2px]"
+          >
+            Browse handbooks →
+          </Link>
+        </div>
+
+        <div className="grid md:grid-cols-2 gap-5">
+          <TrackCard
+            eyebrow="Track 01 — Course (sign-in required)"
+            icon={<Code2 className="h-5 w-5" />}
+            iconTone="text-ink-blue"
+            title="GATE CSE Preparation"
+            description="13টা subject, 500+ PYQs solved, weightage analysis, mindmap summary — GATE 2026-র জন্য complete প্রস্তুতি।"
+            items={
+              gateSection?.docs
+                .slice(0, 5)
+                .map((d) => ({ slug: d.slug, label: cleanChapterTitle(d.title) })) ?? []
+            }
+            meta={`${totalChapters} chapters · updated regularly`}
+            ctaTo={isAuthenticated ? '/sections/gate-cse' : '/login?next=/sections/gate-cse'}
+            ctaLabel={isAuthenticated ? 'Open course' : 'Sign in to start'}
+            locked={!isAuthenticated}
+          />
+          <TrackCard
+            eyebrow="Track 02 — Public handbooks"
+            icon={<Network className="h-5 w-5" />}
+            iconTone="text-clay"
+            title="Standalone Handbooks"
+            description="একটা টপিকে গভীরে যাও — What → Why → How → Summary flow-এ real-world-ready content।"
+            items={rootDocs
+              .slice(0, 5)
+              .map((d) => ({ slug: d.slug, label: cleanChapterTitle(d.title) }))}
+            meta={`${totalHandbooks} handbooks · free to read`}
+            ctaTo="/handbooks"
+            ctaLabel="Browse handbooks"
+          />
+        </div>
+      </section>
+
+      {/* ════════════════════════════════════════════════════════════════
+          WHY — 6 features
+          ════════════════════════════════════════════════════════════════ */}
+      <section className="border-y border-line bg-sand-2 py-16 md:py-20">
+        <div className="max-w-[1280px] mx-auto px-6 md:px-10">
+          <div className="max-w-[720px] mb-10">
+            <div className="meta text-[12px] uppercase tracking-[0.04em]">Why Learning Hub</div>
+            <h2 className="font-serif text-[32px] md:text-[42px] mt-2 leading-[1.1] tracking-[-0.02em] text-ink">
+              ব্যস্ত পেশাজীবীদের জন্য —<br />
+              <em className="italic text-amber-700">বিশ মিনিট</em>-এর পাঠ।
+            </h2>
+          </div>
+
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-7">
+            <Feature n="01" title="Bite-sized readings" desc="প্রতিটা reading 8–20 মিনিটের। Commute-এ পড়ো, stoplight-এ বন্ধ করো।" />
+            <Feature n="02" title="PYQ-heavy" desc="প্রতিটা chapter-এ 20-30 solved PYQ, practice problems সহ — exam pattern internalize হবে।" />
+            <Feature n="03" title="Bilingual by design" desc="Concept বাংলায়, technical keywords English-এ — দুটোরই intuition গড়ে ওঠে।" />
+            <Feature n="04" title="Mermaid diagrams" desc="Complex topics flowchart, sequence, mindmap দিয়ে visual — শুধু text না।" />
+            <Feature n="05" title="Offline-ready PWA" desc="Install করো, offline-ও পড়ো। Internet ছাড়াও study চলবে।" />
+            <Feature n="06" title="No ads, no tracking" desc="Pure learning experience — কোনো ad, কোনো upsell, কোনো dark pattern নেই।" />
+          </div>
+        </div>
+      </section>
+
+      {/* ════════════════════════════════════════════════════════════════
+          CTA — dark card
+          ════════════════════════════════════════════════════════════════ */}
+      <section className="max-w-[1280px] mx-auto px-6 md:px-10 py-16 md:py-20">
+        <div
+          className="rounded-[16px] border p-10 md:p-14 relative overflow-hidden grid md:grid-cols-[1.3fr_1fr] gap-10 items-center"
+          style={{
+            background: 'hsl(var(--ink))',
+            color: 'hsl(var(--bg))',
+            borderColor: 'hsl(var(--ink))',
+          }}
+        >
+          <div
+            aria-hidden
+            className="absolute rounded-full pointer-events-none"
+            style={{
+              right: -120,
+              top: -120,
+              width: 360,
+              height: 360,
+              background:
+                'radial-gradient(closest-side, hsl(var(--amber) / 0.3), transparent 70%)',
+            }}
+          />
+          <div className="relative">
+            <div className="text-[12px] uppercase tracking-[0.04em] text-[#FDE68A]">
+              Start today
+            </div>
+            <h2
+              className="font-serif text-[32px] md:text-[44px] mt-2 tracking-[-0.02em] leading-[1.1]"
+              style={{ color: 'hsl(var(--bg))' }}
+            >
+              বিশ মিনিট আজ।<br />
+              <em className="italic" style={{ color: '#FDE68A' }}>এক বছর পরে</em> তুমি আলাদা।
+            </h2>
+            <p className="text-[14px] md:text-[15px] mt-4 max-w-[480px] leading-[1.55]" style={{ color: '#D8CDB3' }}>
+              Any course free — no card, no trial pressure। Sign in করো একটা shared
+              password দিয়ে, আর তোমার নাম দাও — ব্যাস।
+            </p>
+          </div>
+          <div className="relative flex flex-col gap-3">
+            {isAuthenticated ? (
+              <Link to="/dashboard" className="btn btn-lg btn-amber" style={{ height: 54 }}>
+                Go to dashboard <ArrowRight className="h-4 w-4" />
+              </Link>
+            ) : (
+              <Link to="/login" className="btn btn-lg btn-amber" style={{ height: 54 }}>
+                Sign in to the course <ArrowRight className="h-4 w-4" />
+              </Link>
+            )}
+            <Link
+              to="/handbooks"
+              className="btn btn-lg inline-flex items-center justify-center gap-2 rounded-full"
+              style={{
+                height: 54,
+                background: 'transparent',
+                color: 'hsl(var(--bg))',
+                border: '1px solid #4a4540',
+              }}
+            >
+              Read handbooks first
+            </Link>
+            <div className="text-[12px] mt-1 text-center" style={{ color: '#8A8072' }}>
+              ✦ Fully free · ✦ No tracking · ✦ Offline-ready
+            </div>
           </div>
         </div>
       </section>
@@ -191,72 +345,96 @@ export function HomePage() {
   );
 }
 
-function StatCard({ icon, value, label, color }: { icon: React.ReactNode; value: string; label: string; color: string }) {
-  const colorMap: Record<string, string> = {
-    blue: 'border-t-blue-500 text-blue-500',
-    purple: 'border-t-purple-500 text-purple-500',
-    orange: 'border-t-orange-500 text-orange-500',
-    green: 'border-t-green-500 text-green-500',
-  };
+// ── Sub-components ─────────────────────────────────────────────────────
 
+function Stat({ value, label }: { value: React.ReactNode; label: string }) {
   return (
-    <div className={`p-6 bg-card border border-border/60 shadow-sm transition-all hover:shadow-xl hover:-translate-y-1 bg-gradient-to-b from-card to-card/95 border-t-4 ${colorMap[color] || 'border-t-primary'}`}>
-      <div className="flex flex-col items-center text-center gap-3">
-        <div className="p-3 bg-muted/50 rounded-2xl group-hover:bg-muted transition-colors">
+    <div>
+      <div className="font-serif text-[28px] text-ink tracking-tight leading-none">{value}</div>
+      <div className="text-[12px] text-ink-4 mt-1">{label}</div>
+    </div>
+  );
+}
+
+function Divider() {
+  return <div className="w-px h-8 bg-line" />;
+}
+
+function TrackCard({
+  eyebrow,
+  icon,
+  iconTone,
+  title,
+  description,
+  items,
+  meta,
+  ctaTo,
+  ctaLabel,
+  locked = false,
+}: {
+  eyebrow: string;
+  icon: React.ReactNode;
+  iconTone: string;
+  title: string;
+  description: string;
+  items: Array<{ slug: string; label: string }>;
+  meta: string;
+  ctaTo: string;
+  ctaLabel: string;
+  locked?: boolean;
+}) {
+  return (
+    <div className="card-surface bg-surface-2 p-8 flex flex-col">
+      <div className="flex items-center justify-between">
+        <div
+          className={`h-12 w-12 rounded-xl bg-amber-50 flex items-center justify-center ${iconTone}`}
+        >
           {icon}
         </div>
-        <div>
-          <div className="text-3xl font-black text-foreground mb-1 tracking-tight">{value}</div>
-          <div className="text-sm font-semibold text-muted-foreground uppercase tracking-widest">{label}</div>
+        <span className="meta flex items-center gap-1.5">
+          {locked && <Lock className="h-3 w-3" />}
+          {eyebrow}
+        </span>
+      </div>
+      <h3 className="font-serif text-[28px] mt-5 tracking-[-0.02em] text-ink leading-tight">
+        {title}
+      </h3>
+      <p className="text-[14px] text-ink-3 mt-2.5 leading-[1.6]">{description}</p>
+
+      {items.length > 0 && (
+        <div className="mt-5 border-t border-line pt-4">
+          {items.map((c, i) => (
+            <div
+              key={c.slug}
+              className={`flex items-center justify-between py-2.5 ${
+                i < items.length - 1 ? 'border-b border-line border-dashed' : ''
+              }`}
+            >
+              <span className="text-[13.5px] text-ink-2 truncate pr-2">{c.label}</span>
+              <ArrowUpRight className="h-3.5 w-3.5 text-ink-4 shrink-0" />
+            </div>
+          ))}
         </div>
+      )}
+
+      <div className="flex items-center justify-between mt-5 pt-1">
+        <span className="meta">{meta}</span>
+        <Link to={ctaTo} className="btn btn-sm btn-ghost">
+          {ctaLabel} <ArrowRight className="h-3 w-3" />
+        </Link>
       </div>
     </div>
   );
 }
 
-function ProfessionalCard({ icon, title, description, badge, link, actionText, isSection = false }: any) {
+function Feature({ n, title, desc }: { n: string; title: string; desc: string }) {
   return (
-    <Card className="flex flex-col h-full bg-card border border-border/80 shadow-sm transition-all hover:shadow-md hover:border-primary/40 group relative overflow-hidden">
-      {/* AWS Accent top border */}
-      <div className={`absolute top-0 left-0 w-full h-[3px] ${isSection ? 'bg-primary' : 'bg-slate-400 opacity-60'}`} />
-      
-      <CardHeader className="pt-8">
-        <div className="flex items-center justify-between mb-4">
-          <div className="w-14 h-14 bg-muted/50 rounded-2xl flex items-center justify-center text-3xl shadow-inner group-hover:bg-primary/5 transition-colors">
-            {icon}
-          </div>
-          <Badge variant="secondary" className="font-semibold px-2.5 py-0.5 rounded-full border-none bg-muted text-muted-foreground uppercase text-[10px] tracking-wider">
-            {badge}
-          </Badge>
-        </div>
-        <CardTitle className="text-2xl font-bold group-hover:text-primary transition-colors">
-          {title}
-        </CardTitle>
-        <CardDescription className="text-base mt-3 leading-relaxed line-clamp-2">
-          {description}
-        </CardDescription>
-      </CardHeader>
-      
-      <CardContent className="mt-auto pt-6 border-t border-border/40">
-        <Link to={link}>
-          <Button variant="ghost" className="w-full group/btn flex items-center justify-between px-4 py-6 font-bold text-base hover:bg-primary hover:text-white transition-all rounded-xl">
-            {actionText}
-            <ChevronRight className="w-5 h-5 group-hover/btn:translate-x-1 transition-transform" />
-          </Button>
-        </Link>
-      </CardContent>
-    </Card>
-  );
-}
-
-function FeatureItem({ icon, title, desc }: { icon: string; title: string; desc: string }) {
-  return (
-    <div className="flex flex-col gap-4 p-8 rounded-3xl bg-card border border-border/40 hover:border-primary/20 hover:bg-primary/[0.02] transition-all">
-      <div className="text-5xl">{icon}</div>
-      <div>
-        <h4 className="text-xl font-bold mb-3">{title}</h4>
-        <p className="text-muted-foreground leading-relaxed font-medium">{desc}</p>
+    <div className="pt-6 border-t border-line-2">
+      <div className="mono-font text-[11px] text-amber-700">{n}</div>
+      <div className="font-serif text-[22px] text-ink mt-2 tracking-[-0.015em] leading-tight">
+        {title}
       </div>
+      <p className="text-[13.5px] text-ink-3 mt-2.5 leading-[1.6] max-w-[360px]">{desc}</p>
     </div>
   );
 }

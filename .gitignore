@@ -2,6 +2,7 @@ node_modules/
 .netlify/
 .playwright-mcp/
 .claude/settings.local.json
+.ui-design-preview/
 
 # Editor/OS
 .vscode/
@@ -11,3 +12,7 @@ node_modules/
 
 # Local build artifacts at root (none expected, but safe)
 dist/
+
+# Test artifacts from Playwright session (at repo root)
+*.png
+*.zip

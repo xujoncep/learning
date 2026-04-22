@@ -1,8 +1,9 @@
 import { Suspense, useEffect, useState, type ComponentType } from 'react';
-import { useParams } from 'react-router-dom';
+import { Navigate, useLocation, useParams } from 'react-router-dom';
 import { MDXProvider } from '@mdx-js/react';
 import { NotFoundPage } from './NotFoundPage';
 import { findDoc, getAdjacentDocs, type DocEntry } from '@/lib/content';
+import { useAuth } from '@/lib/auth';
 import { mdxComponents } from '@/components/mdx/MDXComponents';
 import { Header } from '@/components/layout/Header';
 import { DocHeader } from '@/components/layout/DocHeader';
@@ -53,10 +54,18 @@ function useScrollRestore(slug: string) {
 
 export function DocPage() {
   const params = useParams();
+  const location = useLocation();
+  const { isAuthenticated } = useAuth();
   const slug = params['*'] ?? '';
   const doc = findDoc(slug);
 
   if (!doc) return <NotFoundPage />;
+
+  // Gate: GATE CSE chapters require login; handbooks stay public.
+  if (doc.section === 'gate-cse' && !isAuthenticated) {
+    const next = encodeURIComponent(location.pathname + location.search);
+    return <Navigate to={`/login?next=${next}`} replace />;
+  }
 
   const isCourse = doc.section !== 'root';
   return isCourse ? <CourseView doc={doc} /> : <ArticleView doc={doc} />;

@@ -117,6 +117,66 @@ export function getAdjacentDocs(slug: string): { prev?: DocEntry; next?: DocEntr
   };
 }
 
+/**
+ * Turn a full chapter title into a compact version for card display.
+ * Examples:
+ *   "Engineering Mathematics — GATE CSE 🔢"    → "Engineering Mathematics"
+ *   "GATE CSE — Master Index 📚"               → "Master Index"
+ *   "Operating System — GATE CSE 🖥️"           → "Operating System"
+ *   "SSH (Secure Shell) — Complete Guide…"    → same, trailing emoji stripped
+ */
+export function cleanChapterTitle(title: string): string {
+  // "Topic — GATE CSE <anything>" → "Topic"
+  const afterSuffix = title.replace(/\s+—\s+GATE CSE\b.*$/u, '');
+  if (afterSuffix !== title) return afterSuffix.trim();
+  // "GATE CSE — Master Index 📚" → "Master Index"
+  const afterPrefix = title.replace(/^GATE CSE\s+—\s+/, '');
+  if (afterPrefix !== title) {
+    return afterPrefix.replace(/[\u{1F300}-\u{1FAFF}\u{2600}-\u{27BF}️\s]+$/u, '').trim();
+  }
+  // Generic: just strip trailing emoji
+  return title.replace(/[\u{1F300}-\u{1FAFF}\u{2600}-\u{27BF}️\s]+$/u, '').trim();
+}
+
+/**
+ * Human-friendly chapter label for card badges.
+ *   slug "00-master-index"            → "Index"
+ *   slug "00-exam-pattern-strategy"   → "Intro"
+ *   order 8                           → "Chapter 08"
+ *   root handbook                     → "Handbook"
+ */
+export function chapterLabel(doc: DocEntry): string {
+  if (doc.section === 'root') return 'Handbook';
+  if (doc.order === 0) {
+    if (doc.slug.includes('master-index')) return 'Index';
+    return 'Intro';
+  }
+  if (doc.order === 999) return 'Chapter';
+  return `Chapter ${String(doc.order).padStart(2, '0')}`;
+}
+
+/**
+ * 2-3 character banner initials for a card.
+ * Prefers zero-padded chapter number for course docs; falls back to
+ * ALLCAPS letters in the title.
+ */
+export function chapterInitials(doc: DocEntry): string {
+  if (doc.section !== 'root') {
+    if (doc.order === 0) {
+      return doc.slug.includes('master-index') ? 'IX' : 'IN';
+    }
+    if (doc.order !== 999) {
+      return String(doc.order).padStart(2, '0');
+    }
+  }
+  // Root / fallback: pull ALLCAPS letters or initials of first two words
+  const caps = doc.title.match(/[A-Z]{2,4}/);
+  if (caps) return caps[0].slice(0, 3);
+  const words = doc.title.replace(/^[\d\-\s]+/, '').split(/\s+/).filter(Boolean);
+  if (words.length >= 2) return (words[0][0] + words[1][0]).toUpperCase();
+  return doc.title.slice(0, 2).toUpperCase();
+}
+
 // Expose pre-extracted plain text (from build-time meta) for search.
 export function getAllRawContent(): Array<{ doc: DocEntry; raw: string }> {
   return docs
