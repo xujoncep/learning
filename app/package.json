@@ -4,6 +4,10 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
+    "convert": "node scripts/convert-md-to-mdx.mjs",
+    "sitemap": "node scripts/generate-sitemap.mjs",
+    "prebuild": "npm run convert && npm run sitemap",
+    "predev": "npm run convert",
     "dev": "vite",
     "build": "tsc -b && vite build",
     "lint": "eslint .",
@@ -12,13 +16,17 @@
   "dependencies": {
     "@mdx-js/react": "^3.1.1",
     "@mdx-js/rollup": "^3.1.1",
+    "@radix-ui/react-dialog": "^1.1.15",
+    "@radix-ui/react-dropdown-menu": "^2.1.16",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
+    "flexsearch": "^0.8.212",
     "katex": "^0.16.45",
     "lucide-react": "^1.8.0",
     "mermaid": "^11.14.0",
     "react": "^19.2.5",
     "react-dom": "^19.2.5",
+    "react-helmet-async": "^3.0.0",
     "react-router-dom": "^7.14.1",
     "rehype-autolink-headings": "^7.1.0",
     "rehype-katex": "^7.0.1",
@@ -31,6 +39,7 @@
   },
   "devDependencies": {
     "@eslint/js": "^9.39.4",
+    "@types/flexsearch": "^0.7.6",
     "@types/node": "^24.12.2",
     "@types/react": "^19.2.14",
     "@types/react-dom": "^19.2.3",
@@ -45,6 +54,8 @@
     "tailwindcss": "^3.4.19",
     "typescript": "~6.0.2",
     "typescript-eslint": "^8.58.2",
-    "vite": "^8.0.9"
+    "vite": "^8.0.9",
+    "vite-plugin-pwa": "^1.2.0",
+    "workbox-window": "^7.4.0"
   }
 }

@@ -36,6 +36,7 @@
     --ring: 262 83% 58%;
 
     --radius: 0.75rem;
+    --prose-base-size: 16px;
   }
 
   .dark {
@@ -81,6 +82,10 @@
   ::selection {
     @apply bg-primary/20 text-foreground;
   }
+
+  :focus-visible {
+    @apply outline-none ring-2 ring-ring ring-offset-2 ring-offset-background rounded-sm;
+  }
 }
 
 @layer components {
@@ -103,6 +108,7 @@
 
   .prose-custom {
     @apply text-foreground;
+    font-size: var(--prose-base-size);
   }
 
   .prose-custom h1 {
@@ -162,7 +168,7 @@
   }
 
   .prose-custom table {
-    @apply w-full my-6 border-collapse overflow-hidden rounded-lg border border-border;
+    @apply w-full my-6 border-collapse overflow-hidden rounded-lg border border-border text-sm;
   }
 
   .prose-custom thead {
@@ -205,18 +211,105 @@
     @apply px-4 py-2;
   }
 
+  /* Shiki token colors come from the theme; keep pre transparent (CodeBlock wraps it) */
   .prose-custom pre {
-    @apply my-6 p-4 bg-card rounded-lg border border-border overflow-x-auto text-sm leading-relaxed shadow-sm;
+    @apply bg-transparent p-0 text-sm leading-relaxed;
   }
 
   .prose-custom pre code {
     @apply bg-transparent text-foreground p-0 text-sm font-mono;
     counter-reset: line;
+    display: block;
   }
 
-  .prose-custom pre code [data-line]::before {
+  .prose-custom pre code [data-line] {
+    display: inline-block;
+    width: 100%;
+    padding: 0 0.5rem;
+  }
+
+  .prose-custom pre code.has-line-numbers [data-line]::before {
     counter-increment: line;
     content: counter(line);
-    @apply inline-block w-6 mr-4 text-right text-muted-foreground/60;
+    display: inline-block;
+    width: 1.5rem;
+    margin-right: 1rem;
+    text-align: right;
+    color: hsl(var(--muted-foreground) / 0.5);
+  }
+
+  .mermaid-content svg {
+    max-width: 100%;
+    height: auto;
+  }
+}
+
+/* ─────────────────────────────────────────────
+   Print Styles — clean paper output
+   ───────────────────────────────────────────── */
+@media print {
+  header,
+  aside,
+  nav[aria-label='Breadcrumb'],
+  button,
+  .mobile-nav,
+  [role='progressbar'] {
+    display: none !important;
+  }
+
+  body {
+    background: white !important;
+    color: black !important;
+  }
+
+  .prose-custom {
+    font-size: 11pt;
+    line-height: 1.45;
+    max-width: 100%;
+  }
+
+  .prose-custom h1,
+  .prose-custom h2,
+  .prose-custom h3,
+  .prose-custom h4 {
+    color: black !important;
+    background: none !important;
+    -webkit-text-fill-color: initial !important;
+    page-break-after: avoid;
+  }
+
+  .prose-custom a {
+    color: black !important;
+    text-decoration: underline;
+  }
+
+  .prose-custom a[href^='http']::after {
+    content: ' (' attr(href) ')';
+    font-size: 0.8em;
+    color: #555;
+  }
+
+  .prose-custom table,
+  .prose-custom figure,
+  .prose-custom pre {
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+
+  .prose-custom pre {
+    border: 1px solid #ccc;
+    background: #f6f6f6 !important;
+  }
+}
+
+/* Reduced motion accessibility */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
   }
 }
