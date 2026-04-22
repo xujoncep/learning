@@ -1,8 +1,13 @@
 node_modules/
-package-lock.json
-test-results/
-playwright-report/
-screenshots/
 .netlify/
 .playwright-mcp/
 .claude/settings.local.json
+
+# Editor/OS
+.vscode/
+.idea/
+.DS_Store
+*.swp
+
+# Local build artifacts at root (none expected, but safe)
+dist/

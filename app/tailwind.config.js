@@ -4,7 +4,7 @@ export default {
   content: [
     "./index.html",
     "./src/**/*.{js,ts,jsx,tsx,mdx}",
-    "./src/content/**/*.{md,mdx}",
+    "./src/generated/content/**/*.{md,mdx}",
   ],
   theme: {
     container: {

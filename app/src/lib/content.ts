@@ -1,18 +1,21 @@
 import type { ComponentType, LazyExoticComponent } from 'react';
 import { lazy } from 'react';
+import metaJson from '@/generated/content-meta.json';
 
 type MDXModule = { default: ComponentType };
 
-// Lazy-loaded: each .mdx is a separate chunk, fetched on demand.
-const lazyModules = import.meta.glob<MDXModule>('/src/content/**/*.mdx');
+interface GeneratedMeta {
+  title: string | null;
+  description: string | null;
+  wordCount: number;
+  readingTime: number;
+  plainText: string;
+}
 
-// Eager meta: build-time generated minimal metadata for sidebar/search.
-// We extract the first heading from raw markdown at build time via Vite's `?raw` query.
-const rawContent = import.meta.glob<string>('/src/content/**/*.mdx', {
-  query: '?raw',
-  import: 'default',
-  eager: true,
-});
+const meta = metaJson as Record<string, GeneratedMeta>;
+
+// Lazy-loaded: each .mdx is a separate chunk, fetched on demand.
+const lazyModules = import.meta.glob<MDXModule>('/src/generated/content/**/*.mdx');
 
 export interface DocMeta {
   slug: string;
@@ -46,42 +49,18 @@ function extractOrder(slug: string): number {
   return match ? parseInt(match[1], 10) : 999;
 }
 
-function extractFirstH1(raw: string): string | null {
-  const match = raw.match(/^#\s+(.+)$/m);
-  if (!match) return null;
-  return match[1].trim();
-}
-
-function extractBlockquote(raw: string): string | null {
-  const match = raw.match(/^>\s+(.+)$/m);
-  if (!match) return null;
-  return match[1].replace(/\*\*/g, '').replace(/\[(.+?)\]\(.+?\)/g, '$1').trim();
-}
-
-function estimateReadingTime(raw: string): { minutes: number; words: number } {
-  const text = raw
-    .replace(/```[\s\S]*?```/g, '')
-    .replace(/<[^>]+>/g, '')
-    .replace(/[#*_`>\-[\]()]/g, '')
-    .trim();
-  const words = text.split(/\s+/).filter(Boolean).length;
-  const minutes = Math.max(1, Math.ceil(words / 200));
-  return { minutes, words };
-}
-
 export const docs: DocEntry[] = Object.entries(lazyModules)
   .map(([file, loader]) => {
-    const rel = file.replace('/src/content/', '').replace(/\.mdx$/, '');
+    const rel = file.replace('/src/generated/content/', '').replace(/\.mdx$/, '');
     const parts = rel.split('/');
     const isSectioned = parts.length > 1;
     const section = isSectioned ? parts[0] : 'root';
     const slug = rel;
     const basename = parts[parts.length - 1];
 
-    const raw = rawContent[file] ?? '';
-    const rt = estimateReadingTime(raw);
-    const title = extractFirstH1(raw) ?? prettyTitle(basename);
-    const description = extractBlockquote(raw) ?? `Complete learning material on ${title}`;
+    const m = meta[file];
+    const title = m?.title ?? prettyTitle(basename);
+    const description = m?.description ?? `Complete learning material on ${title}`;
 
     return {
       slug,
@@ -90,8 +69,8 @@ export const docs: DocEntry[] = Object.entries(lazyModules)
       order: extractOrder(basename),
       path: `/docs/${slug}`,
       description,
-      readingTime: rt.minutes,
-      wordCount: rt.words,
+      readingTime: m?.readingTime ?? 1,
+      wordCount: m?.wordCount ?? 0,
       Component: lazy(loader),
     } as DocEntry;
   })
@@ -130,7 +109,6 @@ export function findDoc(slug: string): DocEntry | undefined {
 export function getAdjacentDocs(slug: string): { prev?: DocEntry; next?: DocEntry } {
   const current = findDoc(slug);
   if (!current) return {};
-  // Stay within section for prev/next; skip across sections.
   const siblings = docs.filter((d) => d.section === current.section);
   const idx = siblings.findIndex((d) => d.slug === slug);
   return {
@@ -139,11 +117,13 @@ export function getAdjacentDocs(slug: string): { prev?: DocEntry; next?: DocEntr
   };
 }
 
-// Expose raw content for search index
+// Expose pre-extracted plain text (from build-time meta) for search.
 export function getAllRawContent(): Array<{ doc: DocEntry; raw: string }> {
-  return Object.entries(rawContent).map(([file, raw]) => {
-    const rel = file.replace('/src/content/', '').replace(/\.mdx$/, '');
-    const doc = docs.find((d) => d.slug === rel)!;
-    return { doc, raw };
-  });
+  return docs
+    .map((doc) => {
+      const file = `/src/generated/content/${doc.slug}.mdx`;
+      const raw = meta[file]?.plainText ?? '';
+      return { doc, raw };
+    })
+    .filter((x) => x.raw.length > 0);
 }
