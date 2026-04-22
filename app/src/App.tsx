@@ -19,19 +19,13 @@ function App() {
       <Route
         path="/sections/:sectionId"
         element={
-          <Layout showSidebar={false} showSearch={true}>
+          <Layout showSidebar={false} showSearch>
             <SectionPage />
           </Layout>
         }
       />
-      <Route
-        path="/docs/*"
-        element={
-          <Layout showSidebar showSearch>
-            <DocPage />
-          </Layout>
-        }
-      />
+      {/* DocPage renders its own chrome (header/sidebar) — Course vs Article */}
+      <Route path="/docs/*" element={<DocPage />} />
       <Route
         path="*"
         element={
