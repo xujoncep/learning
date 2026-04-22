@@ -1,0 +1,6 @@
+# Cloudflare Pages configuration
+# Run: npx wrangler pages deploy app/dist --project-name=learning-hub
+
+name = "learning-hub"
+compatibility_date = "2026-04-22"
+pages_build_output_dir = "./app/dist"
