@@ -154,6 +154,30 @@ Headers/redirects come from `app/public/_headers` and `app/public/_redirects`.
 
 ---
 
+## 🤖 AI Skills & Agents
+
+The project ships with ready-to-use Claude Code skills and a specialist agent under `.claude/` to speed up common workflows.
+
+### Skills (invoke with `/<name>` in Claude Code)
+
+| Skill | Purpose |
+|-------|---------|
+| `/add-chapter` | Author a new GATE CSE chapter under `handnote/gate-cse/` following the 9-section template |
+| `/new-handbook` | Author a new standalone handbook under `handnote/` with What→Why→How flow |
+| `/build-check` | Run production build and report bundle sizes / warnings (no deploy) |
+| `/deploy` | Build + ship to Cloudflare Pages + smoke-test live URL |
+| `/ui-test` | End-to-end Playwright MCP tests on the deployed site |
+
+### Agents
+
+| Agent | Invocation | Purpose |
+|-------|-----------|---------|
+| `content-writer` | `Agent` tool with `subagent_type: content-writer` | Drafts / expands `.md` content following project voice, templates, Mermaid + KaTeX conventions. Pure authoring — no code or deploy. |
+
+Skill / agent definitions live in `.claude/skills/*.md` and `.claude/agents/*.md` respectively.
+
+---
+
 ## 📋 CLAUDE.md
 
-Project conventions for AI-assisted work — answers in Bangla, English technical keywords, final deliverables as `.md` files with Mermaid diagrams, structured as tutorials (What → Why → How → Summary).
+Project conventions for AI-assisted work — answers in Bangla, English technical keywords, final deliverables as `.md` files with Mermaid diagrams, structured as tutorials (What → Why → How → Summary). See [CLAUDE.md](CLAUDE.md) for the full rules.
