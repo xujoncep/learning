@@ -4,6 +4,7 @@ import { BrowserRouter } from 'react-router-dom';
 import { HelmetProvider } from 'react-helmet-async';
 import { ThemeProvider } from '@/lib/theme';
 import { FontSizeProvider } from '@/lib/font-size';
+import { AuthProvider } from '@/lib/auth';
 import { registerServiceWorker } from '@/lib/pwa';
 import './index.css';
 import App from './App.tsx';
@@ -14,7 +15,9 @@ createRoot(document.getElementById('root')!).render(
       <ThemeProvider>
         <FontSizeProvider>
           <BrowserRouter>
-            <App />
+            <AuthProvider>
+              <App />
+            </AuthProvider>
           </BrowserRouter>
         </FontSizeProvider>
       </ThemeProvider>

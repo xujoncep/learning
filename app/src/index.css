@@ -1,138 +1,330 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&family=Hind+Siliguri:wght@400;500;600;700&display=swap');
 @import 'katex/dist/katex.min.css';
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
+/* ─────────────────────────────────────────────
+   Design tokens — Porhi warm-sand palette
+   Light mode (default) + warm-dark counterpart
+   ───────────────────────────────────────────── */
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+    /* Surfaces — warm sand */
+    --bg:          44 87% 94%;   /* #FDF6E3  page */
+    --bg-2:        43 75% 89%;   /* #F7ECCF  subtle panels */
+    --bg-3:        48 96% 89%;   /* #FEF3C7  amber tinted */
+    --card:        48 100% 97%;  /* #FFFBEF  card */
+    --card-2:      0 0% 100%;    /* #FFFFFF  pure white card */
 
-    --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
+    --line:        43 52% 80%;   /* #E8DAB0  hairline */
+    --line-2:      43 48% 69%;   /* #D6C48A  stronger */
 
-    --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
+    /* Ink */
+    --ink:         20 10% 10%;   /* #1C1917  headings */
+    --ink-2:       22 12% 15%;   /* #2B2622  body */
+    --ink-3:       30 10% 33%;   /* #5C544B  secondary */
+    --ink-4:       34 11% 49%;   /* #8A8072  muted */
+    --ink-5:       36 18% 66%;   /* #B8AE9C  placeholder */
 
-    --primary: 262 83% 58%;
-    --primary-foreground: 210 40% 98%;
+    /* Brand — warm amber */
+    --amber:       28 94% 44%;   /* #D97706 */
+    --amber-600:   28 91% 37%;   /* #B45309 */
+    --amber-700:   27 83% 31%;   /* #92400E */
+    --amber-50:    48 96% 89%;   /* #FEF3C7 */
+    --amber-100:   48 96% 76%;   /* #FDE68A */
 
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
+    /* Accents */
+    --clay:        18 53% 47%;   /* #B85C38 */
+    --sage:        96 16% 43%;   /* #6B7F5C */
+    --ink-blue:    214 52% 25%;  /* #1E3A5F */
 
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
+    /* Feedback */
+    --success:     96 29% 33%;   /* #4F6B3A */
+    --danger:      8 58% 40%;    /* #A23B2A */
 
-    --accent: 262 83% 96%;
-    --accent-foreground: 262 83% 28%;
-
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
-
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 262 83% 58%;
+    /* ── Legacy shadcn tokens (repointed to warm palette) ── */
+    --background:              var(--bg);
+    --foreground:              var(--ink);
+    --card-foreground:         var(--ink);
+    --popover:                 var(--card);
+    --popover-foreground:      var(--ink);
+    --primary:                 var(--ink);
+    --primary-foreground:      var(--bg);
+    --secondary:               var(--bg-2);
+    --secondary-foreground:    var(--ink);
+    --muted:                   var(--bg-2);
+    --muted-foreground:        var(--ink-4);
+    --accent:                  var(--amber-50);
+    --accent-foreground:       var(--amber-700);
+    --destructive:             var(--danger);
+    --destructive-foreground:  0 0% 100%;
+    --border:                  var(--line);
+    --input:                   var(--line-2);
+    --ring:                    var(--amber);
 
     --radius: 0.75rem;
     --prose-base-size: 16px;
   }
 
   .dark {
-    --background: 222.2 84% 4.9%;
-    --foreground: 210 40% 98%;
+    /* Warm dark mode — sand swapped for espresso */
+    --bg:          24 10% 8%;    /* very dark warm */
+    --bg-2:        24 10% 12%;
+    --bg-3:        28 22% 14%;   /* amber-tinted dark */
+    --card:        24 10% 10%;
+    --card-2:      24 10% 14%;
 
-    --card: 222.2 47% 8%;
-    --card-foreground: 210 40% 98%;
+    --line:        28 10% 22%;
+    --line-2:      32 12% 30%;
 
-    --popover: 222.2 84% 4.9%;
-    --popover-foreground: 210 40% 98%;
+    --ink:         40 30% 94%;   /* warm off-white */
+    --ink-2:       38 22% 85%;
+    --ink-3:       35 15% 68%;
+    --ink-4:       32 10% 52%;
+    --ink-5:       30 8% 40%;
 
-    --primary: 263 70% 65%;
-    --primary-foreground: 210 40% 98%;
+    --amber:       32 92% 55%;   /* slightly brighter for dark */
+    --amber-600:   28 88% 48%;
+    --amber-700:   28 82% 60%;   /* flipped to brighter for dark headings */
+    --amber-50:    30 40% 16%;
+    --amber-100:   30 45% 22%;
 
-    --secondary: 217.2 32.6% 17.5%;
-    --secondary-foreground: 210 40% 98%;
+    --clay:        18 53% 55%;
+    --sage:        96 20% 55%;
+    --ink-blue:    214 52% 60%;
 
-    --muted: 217.2 32.6% 17.5%;
-    --muted-foreground: 215 20.2% 65.1%;
+    --success:     96 30% 50%;
+    --danger:      8 60% 55%;
 
-    --accent: 263 50% 20%;
-    --accent-foreground: 210 40% 98%;
-
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 210 40% 98%;
-
-    --border: 217.2 32.6% 20%;
-    --input: 217.2 32.6% 17.5%;
-    --ring: 263 70% 65%;
+    --background:              var(--bg);
+    --foreground:              var(--ink);
+    --card-foreground:         var(--ink);
+    --popover:                 var(--card);
+    --popover-foreground:      var(--ink);
+    --primary:                 var(--amber);
+    --primary-foreground:      24 10% 8%;
+    --secondary:               var(--bg-2);
+    --secondary-foreground:    var(--ink);
+    --muted:                   var(--bg-2);
+    --muted-foreground:        var(--ink-4);
+    --accent:                  var(--amber-50);
+    --accent-foreground:       var(--amber-700);
+    --destructive:             var(--danger);
+    --destructive-foreground:  0 0% 100%;
+    --border:                  var(--line);
+    --input:                   var(--line-2);
+    --ring:                    var(--amber);
   }
 }
 
 @layer base {
   * {
     @apply border-border;
+    box-sizing: border-box;
+  }
+  html {
+    font-family: "Geist", "Inter", system-ui, -apple-system, sans-serif;
+    letter-spacing: -0.005em;
   }
   body {
-    @apply bg-background text-foreground font-sans antialiased;
-    font-feature-settings: "rlig" 1, "calt" 1;
+    @apply bg-background text-ink-2 antialiased;
+    font-feature-settings: "ss01", "cv11";
+    line-height: 1.55;
+  }
+
+  /* Serif headings by default — Fraunces */
+  h1, h2, h3, h4, h5, h6 {
+    font-family: "Fraunces", "Iowan Old Style", Georgia, serif;
+    font-weight: 500;
+    letter-spacing: -0.02em;
+    line-height: 1.15;
+    color: hsl(var(--ink));
   }
 
   ::selection {
-    @apply bg-primary/20 text-foreground;
+    background: hsl(var(--amber-100));
+    color: hsl(var(--ink));
   }
 
   :focus-visible {
-    @apply outline-none ring-2 ring-ring ring-offset-2 ring-offset-background rounded-sm;
+    outline: 2px solid hsl(var(--amber));
+    outline-offset: 2px;
+    border-radius: 4px;
   }
 }
 
+/* ─────────────────────────────────────────────
+   Porhi utility classes (non-Tailwind)
+   ───────────────────────────────────────────── */
 @layer components {
+  /* Editorial type helpers */
+  .serif {
+    font-family: "Fraunces", "Iowan Old Style", Georgia, serif;
+    font-weight: 400;
+    letter-spacing: -0.01em;
+  }
+  .bn {
+    font-family: "Tiro Bangla", "Hind Siliguri", "Noto Serif Bengali", serif;
+    font-weight: 400;
+  }
+  .mono-font {
+    font-family: "Geist Mono", "JetBrains Mono", ui-monospace, monospace;
+  }
+
+  /* Dotted editorial divider */
+  .dots {
+    height: 1px;
+    background-image: radial-gradient(circle, hsl(var(--line-2)) 1px, transparent 1px);
+    background-size: 6px 1px;
+    background-repeat: repeat-x;
+    background-position: center;
+  }
+
+  /* Plain hairline */
+  .hairline {
+    background: hsl(var(--line));
+    height: 1px;
+    border: 0;
+  }
+
+  /* Pill chip primitives */
+  .chip {
+    @apply inline-flex items-center gap-1.5 h-[26px] px-[10px] rounded-full text-[11.5px] font-medium border;
+    background: hsl(var(--bg-2));
+    color: hsl(var(--ink-3));
+    border-color: hsl(var(--line));
+  }
+  .chip-amber {
+    background: hsl(var(--amber-50));
+    color: hsl(var(--amber-700));
+    border-color: hsl(var(--amber-100));
+  }
+  .chip-ink {
+    background: hsl(var(--ink));
+    color: hsl(var(--bg));
+    border-color: hsl(var(--ink));
+  }
+  .chip-outline {
+    background: transparent;
+  }
+
+  /* Button primitives */
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 h-10 px-[18px] rounded-full text-[13px] font-medium transition-colors whitespace-nowrap;
+    letter-spacing: -0.005em;
+  }
+  .btn-sm { @apply h-8 px-[14px] text-xs; }
+  .btn-lg { @apply h-12 px-[22px] text-sm; }
+  .btn-primary {
+    background: hsl(var(--ink));
+    color: hsl(var(--bg));
+  }
+  .btn-primary:hover { background: black; }
+  .dark .btn-primary {
+    background: hsl(var(--amber));
+    color: hsl(var(--bg));
+  }
+  .dark .btn-primary:hover { background: hsl(var(--amber-600)); }
+  .btn-amber {
+    background: hsl(var(--amber));
+    color: hsl(var(--card));
+  }
+  .btn-amber:hover { background: hsl(var(--amber-600)); }
+  .btn-ghost {
+    background: transparent;
+    color: hsl(var(--ink));
+    border: 1px solid hsl(var(--line-2));
+  }
+  .btn-ghost:hover { background: hsl(var(--bg-2)); }
+
+  /* Card primitive */
+  .card-surface {
+    background: hsl(var(--card));
+    border: 1px solid hsl(var(--line));
+    border-radius: 12px;
+  }
+
+  /* Meta text (small muted caption) */
+  .meta { color: hsl(var(--ink-4)); font-size: 12px; }
+
+  /* Scrollbar — subtle warm */
   ::-webkit-scrollbar {
     width: 10px;
     height: 10px;
   }
-
   ::-webkit-scrollbar-track {
     @apply bg-transparent;
   }
-
   ::-webkit-scrollbar-thumb {
-    @apply bg-border rounded-full;
+    background: hsl(var(--line-2));
+    border-radius: 99px;
   }
-
   ::-webkit-scrollbar-thumb:hover {
-    @apply bg-muted-foreground/50;
+    background: hsl(var(--ink-4));
   }
+}
 
+/* ─────────────────────────────────────────────
+   Prose — MDX article content styling
+   Fraunces serif headings + amber emphasis
+   ───────────────────────────────────────────── */
+@layer components {
   .prose-custom {
-    @apply text-foreground;
+    color: hsl(var(--ink-2));
     font-size: var(--prose-base-size);
   }
 
   .prose-custom h1 {
-    @apply text-4xl md:text-5xl font-extrabold tracking-tight mt-0 mb-6 bg-clip-text text-transparent bg-gradient-to-r from-primary to-primary/60;
+    @apply text-4xl md:text-5xl font-medium mt-0 mb-6;
+    font-family: "Fraunces", "Iowan Old Style", Georgia, serif;
+    letter-spacing: -0.025em;
+    color: hsl(var(--ink));
+    line-height: 1.08;
+  }
+  .prose-custom h1 em {
+    color: hsl(var(--amber-700));
+    font-style: italic;
   }
 
   .prose-custom h2 {
-    @apply text-2xl md:text-3xl font-bold tracking-tight mt-12 mb-4 pb-2 border-b border-border scroll-mt-20;
+    @apply text-2xl md:text-[32px] font-medium tracking-tight mt-12 mb-4 pb-2 border-b border-line scroll-mt-20;
+    font-family: "Fraunces", "Iowan Old Style", Georgia, serif;
+    letter-spacing: -0.02em;
+    color: hsl(var(--ink));
+  }
+  .prose-custom h2 em {
+    color: hsl(var(--amber-700));
+    font-style: italic;
   }
 
   .prose-custom h3 {
-    @apply text-xl md:text-2xl font-semibold mt-8 mb-3 scroll-mt-20;
+    @apply text-xl md:text-2xl font-medium mt-8 mb-3 scroll-mt-20;
+    font-family: "Fraunces", "Iowan Old Style", Georgia, serif;
+    letter-spacing: -0.015em;
+    color: hsl(var(--ink));
   }
 
   .prose-custom h4 {
-    @apply text-lg md:text-xl font-semibold mt-6 mb-2 scroll-mt-20;
+    @apply text-lg md:text-xl font-medium mt-6 mb-2 scroll-mt-20;
+    font-family: "Fraunces", "Iowan Old Style", Georgia, serif;
+    color: hsl(var(--ink));
   }
 
   .prose-custom p {
-    @apply leading-7 my-4 text-foreground/90;
+    @apply leading-[1.7] my-4;
+    color: hsl(var(--ink-2));
   }
 
   .prose-custom a {
-    @apply text-primary font-medium underline-offset-4 hover:underline transition-colors;
+    color: hsl(var(--amber-700));
+    font-weight: 500;
+    text-decoration: none;
+    border-bottom: 1px solid hsl(var(--amber-100));
+    transition: border-color 0.15s;
+  }
+  .prose-custom a:hover {
+    border-bottom-color: hsl(var(--amber));
   }
 
   .prose-custom ul {
@@ -144,90 +336,115 @@
   }
 
   .prose-custom li {
-    @apply text-foreground/90 leading-7;
+    @apply leading-7;
+    color: hsl(var(--ink-2));
   }
 
   .prose-custom li > p {
     @apply my-0;
   }
 
+  /* Pull-quote / callout — Porhi editorial style */
   .prose-custom blockquote {
-    @apply border-l-4 border-primary bg-primary/5 py-2 px-4 my-6 rounded-r-lg text-muted-foreground italic;
+    margin: 1.75rem -1rem;
+    padding: 1.5rem 1.75rem;
+    border-left: 3px solid hsl(var(--amber));
+    background: hsl(var(--bg-2));
+    border-radius: 0 12px 12px 0;
+    color: hsl(var(--ink));
+    font-family: "Fraunces", Georgia, serif;
+    font-size: 1.15em;
+    font-style: italic;
+    line-height: 1.5;
+    letter-spacing: -0.01em;
   }
 
   .prose-custom hr {
-    @apply my-10 border-border;
+    @apply my-10;
+    background: hsl(var(--line));
+    height: 1px;
+    border: 0;
   }
 
   .prose-custom strong {
-    @apply font-semibold text-foreground;
+    font-weight: 600;
+    color: hsl(var(--ink));
+  }
+
+  .prose-custom em {
+    color: hsl(var(--amber-700));
   }
 
   .prose-custom code:not(pre code) {
-    @apply bg-muted text-foreground px-1.5 py-0.5 rounded-md text-sm font-mono border border-border;
+    @apply px-1.5 py-0.5 rounded-md text-sm font-mono;
+    background: hsl(var(--bg-2));
+    color: hsl(var(--ink));
+    border: 1px solid hsl(var(--line));
   }
 
+  /* Tables */
   .prose-custom table {
-    @apply w-full my-6 border-collapse overflow-hidden rounded-lg border border-border text-sm;
+    @apply w-full my-6 border-collapse overflow-hidden rounded-lg text-sm;
+    border: 1px solid hsl(var(--line));
   }
-
   .prose-custom thead {
-    @apply bg-muted/50;
+    background: hsl(var(--bg-2));
   }
-
   .prose-custom th {
-    @apply px-4 py-3 text-left font-semibold text-foreground border-b border-border;
+    @apply px-4 py-3 text-left font-semibold;
+    color: hsl(var(--ink));
+    border-bottom: 1px solid hsl(var(--line));
   }
-
   .prose-custom td {
-    @apply px-4 py-3 border-b border-border/50;
+    @apply px-4 py-3;
+    border-bottom: 1px solid hsl(var(--line));
   }
-
   .prose-custom tbody tr:last-child td {
-    @apply border-b-0;
+    border-bottom: 0;
   }
-
   .prose-custom tbody tr:hover {
-    @apply bg-muted/30 transition-colors;
+    background: hsl(var(--bg-2) / 0.5);
   }
 
   .prose-custom img {
-    @apply rounded-lg border border-border my-6 mx-auto;
+    @apply rounded-lg my-6 mx-auto;
+    border: 1px solid hsl(var(--line));
   }
 
+  /* Collapsibles */
   .prose-custom details {
-    @apply my-4 border border-border rounded-lg overflow-hidden;
+    @apply my-4 rounded-lg overflow-hidden;
+    border: 1px solid hsl(var(--line));
   }
-
   .prose-custom summary {
-    @apply bg-muted/50 px-4 py-3 cursor-pointer font-medium hover:bg-muted transition-colors;
+    @apply px-4 py-3 cursor-pointer font-medium transition-colors;
+    background: hsl(var(--bg-2));
   }
-
+  .prose-custom summary:hover {
+    background: hsl(var(--bg-3));
+  }
   .prose-custom details[open] summary {
-    @apply border-b border-border;
+    border-bottom: 1px solid hsl(var(--line));
   }
-
   .prose-custom details > *:not(summary) {
     @apply px-4 py-2;
   }
 
-  /* Shiki token colors come from the theme; keep pre transparent (CodeBlock wraps it) */
+  /* Shiki-rendered code blocks — keep transparent bg; CodeBlock wraps with dark panel */
   .prose-custom pre {
     @apply bg-transparent p-0 text-sm leading-relaxed;
   }
-
   .prose-custom pre code {
-    @apply bg-transparent text-foreground p-0 text-sm font-mono;
+    @apply bg-transparent p-0 text-sm font-mono;
+    color: hsl(var(--ink));
     counter-reset: line;
     display: block;
   }
-
   .prose-custom pre code [data-line] {
     display: inline-block;
     width: 100%;
     padding: 0 0.5rem;
   }
-
   .prose-custom pre code.has-line-numbers [data-line]::before {
     counter-increment: line;
     content: counter(line);
@@ -235,7 +452,13 @@
     width: 1.5rem;
     margin-right: 1rem;
     text-align: right;
-    color: hsl(var(--muted-foreground) / 0.5);
+    color: hsl(var(--ink-4) / 0.5);
+  }
+
+  /* Bangla paragraphs inside prose — Tiro Bangla serif */
+  .prose-custom p:lang(bn),
+  .prose-custom li:lang(bn) {
+    font-family: "Tiro Bangla", "Hind Siliguri", "Noto Serif Bengali", serif;
   }
 
   .mermaid-content svg {

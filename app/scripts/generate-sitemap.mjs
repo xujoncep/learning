@@ -8,9 +8,9 @@ import { fileURLToPath } from 'node:url';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-const CONTENT = path.resolve(__dirname, '..', 'src', 'content');
+const CONTENT = path.resolve(__dirname, '..', 'src', 'generated', 'content');
 const PUBLIC_DIR = path.resolve(__dirname, '..', 'public');
-const SITE_URL = process.env.SITE_URL || 'https://reliable-moonbeam-bcdbd1.netlify.app';
+const SITE_URL = process.env.SITE_URL || 'https://learning-hub-3gw.pages.dev';
 
 function walk(dir, filter = () => true) {
   const out = [];

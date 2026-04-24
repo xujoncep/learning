@@ -1,107 +1,129 @@
 ---
 name: ui-test
-description: Run Playwright MCP UI tests on the live Docsify site, fix issues, and generate a report
+description: Run end-to-end UI tests on the live React site (Cloudflare Pages) using Playwright MCP — course layout, article layout, search, sidebar collapse, bookmark, dark mode, mobile responsive.
 user_invocable: true
 ---
 
-# UI Test Skill
+# UI Test Skill — React Learning Hub
 
-Run comprehensive UI tests on the deployed Docsify site using Playwright MCP.
+Systematic UI verification of the deployed site using Playwright MCP.
 
-## Site Info
-- **URL:** `https://reliable-moonbeam-bcdbd1.netlify.app`
-- **Tech:** Docsify v4 + Mermaid.js + PrismJS
-- **Pages:** 6 handnotes in `handnote/` folder
+## Target
 
-## Test Steps
+- **Production:** `https://learning-hub-3gw.pages.dev`
+- **Local dev:** `http://localhost:5173` (after `cd app && npm run dev`)
+- **Docker:** `http://localhost:8080` (after `docker run`)
 
-### 1. Cover Page Check
-- Navigate to the site root URL
-- Take a screenshot of the cover page
-- Verify: logo, title, subtitle, feature list, buttons visible
-- Check dark theme contrast
+## Page Taxonomy
 
-### 2. Page Loading (All 6 Handnotes)
-Navigate to each page and verify it loads:
-- `#/handnote/ssl-tls`
-- `#/handnote/ssh`
-- `#/handnote/authentication-authorization-dotnet`
-- `#/handnote/react-for-dotnet-developers`
-- `#/handnote/computer-networking-hand-book`
-- `#/handnote/c-programming-hand-book`
+| Route | Layout type | Things to test |
+|-------|-------------|----------------|
+| `/` | Home | Hero, stats, course cards, handbook cards, social icons |
+| `/sections/:id` | Section listing | Chapter cards, section title, breadcrumb |
+| `/docs/gate-cse/*` | **Course** | Course sidebar, top Prev/Next, Bookmark, bottom PrevNext, sidebar collapse |
+| `/docs/<slug>` (root) | **Article** | No sidebar, no prev/next, clean breadcrumb, narrow column |
+| `/404` | Not found | Any unknown URL |
 
-For each page check:
-- H1 heading loaded
-- Tables rendered
-- Content is not empty
+## Test Flow
 
-### 3. Mermaid Diagrams
-On pages with mermaid diagrams, evaluate:
-```js
-() => {
-  const mermaidDivs = document.querySelectorAll('.mermaid');
-  const total = mermaidDivs.length;
-  let rendered = 0;
-  mermaidDivs.forEach(el => { if (el.querySelector('svg')) rendered++; });
-  return { total, rendered, failed: total - rendered };
-}
-```
-All mermaid blocks must render as SVG (0 failures).
+### 1. Home page
+- Navigate to base URL → expect `200`, title contains "Learning Hub"
+- Verify hero headline + "Start Learning" CTA
+- Verify both sections render: "Comprehensive Learning Guides" + "Individual Handbooks"
 
-### 4. Search
-- Fill the search box with a keyword (e.g., "TCP" or "SSL")
-- Wait 2 seconds for results
-- Verify `.matching-post` count > 0
+### 2. Course page (Course layout)
+- Navigate to `/docs/gate-cse/08-operating-system`
+- Expect title prefix "Operating System"
+- **Sidebar:** visible on desktop, contains 13 chapters, current one highlighted
+- **Top controls:** Previous button + Next button visible; Bookmark icon present
+- **Breadcrumb:** `Home › GATE CSE`
+- **Reading time + word count badges** present
+- Scroll down: bottom PrevNext card visible
 
-### 5. Sidebar Navigation
-- Verify sidebar has all 6 topic links
-- Check no `_sidebar.md` 404 errors in console
+### 3. Sidebar collapse
+- Click "Collapse sidebar" button
+- Sidebar disappears, small rail button appears on left
+- Click rail → sidebar re-expands
+- Reload page → state persisted via `localStorage` key `course-sidebar-open`
 
-### 6. Console Errors
-- Check browser console for errors
-- Report any 404s or JS errors
-- Fix if critical
+### 4. Bookmark
+- Click Bookmark icon on a course page → icon fills + color changes
+- Reload → still filled (localStorage `learning-bookmarks`)
+- Click again → unmark
+
+### 5. Article page (Article layout)
+- Navigate to `/docs/ssh`
+- Expect: **no sidebar**, **no Prev/Next**, no hamburger button
+- Breadcrumb: `Home › Handbooks`
+- Narrower content column
+
+### 6. Search (⌘K)
+- On any page, press `Ctrl+K` or `/` → dialog opens
+- Type "algorithms" → at least one result
+- Arrow down / Enter → navigate to doc
+
+### 7. Dark / light toggle
+- Click theme button → root class flips `dark` ↔ `light`
+- Reload → persisted in `learning-theme`
+
+### 8. Font size menu
+- Open "Text size" dropdown → three options (Small/Medium/Large)
+- Pick Large → prose font-size changes
+
+### 9. Mobile view
+- `browser_resize` to 390×844
+- Hamburger button visible in header
+- Course page: tap hamburger → drawer shows course chapters only
+- Article page: no hamburger (nothing to open)
+
+### 10. Console errors
+- On every page visited, check `browser_console_messages level=error`
+- Zero critical errors expected (ignore known Google Fonts flaky load)
 
 ## After Tests
 
-### Fix Issues
-If any test fails:
-1. Identify the root cause
-2. Fix the code
-3. Commit and push (Netlify auto-deploys via hook)
-4. Re-test to verify fix
+### Report template
 
-### Generate Report
-Output a markdown table report with:
-
-```
+```md
 ## UI Test Report
-**Site:** URL
-**Date:** YYYY-MM-DD
+**Site:** <URL> **Date:** YYYY-MM-DD **Commit:** <sha>
 
-| Test | Result | Details |
-|------|--------|---------|
-| Cover Page | PASS/FAIL | ... |
-| Page Loading (6 pages) | PASS/FAIL | ... |
-| Mermaid Diagrams | PASS/FAIL | X/Y rendered |
-| Search | PASS/FAIL | N results |
-| Sidebar | PASS/FAIL | ... |
-| Console Errors | PASS/FAIL | N errors |
+| Area | Result | Notes |
+|------|--------|-------|
+| Home | ✅ / ❌ | ... |
+| Course layout | ✅ / ❌ | ... |
+| Sidebar collapse | ✅ / ❌ | ... |
+| Bookmark | ✅ / ❌ | ... |
+| Article layout | ✅ / ❌ | ... |
+| Search (⌘K) | ✅ / ❌ | ... |
+| Theme toggle | ✅ / ❌ | ... |
+| Font size | ✅ / ❌ | ... |
+| Mobile | ✅ / ❌ | ... |
+| Console errors | ✅ / ❌ | N errors |
 
-### Bugs Fixed
-| Issue | Fix |
-|-------|-----|
-| ... | ... |
+### Issues found
+| Issue | Page | Severity | Suggested fix |
+|-------|------|----------|----------------|
 
-### Final Verdict: PASS/FAIL
+### Verdict: PASS / FAIL
 ```
 
-## Tools Used
-- `mcp__playwright__browser_navigate` — page navigation
-- `mcp__playwright__browser_take_screenshot` — visual verification
-- `mcp__playwright__browser_snapshot` — accessibility tree
-- `mcp__playwright__browser_evaluate` — JS evaluation for mermaid/search checks
-- `mcp__playwright__browser_fill_form` — search input
-- `mcp__playwright__browser_click` — sidebar link clicks
-- `mcp__playwright__browser_wait_for` — wait for content
-- `mcp__playwright__browser_close` — cleanup
+### Fix workflow
+If a test fails:
+1. Identify root cause (usually a component file under `app/src/components/`)
+2. Fix the code
+3. `cd app && npm run build`
+4. `npx wrangler pages deploy dist --project-name=learning-hub --branch=main --commit-dirty=true`
+5. Re-test to confirm
+
+## MCP tools used
+
+- `mcp__playwright__browser_navigate`
+- `mcp__playwright__browser_snapshot`
+- `mcp__playwright__browser_click`
+- `mcp__playwright__browser_type`
+- `mcp__playwright__browser_take_screenshot`
+- `mcp__playwright__browser_console_messages`
+- `mcp__playwright__browser_resize`
+- `mcp__playwright__browser_wait_for`
+- `mcp__playwright__browser_close`
