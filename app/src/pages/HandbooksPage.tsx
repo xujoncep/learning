@@ -10,7 +10,7 @@ export function HandbooksPage() {
   return (
     <Layout showSearch>
       <SeoHead
-        title="Handbooks · Learning Hub"
+        title="Handbooks · Porhi"
         description="Standalone deep-dive guides on SSH, SSL/TLS, Networking, C programming, and more — fully public reading."
       />
 
@@ -18,7 +18,7 @@ export function HandbooksPage() {
         {/* Masthead */}
         <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 pb-8 border-b border-line">
           <div>
-            <div className="meta text-[12px] uppercase tracking-[0.04em]">The Learning Hub Journal</div>
+            <div className="meta text-[12px] uppercase tracking-[0.04em]">The Porhi Journal</div>
             <h1 className="font-serif text-5xl md:text-[60px] font-normal tracking-[-0.03em] leading-[1] mt-3 text-ink">
               Notes on <em className="italic text-amber-700">learning</em>,<br />
               the craft, and the slow career.

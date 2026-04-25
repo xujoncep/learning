@@ -31,7 +31,7 @@ export function SeoHead({
       <meta property="og:url" content={fullUrl} />
       {description && <meta property="og:description" content={description} />}
       <meta property="og:image" content={ogImage} />
-      <meta property="og:site_name" content="Learning Hub" />
+      <meta property="og:site_name" content="Porhi" />
 
       <meta name="twitter:card" content="summary_large_image" />
       <meta name="twitter:title" content={title} />

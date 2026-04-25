@@ -49,7 +49,7 @@ The site auto-detects which layout to use based on whether the `.md` lives in a 
 The site uses a **shared-password** gate — no backend. All content is client-side; this is a UX gate, not real security.
 
 - **Shared password constant:** `SHARED_PASSWORD` in `app/src/lib/auth.tsx`
-- **Current value:** `learning2026` — to rotate, edit the constant + redeploy
+- **Current value:** `admin` — to rotate, edit the constant + redeploy. Login page placeholders + a visible "Demo credentials" banner display `admin / admin` so anyone landing on `/login` can sign in.
 - **Session storage:** localStorage keys `learning:auth`, `learning:display-name`, `learning:logged-in-at`
 - **Login flow:** user types a display name + shared password → session set → redirect to `?next=` or `/dashboard`
 

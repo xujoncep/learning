@@ -2,7 +2,7 @@ import { Suspense, useEffect, useState, type ComponentType } from 'react';
 import { Navigate, useLocation, useParams } from 'react-router-dom';
 import { MDXProvider } from '@mdx-js/react';
 import { NotFoundPage } from './NotFoundPage';
-import { findDoc, getAdjacentDocs, type DocEntry } from '@/lib/content';
+import { findDoc, getAdjacentDocs, isGatedSection, type DocEntry } from '@/lib/content';
 import { useAuth } from '@/lib/auth';
 import { mdxComponents } from '@/components/mdx/MDXComponents';
 import { Header } from '@/components/layout/Header';
@@ -52,17 +52,28 @@ function useScrollRestore(slug: string) {
   }, [slug]);
 }
 
+// Legacy slugs that have been split into per-LEVEL course sections.
+// Redirect to the new master index so old bookmarks and external links still work.
+const LEGACY_SLUG_REDIRECTS: Record<string, string> = {
+  'c-programming-hand-book': '/docs/c-programming/00-master-index',
+  'computer-networking-hand-book': '/docs/computer-networking/00-master-index',
+};
+
 export function DocPage() {
   const params = useParams();
   const location = useLocation();
   const { isAuthenticated } = useAuth();
   const slug = params['*'] ?? '';
+
+  const legacyTarget = LEGACY_SLUG_REDIRECTS[slug];
+  if (legacyTarget) return <Navigate to={legacyTarget} replace />;
+
   const doc = findDoc(slug);
 
   if (!doc) return <NotFoundPage />;
 
-  // Gate: GATE CSE chapters require login; handbooks stay public.
-  if (doc.section === 'gate-cse' && !isAuthenticated) {
+  // Gate: course sections (gate-cse, c-programming, computer-networking) require login; root handbooks stay public.
+  if (isGatedSection(doc.section) && !isAuthenticated) {
     const next = encodeURIComponent(location.pathname + location.search);
     return <Navigate to={`/login?next=${next}`} replace />;
   }
@@ -89,7 +100,7 @@ function CourseView({ doc }: { doc: DocEntry }) {
 
   return (
     <div className="min-h-screen flex flex-col">
-      <SeoHead title={`${doc.title} · Learning Hub`} description={doc.description} canonical={doc.path} />
+      <SeoHead title={`${doc.title} · Porhi`} description={doc.description} canonical={doc.path} />
       <Header onMenuClick={() => setMobileOpen(true)} showMenu showSearch />
       <CourseMobileNav
         open={mobileOpen}
@@ -143,7 +154,7 @@ function ArticleView({ doc }: { doc: DocEntry }) {
 
   return (
     <div className="min-h-screen flex flex-col">
-      <SeoHead title={`${doc.title} · Learning Hub`} description={doc.description} canonical={doc.path} />
+      <SeoHead title={`${doc.title} · Porhi`} description={doc.description} canonical={doc.path} />
       <Header onMenuClick={() => {}} showMenu={false} showSearch />
       <ReadingProgress />
       <BackToTop />

@@ -32,10 +32,50 @@ export interface DocEntry extends DocMeta {
   Component: LazyExoticComponent<ComponentType>;
 }
 
-const SECTION_META: Record<string, { title: string; icon: string; order: number }> = {
-  'gate-cse': { title: 'GATE CSE', icon: '🎓', order: 1 },
-  root: { title: 'Handbooks', icon: '📚', order: 2 },
+interface SectionMeta {
+  title: string;
+  icon: string;
+  order: number;
+  gated?: boolean;
+  description?: string;
+}
+
+const SECTION_META: Record<string, SectionMeta> = {
+  'gate-cse': {
+    title: 'GATE CSE',
+    icon: '🎓',
+    order: 1,
+    gated: true,
+    description:
+      'GATE CSE-র সব subject, PYQ-heavy approach, bilingual explanations — একটা focused course হিসেবে organized।',
+  },
+  'c-programming': {
+    title: 'C Programming',
+    icon: '💻',
+    order: 2,
+    gated: true,
+    description:
+      'C language depth-এ — fundamentals থেকে data structures পর্যন্ত। প্রতিটা level-এ concept, code examples, MCQ + written problems, traps।',
+  },
+  'computer-networking': {
+    title: 'Computer Networking',
+    icon: '🌐',
+    order: 3,
+    gated: true,
+    description:
+      'OSI/TCP-IP থেকে শুরু করে routing, security, wireless পর্যন্ত — networking-র complete course। প্রতিটা layer + protocol-এ deep dive।',
+  },
+  root: { title: 'Handbooks', icon: '📚', order: 4 },
 };
+
+export function isGatedSection(section: string | undefined): boolean {
+  if (!section) return false;
+  return SECTION_META[section]?.gated === true;
+}
+
+export function getSectionMeta(section: string): SectionMeta | undefined {
+  return SECTION_META[section];
+}
 
 function prettyTitle(slug: string): string {
   return slug

@@ -1,9 +1,10 @@
-# Software Engineering Learning Hub
+# Porhi — বাংলায় CS শেখার জায়গা
 
 > বাংলায় Software Engineering এর Core Concepts — GATE CSE প্রস্তুতি, Networking, Security, Frontend, সব একসাথে।
 > Warm-sand editorial UI · bilingual (Bangla + English) · shared-password gated course + free handbooks.
 
 **Live site:** <https://learning-hub-3gw.pages.dev> (Cloudflare Pages)
+**Version:** 1.0.0
 
 ---
 
@@ -209,6 +210,8 @@ The project ships with ready-to-use Claude Code skills and a specialist agent un
 | `/add-chapter` | Author a new GATE CSE chapter under `handnote/gate-cse/` following the 9-section template |
 | `/new-handbook` | Author a new standalone handbook under `handnote/` with What→Why→How flow |
 | `/build-check` | Run production build and report bundle sizes / warnings (no deploy) |
+| `/docker-run` | Build the Docker image and run on `localhost:8080` with smoke tests (offline preview / pre-deploy validation) |
+| `/content-audit` | Lint all `handnote/*.md` for compliance (frontmatter, Mermaid, code fences, broken links) — reports only, no auto-fix |
 | `/deploy` | Build + ship to Cloudflare Pages + smoke-test live URL |
 | `/ui-test` | End-to-end Playwright MCP tests on the deployed site |
 
@@ -217,6 +220,7 @@ The project ships with ready-to-use Claude Code skills and a specialist agent un
 | Agent | Invocation | Purpose |
 |-------|-----------|---------|
 | `content-writer` | `Agent` tool with `subagent_type: content-writer` | Drafts / expands `.md` content following project voice, templates, Mermaid + KaTeX conventions. Pure authoring — no code or deploy. |
+| `app-engineer` | `Agent` tool with `subagent_type: app-engineer` | Writes / modifies React + TS code under `app/src/` — knows Porhi tokens, layout taxonomy, auth gate, MDX pipeline. Scoped to `app/`; never touches `handnote/`. |
 
 Skill / agent definitions live in `.claude/skills/*.md` and `.claude/agents/*.md` respectively.
 

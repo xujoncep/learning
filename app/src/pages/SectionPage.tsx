@@ -1,6 +1,13 @@
 import { useParams, Link, Navigate, useLocation } from 'react-router-dom';
 import { ArrowRight, BookOpen, Clock, Lock } from 'lucide-react';
-import { sections, cleanChapterTitle, chapterLabel, chapterInitials } from '@/lib/content';
+import {
+  sections,
+  cleanChapterTitle,
+  chapterLabel,
+  chapterInitials,
+  isGatedSection,
+  getSectionMeta,
+} from '@/lib/content';
 import { useAuth } from '@/lib/auth';
 
 const TONES = [
@@ -16,8 +23,8 @@ export function SectionPage() {
   const { isAuthenticated } = useAuth();
   const location = useLocation();
 
-  // Gate: GATE CSE course requires login.
-  if (sectionId === 'gate-cse' && !isAuthenticated) {
+  // Gate: course sections require login. Root handbooks stay public.
+  if (isGatedSection(sectionId) && !isAuthenticated) {
     const next = encodeURIComponent(location.pathname + location.search);
     return <Navigate to={`/login?next=${next}`} replace />;
   }
@@ -55,9 +62,8 @@ export function SectionPage() {
             {sectionData.title} — <em className="italic text-amber-700">every chapter</em>.
           </h1>
           <p className="text-[15px] text-ink-3 mt-4 max-w-[640px] leading-relaxed">
-            {sectionId === 'gate-cse'
-              ? 'GATE CSE-র সব subject, PYQ-heavy approach, bilingual explanations — একটা focused course হিসেবে organized।'
-              : `Explore all materials under ${sectionData.title}. Any card → start reading.`}
+            {getSectionMeta(sectionId ?? '')?.description ??
+              `Explore all materials under ${sectionData.title}. Any card → start reading.`}
           </p>
         </div>
         <div className="meta shrink-0">
@@ -118,7 +124,7 @@ export function SectionPage() {
       </div>
 
       {/* Signed-in indicator */}
-      {sectionId === 'gate-cse' && (
+      {isGatedSection(sectionId) && (
         <div className="mt-12 pt-6 border-t border-line flex items-center justify-center gap-2 text-[12px] text-ink-4">
           <Lock className="h-3 w-3" /> Course content — accessible to signed-in readers
         </div>

@@ -16,13 +16,13 @@ export function Logo({ size = 22, to = '/', className = '' }: LogoProps) {
         aria-hidden
         className="inline-flex h-[26px] w-[26px] items-center justify-center rounded-md bg-amber text-surface font-serif italic font-semibold text-[15px] shadow-soft-1"
       >
-        L
+        P
       </span>
       <span
         className="font-serif font-medium tracking-tight leading-none"
         style={{ fontSize: size }}
       >
-        Learning&nbsp;Hub<span className="text-amber">.</span>
+        Porhi<span className="text-amber">.</span>
       </span>
     </Link>
   );
