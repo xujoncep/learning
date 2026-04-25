@@ -4,6 +4,7 @@
 > Warm-sand editorial UI · bilingual (Bangla + English) · shared-password gated course + free handbooks.
 
 **Live site:** <https://learning-hub-3gw.pages.dev> (Cloudflare Pages)
+**Version:** 1.0.0
 
 ---
 
