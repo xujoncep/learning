@@ -16,7 +16,7 @@ import { Navigate, useLocation } from 'react-router-dom';
  *
  * To change the password: edit SHARED_PASSWORD below and redeploy.
  */
-export const SHARED_PASSWORD = 'learning2026';
+export const SHARED_PASSWORD = 'admin';
 
 const K_AUTH = 'learning:auth';
 const K_NAME = 'learning:display-name';

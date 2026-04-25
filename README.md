@@ -1,4 +1,4 @@
-# Software Engineering Learning Hub
+# Porhi — বাংলায় CS শেখার জায়গা
 
 > বাংলায় Software Engineering এর Core Concepts — GATE CSE প্রস্তুতি, Networking, Security, Frontend, সব একসাথে।
 > Warm-sand editorial UI · bilingual (Bangla + English) · shared-password gated course + free handbooks.

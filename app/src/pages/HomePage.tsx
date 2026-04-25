@@ -47,7 +47,7 @@ export function HomePage() {
             </h1>
 
             <p className="mt-6 text-[16px] md:text-[17px] text-ink-3 leading-[1.55] max-w-[540px]">
-              Learning Hub একটা focused study site — GATE CSE-র জন্য প্রতিটা subject
+              Porhi একটা focused study site — GATE CSE-র জন্য প্রতিটা subject
               depth-এ cover করা, সাথে SSH, SSL/TLS, Networking, C programming-এর
               standalone handbook। ছোট ছোট পাঠ, বড় অগ্রগতি।
             </p>
@@ -159,10 +159,10 @@ export function HomePage() {
                 <div className="flex items-center justify-between mt-5">
                   <div className="flex items-center gap-2">
                     <div className="h-7 w-7 rounded-full flex items-center justify-center text-white font-serif text-[11px] bg-ink-blue">
-                      LH
+                      P
                     </div>
                     <div className="leading-tight">
-                      <div className="text-[12px] text-ink">Learning Hub</div>
+                      <div className="text-[12px] text-ink">Porhi</div>
                       <div className="meta text-[11px]">Bilingual study material</div>
                     </div>
                   </div>
@@ -255,7 +255,7 @@ export function HomePage() {
       <section className="border-y border-line bg-sand-2 py-16 md:py-20">
         <div className="max-w-[1280px] mx-auto px-6 md:px-10">
           <div className="max-w-[720px] mb-10">
-            <div className="meta text-[12px] uppercase tracking-[0.04em]">Why Learning Hub</div>
+            <div className="meta text-[12px] uppercase tracking-[0.04em]">Why Porhi</div>
             <h2 className="font-serif text-[32px] md:text-[42px] mt-2 leading-[1.1] tracking-[-0.02em] text-ink">
               ব্যস্ত পেশাজীবীদের জন্য —<br />
               <em className="italic text-amber-700">বিশ মিনিট</em>-এর পাঠ।

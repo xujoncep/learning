@@ -37,7 +37,7 @@ export function LoginPage() {
 
   return (
     <>
-      <SeoHead title="Sign in · Learning Hub" description="Sign in to access the GATE CSE course and dashboard." />
+      <SeoHead title="Sign in · Porhi" description="Sign in to access the gated courses and dashboard." />
 
       <div className="min-h-screen grid md:grid-cols-2 bg-sand">
         {/* LEFT — form */}
@@ -54,9 +54,17 @@ export function LoginPage() {
                   Sign in to continue <em className="italic text-amber-700">learning</em>.
                 </h1>
                 <p className="text-[14px] text-ink-3 mt-3 leading-relaxed">
-                  GATE CSE course আর personal dashboard access করতে একটা display name
+                  Gated courses আর personal dashboard access করতে একটা display name
                   আর shared password লাগবে।
                 </p>
+                <div className="mt-4 inline-flex items-center gap-2 rounded-md border border-amber/40 bg-amber-50 px-3 py-2 text-[12.5px] text-amber-700">
+                  <Lock className="h-3.5 w-3.5" />
+                  <span>
+                    Demo credentials: <span className="mono-font font-medium">admin</span>
+                    <span className="text-ink-4"> / </span>
+                    <span className="mono-font font-medium">admin</span>
+                  </span>
+                </div>
               </div>
 
               <form onSubmit={onSubmit} className="space-y-4">
@@ -73,7 +81,7 @@ export function LoginPage() {
                       onChange={(e) => setName(e.target.value)}
                       autoFocus
                       required
-                      placeholder="e.g., Mehedy"
+                      placeholder="admin"
                       className="w-full h-12 pl-10 pr-3 bg-surface-2 border border-line-2 rounded-lg text-[14px] text-ink placeholder:text-ink-5 focus:outline-none focus:ring-2 focus:ring-amber-100 focus:border-amber transition-all"
                     />
                   </div>
@@ -91,7 +99,7 @@ export function LoginPage() {
                       value={password}
                       onChange={(e) => setPassword(e.target.value)}
                       required
-                      placeholder="Enter shared password"
+                      placeholder="admin"
                       className="w-full h-12 pl-10 pr-10 bg-surface-2 border border-line-2 rounded-lg text-[14px] text-ink placeholder:text-ink-5 focus:outline-none focus:ring-2 focus:ring-amber-100 focus:border-amber transition-all"
                     />
                     <button
@@ -132,7 +140,6 @@ export function LoginPage() {
                 </button>
 
                 <p className="text-[12px] text-ink-4 text-center pt-2">
-                  Password না জানলে site owner-এর সাথে যোগাযোগ করো। <br />
                   Public resources → <Link to="/" className="text-amber-700 hover:underline">Home</Link>
                   {' · '}
                   <Link to="/handbooks" className="text-amber-700 hover:underline">Handbooks</Link>
@@ -142,7 +149,7 @@ export function LoginPage() {
           </div>
 
           <div className="text-[12px] text-ink-4 pt-8">
-            © {new Date().getFullYear()} Learning Hub · বাংলায় CS শেখার জায়গা
+            © {new Date().getFullYear()} Porhi · বাংলায় CS শেখার জায়গা
           </div>
         </div>
 
@@ -204,10 +211,10 @@ export function LoginPage() {
 
             <div className="flex items-center gap-3 text-[12.5px] text-[#D8CDB3]">
               <div className="inline-flex h-8 w-8 items-center justify-center rounded-full bg-[#B85C38] text-white font-serif text-[13px]">
-                LH
+                P
               </div>
               <div>
-                <div className="text-[#FFFBEF] font-medium">Learning Hub</div>
+                <div className="text-[#FFFBEF] font-medium">Porhi</div>
                 <div className="text-[#8A8072] text-[11.5px]">বাংলায় CS শেখার জায়গা</div>
               </div>
             </div>

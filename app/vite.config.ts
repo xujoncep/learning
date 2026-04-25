@@ -39,10 +39,10 @@ export default defineConfig({
       registerType: 'autoUpdate',
       includeAssets: ['favicon.svg', 'robots.txt', 'sitemap.xml'],
       manifest: {
-        name: 'Software Engineering Learning Hub',
-        short_name: 'Learning Hub',
+        name: 'Porhi — বাংলায় CS শেখার জায়গা',
+        short_name: 'Porhi',
         description:
-          'Bilingual (বাংলা + English) Software Engineering learning platform — GATE CSE, Networking, Security, Frontend.',
+          'Porhi — বাংলায় Software Engineering শেখার একটা শান্ত জায়গা। GATE CSE, Networking, Security, Frontend, সব একসাথে।',
         theme_color: '#8b5cf6',
         background_color: '#ffffff',
         display: 'standalone',

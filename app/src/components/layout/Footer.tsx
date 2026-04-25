@@ -65,7 +65,7 @@ export function Footer() {
         ))}
 
         <div className="md:col-span-4 border-t border-line pt-6 flex flex-col md:flex-row items-start md:items-center justify-between gap-3 text-[12px] text-ink-4">
-          <span>© {new Date().getFullYear()} Learning Hub · বাংলায় CS শেখার জায়গা</span>
+          <span>© {new Date().getFullYear()} Porhi · বাংলায় CS শেখার জায়গা</span>
           <span>Made with care in Dhaka ✦ for working professionals and students</span>
         </div>
       </div>

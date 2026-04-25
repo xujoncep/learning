@@ -100,7 +100,7 @@ function CourseView({ doc }: { doc: DocEntry }) {
 
   return (
     <div className="min-h-screen flex flex-col">
-      <SeoHead title={`${doc.title} · Learning Hub`} description={doc.description} canonical={doc.path} />
+      <SeoHead title={`${doc.title} · Porhi`} description={doc.description} canonical={doc.path} />
       <Header onMenuClick={() => setMobileOpen(true)} showMenu showSearch />
       <CourseMobileNav
         open={mobileOpen}
@@ -154,7 +154,7 @@ function ArticleView({ doc }: { doc: DocEntry }) {
 
   return (
     <div className="min-h-screen flex flex-col">
-      <SeoHead title={`${doc.title} · Learning Hub`} description={doc.description} canonical={doc.path} />
+      <SeoHead title={`${doc.title} · Porhi`} description={doc.description} canonical={doc.path} />
       <Header onMenuClick={() => {}} showMenu={false} showSearch />
       <ReadingProgress />
       <BackToTop />

@@ -22,7 +22,7 @@ export function DashboardPage() {
   return (
     <Layout showSearch>
       <SeoHead
-        title={`Dashboard · ${displayName ?? 'Welcome'} · Learning Hub`}
+        title={`Dashboard · ${displayName ?? 'Welcome'} · Porhi`}
         description="Your reading progress and today's study plan."
       />
 
