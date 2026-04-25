@@ -16,15 +16,33 @@ interface HeaderProps {
   showSearch?: boolean;
 }
 
-const PUBLIC_LINKS = [
+// Desktop nav stays slim to avoid tablet crowding — links to courses live on /home tracks
+// and via the section pages themselves. The mobile dropdown shows all sections explicitly.
+const PUBLIC_DESKTOP_LINKS = [
   { label: 'Home', to: '/' },
+  { label: 'Courses', to: '/sections/gate-cse' },
   { label: 'Handbooks', to: '/handbooks' },
-  { label: 'Sections', to: '/sections/gate-cse' },
 ];
 
-const AUTHED_LINKS = [
+const AUTHED_DESKTOP_LINKS = [
   { label: 'Dashboard', to: '/dashboard' },
-  { label: 'Course', to: '/sections/gate-cse' },
+  { label: 'Courses', to: '/sections/gate-cse' },
+  { label: 'Handbooks', to: '/handbooks' },
+];
+
+const PUBLIC_MOBILE_LINKS = [
+  { label: 'Home', to: '/' },
+  { label: 'Handbooks', to: '/handbooks' },
+  { label: 'GATE CSE', to: '/sections/gate-cse' },
+  { label: 'C Programming', to: '/sections/c-programming' },
+  { label: 'Computer Networking', to: '/sections/computer-networking' },
+];
+
+const AUTHED_MOBILE_LINKS = [
+  { label: 'Dashboard', to: '/dashboard' },
+  { label: 'GATE CSE', to: '/sections/gate-cse' },
+  { label: 'C Programming', to: '/sections/c-programming' },
+  { label: 'Computer Networking', to: '/sections/computer-networking' },
   { label: 'Handbooks', to: '/handbooks' },
 ];
 
@@ -49,7 +67,8 @@ export function Header({ onMenuClick, showMenu = false, showSearch = false }: He
     return () => window.removeEventListener('keydown', handler);
   }, []);
 
-  const links = isAuthenticated ? AUTHED_LINKS : PUBLIC_LINKS;
+  const desktopLinks = isAuthenticated ? AUTHED_DESKTOP_LINKS : PUBLIC_DESKTOP_LINKS;
+  const mobileLinks = isAuthenticated ? AUTHED_MOBILE_LINKS : PUBLIC_MOBILE_LINKS;
 
   return (
     <>
@@ -62,7 +81,7 @@ export function Header({ onMenuClick, showMenu = false, showSearch = false }: He
 
       <header className="sticky top-0 z-40 w-full border-b border-line bg-sand/85 backdrop-blur-md supports-[backdrop-filter]:bg-sand/70">
         <div className="flex h-16 items-center gap-4 px-4 md:px-8">
-          {showMenu && (
+          {showMenu ? (
             <button
               type="button"
               onClick={onMenuClick}
@@ -71,12 +90,54 @@ export function Header({ onMenuClick, showMenu = false, showSearch = false }: He
             >
               <Menu className="h-5 w-5" />
             </button>
+          ) : (
+            <DropdownMenu.Root>
+              <DropdownMenu.Trigger asChild>
+                <button
+                  aria-label="Open navigation"
+                  className="md:hidden inline-flex h-9 w-9 items-center justify-center rounded-full text-ink-3 hover:bg-sand-2 transition-colors"
+                >
+                  <Menu className="h-5 w-5" />
+                </button>
+              </DropdownMenu.Trigger>
+              <DropdownMenu.Portal>
+                <DropdownMenu.Content
+                  sideOffset={8}
+                  align="start"
+                  className="z-50 min-w-[200px] rounded-xl border border-line bg-surface-2 p-1.5 shadow-soft-3 animate-fade-in"
+                >
+                  {mobileLinks.map((l) => (
+                    <DropdownMenu.Item key={l.to} asChild>
+                      <Link
+                        to={l.to}
+                        className="flex items-center px-3 py-2 text-sm rounded-md cursor-pointer outline-none transition-colors text-ink-2 data-[highlighted]:bg-sand-2 data-[highlighted]:text-ink"
+                      >
+                        {l.label}
+                      </Link>
+                    </DropdownMenu.Item>
+                  ))}
+                  {!isAuthenticated && (
+                    <>
+                      <DropdownMenu.Separator className="my-1 h-px bg-line" />
+                      <DropdownMenu.Item asChild>
+                        <Link
+                          to="/login"
+                          className="flex items-center px-3 py-2 text-sm rounded-md cursor-pointer outline-none transition-colors text-amber-700 font-medium data-[highlighted]:bg-amber-50"
+                        >
+                          Sign in
+                        </Link>
+                      </DropdownMenu.Item>
+                    </>
+                  )}
+                </DropdownMenu.Content>
+              </DropdownMenu.Portal>
+            </DropdownMenu.Root>
           )}
 
           <Logo />
 
           <nav className="hidden md:flex items-center gap-6 ml-6">
-            {links.map((l) => (
+            {desktopLinks.map((l) => (
               <NavLink
                 key={l.to}
                 to={l.to}

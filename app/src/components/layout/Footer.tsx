@@ -6,18 +6,16 @@ const COLUMNS: Array<{ title: string; links: Array<{ label: string; to: string }
     title: 'Learn',
     links: [
       { label: 'Home', to: '/' },
-      { label: 'GATE CSE Course', to: '/sections/gate-cse' },
       { label: 'Handbooks', to: '/handbooks' },
       { label: 'Dashboard', to: '/dashboard' },
     ],
   },
   {
-    title: 'Resources',
+    title: 'Courses',
     links: [
-      { label: 'Operating System', to: '/docs/gate-cse/08-operating-system' },
-      { label: 'Computer Networks', to: '/docs/gate-cse/10-computer-networks' },
-      { label: 'DBMS', to: '/docs/gate-cse/09-dbms' },
-      { label: 'Algorithms', to: '/docs/gate-cse/05-algorithms' },
+      { label: 'GATE CSE', to: '/sections/gate-cse' },
+      { label: 'C Programming', to: '/sections/c-programming' },
+      { label: 'Computer Networking', to: '/sections/computer-networking' },
     ],
   },
   {
@@ -25,8 +23,8 @@ const COLUMNS: Array<{ title: string; links: Array<{ label: string; to: string }
     links: [
       { label: 'SSH', to: '/docs/ssh' },
       { label: 'SSL / TLS', to: '/docs/ssl-tls' },
-      { label: 'Networking', to: '/docs/computer-networking-hand-book' },
-      { label: 'C Programming', to: '/docs/c-programming-hand-book' },
+      { label: 'Authentication & Authorization', to: '/docs/authentication-authorization-dotnet' },
+      { label: 'React for .NET Developers', to: '/docs/react-for-dotnet-developers' },
     ],
   },
 ];

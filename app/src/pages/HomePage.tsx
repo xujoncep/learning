@@ -30,7 +30,7 @@ export function HomePage() {
       <section className="relative overflow-hidden">
         <div className="max-w-[1280px] mx-auto px-6 md:px-10 pt-14 md:pt-20 pb-16 md:pb-24 grid md:grid-cols-[1.15fr_1fr] gap-10 md:gap-16 items-center">
           {/* LEFT */}
-          <div>
+          <div className="min-w-0">
             <div className="flex flex-wrap gap-2 mb-5">
               <span className="chip chip-amber">
                 <Sparkles className="h-3 w-3" /> New · GATE CSE 2026 cohort open
@@ -38,7 +38,7 @@ export function HomePage() {
               <span className="chip chip-outline">{totalChapters} chapters · {totalHandbooks} handbooks</span>
             </div>
 
-            <h1 className="font-serif text-[48px] md:text-[68px] leading-[1.02] tracking-[-0.03em] text-ink">
+            <h1 className="font-serif text-[40px] sm:text-[48px] md:text-[68px] leading-[1.05] md:leading-[1.02] tracking-[-0.025em] md:tracking-[-0.03em] text-ink break-words">
               বাংলায় CS শেখো,<br />
               <em className="italic text-amber-700">
                 সহজে বুঝে
@@ -52,23 +52,23 @@ export function HomePage() {
               standalone handbook। ছোট ছোট পাঠ, বড় অগ্রগতি।
             </p>
 
-            <div className="flex flex-wrap items-center gap-3 mt-8">
+            <div className="flex flex-col sm:flex-row sm:flex-wrap sm:items-center gap-3 mt-8">
               {isAuthenticated ? (
-                <Link to="/dashboard" className="btn btn-lg btn-primary">
+                <Link to="/dashboard" className="btn btn-lg btn-primary justify-center w-full sm:w-auto">
                   Go to dashboard <ArrowRight className="h-4 w-4" />
                 </Link>
               ) : (
-                <Link to="/login" className="btn btn-lg btn-primary">
+                <Link to="/login" className="btn btn-lg btn-primary justify-center w-full sm:w-auto">
                   Start learning free <ArrowRight className="h-4 w-4" />
                 </Link>
               )}
-              <Link to="/handbooks" className="btn btn-lg btn-ghost">
+              <Link to="/handbooks" className="btn btn-lg btn-ghost justify-center w-full sm:w-auto">
                 <BookOpen className="h-3.5 w-3.5" /> Browse handbooks
               </Link>
             </div>
 
-            {/* Stats row */}
-            <div className="flex items-center gap-8 mt-10">
+            {/* Stats row — 2x2 grid on mobile, single row on desktop */}
+            <div className="grid grid-cols-2 gap-x-6 gap-y-5 mt-10 sm:flex sm:items-center sm:gap-8">
               <Stat value={totalChapters.toString()} label="GATE chapters" />
               <Divider />
               <Stat value={totalHandbooks.toString()} label="handbooks" />
@@ -357,7 +357,7 @@ function Stat({ value, label }: { value: React.ReactNode; label: string }) {
 }
 
 function Divider() {
-  return <div className="w-px h-8 bg-line" />;
+  return <div className="hidden sm:block w-px h-8 bg-line" />;
 }
 
 function TrackCard({
