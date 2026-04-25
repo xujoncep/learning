@@ -1,2 +1,6 @@
+# Legacy single-file handbooks → new per-LEVEL course master indexes
+/docs/c-programming-hand-book           /docs/c-programming/00-master-index           301
+/docs/computer-networking-hand-book     /docs/computer-networking/00-master-index     301
+
 # SPA fallback — serve index.html for client-side routes.
 /*    /index.html   200

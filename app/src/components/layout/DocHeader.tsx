@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import { Clock, FileText, ChevronRight } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
+import { getSectionMeta } from '@/lib/content';
 
 interface DocHeaderProps {
   title: string;
@@ -9,13 +10,9 @@ interface DocHeaderProps {
   wordCount: number;
 }
 
-const SECTION_LABEL: Record<string, { title: string; icon: string }> = {
-  'gate-cse': { title: 'GATE CSE', icon: '🎓' },
-  root: { title: 'Handbooks', icon: '📚' },
-};
-
 export function DocHeader({ section, readingTime, wordCount }: DocHeaderProps) {
-  const label = SECTION_LABEL[section] ?? { title: section, icon: '📄' };
+  const meta = getSectionMeta(section);
+  const label = meta ?? { title: section, icon: '📄' };
 
   return (
     <nav
