@@ -19,4 +19,4 @@ database_id = "0c07a7f1-4900-41db-9ea7-ee5bce7050ef"
 
 [vars]
 FRONTEND_URL = "https://learning-hub-3gw.pages.dev"
-GOOGLE_REDIRECT_URI = "https://porhi-api.<your-account>.workers.dev/auth/google/callback"
+GOOGLE_REDIRECT_URI = "https://porhi-api.sahabuddin-onnorokom.workers.dev/auth/google/callback"
