@@ -1,4 +1,10 @@
 import { useCallback, useEffect, useState } from 'react';
+import {
+  addBookmark as apiAddBookmark,
+  recordAudit,
+  removeBookmark as apiRemoveBookmark,
+} from '@/lib/api';
+import { getApiToken } from '@/lib/auth';
 
 const STORAGE_KEY = 'learning-bookmarks';
 const EVENT = 'learning:bookmarks-change';
@@ -54,7 +60,19 @@ export function useBookmark(slug: string): [boolean, () => void] {
   }, [slug]);
 
   const toggle = useCallback(() => {
-    setValue(toggleBookmark(slug));
+    const newValue = toggleBookmark(slug);
+    setValue(newValue);
+
+    // Best-effort sync to API when an OAuth session exists.
+    // Failures are tolerated — localStorage already reflects the change.
+    if (getApiToken()) {
+      const remote = newValue ? apiAddBookmark(slug) : apiRemoveBookmark(slug);
+      remote
+        .then(() => recordAudit(newValue ? 'bookmark_add' : 'bookmark_remove', slug))
+        .catch(() => {
+          /* tolerated */
+        });
+    }
   }, [slug]);
 
   return [value, toggle];

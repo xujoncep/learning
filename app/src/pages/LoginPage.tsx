@@ -2,6 +2,7 @@ import { useEffect, useState, type FormEvent } from 'react';
 import { Link, useNavigate, useSearchParams } from 'react-router-dom';
 import { ArrowRight, Eye, EyeOff, Lock, User as UserIcon } from 'lucide-react';
 import { useAuth } from '@/lib/auth';
+import { apiGoogleSignInUrl } from '@/lib/api';
 import { Logo } from '@/components/layout/Logo';
 import { SeoHead } from '@/components/layout/SeoHead';
 
@@ -14,7 +15,12 @@ export function LoginPage() {
   const [name, setName] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
-  const [error, setError] = useState<string | null>(null);
+  const [error, setError] = useState<string | null>(() => {
+    const code = searchParams.get('error');
+    if (code === 'oauth_failed') return 'Google sign-in did not complete. Please try again.';
+    if (code === 'oauth_invalid') return 'Google session was rejected. Please try again.';
+    return null;
+  });
   const [submitting, setSubmitting] = useState(false);
 
   // If already logged in, bounce to next/dashboard.
@@ -65,6 +71,32 @@ export function LoginPage() {
                     <span className="mono-font font-medium">admin</span>
                   </span>
                 </div>
+              </div>
+
+              {/* Google OAuth */}
+              <button
+                type="button"
+                onClick={() => {
+                  window.location.href = apiGoogleSignInUrl();
+                }}
+                className="w-full h-12 inline-flex items-center justify-center gap-3 rounded-full bg-white border border-line-2 text-[14px] font-medium text-ink hover:bg-sand-2 hover:border-line transition-all shadow-sm"
+              >
+                <svg width="18" height="18" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden>
+                  <path fill="#4285F4" d="M23.49 12.27c0-.79-.07-1.54-.19-2.27H12v4.51h6.44c-.28 1.48-1.13 2.74-2.4 3.58v3h3.88c2.27-2.09 3.57-5.18 3.57-8.82z" />
+                  <path fill="#34A853" d="M12 24c3.24 0 5.95-1.08 7.93-2.91l-3.88-3c-1.08.72-2.45 1.16-4.05 1.16-3.12 0-5.77-2.11-6.71-4.95H1.29v3.09C3.26 21.31 7.31 24 12 24z" />
+                  <path fill="#FBBC05" d="M5.29 14.3c-.24-.72-.38-1.49-.38-2.3s.14-1.58.38-2.3V6.61H1.29C.47 8.24 0 10.06 0 12s.47 3.76 1.29 5.39l4-3.09z" />
+                  <path fill="#EA4335" d="M12 4.75c1.77 0 3.35.61 4.6 1.8l3.42-3.42C17.95 1.19 15.24 0 12 0 7.31 0 3.26 2.69 1.29 6.61l4 3.09C6.23 6.86 8.88 4.75 12 4.75z" />
+                </svg>
+                Sign in with Google
+              </button>
+
+              {/* Divider */}
+              <div className="my-5 flex items-center gap-3">
+                <div className="flex-1 h-px bg-line" />
+                <span className="text-[11px] uppercase tracking-[0.06em] text-ink-4">
+                  or use shared password
+                </span>
+                <div className="flex-1 h-px bg-line" />
               </div>
 
               <form onSubmit={onSubmit} className="space-y-4">
