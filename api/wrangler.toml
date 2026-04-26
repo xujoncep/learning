@@ -1,0 +1,22 @@
+# Porhi API — Cloudflare Worker.
+#
+# Secrets to set via `wrangler secret put <name>` (do NOT add here):
+#   - JWT_SECRET             32+ byte random hex
+#   - GOOGLE_CLIENT_ID       from Google Cloud Console
+#   - GOOGLE_CLIENT_SECRET   from Google Cloud Console
+#
+# After first deploy, update GOOGLE_REDIRECT_URI below to match the deployed
+# Worker URL, and add that URL to Authorized Redirect URIs in Google Cloud Console.
+
+name = "porhi-api"
+main = "src/index.ts"
+compatibility_date = "2026-04-01"
+
+[[d1_databases]]
+binding = "DB"
+database_name = "porhi-db"
+database_id = "0c07a7f1-4900-41db-9ea7-ee5bce7050ef"
+
+[vars]
+FRONTEND_URL = "https://learning-hub-3gw.pages.dev"
+GOOGLE_REDIRECT_URI = "https://porhi-api.<your-account>.workers.dev/auth/google/callback"
