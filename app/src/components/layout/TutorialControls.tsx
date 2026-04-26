@@ -16,10 +16,7 @@ export function TutorialControls({ prev, next, slug }: TutorialControlsProps) {
 
   return (
     <div className="flex items-center justify-between gap-3 my-6 pb-6 border-b border-border/60">
-      <div className="flex items-center gap-2">
-        <NavButton to={prev?.path} label="Previous" direction="prev" disabled={!prev} />
-        <NavButton to={next?.path} label="Next" direction="next" disabled={!next} />
-      </div>
+      <NavButton to={prev?.path} label="Previous" direction="prev" disabled={!prev} />
 
       <Button
         variant="ghost"
@@ -38,6 +35,8 @@ export function TutorialControls({ prev, next, slug }: TutorialControlsProps) {
           <Bookmark className="h-5 w-5" />
         )}
       </Button>
+
+      <NavButton to={next?.path} label="Next" direction="next" disabled={!next} />
     </div>
   );
 }

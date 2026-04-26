@@ -2,25 +2,32 @@ import { Link } from 'react-router-dom';
 import {
   ArrowRight,
   BookOpen,
-  Sparkles,
   Code2,
+  Braces,
   Network,
+  Library,
   Lock,
   ArrowUpRight,
-  Flame,
   Bookmark as BookmarkIcon,
   Share2,
 } from 'lucide-react';
-import { docs, sections, cleanChapterTitle } from '@/lib/content';
+import { docs, sections, cleanChapterTitle, getSectionMeta } from '@/lib/content';
 import { useAuth } from '@/lib/auth';
 
 export function HomePage() {
   const { isAuthenticated } = useAuth();
   const gateSection = sections.find((s) => s.id === 'gate-cse');
+  const cSection = sections.find((s) => s.id === 'c-programming');
+  const networkingSection = sections.find((s) => s.id === 'computer-networking');
   const rootDocs = docs.filter((d) => d.section === 'root');
 
   const totalChapters = gateSection?.docs.length ?? 0;
   const totalHandbooks = rootDocs.length;
+  const courseCount = 3;
+
+  const gateMeta = getSectionMeta('gate-cse');
+  const cMeta = getSectionMeta('c-programming');
+  const networkingMeta = getSectionMeta('computer-networking');
 
   return (
     <div className="animate-fade-in">
@@ -32,10 +39,9 @@ export function HomePage() {
           {/* LEFT */}
           <div className="min-w-0">
             <div className="flex flex-wrap gap-2 mb-5">
-              <span className="chip chip-amber">
-                <Sparkles className="h-3 w-3" /> New · GATE CSE 2026 cohort open
+              <span className="chip chip-outline">
+                {totalChapters} chapters · {totalHandbooks} handbooks · {courseCount} courses
               </span>
-              <span className="chip chip-outline">{totalChapters} chapters · {totalHandbooks} handbooks</span>
             </div>
 
             <h1 className="font-serif text-[40px] sm:text-[48px] md:text-[68px] leading-[1.05] md:leading-[1.02] tracking-[-0.025em] md:tracking-[-0.03em] text-ink break-words">
@@ -176,19 +182,6 @@ export function HomePage() {
               </div>
             </div>
 
-            {/* Floating streak chip */}
-            <div
-              className="card-surface bg-surface-2 shadow-soft-2 flex items-center gap-2.5 absolute"
-              style={{ right: -16, top: 60, padding: '10px 14px', zIndex: 2 }}
-            >
-              <div className="h-8 w-8 rounded-md bg-amber-50 text-amber-700 flex items-center justify-center">
-                <Flame className="h-4 w-4" />
-              </div>
-              <div className="leading-tight">
-                <div className="text-[13px] text-ink font-medium">12-day streak</div>
-                <div className="meta">Keep it going ✨</div>
-              </div>
-            </div>
           </div>
         </div>
       </section>
@@ -218,25 +211,70 @@ export function HomePage() {
 
         <div className="grid md:grid-cols-2 gap-5">
           <TrackCard
-            eyebrow="Track 01 — Course (sign-in required)"
+            eyebrow="Course · sign-in required"
             icon={<Code2 className="h-5 w-5" />}
             iconTone="text-ink-blue"
-            title="GATE CSE Preparation"
-            description="13টা subject, 500+ PYQs solved, weightage analysis, mindmap summary — GATE 2026-র জন্য complete প্রস্তুতি।"
+            title={gateMeta?.title ?? 'GATE CSE Preparation'}
+            description={
+              gateMeta?.description ??
+              'GATE CSE-র সব subject, PYQ-heavy approach, bilingual explanations।'
+            }
             items={
               gateSection?.docs
                 .slice(0, 5)
                 .map((d) => ({ slug: d.slug, label: cleanChapterTitle(d.title) })) ?? []
             }
-            meta={`${totalChapters} chapters · updated regularly`}
+            meta={`${gateSection?.docs.length ?? 0} chapters · updated regularly`}
             ctaTo={isAuthenticated ? '/sections/gate-cse' : '/login?next=/sections/gate-cse'}
             ctaLabel={isAuthenticated ? 'Open course' : 'Sign in to start'}
             locked={!isAuthenticated}
           />
           <TrackCard
-            eyebrow="Track 02 — Public handbooks"
-            icon={<Network className="h-5 w-5" />}
+            eyebrow="Course · sign-in required"
+            icon={<Braces className="h-5 w-5" />}
             iconTone="text-clay"
+            title={cMeta?.title ?? 'C Programming'}
+            description={
+              cMeta?.description ??
+              'C language depth-এ — fundamentals থেকে data structures পর্যন্ত।'
+            }
+            items={
+              cSection?.docs
+                .slice(0, 5)
+                .map((d) => ({ slug: d.slug, label: cleanChapterTitle(d.title) })) ?? []
+            }
+            meta={`${cSection?.docs.length ?? 0} chapters · structured course`}
+            ctaTo={isAuthenticated ? '/sections/c-programming' : '/login?next=/sections/c-programming'}
+            ctaLabel={isAuthenticated ? 'Open course' : 'Sign in to start'}
+            locked={!isAuthenticated}
+          />
+          <TrackCard
+            eyebrow="Course · sign-in required"
+            icon={<Network className="h-5 w-5" />}
+            iconTone="text-sage"
+            title={networkingMeta?.title ?? 'Computer Networking'}
+            description={
+              networkingMeta?.description ??
+              'OSI/TCP-IP থেকে শুরু করে routing, security, wireless পর্যন্ত — networking-র complete course।'
+            }
+            items={
+              networkingSection?.docs
+                .slice(0, 5)
+                .map((d) => ({ slug: d.slug, label: cleanChapterTitle(d.title) })) ?? []
+            }
+            meta={`${networkingSection?.docs.length ?? 0} chapters · layer by layer`}
+            ctaTo={
+              isAuthenticated
+                ? '/sections/computer-networking'
+                : '/login?next=/sections/computer-networking'
+            }
+            ctaLabel={isAuthenticated ? 'Open course' : 'Sign in to start'}
+            locked={!isAuthenticated}
+          />
+          <TrackCard
+            eyebrow="Free handbooks"
+            icon={<Library className="h-5 w-5" />}
+            iconTone="text-amber-700"
             title="Standalone Handbooks"
             description="একটা টপিকে গভীরে যাও — What → Why → How → Summary flow-এ real-world-ready content।"
             items={rootDocs
