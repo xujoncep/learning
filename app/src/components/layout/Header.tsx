@@ -79,14 +79,14 @@ export function Header({ onMenuClick, showMenu = false, showSearch = false }: He
         Skip to content
       </a>
 
-      <header className="sticky top-0 z-40 w-full border-b border-line bg-sand/85 backdrop-blur-md supports-[backdrop-filter]:bg-sand/70">
-        <div className="flex h-16 items-center gap-4 px-4 md:px-8">
+      <header className="sticky top-0 z-40 w-full border-b border-line bg-sand/90 backdrop-blur-md supports-[backdrop-filter]:bg-sand/80">
+        <div className="flex h-[68px] items-center gap-4 px-4 md:px-8">
           {showMenu ? (
             <button
               type="button"
               onClick={onMenuClick}
               aria-label="Open menu"
-              className="md:hidden inline-flex h-9 w-9 items-center justify-center rounded-full text-ink-3 hover:bg-sand-2 transition-colors"
+              className="md:hidden inline-flex h-9 w-9 items-center justify-center rounded-md text-ink-3 hover:bg-sand-2 transition-colors"
             >
               <Menu className="h-5 w-5" />
             </button>
@@ -95,7 +95,7 @@ export function Header({ onMenuClick, showMenu = false, showSearch = false }: He
               <DropdownMenu.Trigger asChild>
                 <button
                   aria-label="Open navigation"
-                  className="md:hidden inline-flex h-9 w-9 items-center justify-center rounded-full text-ink-3 hover:bg-sand-2 transition-colors"
+                  className="md:hidden inline-flex h-9 w-9 items-center justify-center rounded-md text-ink-3 hover:bg-sand-2 transition-colors"
                 >
                   <Menu className="h-5 w-5" />
                 </button>
@@ -136,7 +136,7 @@ export function Header({ onMenuClick, showMenu = false, showSearch = false }: He
 
           <Logo />
 
-          <nav className="hidden md:flex items-center gap-6 ml-6">
+          <nav className="hidden md:flex items-center gap-7 ml-7">
             {desktopLinks.map((l) => (
               <NavLink
                 key={l.to}
@@ -162,7 +162,7 @@ export function Header({ onMenuClick, showMenu = false, showSearch = false }: He
               type="button"
               onClick={() => setSearchOpen(true)}
               aria-label="Search (Ctrl+K)"
-              className="hidden md:inline-flex items-center gap-2 h-9 px-3 rounded-full border border-line bg-sand-2 hover:bg-sand-3 transition-colors text-[12.5px] text-ink-4"
+              className="hidden md:inline-flex items-center gap-2 h-9 px-3 rounded-[8px] border border-line bg-sand-2 hover:bg-sand-3 transition-colors text-[12.5px] text-ink-4"
             >
               <Search className="h-3.5 w-3.5" />
               <span>Search</span>
@@ -177,7 +177,7 @@ export function Header({ onMenuClick, showMenu = false, showSearch = false }: He
               type="button"
               onClick={() => setSearchOpen(true)}
               aria-label="Search"
-              className="md:hidden inline-flex h-9 w-9 items-center justify-center rounded-full text-ink-3 hover:bg-sand-2 transition-colors"
+              className="md:hidden inline-flex h-9 w-9 items-center justify-center rounded-md text-ink-3 hover:bg-sand-2 transition-colors"
             >
               <Search className="h-4 w-4" />
             </button>
@@ -188,7 +188,7 @@ export function Header({ onMenuClick, showMenu = false, showSearch = false }: He
             <DropdownMenu.Trigger asChild>
               <button
                 aria-label="Text size"
-                className="inline-flex h-9 w-9 items-center justify-center rounded-full text-ink-3 hover:bg-sand-2 transition-colors"
+                className="inline-flex h-9 w-9 items-center justify-center rounded-md text-ink-3 hover:bg-sand-2 transition-colors"
               >
                 <Type className="h-4 w-4" />
               </button>
@@ -222,7 +222,7 @@ export function Header({ onMenuClick, showMenu = false, showSearch = false }: He
             type="button"
             onClick={toggleTheme}
             aria-label="Toggle theme"
-            className="inline-flex h-9 w-9 items-center justify-center rounded-full text-ink-3 hover:bg-sand-2 transition-colors"
+            className="inline-flex h-9 w-9 items-center justify-center rounded-md text-ink-3 hover:bg-sand-2 transition-colors"
           >
             {theme === 'dark' ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
           </button>

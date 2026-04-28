@@ -21,7 +21,7 @@ export function ReadingProgress() {
 
   return (
     <div
-      className="fixed top-14 left-0 right-0 z-30 h-1 bg-transparent pointer-events-none"
+      className="fixed top-[68px] left-0 right-0 z-30 h-1 bg-transparent pointer-events-none"
       role="progressbar"
       aria-valuenow={Math.round(progress)}
       aria-valuemin={0}

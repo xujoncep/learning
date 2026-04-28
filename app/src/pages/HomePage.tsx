@@ -35,7 +35,7 @@ export function HomePage() {
           HERO — 2-column editorial
           ════════════════════════════════════════════════════════════════ */}
       <section className="relative overflow-hidden">
-        <div className="max-w-[1280px] mx-auto px-6 md:px-10 pt-14 md:pt-20 pb-16 md:pb-24 grid md:grid-cols-[1.15fr_1fr] gap-10 md:gap-16 items-center">
+        <div className="max-w-[1280px] mx-auto px-6 md:px-10 pt-14 md:pt-20 pb-16 md:pb-24 grid md:grid-cols-[1.12fr_1fr] gap-10 md:gap-16 items-center">
           {/* LEFT */}
           <div className="min-w-0">
             <div className="flex flex-wrap gap-2 mb-5">
@@ -74,7 +74,7 @@ export function HomePage() {
             </div>
 
             {/* Stats row — 2x2 grid on mobile, single row on desktop */}
-            <div className="grid grid-cols-2 gap-x-6 gap-y-5 mt-10 sm:flex sm:items-center sm:gap-8">
+            <div className="grid grid-cols-2 gap-x-6 gap-y-5 mt-10 sm:flex sm:items-center sm:gap-7">
               <Stat value={totalChapters.toString()} label="GATE chapters" />
               <Divider />
               <Stat value={totalHandbooks.toString()} label="handbooks" />
@@ -164,7 +164,7 @@ export function HomePage() {
 
                 <div className="flex items-center justify-between mt-5">
                   <div className="flex items-center gap-2">
-                    <div className="h-7 w-7 rounded-full flex items-center justify-center text-white font-serif text-[11px] bg-ink-blue">
+                    <div className="h-7 w-7 rounded-[8px] flex items-center justify-center text-white font-serif text-[11px] bg-ink-blue">
                       P
                     </div>
                     <div className="leading-tight">
@@ -363,7 +363,7 @@ export function HomePage() {
             )}
             <Link
               to="/handbooks"
-              className="btn btn-lg inline-flex items-center justify-center gap-2 rounded-full"
+              className="btn btn-lg inline-flex items-center justify-center gap-2 rounded-[8px]"
               style={{
                 height: 54,
                 background: 'transparent',
@@ -424,9 +424,7 @@ function TrackCard({
   return (
     <div className="card-surface bg-surface-2 p-8 flex flex-col">
       <div className="flex items-center justify-between">
-        <div
-          className={`h-12 w-12 rounded-xl bg-amber-50 flex items-center justify-center ${iconTone}`}
-        >
+        <div className={`h-12 w-12 rounded-[10px] bg-amber-50 flex items-center justify-center ${iconTone}`}>
           {icon}
         </div>
         <span className="meta flex items-center gap-1.5">

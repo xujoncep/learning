@@ -33,7 +33,7 @@ export function HandbooksPage() {
         </div>
 
         {/* Grid */}
-        <div className="mt-12 grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="mt-12 grid md:grid-cols-2 lg:grid-cols-3 gap-5">
           {handbooks.map((doc) => (
             <Link
               key={doc.slug}
@@ -41,7 +41,7 @@ export function HandbooksPage() {
               className="group card-surface bg-surface-2 overflow-hidden hover:shadow-soft-2 transition-all flex flex-col"
             >
               <div className="h-[160px] relative bg-gradient-to-br from-amber-50 to-amber-100 border-b border-line overflow-hidden">
-                <div className="absolute top-4 left-4 px-2.5 py-1 rounded-full bg-surface-2/95 text-[11px] font-medium text-ink-2">
+                <div className="absolute top-4 left-4 px-2.5 py-1 rounded-[6px] bg-surface-2/95 text-[11px] font-medium text-ink-2">
                   Handbook
                 </div>
                 <div className="absolute bottom-4 left-4 font-serif italic text-[44px] text-amber-700 opacity-50 leading-none">

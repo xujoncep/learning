@@ -72,7 +72,7 @@ export function SectionPage() {
       </div>
 
       {/* Grid */}
-      <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mt-10">
+      <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5 mt-10">
         {sectionData.docs.map((doc, i) => (
           <Link
             key={doc.slug}
@@ -83,10 +83,10 @@ export function SectionPage() {
             <div
               className={`h-[160px] relative bg-gradient-to-br ${TONES[i % TONES.length]} border-b border-line overflow-hidden`}
             >
-              <div className="absolute top-4 left-4 px-2.5 py-1 rounded-full bg-surface-2/95 text-[11px] font-medium text-ink-2">
+              <div className="absolute top-4 left-4 px-2.5 py-1 rounded-[6px] bg-surface-2/95 text-[11px] font-medium text-ink-2">
                 {chapterLabel(doc)}
               </div>
-              <div className="absolute top-4 right-4 w-8 h-8 rounded-full bg-surface-2/90 text-ink-3 flex items-center justify-center">
+              <div className="absolute top-4 right-4 w-8 h-8 rounded-[8px] bg-surface-2/90 text-ink-3 flex items-center justify-center">
                 <BookOpen className="h-3.5 w-3.5" />
               </div>
               <div className="absolute bottom-3.5 left-4 font-serif italic text-[42px] text-amber-700 opacity-45 leading-none">

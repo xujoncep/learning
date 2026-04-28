@@ -79,7 +79,7 @@ export function LoginPage() {
                 onClick={() => {
                   window.location.href = apiGoogleSignInUrl();
                 }}
-                className="w-full h-12 inline-flex items-center justify-center gap-3 rounded-full bg-white border border-line-2 text-[14px] font-medium text-ink hover:bg-sand-2 hover:border-line transition-all shadow-sm"
+                className="w-full h-12 inline-flex items-center justify-center gap-3 rounded-[8px] bg-white border border-line-2 text-[14px] font-medium text-ink hover:bg-sand-2 hover:border-line transition-all shadow-sm"
               >
                 <svg width="18" height="18" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden>
                   <path fill="#4285F4" d="M23.49 12.27c0-.79-.07-1.54-.19-2.27H12v4.51h6.44c-.28 1.48-1.13 2.74-2.4 3.58v3h3.88c2.27-2.09 3.57-5.18 3.57-8.82z" />
@@ -186,7 +186,7 @@ export function LoginPage() {
         </div>
 
         {/* RIGHT — editorial illustration panel */}
-        <div className="hidden md:block relative overflow-hidden bg-[hsl(var(--ink-blue))]">
+        <div className="hidden md:block relative overflow-hidden bg-[hsl(var(--ink-blue))] border-l border-line/30">
           <div
             className="absolute inset-0"
             style={{

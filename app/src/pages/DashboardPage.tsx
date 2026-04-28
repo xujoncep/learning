@@ -29,7 +29,7 @@ export function DashboardPage() {
       <div className="max-w-[1200px] mx-auto px-6 md:px-10 py-10 md:py-14">
         {/* Header */}
         <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-5 mb-10">
-          <div className="flex items-center gap-5">
+          <div className="flex items-center gap-4 md:gap-5">
             <div
               aria-hidden
               className="h-16 w-16 rounded-full text-surface font-serif text-xl font-semibold flex items-center justify-center shadow-soft-2"
@@ -77,7 +77,7 @@ export function DashboardPage() {
                   to={doc.path}
                   className="card-surface bg-surface-2 overflow-hidden group hover:shadow-soft-2 transition-all"
                 >
-                  <div className="h-[90px] relative bg-gradient-to-br from-amber-50 to-amber-100 border-b border-line">
+                  <div className="h-[94px] relative bg-gradient-to-br from-amber-50 to-amber-100 border-b border-line">
                     <div className="absolute top-3.5 left-4 text-[11px] font-medium text-ink-3">
                       {chapterLabel(doc)}
                     </div>
@@ -112,7 +112,7 @@ export function DashboardPage() {
                 { icon: <BookOpen className="h-4 w-4" />, tone: 'text-sage', label: 'Readings', value: '—', sub: 'all time' },
                 { icon: <Bookmark className="h-4 w-4" />, tone: 'text-clay', label: 'Bookmarks', value: '—', sub: 'saved' },
               ].map((s) => (
-                <div key={s.label} className="card-surface bg-surface-2 p-4">
+                <div key={s.label} className="card-surface bg-surface-2 p-4 md:p-[18px]">
                   <div className={`inline-flex items-center gap-2 ${s.tone}`}>
                     {s.icon}
                     <span className="meta text-ink-4">{s.label}</span>

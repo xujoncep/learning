@@ -94,7 +94,7 @@ export function CollapsedRail({ onExpand }: CollapsedRailProps) {
     <button
       type="button"
       onClick={onExpand}
-      className="hidden md:flex w-7 shrink-0 sticky top-14 h-[calc(100vh-3.5rem)] bg-card/40 border-r border-border/60 items-start justify-center pt-4 hover:bg-accent/40 transition-colors group"
+      className="hidden md:flex w-7 shrink-0 sticky top-[68px] h-[calc(100vh-68px)] bg-card/40 border-r border-border/60 items-start justify-center pt-4 hover:bg-accent/40 transition-colors group"
       aria-label="Expand sidebar"
     >
       <ChevronLeft className="h-4 w-4 rotate-180 text-muted-foreground group-hover:text-foreground" />

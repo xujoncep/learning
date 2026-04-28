@@ -190,7 +190,7 @@
 
   /* Pill chip primitives */
   .chip {
-    @apply inline-flex items-center gap-1.5 h-[26px] px-[10px] rounded-full text-[11.5px] font-medium border;
+    @apply inline-flex items-center gap-1.5 h-[26px] px-[10px] rounded-md text-[11.5px] font-medium border;
     background: hsl(var(--bg-2));
     color: hsl(var(--ink-3));
     border-color: hsl(var(--line));
@@ -211,11 +211,11 @@
 
   /* Button primitives */
   .btn {
-    @apply inline-flex items-center justify-center gap-2 h-10 px-[18px] rounded-full text-[13px] font-medium transition-colors whitespace-nowrap;
+    @apply inline-flex items-center justify-center gap-2 h-10 px-[18px] rounded-[8px] text-[13px] font-medium transition-colors whitespace-nowrap;
     letter-spacing: -0.005em;
   }
-  .btn-sm { @apply h-8 px-[14px] text-xs; }
-  .btn-lg { @apply h-12 px-[22px] text-sm; }
+  .btn-sm { @apply h-8 px-[14px] text-xs rounded-[6px]; }
+  .btn-lg { @apply h-12 px-[22px] text-sm rounded-[8px]; }
   .btn-primary {
     background: hsl(var(--ink));
     color: hsl(var(--bg));

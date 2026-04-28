@@ -113,7 +113,7 @@ function CourseView({ doc }: { doc: DocEntry }) {
 
       <div className="flex flex-1">
         {sidebarOpen ? (
-          <aside className="hidden md:block w-64 shrink-0 border-r border-border/60 sticky top-14 h-[calc(100vh-3.5rem)]">
+          <aside className="hidden md:block w-64 shrink-0 border-r border-border/60 sticky top-[68px] h-[calc(100vh-68px)]">
             <CourseSidebar
               section={doc.section}
               currentSlug={doc.slug}

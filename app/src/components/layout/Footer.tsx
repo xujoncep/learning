@@ -49,7 +49,7 @@ export function Footer() {
             <div className="text-[11px] font-medium uppercase tracking-[0.04em] text-ink mb-3">
               {col.title}
             </div>
-            <ul className="space-y-1.5">
+            <ul className="space-y-2">
               {col.links.map((l) => (
                 <li key={l.to}>
                   <Link
