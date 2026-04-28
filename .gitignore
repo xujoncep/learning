@@ -18,3 +18,4 @@ dist/
 # Test artifacts from Playwright session (at repo root)
 *.png
 *.zip
+.claude/scheduled_tasks.lock

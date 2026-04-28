@@ -30,6 +30,7 @@ app.use(
 );
 
 app.get('/', (c) => c.json({ ok: true, service: 'porhi-api' }));
+
 app.route('/auth', authRoutes);
 app.route('/me', meRoutes);
 app.route('/audit', auditRoutes);
