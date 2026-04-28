@@ -44,14 +44,11 @@ Two kinds of content, two folder placements:
 
 The site auto-detects which layout to use based on whether the `.md` lives in a subfolder or at the root of `handnote/`.
 
-## Authentication (client-side gate)
+## Authentication
 
-The site uses a **shared-password** gate — no backend. All content is client-side; this is a UX gate, not real security.
+**Public-facing path: Google OAuth only.** The login page exposes a single "Sign in with Google" button. The Porhi API (Cloudflare Worker at `api/`) handles the OAuth round-trip and issues a JWT that is stored in `localStorage['porhi:token']` and used as `Authorization: Bearer …` on all `/me/*` endpoints.
 
-- **Shared password constant:** `SHARED_PASSWORD` in `app/src/lib/auth.tsx`
-- **Current value:** `admin` — to rotate, edit the constant + redeploy. Login page placeholders + a visible "Demo credentials" banner display `admin / admin` so anyone landing on `/login` can sign in.
-- **Session storage:** localStorage keys `learning:auth`, `learning:display-name`, `learning:logged-in-at`
-- **Login flow:** user types a display name + shared password → session set → redirect to `?next=` or `/dashboard`
+**Internal-only fallback:** `SHARED_PASSWORD = 'admin'` and the `login(password, name)` function in `app/src/lib/auth.tsx` are kept for Playwright tests and dev shortcuts. They flip the auth gate locally but do NOT mint a JWT, so any backend-backed feature (dashboard activity, calendar) gracefully shows "Activity tracking off — sign in with Google" when this path is used. The form has been removed from `LoginPage.tsx`; access via `localStorage.setItem('learning:auth', 'true')` etc.
 
 ### Route gate map
 
@@ -61,11 +58,22 @@ The site uses a **shared-password** gate — no backend. All content is client-s
 | `/handbooks` | 🌐 public |
 | `/docs/<handbook-slug>` (root handbooks like ssh, ssl-tls) | 🌐 public |
 | `/login` | 🌐 public |
-| `/sections/gate-cse` | 🔒 login required |
-| `/docs/gate-cse/*` | 🔒 login required |
+| `/courses` | 🌐 public (cards link into gated section pages) |
+| `/sections/<gated-id>` | 🔒 login required |
+| `/docs/<gated-section>/*` | 🔒 login required |
 | `/dashboard` | 🔒 login required |
 
-Gating is done inside `SectionPage` and `DocPage` based on `doc.section === 'gate-cse'`; `/dashboard` uses `<ProtectedRoute>` wrapper from `lib/auth.tsx`.
+Gated sections: `gate-cse`, `c-programming`, `computer-networking`, `dbms`, `operating-system`, `system-design`. Gating is done inside `SectionPage`/`DocPage` via `isGatedSection()` from `lib/content.ts`. `/dashboard` uses `<ProtectedRoute>` wrapper from `lib/auth.tsx`.
+
+## Backend (Cloudflare Worker + D1)
+
+`api/` is a separate Hono Worker (`porhi-api`) backed by D1 database `porhi-db`.
+
+- **Tables:** `users`, `bookmarks`, `reading_progress`, `audit_log`, `reading_events` (per-page-load activity log).
+- **Endpoints:** `/auth/google`, `/auth/google/callback`, `/me`, `/me/bookmarks`, `/me/progress`, `/me/events` (POST), `/me/calendar`, `/me/calendar/day`, `/me/summary`.
+- **Migrations:** `api/migrations/000N_*.sql`. Apply with `cd api && npm run db:migrate:remote`.
+- **Deploy:** `cd api && npx wrangler deploy`.
+- **Frontend client:** `app/src/lib/api.ts` (typed wrappers around `authedFetch` with auto Bearer token).
 
 ## Build & Publish Flow
 

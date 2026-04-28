@@ -1,52 +1,34 @@
-import { useEffect, useState, type FormEvent } from 'react';
+import { useEffect, useState } from 'react';
 import { Link, useNavigate, useSearchParams } from 'react-router-dom';
-import { ArrowRight, Eye, EyeOff, Lock, User as UserIcon } from 'lucide-react';
 import { useAuth } from '@/lib/auth';
 import { apiGoogleSignInUrl } from '@/lib/api';
 import { Logo } from '@/components/layout/Logo';
 import { SeoHead } from '@/components/layout/SeoHead';
 
 export function LoginPage() {
-  const { isAuthenticated, login } = useAuth();
+  const { isAuthenticated } = useAuth();
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
   const next = searchParams.get('next') || '/dashboard';
 
-  const [name, setName] = useState('');
-  const [password, setPassword] = useState('');
-  const [showPassword, setShowPassword] = useState(false);
-  const [error, setError] = useState<string | null>(() => {
+  const [error] = useState<string | null>(() => {
     const code = searchParams.get('error');
     if (code === 'oauth_failed') return 'Google sign-in did not complete. Please try again.';
     if (code === 'oauth_invalid') return 'Google session was rejected. Please try again.';
     return null;
   });
-  const [submitting, setSubmitting] = useState(false);
 
   // If already logged in, bounce to next/dashboard.
   useEffect(() => {
     if (isAuthenticated) navigate(next, { replace: true });
   }, [isAuthenticated, navigate, next]);
 
-  const onSubmit = (e: FormEvent) => {
-    e.preventDefault();
-    setError(null);
-    setSubmitting(true);
-    const result = login(password, name);
-    if (result.ok) {
-      navigate(next, { replace: true });
-    } else {
-      setError(result.reason);
-      setSubmitting(false);
-    }
-  };
-
   return (
     <>
-      <SeoHead title="Sign in · Porhi" description="Sign in to access the gated courses and dashboard." />
+      <SeoHead title="Sign in · Porhi" description="Sign in with Google to access courses and your reading dashboard." />
 
       <div className="min-h-screen grid md:grid-cols-2 bg-sand">
-        {/* LEFT — form */}
+        {/* LEFT — sign-in column */}
         <div className="flex flex-col p-6 md:p-12">
           <div className="mb-10">
             <Logo />
@@ -60,17 +42,9 @@ export function LoginPage() {
                   Sign in to continue <em className="italic text-amber-700">learning</em>.
                 </h1>
                 <p className="text-[14px] text-ink-3 mt-3 leading-relaxed">
-                  Gated courses আর personal dashboard access করতে একটা display name
-                  আর shared password লাগবে।
+                  Gated courses, personal dashboard, calendar আর reading activity tracking
+                  — সব access করতে Google দিয়ে sign in করো।
                 </p>
-                <div className="mt-4 inline-flex items-center gap-2 rounded-md border border-amber/40 bg-amber-50 px-3 py-2 text-[12.5px] text-amber-700">
-                  <Lock className="h-3.5 w-3.5" />
-                  <span>
-                    Demo credentials: <span className="mono-font font-medium">admin</span>
-                    <span className="text-ink-4"> / </span>
-                    <span className="mono-font font-medium">admin</span>
-                  </span>
-                </div>
               </div>
 
               {/* Google OAuth */}
@@ -90,93 +64,37 @@ export function LoginPage() {
                 Sign in with Google
               </button>
 
-              {/* Divider */}
-              <div className="my-5 flex items-center gap-3">
-                <div className="flex-1 h-px bg-line" />
-                <span className="text-[11px] uppercase tracking-[0.06em] text-ink-4">
-                  or use shared password
-                </span>
-                <div className="flex-1 h-px bg-line" />
-              </div>
-
-              <form onSubmit={onSubmit} className="space-y-4">
-                {/* Display name */}
-                <label className="block">
-                  <span className="text-[12px] font-medium text-ink-3 mb-1.5 inline-block">
-                    Display name
-                  </span>
-                  <div className="relative">
-                    <UserIcon className="absolute left-3.5 top-1/2 -translate-y-1/2 h-4 w-4 text-ink-4 pointer-events-none" />
-                    <input
-                      type="text"
-                      value={name}
-                      onChange={(e) => setName(e.target.value)}
-                      autoFocus
-                      required
-                      placeholder="admin"
-                      className="w-full h-12 pl-10 pr-3 bg-surface-2 border border-line-2 rounded-lg text-[14px] text-ink placeholder:text-ink-5 focus:outline-none focus:ring-2 focus:ring-amber-100 focus:border-amber transition-all"
-                    />
-                  </div>
-                </label>
-
-                {/* Password */}
-                <label className="block">
-                  <span className="text-[12px] font-medium text-ink-3 mb-1.5 inline-block">
-                    Shared password
-                  </span>
-                  <div className="relative">
-                    <Lock className="absolute left-3.5 top-1/2 -translate-y-1/2 h-4 w-4 text-ink-4 pointer-events-none" />
-                    <input
-                      type={showPassword ? 'text' : 'password'}
-                      value={password}
-                      onChange={(e) => setPassword(e.target.value)}
-                      required
-                      placeholder="admin"
-                      className="w-full h-12 pl-10 pr-10 bg-surface-2 border border-line-2 rounded-lg text-[14px] text-ink placeholder:text-ink-5 focus:outline-none focus:ring-2 focus:ring-amber-100 focus:border-amber transition-all"
-                    />
-                    <button
-                      type="button"
-                      onClick={() => setShowPassword((v) => !v)}
-                      aria-label={showPassword ? 'Hide password' : 'Show password'}
-                      className="absolute right-3 top-1/2 -translate-y-1/2 text-ink-4 hover:text-ink-2 transition-colors p-1"
-                    >
-                      {showPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
-                    </button>
-                  </div>
-                </label>
-
-                {error && (
-                  <div
-                    role="alert"
-                    className="text-[13px] text-danger bg-danger/5 border border-danger/20 rounded-md px-3 py-2"
-                    style={{
-                      color: 'hsl(var(--danger))',
-                      background: 'hsl(var(--danger) / 0.08)',
-                      borderColor: 'hsl(var(--danger) / 0.25)',
-                    }}
-                  >
-                    {error}
-                  </div>
-                )}
-
-                <button
-                  type="submit"
-                  disabled={submitting}
-                  className="btn btn-lg btn-primary w-full"
+              {error && (
+                <div
+                  role="alert"
+                  className="mt-4 text-[13px] rounded-md px-3 py-2"
+                  style={{
+                    color: 'hsl(var(--danger))',
+                    background: 'hsl(var(--danger) / 0.08)',
+                    borderColor: 'hsl(var(--danger) / 0.25)',
+                    borderWidth: 1,
+                    borderStyle: 'solid',
+                  }}
                 >
-                  {submitting ? 'Signing in…' : (
-                    <>
-                      Sign in <ArrowRight className="h-4 w-4" />
-                    </>
-                  )}
-                </button>
+                  {error}
+                </div>
+              )}
 
-                <p className="text-[12px] text-ink-4 text-center pt-2">
-                  Public resources → <Link to="/" className="text-amber-700 hover:underline">Home</Link>
-                  {' · '}
-                  <Link to="/handbooks" className="text-amber-700 hover:underline">Handbooks</Link>
-                </p>
-              </form>
+              <p className="text-[12.5px] text-ink-4 mt-6 leading-relaxed">
+                We only use Google sign-in to identify you across devices and keep your
+                reading history safe. No password to remember, no separate account.
+              </p>
+
+              <p className="text-[12px] text-ink-4 text-center pt-8 border-t border-line/50 mt-8">
+                Public resources →{' '}
+                <Link to="/" className="text-amber-700 hover:underline">
+                  Home
+                </Link>
+                {' · '}
+                <Link to="/handbooks" className="text-amber-700 hover:underline">
+                  Handbooks
+                </Link>
+              </p>
             </div>
           </div>
 
@@ -194,7 +112,6 @@ export function LoginPage() {
                 'linear-gradient(135deg, hsl(var(--ink-blue)) 0%, hsl(214, 60%, 12%) 70%)',
             }}
           />
-          {/* amber glow */}
           <div
             aria-hidden
             className="absolute rounded-full"

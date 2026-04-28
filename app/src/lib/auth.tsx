@@ -11,15 +11,23 @@ import { Navigate, useLocation } from 'react-router-dom';
 import { getMe, type UserRow } from '@/lib/api';
 
 /**
- * Shared-credential auth (client-side only, no backend).
- * Anyone with the password + a display name gets in. Progress data is
- * per-browser in localStorage; this is a UX gate, not real security.
+ * Two auth paths coexist:
  *
- * To change the password: edit SHARED_PASSWORD below and redeploy.
+ *  1. Google OAuth (the only one exposed in the UI). The Porhi API issues
+ *     a JWT after the round-trip; that token lives in K_TOKEN and is what
+ *     the API uses for `Authorization: Bearer …`. Anything that needs
+ *     real per-user data (dashboard activity, calendar, etc.) requires
+ *     this path.
  *
- * In parallel, an OAuth-aware path exists: when the Porhi API issues a
- * JWT it is stored under K_TOKEN and used by lib/api.ts. Either path
- * marks the session as authenticated.
+ *  2. Internal shared-password (`SHARED_PASSWORD`). Not shown in the UI
+ *     and only used programmatically — Playwright tests, dev shortcuts —
+ *     to flip the auth gate without hitting Google. It does NOT mint a
+ *     JWT, so any backend-backed feature will gracefully be unauthorized
+ *     when this path is used.
+ *
+ *  `isAuthenticated` is true if either path has set its session — the gate
+ *  is the same. UI features that need the API check `getApiToken()` or
+ *  `apiUser` directly to handle the no-token case.
  */
 export const SHARED_PASSWORD = 'admin';
 
@@ -33,6 +41,7 @@ export interface AuthState {
   displayName: string | null;
   loggedInAt: string | null;
   apiUser: UserRow | null;
+  /** Internal/testing path. Not surfaced in the public UI. */
   login: (password: string, name: string) => { ok: true } | { ok: false; reason: string };
   logout: () => void;
   setOAuthSession: (token: string) => Promise<void>;

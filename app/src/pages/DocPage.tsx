@@ -4,6 +4,7 @@ import { MDXProvider } from '@mdx-js/react';
 import { NotFoundPage } from './NotFoundPage';
 import { findDoc, getAdjacentDocs, isGatedSection, type DocEntry } from '@/lib/content';
 import { useAuth } from '@/lib/auth';
+import { recordReadingEvent } from '@/lib/api';
 import { mdxComponents } from '@/components/mdx/MDXComponents';
 import { Header } from '@/components/layout/Header';
 import { DocHeader } from '@/components/layout/DocHeader';
@@ -28,6 +29,16 @@ function DocLoadingSkeleton() {
       <div className="h-4 bg-muted rounded w-2/3" />
     </div>
   );
+}
+
+// Fire one /me/events POST per chapter load when the reader is signed in.
+// One row per page-load powers the calendar heat map; the recordReadingEvent
+// helper swallows network errors so a backend hiccup never blocks reading.
+function useTrackReadingEvent(doc: DocEntry, isAuthenticated: boolean) {
+  useEffect(() => {
+    if (!isAuthenticated) return;
+    recordReadingEvent({ slug: doc.slug, title: doc.title, section: doc.section });
+  }, [doc.slug, doc.title, doc.section, isAuthenticated]);
 }
 
 function useScrollRestore(slug: string) {
@@ -83,6 +94,7 @@ export function DocPage() {
 }
 
 function CourseView({ doc }: { doc: DocEntry }) {
+  const { isAuthenticated } = useAuth();
   const [mobileOpen, setMobileOpen] = useState(false);
   const [sidebarOpen, setSidebarOpen] = useState(() => {
     if (typeof window === 'undefined') return true;
@@ -93,6 +105,7 @@ function CourseView({ doc }: { doc: DocEntry }) {
     localStorage.setItem(COURSE_SIDEBAR_KEY, String(sidebarOpen));
   }, [sidebarOpen]);
 
+  useTrackReadingEvent(doc, isAuthenticated);
   useScrollRestore(doc.slug);
 
   const { prev, next } = getAdjacentDocs(doc.slug);
@@ -149,6 +162,8 @@ function CourseView({ doc }: { doc: DocEntry }) {
 }
 
 function ArticleView({ doc }: { doc: DocEntry }) {
+  const { isAuthenticated } = useAuth();
+  useTrackReadingEvent(doc, isAuthenticated);
   useScrollRestore(doc.slug);
   const Content = doc.Component as ComponentType;
 

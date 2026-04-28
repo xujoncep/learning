@@ -123,3 +123,67 @@ export async function recordAudit(action: string, target?: string): Promise<void
     body: JSON.stringify({ action, target }),
   });
 }
+
+// ─── Reading events / dashboard analytics ─────────────────────────────────
+
+export interface DayCount {
+  date: string;
+  count: number;
+}
+
+export interface DayEvent {
+  doc_slug: string;
+  doc_title: string;
+  section_id: string;
+  visits: number;
+  first_seen: string;
+  last_seen: string;
+}
+
+export interface ReadingSummary {
+  total_events: number;
+  distinct_chapters: number;
+  current_streak: number;
+  active_days_30: number;
+  recent: Array<{
+    doc_slug: string;
+    doc_title: string;
+    section_id: string;
+    created_at: string;
+  }>;
+}
+
+// Fire-and-forget. We swallow errors so a backend hiccup never blocks
+// the reader from actually reading the chapter.
+export async function recordReadingEvent(data: {
+  slug: string;
+  title: string;
+  section: string;
+}): Promise<void> {
+  try {
+    await authedFetch<{ ok: true }>('/me/events', {
+      method: 'POST',
+      body: JSON.stringify(data),
+    });
+  } catch {
+    /* analytics best-effort */
+  }
+}
+
+export async function getCalendarMonth(from: string, to: string): Promise<DayCount[]> {
+  const data = await authedFetch<{ days: DayCount[] }>(
+    `/me/calendar?from=${encodeURIComponent(from)}&to=${encodeURIComponent(to)}`,
+  );
+  return data.days;
+}
+
+export async function getDayEvents(date: string): Promise<DayEvent[]> {
+  const data = await authedFetch<{ date: string; events: DayEvent[] }>(
+    `/me/calendar/day?date=${encodeURIComponent(date)}`,
+  );
+  return data.events;
+}
+
+export async function getReadingSummary(): Promise<ReadingSummary> {
+  return authedFetch<ReadingSummary>('/me/summary');
+}

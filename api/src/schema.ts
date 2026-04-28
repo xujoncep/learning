@@ -29,3 +29,12 @@ export interface AuditLogRow {
   target: string | null;
   created_at: string;
 }
+
+export interface ReadingEventRow {
+  id: number;
+  user_id: number;
+  doc_slug: string;
+  doc_title: string;
+  section_id: string;
+  created_at: string;
+}
