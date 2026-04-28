@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowRight, Bookmark, BookOpen, Clock, Flame, Loader2 } from 'lucide-react';
+import { ArrowRight, Bookmark, BookOpen, Flame, Loader2, Timer } from 'lucide-react';
 import { Layout } from '@/components/layout/Layout';
 import { SeoHead } from '@/components/layout/SeoHead';
 import { useAuth, avatarColor, initials, getApiToken } from '@/lib/auth';
@@ -8,6 +8,15 @@ import { findDoc, getSectionMeta } from '@/lib/content';
 import { getReadingSummary, type ReadingSummary } from '@/lib/api';
 import { Calendar } from '@/components/dashboard/Calendar';
 import { DayDetails } from '@/components/dashboard/DayDetails';
+
+function formatActiveTime(seconds: number): string {
+  if (seconds < 60) return `${seconds}s`;
+  const minutes = Math.floor(seconds / 60);
+  if (minutes < 60) return `${minutes}m`;
+  const hours = Math.floor(minutes / 60);
+  const remMin = minutes - hours * 60;
+  return remMin > 0 ? `${hours}h ${remMin}m` : `${hours}h`;
+}
 
 function formatRelativeTime(iso: string): string {
   const then = new Date(iso + (iso.endsWith('Z') ? '' : 'Z'));
@@ -87,6 +96,11 @@ export function DashboardPage() {
     return String(n);
   };
 
+  const activeTimeValue =
+    summaryLoading || summary?.total_seconds_30 == null
+      ? '—'
+      : formatActiveTime(summary.total_seconds_30);
+
   return (
     <Layout showSearch>
       <SeoHead
@@ -94,23 +108,23 @@ export function DashboardPage() {
         description="Your reading activity, calendar, and day-by-day summary."
       />
 
-      <div className="max-w-[1280px] mx-auto px-6 md:px-10 py-10 md:py-14">
+      <div className="max-w-[1280px] mx-auto px-4 sm:px-6 md:px-10 py-8 md:py-14">
         {/* Header */}
-        <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-5 mb-10">
-          <div className="flex items-center gap-4 md:gap-5">
+        <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-5 mb-8 md:mb-10">
+          <div className="flex items-center gap-3 sm:gap-4 md:gap-5 min-w-0">
             <div
               aria-hidden
-              className="h-16 w-16 rounded-full text-surface font-serif text-xl font-semibold flex items-center justify-center shadow-soft-2"
+              className="h-12 w-12 sm:h-16 sm:w-16 shrink-0 rounded-full text-surface font-serif text-base sm:text-xl font-semibold flex items-center justify-center shadow-soft-2"
               style={{ background: color }}
             >
               {avatar}
             </div>
-            <div>
+            <div className="min-w-0">
               <div className="meta">{dateStr}</div>
-              <h1 className="font-serif text-4xl md:text-[42px] leading-[1.05] tracking-tight text-ink mt-1">
+              <h1 className="font-serif text-[26px] sm:text-3xl md:text-[42px] leading-[1.1] md:leading-[1.05] tracking-tight text-ink mt-1 break-words">
                 Welcome back, <em className="italic text-amber-700">{displayName || 'friend'}</em>.
               </h1>
-              <p className="text-[14px] text-ink-3 mt-2">
+              <p className="text-[13px] sm:text-[14px] text-ink-3 mt-2">
                 {recent.length > 0
                   ? 'নিচে তোমার activity আর সবশেষ পড়া chapter গুলো।'
                   : 'একটা course বেছে নাও — তোমার reading activity এখানে track হবে।'}
@@ -120,7 +134,7 @@ export function DashboardPage() {
 
           <Link
             to={resumePath}
-            className="btn btn-lg btn-amber shrink-0"
+            className="btn btn-lg btn-amber shrink-0 self-start md:self-auto"
           >
             {resumeTarget ? (
               <>
@@ -162,10 +176,10 @@ export function DashboardPage() {
               sub: 'days in a row',
             },
             {
-              icon: <Clock className="h-4 w-4" />,
+              icon: <Timer className="h-4 w-4" />,
               tone: 'text-ink-blue',
-              label: 'Active days',
-              value: statValue(summary?.active_days_30),
+              label: 'Active time',
+              value: activeTimeValue,
               sub: 'last 30 days',
             },
             {
@@ -178,20 +192,20 @@ export function DashboardPage() {
             {
               icon: <Bookmark className="h-4 w-4" />,
               tone: 'text-clay',
-              label: 'Total reads',
-              value: statValue(summary?.total_events),
-              sub: 'all time',
+              label: 'Active days',
+              value: statValue(summary?.active_days_30),
+              sub: 'last 30 days',
             },
           ].map((s) => (
-            <div key={s.label} className="card-surface bg-surface-2 p-4 md:p-[18px]">
+            <div key={s.label} className="card-surface bg-surface-2 p-3 md:p-[18px]">
               <div className={`inline-flex items-center gap-2 ${s.tone}`}>
                 {s.icon}
-                <span className="meta text-ink-4">{s.label}</span>
+                <span className="meta text-ink-4 text-[10.5px] sm:text-[11px]">{s.label}</span>
               </div>
-              <div className="font-serif text-[28px] text-ink mt-2 tracking-tight leading-none">
+              <div className="font-serif text-[24px] sm:text-[28px] text-ink mt-2 tracking-tight leading-none">
                 {s.value}
               </div>
-              <div className="meta text-[11.5px] mt-1">{s.sub}</div>
+              <div className="meta text-[11px] sm:text-[11.5px] mt-1">{s.sub}</div>
             </div>
           ))}
         </div>

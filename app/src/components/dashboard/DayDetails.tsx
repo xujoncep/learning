@@ -94,11 +94,17 @@ export function DayDetails({ date }: Props) {
 
       {!loading && !error && events && events.length > 0 && (
         <>
-          <div className="mt-2 text-[12px] text-ink-4">
-            {events.length} chapter{events.length === 1 ? '' : 's'} ·{' '}
-            {events.reduce((sum, e) => sum + e.visits, 0)} total visit
-            {events.reduce((sum, e) => sum + e.visits, 0) === 1 ? '' : 's'}
-          </div>
+          {(() => {
+            const totalMinutes = Math.round(
+              events.reduce((sum, e) => sum + e.total_seconds, 0) / 60,
+            );
+            return (
+              <div className="mt-2 text-[12px] text-ink-4">
+                {events.length} chapter{events.length === 1 ? '' : 's'}
+                {totalMinutes > 0 && ` · ${totalMinutes} min active`}
+              </div>
+            );
+          })()}
           <ul className="mt-4 space-y-2.5">
             {events.map((e) => {
               const doc = findDoc(e.doc_slug);
@@ -117,14 +123,14 @@ export function DayDetails({ date }: Props) {
                       <div className="text-[13.5px] text-ink leading-snug font-medium group-hover:text-amber-700 transition-colors">
                         {e.doc_title}
                       </div>
-                      <div className="text-[11.5px] text-ink-4 mt-0.5 flex items-center gap-1.5">
+                      <div className="text-[11.5px] text-ink-4 mt-0.5 flex flex-wrap items-center gap-x-1.5 gap-y-0.5">
                         <span>{sectionMeta?.title ?? e.section_id}</span>
                         <span>·</span>
                         <span>{formatTime(e.last_seen)}</span>
-                        {e.visits > 1 && (
+                        {e.total_seconds >= 60 && (
                           <>
                             <span>·</span>
-                            <span>{e.visits} visits</span>
+                            <span>{Math.round(e.total_seconds / 60)} min</span>
                           </>
                         )}
                       </div>

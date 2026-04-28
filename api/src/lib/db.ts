@@ -110,22 +110,24 @@ export async function recordAudit(
 export async function recordReadingEvent(
   db: D1Database,
   userId: number,
-  data: { slug: string; title: string; sectionId: string },
+  data: { slug: string; title: string; sectionId: string; seconds?: number },
 ): Promise<void> {
   await db
     .prepare(
-      'INSERT INTO reading_events (user_id, doc_slug, doc_title, section_id) VALUES (?1, ?2, ?3, ?4)',
+      `INSERT INTO reading_events (user_id, doc_slug, doc_title, section_id, duration_seconds)
+       VALUES (?1, ?2, ?3, ?4, ?5)`,
     )
-    .bind(userId, data.slug, data.title, data.sectionId)
+    .bind(userId, data.slug, data.title, data.sectionId, Math.max(0, Math.floor(data.seconds ?? 0)))
     .run();
 }
 
 export interface DayCount {
   date: string;
   count: number;
+  total_seconds: number;
 }
 
-// Daily counts of chapter visits for the calendar heat map.
+// Daily counts + total active reading time for the calendar heat map.
 // `from` and `to` are ISO datetime strings, inclusive on `from`, exclusive on `to`.
 export async function getCalendarMonth(
   db: D1Database,
@@ -135,7 +137,9 @@ export async function getCalendarMonth(
 ): Promise<DayCount[]> {
   const res = await db
     .prepare(
-      `SELECT date(created_at) AS date, count(*) AS count
+      `SELECT date(created_at) AS date,
+              count(*) AS count,
+              COALESCE(sum(duration_seconds), 0) AS total_seconds
        FROM reading_events
        WHERE user_id = ?1 AND created_at >= ?2 AND created_at < ?3
        GROUP BY date(created_at)
@@ -151,13 +155,14 @@ export interface DayEvent {
   doc_title: string;
   section_id: string;
   visits: number;
+  total_seconds: number;
   first_seen: string;
   last_seen: string;
 }
 
 // All chapters read on a single calendar day, deduped per chapter with
-// visit count + first/last timestamps so the day-detail panel can show
-// a clean list rather than every page-load row.
+// visit count, total active seconds, and first/last timestamps so the
+// day-detail panel can show a clean list rather than every page-load row.
 export async function getDayEvents(
   db: D1Database,
   userId: number,
@@ -167,6 +172,7 @@ export async function getDayEvents(
     .prepare(
       `SELECT doc_slug, doc_title, section_id,
               count(*) AS visits,
+              COALESCE(sum(duration_seconds), 0) AS total_seconds,
               min(created_at) AS first_seen,
               max(created_at) AS last_seen
        FROM reading_events
@@ -184,6 +190,7 @@ export interface ReadingSummary {
   distinct_chapters: number;
   current_streak: number;
   active_days_30: number;
+  total_seconds_30: number;
   recent: Array<{ doc_slug: string; doc_title: string; section_id: string; created_at: string }>;
 }
 
@@ -233,6 +240,16 @@ export async function getReadingSummary(
     }
   }
 
+  // Total active reading time over the last 30 days, in seconds.
+  const seconds30 = await db
+    .prepare(
+      `SELECT COALESCE(sum(duration_seconds), 0) AS total_seconds_30
+       FROM reading_events
+       WHERE user_id = ?1 AND created_at >= datetime('now', '-30 days')`,
+    )
+    .bind(userId)
+    .first<{ total_seconds_30: number }>();
+
   const recentRes = await db
     .prepare(
       `SELECT doc_slug, doc_title, section_id, created_at
@@ -249,6 +266,7 @@ export async function getReadingSummary(
     distinct_chapters: totals?.distinct_chapters ?? 0,
     current_streak: streak,
     active_days_30: activeDays.length,
+    total_seconds_30: seconds30?.total_seconds_30 ?? 0,
     recent: recentRes.results ?? [],
   };
 }

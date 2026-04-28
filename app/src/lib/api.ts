@@ -129,6 +129,7 @@ export async function recordAudit(action: string, target?: string): Promise<void
 export interface DayCount {
   date: string;
   count: number;
+  total_seconds: number;
 }
 
 export interface DayEvent {
@@ -136,6 +137,7 @@ export interface DayEvent {
   doc_title: string;
   section_id: string;
   visits: number;
+  total_seconds: number;
   first_seen: string;
   last_seen: string;
 }
@@ -145,6 +147,7 @@ export interface ReadingSummary {
   distinct_chapters: number;
   current_streak: number;
   active_days_30: number;
+  total_seconds_30: number;
   recent: Array<{
     doc_slug: string;
     doc_title: string;
@@ -154,11 +157,13 @@ export interface ReadingSummary {
 }
 
 // Fire-and-forget. We swallow errors so a backend hiccup never blocks
-// the reader from actually reading the chapter.
+// the reader. `seconds` is optional active reading time accumulated since
+// the previous call (omit / pass 0 for the initial mount event).
 export async function recordReadingEvent(data: {
   slug: string;
   title: string;
   section: string;
+  seconds?: number;
 }): Promise<void> {
   try {
     await authedFetch<{ ok: true }>('/me/events', {
@@ -167,6 +172,34 @@ export async function recordReadingEvent(data: {
     });
   } catch {
     /* analytics best-effort */
+  }
+}
+
+// Last-gasp send used from the `pagehide` / `beforeunload` path. Uses
+// `fetch` with `keepalive: true` so the request can outlive the document
+// (sendBeacon can't carry an Authorization header).
+export function flushReadingHeartbeat(data: {
+  slug: string;
+  title: string;
+  section: string;
+  seconds: number;
+}): void {
+  const token = getToken();
+  if (!token || data.seconds < 1) return;
+  try {
+    fetch(`${API_BASE_URL}/me/events`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify(data),
+      keepalive: true,
+    }).catch(() => {
+      /* best effort */
+    });
+  } catch {
+    /* best effort */
   }
 }
 

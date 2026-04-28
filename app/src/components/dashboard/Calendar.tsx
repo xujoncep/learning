@@ -36,7 +36,7 @@ export function Calendar({ selectedDate, onSelectDate }: Props) {
     year: today.getUTCFullYear(),
     month: today.getUTCMonth(),
   });
-  const [data, setData] = useState<Record<string, number>>({});
+  const [data, setData] = useState<Record<string, { count: number; seconds: number }>>({});
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
@@ -79,8 +79,8 @@ export function Calendar({ selectedDate, onSelectDate }: Props) {
     getCalendarMonth(from, to)
       .then((days: DayCount[]) => {
         if (cancelled) return;
-        const map: Record<string, number> = {};
-        for (const d of days) map[d.date] = d.count;
+        const map: Record<string, { count: number; seconds: number }> = {};
+        for (const d of days) map[d.date] = { count: d.count, seconds: d.total_seconds };
         setData(map);
       })
       .catch((err: Error) => {
@@ -102,7 +102,7 @@ export function Calendar({ selectedDate, onSelectDate }: Props) {
   const todayIso = isoDate(today);
 
   return (
-    <div className="card-surface bg-surface-2 p-5">
+    <div className="card-surface bg-surface-2 p-3 sm:p-5">
       <div className="flex items-center justify-between mb-4">
         <div>
           <div className="meta text-[11px] uppercase tracking-[0.04em]">Activity</div>
@@ -146,13 +146,21 @@ export function Calendar({ selectedDate, onSelectDate }: Props) {
         ))}
       </div>
 
-      <div className="grid grid-cols-7 gap-1.5">
+      <div className="grid grid-cols-7 gap-1 sm:gap-1.5">
         {grid.map((d) => {
           const iso = isoDate(d);
-          const count = data[iso] ?? 0;
+          const entry = data[iso];
+          const count = entry?.count ?? 0;
+          const seconds = entry?.seconds ?? 0;
           const inMonth = d.getUTCMonth() === cursor.month;
           const isToday = iso === todayIso;
           const isSelected = iso === selectedDate;
+
+          const minutes = Math.round(seconds / 60);
+          const tooltip =
+            count === 0
+              ? 'No reads'
+              : `${count} visit${count === 1 ? '' : 's'}${minutes > 0 ? ` · ${minutes} min` : ''}`;
 
           return (
             <button
@@ -160,18 +168,20 @@ export function Calendar({ selectedDate, onSelectDate }: Props) {
               type="button"
               onClick={() => onSelectDate(iso)}
               className={cn(
-                'aspect-square rounded-md text-[12px] font-medium flex flex-col items-center justify-center transition-all',
+                'aspect-square rounded-md text-[11px] sm:text-[12px] font-medium flex flex-col items-center justify-center transition-all',
                 'hover:ring-2 hover:ring-amber/60 focus:outline-none focus-visible:ring-2 focus-visible:ring-amber',
                 intensityClass(count),
                 !inMonth && 'opacity-35',
                 isToday && 'ring-2 ring-ink/70',
                 isSelected && 'ring-2 ring-amber-700',
               )}
-              title={count > 0 ? `${count} chapter${count === 1 ? '' : 's'} read` : 'No reads'}
+              title={tooltip}
             >
               <span className="leading-none">{d.getUTCDate()}</span>
               {count > 0 && (
-                <span className="text-[9.5px] mt-0.5 leading-none opacity-80">{count}</span>
+                <span className="text-[9px] sm:text-[9.5px] mt-0.5 leading-none opacity-80">
+                  {minutes > 0 ? `${minutes}m` : count}
+                </span>
               )}
             </button>
           );

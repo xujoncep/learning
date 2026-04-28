@@ -4,7 +4,7 @@ import { MDXProvider } from '@mdx-js/react';
 import { NotFoundPage } from './NotFoundPage';
 import { findDoc, getAdjacentDocs, isGatedSection, type DocEntry } from '@/lib/content';
 import { useAuth } from '@/lib/auth';
-import { recordReadingEvent } from '@/lib/api';
+import { recordReadingEvent, flushReadingHeartbeat } from '@/lib/api';
 import { mdxComponents } from '@/components/mdx/MDXComponents';
 import { Header } from '@/components/layout/Header';
 import { DocHeader } from '@/components/layout/DocHeader';
@@ -31,13 +31,83 @@ function DocLoadingSkeleton() {
   );
 }
 
-// Fire one /me/events POST per chapter load when the reader is signed in.
-// One row per page-load powers the calendar heat map; the recordReadingEvent
-// helper swallows network errors so a backend hiccup never blocks reading.
-function useTrackReadingEvent(doc: DocEntry, isAuthenticated: boolean) {
+// Heartbeat-style reading tracker. Sends:
+//   - one mount event with seconds=0 so the chapter shows up in "recent"
+//     immediately, even before any active time accumulates;
+//   - a heartbeat row every HEARTBEAT_INTERVAL_S of *visible* time;
+//   - a final flush on unmount or pagehide via fetch keepalive.
+//
+// Active time is accumulated only while the tab is visible (Page Visibility
+// API). Switching tabs / minimizing pauses the count; coming back resumes
+// it. A per-tick cap guards against the timer being suspended (battery
+// saver, throttled background) and then claiming hours of "reading".
+const HEARTBEAT_INTERVAL_S = 30;
+const TICK_MS = 1000;
+const MAX_TICK_DELTA_S = 5;
+
+function useReadingHeartbeat(doc: DocEntry, isAuthenticated: boolean) {
   useEffect(() => {
     if (!isAuthenticated) return;
-    recordReadingEvent({ slug: doc.slug, title: doc.title, section: doc.section });
+    if (typeof document === 'undefined') return;
+
+    const meta = { slug: doc.slug, title: doc.title, section: doc.section };
+
+    // Initial visit row — duration 0, so the chapter shows up in "recent" on
+    // dashboard even if the reader leaves before any heartbeat fires.
+    recordReadingEvent({ ...meta, seconds: 0 });
+
+    let activeSeconds = 0;
+    let lastTick = Date.now();
+    let isVisible = !document.hidden;
+
+    const sendHeartbeat = () => {
+      if (activeSeconds < 1) return;
+      const seconds = activeSeconds;
+      activeSeconds = 0;
+      recordReadingEvent({ ...meta, seconds });
+    };
+
+    const interval = window.setInterval(() => {
+      if (isVisible) {
+        const now = Date.now();
+        const delta = (now - lastTick) / 1000;
+        activeSeconds += Math.min(delta, MAX_TICK_DELTA_S);
+        lastTick = now;
+        if (activeSeconds >= HEARTBEAT_INTERVAL_S) sendHeartbeat();
+      } else {
+        // While hidden the cursor stays frozen; reset on resume so the
+        // visible→visible delta doesn't include hidden time.
+        lastTick = Date.now();
+      }
+    }, TICK_MS);
+
+    const onVisibilityChange = () => {
+      const wasVisible = isVisible;
+      isVisible = !document.hidden;
+      if (wasVisible && !isVisible) {
+        // Going hidden — flush whatever's accumulated so the dashboard is
+        // close to real-time even if the user never closes the tab.
+        sendHeartbeat();
+      } else if (!wasVisible && isVisible) {
+        lastTick = Date.now();
+      }
+    };
+
+    const onPageHide = () => {
+      flushReadingHeartbeat({ ...meta, seconds: Math.floor(activeSeconds) });
+    };
+
+    document.addEventListener('visibilitychange', onVisibilityChange);
+    window.addEventListener('pagehide', onPageHide);
+
+    return () => {
+      window.clearInterval(interval);
+      document.removeEventListener('visibilitychange', onVisibilityChange);
+      window.removeEventListener('pagehide', onPageHide);
+      // Flush remaining seconds on chapter change. Use the keepalive variant
+      // because the previous chapter's React tree may unmount during navigation.
+      flushReadingHeartbeat({ ...meta, seconds: Math.floor(activeSeconds) });
+    };
   }, [doc.slug, doc.title, doc.section, isAuthenticated]);
 }
 
@@ -105,7 +175,7 @@ function CourseView({ doc }: { doc: DocEntry }) {
     localStorage.setItem(COURSE_SIDEBAR_KEY, String(sidebarOpen));
   }, [sidebarOpen]);
 
-  useTrackReadingEvent(doc, isAuthenticated);
+  useReadingHeartbeat(doc, isAuthenticated);
   useScrollRestore(doc.slug);
 
   const { prev, next } = getAdjacentDocs(doc.slug);
@@ -163,7 +233,7 @@ function CourseView({ doc }: { doc: DocEntry }) {
 
 function ArticleView({ doc }: { doc: DocEntry }) {
   const { isAuthenticated } = useAuth();
-  useTrackReadingEvent(doc, isAuthenticated);
+  useReadingHeartbeat(doc, isAuthenticated);
   useScrollRestore(doc.slug);
   const Content = doc.Component as ComponentType;
 

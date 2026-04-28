@@ -71,16 +71,20 @@ function isValidDate(s: unknown): s is string {
   return typeof s === 'string' && /^\d{4}-\d{2}-\d{2}$/.test(s);
 }
 
-// Record a chapter view. Append-only — every page-load is one row so the
-// calendar can show real activity, not just first-visit counts.
+// Record a chapter event. Two ways to call this:
+//   1. Initial mount  — body { slug, title, section } (seconds defaults to 0).
+//   2. Heartbeat      — body { slug, title, section, seconds }, where `seconds`
+//      is the active reading time accumulated since the previous heartbeat
+//      (only ticks while the tab is visible — driven by Page Visibility API).
+// Append-only: each call inserts one row. Aggregations sum duration_seconds.
 meRoutes.post('/events', async (c) => {
   const userId = c.get('userId');
   const body = (await c.req.json().catch(() => null)) as
-    | { slug?: unknown; title?: unknown; section?: unknown }
+    | { slug?: unknown; title?: unknown; section?: unknown; seconds?: unknown }
     | null;
   if (!body) return c.json({ error: 'invalid body' }, 400);
 
-  const { slug: rawSlug, title: rawTitle, section: rawSection } = body;
+  const { slug: rawSlug, title: rawTitle, section: rawSection, seconds: rawSeconds } = body;
   if (!isValidSlug(rawSlug)) return c.json({ error: 'invalid slug' }, 400);
   if (typeof rawTitle !== 'string' || rawTitle.length === 0 || rawTitle.length >= 300) {
     return c.json({ error: 'invalid title' }, 400);
@@ -89,10 +93,21 @@ meRoutes.post('/events', async (c) => {
     return c.json({ error: 'invalid section' }, 400);
   }
 
+  // Cap to 1 hour per heartbeat — guards against clock drift / tab-suspended
+  // edge cases where a single tick claims hours of "reading".
+  let seconds = 0;
+  if (rawSeconds !== undefined && rawSeconds !== null) {
+    if (typeof rawSeconds !== 'number' || !Number.isFinite(rawSeconds) || rawSeconds < 0) {
+      return c.json({ error: 'invalid seconds' }, 400);
+    }
+    seconds = Math.min(3600, Math.floor(rawSeconds));
+  }
+
   await recordReadingEvent(c.env.DB, userId, {
     slug: (rawSlug as string).trim(),
     title: rawTitle.trim(),
     sectionId: rawSection.trim(),
+    seconds,
   });
   return c.json({ ok: true });
 });

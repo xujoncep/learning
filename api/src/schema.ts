@@ -36,5 +36,6 @@ export interface ReadingEventRow {
   doc_slug: string;
   doc_title: string;
   section_id: string;
+  duration_seconds: number;
   created_at: string;
 }
