@@ -16,6 +16,9 @@ const COLUMNS: Array<{ title: string; links: Array<{ label: string; to: string }
       { label: 'GATE CSE', to: '/sections/gate-cse' },
       { label: 'C Programming', to: '/sections/c-programming' },
       { label: 'Computer Networking', to: '/sections/computer-networking' },
+      { label: 'DBMS', to: '/sections/dbms' },
+      { label: 'Operating System', to: '/sections/operating-system' },
+      { label: 'System Design', to: '/sections/system-design' },
     ],
   },
   {

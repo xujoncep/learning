@@ -65,7 +65,31 @@ const SECTION_META: Record<string, SectionMeta> = {
     description:
       'OSI/TCP-IP থেকে শুরু করে routing, security, wireless পর্যন্ত — networking-র complete course। প্রতিটা layer + protocol-এ deep dive।',
   },
-  root: { title: 'Handbooks', icon: '📚', order: 4 },
+  dbms: {
+    title: 'DBMS',
+    icon: '🗄️',
+    order: 4,
+    gated: true,
+    description:
+      'Database fundamentals, relational model, SQL, normalization, transactions, indexing, NoSQL — interview-ready DBMS course।',
+  },
+  'operating-system': {
+    title: 'Operating System',
+    icon: '🖥️',
+    order: 5,
+    gated: true,
+    description:
+      'Process, thread, scheduling, synchronization, deadlock, memory, file system, security — OS-এর complete roadmap।',
+  },
+  'system-design': {
+    title: 'System Design',
+    icon: '🏗️',
+    order: 6,
+    gated: true,
+    description:
+      'NFR, capacity, load balancer, caching, sharding, queue, consistency, observability — beginner থেকে interview-ready system design।',
+  },
+  root: { title: 'Handbooks', icon: '📚', order: 7 },
 };
 
 export function isGatedSection(section: string | undefined): boolean {

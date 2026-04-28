@@ -10,6 +10,9 @@ import {
   ArrowUpRight,
   Bookmark as BookmarkIcon,
   Share2,
+  Database,
+  Cpu,
+  Layers,
 } from 'lucide-react';
 import { docs, sections, cleanChapterTitle, getSectionMeta } from '@/lib/content';
 import { useAuth } from '@/lib/auth';
@@ -19,15 +22,21 @@ export function HomePage() {
   const gateSection = sections.find((s) => s.id === 'gate-cse');
   const cSection = sections.find((s) => s.id === 'c-programming');
   const networkingSection = sections.find((s) => s.id === 'computer-networking');
+  const dbmsSection = sections.find((s) => s.id === 'dbms');
+  const osSection = sections.find((s) => s.id === 'operating-system');
+  const sysDesignSection = sections.find((s) => s.id === 'system-design');
   const rootDocs = docs.filter((d) => d.section === 'root');
 
   const totalChapters = gateSection?.docs.length ?? 0;
   const totalHandbooks = rootDocs.length;
-  const courseCount = 3;
+  const courseCount = 6;
 
   const gateMeta = getSectionMeta('gate-cse');
   const cMeta = getSectionMeta('c-programming');
   const networkingMeta = getSectionMeta('computer-networking');
+  const dbmsMeta = getSectionMeta('dbms');
+  const osMeta = getSectionMeta('operating-system');
+  const sysDesignMeta = getSectionMeta('system-design');
 
   return (
     <div className="animate-fade-in">
@@ -268,6 +277,63 @@ export function HomePage() {
                 ? '/sections/computer-networking'
                 : '/login?next=/sections/computer-networking'
             }
+            ctaLabel={isAuthenticated ? 'Open course' : 'Sign in to start'}
+            locked={!isAuthenticated}
+          />
+          <TrackCard
+            eyebrow="Course · sign-in required"
+            icon={<Database className="h-5 w-5" />}
+            iconTone="text-ink-blue"
+            title={dbmsMeta?.title ?? 'DBMS'}
+            description={
+              dbmsMeta?.description ??
+              'Database fundamentals, SQL, normalization, transactions, indexing — interview-ready DBMS course।'
+            }
+            items={
+              dbmsSection?.docs
+                .slice(0, 5)
+                .map((d) => ({ slug: d.slug, label: cleanChapterTitle(d.title) })) ?? []
+            }
+            meta={`${dbmsSection?.docs.length ?? 0} chapters · SQL + theory`}
+            ctaTo={isAuthenticated ? '/sections/dbms' : '/login?next=/sections/dbms'}
+            ctaLabel={isAuthenticated ? 'Open course' : 'Sign in to start'}
+            locked={!isAuthenticated}
+          />
+          <TrackCard
+            eyebrow="Course · sign-in required"
+            icon={<Cpu className="h-5 w-5" />}
+            iconTone="text-clay"
+            title={osMeta?.title ?? 'Operating System'}
+            description={
+              osMeta?.description ??
+              'Process, scheduling, synchronization, memory, file system — OS-এর complete roadmap।'
+            }
+            items={
+              osSection?.docs
+                .slice(0, 5)
+                .map((d) => ({ slug: d.slug, label: cleanChapterTitle(d.title) })) ?? []
+            }
+            meta={`${osSection?.docs.length ?? 0} chapters · kernel deep dive`}
+            ctaTo={isAuthenticated ? '/sections/operating-system' : '/login?next=/sections/operating-system'}
+            ctaLabel={isAuthenticated ? 'Open course' : 'Sign in to start'}
+            locked={!isAuthenticated}
+          />
+          <TrackCard
+            eyebrow="Course · sign-in required"
+            icon={<Layers className="h-5 w-5" />}
+            iconTone="text-sage"
+            title={sysDesignMeta?.title ?? 'System Design'}
+            description={
+              sysDesignMeta?.description ??
+              'Load balancer, caching, sharding, queues, consistency — interview-ready system design।'
+            }
+            items={
+              sysDesignSection?.docs
+                .slice(0, 5)
+                .map((d) => ({ slug: d.slug, label: cleanChapterTitle(d.title) })) ?? []
+            }
+            meta={`${sysDesignSection?.docs.length ?? 0} chapters · scale + tradeoffs`}
+            ctaTo={isAuthenticated ? '/sections/system-design' : '/login?next=/sections/system-design'}
             ctaLabel={isAuthenticated ? 'Open course' : 'Sign in to start'}
             locked={!isAuthenticated}
           />

@@ -121,6 +121,66 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://learning-hub-3gw.pages.dev/docs/dbms/00-master-index</loc>
+    <lastmod>2026-04-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://learning-hub-3gw.pages.dev/docs/dbms/01-dbms-fundamentals-architecture</loc>
+    <lastmod>2026-04-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://learning-hub-3gw.pages.dev/docs/dbms/02-relational-model-er-mapping</loc>
+    <lastmod>2026-04-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://learning-hub-3gw.pages.dev/docs/dbms/03-sql-core-ddl-dml-dql</loc>
+    <lastmod>2026-04-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://learning-hub-3gw.pages.dev/docs/dbms/04-advanced-sql-subquery-cte-window</loc>
+    <lastmod>2026-04-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://learning-hub-3gw.pages.dev/docs/dbms/05-normalization-functional-dependency</loc>
+    <lastmod>2026-04-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://learning-hub-3gw.pages.dev/docs/dbms/06-transactions-concurrency-recovery</loc>
+    <lastmod>2026-04-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://learning-hub-3gw.pages.dev/docs/dbms/07-index-query-optimization-internals</loc>
+    <lastmod>2026-04-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://learning-hub-3gw.pages.dev/docs/dbms/08-nosql-cap-theory-practical-design</loc>
+    <lastmod>2026-04-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://learning-hub-3gw.pages.dev/docs/dbms/09-interview-beginner-to-advanced</loc>
+    <lastmod>2026-04-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://learning-hub-3gw.pages.dev/docs/exams-datacamp-sql-exam-2026-04-18</loc>
     <lastmod>2026-04-28</lastmod>
     <changefreq>monthly</changefreq>
@@ -205,6 +265,66 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://learning-hub-3gw.pages.dev/docs/operating-system/00-master-index</loc>
+    <lastmod>2026-04-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://learning-hub-3gw.pages.dev/docs/operating-system/01-os-fundamentals-system-calls</loc>
+    <lastmod>2026-04-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://learning-hub-3gw.pages.dev/docs/operating-system/02-process-thread-context-switch</loc>
+    <lastmod>2026-04-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://learning-hub-3gw.pages.dev/docs/operating-system/03-cpu-scheduling-algorithms</loc>
+    <lastmod>2026-04-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://learning-hub-3gw.pages.dev/docs/operating-system/04-synchronization-critical-section</loc>
+    <lastmod>2026-04-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://learning-hub-3gw.pages.dev/docs/operating-system/05-deadlock-detection-prevention-avoidance</loc>
+    <lastmod>2026-04-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://learning-hub-3gw.pages.dev/docs/operating-system/06-memory-management-paging-virtual-memory</loc>
+    <lastmod>2026-04-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://learning-hub-3gw.pages.dev/docs/operating-system/07-file-system-io-disk-management</loc>
+    <lastmod>2026-04-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://learning-hub-3gw.pages.dev/docs/operating-system/08-protection-security-virtualization-containers</loc>
+    <lastmod>2026-04-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://learning-hub-3gw.pages.dev/docs/operating-system/09-interview-beginner-to-advanced</loc>
+    <lastmod>2026-04-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://learning-hub-3gw.pages.dev/docs/react-for-dotnet-developers</loc>
     <lastmod>2026-04-28</lastmod>
     <changefreq>monthly</changefreq>
@@ -223,6 +343,66 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://learning-hub-3gw.pages.dev/docs/system-design/00-master-index</loc>
+    <lastmod>2026-04-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://learning-hub-3gw.pages.dev/docs/system-design/01-design-fundamentals-nfr-capacity</loc>
+    <lastmod>2026-04-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://learning-hub-3gw.pages.dev/docs/system-design/02-load-balancer-reverse-proxy-api-gateway</loc>
+    <lastmod>2026-04-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://learning-hub-3gw.pages.dev/docs/system-design/03-caching-patterns-distributed-cache</loc>
+    <lastmod>2026-04-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://learning-hub-3gw.pages.dev/docs/system-design/04-database-scaling-replication-sharding</loc>
+    <lastmod>2026-04-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://learning-hub-3gw.pages.dev/docs/system-design/05-queue-stream-kafka-rabbitmq</loc>
+    <lastmod>2026-04-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://learning-hub-3gw.pages.dev/docs/system-design/06-consistency-idempotency-retry-rate-limit</loc>
+    <lastmod>2026-04-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://learning-hub-3gw.pages.dev/docs/system-design/07-observability-resilience-circuit-breaker</loc>
+    <lastmod>2026-04-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://learning-hub-3gw.pages.dev/docs/system-design/08-mini-case-studies-urlshortener-feed-notification</loc>
+    <lastmod>2026-04-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://learning-hub-3gw.pages.dev/docs/system-design/09-interview-beginner-to-advanced</loc>
+    <lastmod>2026-04-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://learning-hub-3gw.pages.dev/sections/c-programming</loc>
     <lastmod>2026-04-28</lastmod>
     <changefreq>weekly</changefreq>
@@ -235,7 +415,25 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://learning-hub-3gw.pages.dev/sections/dbms</loc>
+    <lastmod>2026-04-28</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://learning-hub-3gw.pages.dev/sections/gate-cse</loc>
+    <lastmod>2026-04-28</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://learning-hub-3gw.pages.dev/sections/operating-system</loc>
+    <lastmod>2026-04-28</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://learning-hub-3gw.pages.dev/sections/system-design</loc>
     <lastmod>2026-04-28</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
