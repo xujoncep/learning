@@ -285,6 +285,9 @@
   .prose-custom h1 em {
     color: hsl(var(--amber-700));
     font-style: italic;
+    font-family: "Iowan Old Style", "Charter", Georgia, "Times New Roman", serif;
+    font-feature-settings: normal;
+    font-variation-settings: normal;
   }
 
   .prose-custom h2 {
@@ -296,6 +299,25 @@
   .prose-custom h2 em {
     color: hsl(var(--amber-700));
     font-style: italic;
+    font-family: "Iowan Old Style", "Charter", Georgia, "Times New Roman", serif;
+    font-feature-settings: normal;
+    font-variation-settings: normal;
+  }
+
+  /* Replace Fraunces' decorative swash italic with a quieter book-style
+     italic wherever italic emphasis appears inside serif headlines /
+     hero text / chapter-card numbers. font-family swap only — emphasis
+     remains italic, just without the calligraphic flourishes. */
+  .font-serif em,
+  .font-serif i,
+  .font-serif .italic,
+  .font-serif.italic,
+  h1 em,
+  h2 em,
+  blockquote {
+    font-family: "Iowan Old Style", "Charter", Georgia, "Times New Roman", serif;
+    font-feature-settings: normal;
+    font-variation-settings: normal;
   }
 
   .prose-custom h3 {
@@ -352,7 +374,8 @@
     background: hsl(var(--bg-2));
     border-radius: 0 12px 12px 0;
     color: hsl(var(--ink));
-    font-family: "Fraunces", Georgia, serif;
+    font-family: "Iowan Old Style", "Charter", Georgia, "Times New Roman", serif;
+    font-feature-settings: normal;
     font-size: 1.15em;
     font-style: italic;
     line-height: 1.5;
