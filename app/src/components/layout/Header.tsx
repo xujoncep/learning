@@ -22,18 +22,21 @@ const PUBLIC_DESKTOP_LINKS = [
   { label: 'Home', to: '/' },
   { label: 'Courses', to: '/courses' },
   { label: 'Handbooks', to: '/handbooks' },
+  { label: 'About', to: '/about' },
 ];
 
 const AUTHED_DESKTOP_LINKS = [
   { label: 'Dashboard', to: '/dashboard' },
   { label: 'Courses', to: '/courses' },
   { label: 'Handbooks', to: '/handbooks' },
+  { label: 'About', to: '/about' },
 ];
 
 const PUBLIC_MOBILE_LINKS = [
   { label: 'Home', to: '/' },
   { label: 'All courses', to: '/courses' },
   { label: 'Handbooks', to: '/handbooks' },
+  { label: 'About', to: '/about' },
   { label: 'GATE CSE', to: '/sections/gate-cse' },
   { label: 'C Programming', to: '/sections/c-programming' },
   { label: 'Computer Networking', to: '/sections/computer-networking' },
@@ -46,6 +49,7 @@ const AUTHED_MOBILE_LINKS = [
   { label: 'Dashboard', to: '/dashboard' },
   { label: 'All courses', to: '/courses' },
   { label: 'Handbooks', to: '/handbooks' },
+  { label: 'About', to: '/about' },
   { label: 'GATE CSE', to: '/sections/gate-cse' },
   { label: 'C Programming', to: '/sections/c-programming' },
   { label: 'Computer Networking', to: '/sections/computer-networking' },

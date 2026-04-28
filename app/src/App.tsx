@@ -9,6 +9,7 @@ import { AuthCallbackPage } from '@/pages/AuthCallbackPage';
 import { DashboardPage } from '@/pages/DashboardPage';
 import { HandbooksPage } from '@/pages/HandbooksPage';
 import { CoursesIndexPage } from '@/pages/CoursesIndexPage';
+import { AboutPage } from '@/pages/AboutPage';
 import { ProtectedRoute } from '@/lib/auth';
 
 function App() {
@@ -49,6 +50,16 @@ function App() {
         element={
           <Layout showSearch>
             <CoursesIndexPage />
+          </Layout>
+        }
+      />
+
+      {/* About — team, mission, tech stack */}
+      <Route
+        path="/about"
+        element={
+          <Layout showSearch>
+            <AboutPage />
           </Layout>
         }
       />

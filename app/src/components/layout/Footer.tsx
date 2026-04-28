@@ -8,6 +8,7 @@ const COLUMNS: Array<{ title: string; links: Array<{ label: string; to: string }
       { label: 'Home', to: '/' },
       { label: 'Handbooks', to: '/handbooks' },
       { label: 'Dashboard', to: '/dashboard' },
+      { label: 'About', to: '/about' },
     ],
   },
   {
