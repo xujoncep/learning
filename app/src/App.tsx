@@ -8,6 +8,7 @@ import { LoginPage } from '@/pages/LoginPage';
 import { AuthCallbackPage } from '@/pages/AuthCallbackPage';
 import { DashboardPage } from '@/pages/DashboardPage';
 import { HandbooksPage } from '@/pages/HandbooksPage';
+import { CoursesIndexPage } from '@/pages/CoursesIndexPage';
 import { ProtectedRoute } from '@/lib/auth';
 
 function App() {
@@ -40,6 +41,16 @@ function App() {
       <Route
         path="/handbooks"
         element={<HandbooksPage />}
+      />
+
+      {/* Courses catalog — list of every course, links into per-section chapter pages */}
+      <Route
+        path="/courses"
+        element={
+          <Layout showSearch>
+            <CoursesIndexPage />
+          </Layout>
+        }
       />
 
       {/* Sections: public at /sections/:id, but gate-cse gated inside the page */}

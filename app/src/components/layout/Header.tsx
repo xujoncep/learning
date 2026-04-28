@@ -20,18 +20,19 @@ interface HeaderProps {
 // and via the section pages themselves. The mobile dropdown shows all sections explicitly.
 const PUBLIC_DESKTOP_LINKS = [
   { label: 'Home', to: '/' },
-  { label: 'Courses', to: '/sections/gate-cse' },
+  { label: 'Courses', to: '/courses' },
   { label: 'Handbooks', to: '/handbooks' },
 ];
 
 const AUTHED_DESKTOP_LINKS = [
   { label: 'Dashboard', to: '/dashboard' },
-  { label: 'Courses', to: '/sections/gate-cse' },
+  { label: 'Courses', to: '/courses' },
   { label: 'Handbooks', to: '/handbooks' },
 ];
 
 const PUBLIC_MOBILE_LINKS = [
   { label: 'Home', to: '/' },
+  { label: 'All courses', to: '/courses' },
   { label: 'Handbooks', to: '/handbooks' },
   { label: 'GATE CSE', to: '/sections/gate-cse' },
   { label: 'C Programming', to: '/sections/c-programming' },
@@ -43,13 +44,14 @@ const PUBLIC_MOBILE_LINKS = [
 
 const AUTHED_MOBILE_LINKS = [
   { label: 'Dashboard', to: '/dashboard' },
+  { label: 'All courses', to: '/courses' },
+  { label: 'Handbooks', to: '/handbooks' },
   { label: 'GATE CSE', to: '/sections/gate-cse' },
   { label: 'C Programming', to: '/sections/c-programming' },
   { label: 'Computer Networking', to: '/sections/computer-networking' },
   { label: 'DBMS', to: '/sections/dbms' },
   { label: 'Operating System', to: '/sections/operating-system' },
   { label: 'System Design', to: '/sections/system-design' },
-  { label: 'Handbooks', to: '/handbooks' },
 ];
 
 export function Header({ onMenuClick, showMenu = false, showSearch = false }: HeaderProps) {

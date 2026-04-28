@@ -42,11 +42,11 @@ export function UserMenu() {
           </DropdownMenu.Item>
           <DropdownMenu.Item asChild>
             <Link
-              to="/sections/gate-cse"
+              to="/courses"
               className="flex items-center gap-2.5 px-3 py-2 rounded-md text-sm text-ink-2 hover:bg-sand-2 transition-colors cursor-pointer outline-none data-[highlighted]:bg-sand-2"
             >
               <UserIcon className="h-4 w-4 text-ink-4" />
-              My course
+              My courses
             </Link>
           </DropdownMenu.Item>
           <DropdownMenu.Separator className="my-1 h-px bg-line/70" />
