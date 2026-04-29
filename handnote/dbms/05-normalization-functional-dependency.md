@@ -1,102 +1,79 @@
-# Chapter 05 — Normalization & Functional Dependency
+﻿# Chapter 05 — Normalization & Functional Dependency — DBMS 🌐
+
+*এই চ্যাপ্টারটি ডিবিএমএস-এর গণিত। লজিক ছাড়া এটি মুখস্থ করা অসম্ভব।*
 
 ---
 
-## 1. Why Normalization
-- update anomaly remove
-- insert anomaly remove
-- delete anomaly remove
+# Topic 15: Functional Dependency (FD) Closure
+ক্যান্ডিডেট কি বের করার আগে আমাদের এফডি ক্লোজার ($X^+$) বের করা শিখতে হবে।
 
-## 2. FD Basics
-- X → Y means X determines Y
-- trivial vs non-trivial
-- full vs partial dependency
-- transitive dependency
-
-## 3. Normal Forms
-- 1NF: atomic values
-- 2NF: no partial dependency (on composite key)
-- 3NF: no transitive dependency
-- BCNF: every determinant is a candidate key
-
-```mermaid
-flowchart LR
-  A[Unnormalized] --> B[1NF]
-  B --> C[2NF]
-  C --> D[3NF]
-  D --> E[BCNF]
-```
+### 15.1 ক্লোজার বের করার অ্যালগরিদম
+ধরি, $R(A, B, C, D)$ এবং এফডি হলো: $A \rightarrow B, B \rightarrow C$।
+$A$ এর ক্লোজার $A^+$ বের করার নিয়ম:
+1.   শুরুতে সেটে $A$ কে নিন: $\{A\}$
+2.  এফডি দেখুন। $A$ থেকে $B$ পাওয়া যায়, তাই $B$ কে যোগ করুন: $\{A, B\}$
+3.  আবার দেখুন। $B$ থেকে $C$ পাওয়া যায়, তাই $C$ কে যোগ করুন: $\{A, B, C\}$
+4.  আর কিছু পাওয়া যায় না। সুতরাং, $A^+ = \{A, B, C\}$
 
 ---
 
-## 4. SQL Example (decomposition target)
+# Topic 16: Normal Forms (Numeric & Logic)
+চাকরি পরীক্ষায় সবচেয়ে বেশি আসে **3NF** বনাম **BCNF**।
 
-```sql
--- SSMS/PostgreSQL logical model after normalization
-CREATE TABLE Departments (
-  DeptID INT PRIMARY KEY,
-  DeptName VARCHAR(100) UNIQUE NOT NULL
-);
-
-CREATE TABLE Students (
-  StudentID INT PRIMARY KEY,
-  StudentName VARCHAR(100) NOT NULL,
-  DeptID INT NOT NULL REFERENCES Departments(DeptID)
-);
-```
+| Criteria | 3NF | BCNF |
+| :--- | :--- | :--- |
+| **Logic** | $X \rightarrow Y$ হলে $X$ সুপার কি হবে **অথবা** $Y$ প্রাইম এট্রিবিউট হবে। | $X \rightarrow Y$ হলে $X$ অবশ্যই **সুপার কি** হতে হবে। |
+| **Strength** | কম শক্তিশালী (কিছু রিডান্ডেন্সি থাকে)। | অনেক বেশি শক্তিশালী। |
+| **Example** | জিপ কোড এবং সিটি ডিপেন্ডেন্সি। | স্টুডেন্ট, সাবজেক্ট এবং টিচার রিলেশন। |
 
 ---
 
-## 5. MCQ (15)
-1. 1NF core rule? → atomic values ✅  
-2. 2NF remove? → partial dependency ✅  
-3. 3NF remove? → transitive dependency ✅  
-4. BCNF strict than 3NF? → হ্যাঁ ✅  
-5. Anomaly reduction purpose? → normalization ✅  
-6. FD X→Y মানে? → X determines Y ✅  
-7. Candidate key কী? → minimal unique determinant ✅  
-8. Composite key partial dep হলে? → 2NF violate ✅  
-9. 3NF condition? → non-key attributes depend on key only ✅  
-10. BCNF condition? → determinant must be candidate key ✅  
-11. Denormalization কবে? → performance tradeoff দরকার হলে ✅  
-12. Lossless decomposition goal? → no information loss ✅  
-13. Dependency preservation goal? → constraints maintain সহজ ✅  
-14. Update anomaly example? → same fact বহু row এ update ✅  
-15. Normalization সবসময় performance বাড়ায়? → না, tradeoff আছে ✅
+### ⚠️ Interview Traps
+- **প্রশ্ন:** "সব BCNF কি 3NF?" 
+- **উত্তর:** হ্যাঁ, BCNF অনেক বেশি কড়াকড়ি রুল মেনে চলে। কিন্তু সব 3NF আবার BCNF নয়।
+- **প্রশ্ন:** "Normalization কেন করা হয়?" 
+- **উত্তর:** ডেটা ইনসার্ট, আপডেট এবং ডিলিট অ্যানোমালি (Anomaly) দূর করার জন্য।
 
 ---
 
-## 6. Written Problems (5) with Solution
+### 🧠 Practice Zone (The Math Lab)
 
-### P1: Enrollment(Student,Course,Instructor,InstructorPhone) anomalies identify
-**Solution:** instructor data repeat হচ্ছে; update anomaly + delete anomaly আছে।
+#### MCQ Drill
+1. BCNF-এর পূর্ণরূপ কী?
+   - **(ক) Boyce-Codd Normal Form** (খ) Binary Codd New Form (গ) Basic Core Normal Form (ঘ) Business Connect Normal Form
+2. ট্রিভিয়াল এফডি (Trivial FD) বলতে কী বোঝায়?
+   - **(ক) X -> Y যেখানে Y সাবসেট X** (খ) X -> Y যেখানে Y সুপারসেট X (গ) প্রাইমারি কি (ঘ) ফরেন কি
+3. ক্যান্ডিডেট কি বের করার প্রধান শর্ত কোনটি?
+   - **(ক) Closure সেট সব কলাম কভার করবে** (খ) এটি সবসময় ১টি কলাম হবে (গ) এটি NULL হবে (ঘ) এটি ডুপ্লিকেট হবে
+4. 3NF-এ কোন ধরনের ডিপেন্ডেন্সি রিমুভ করা হয়?
+   - (ক) Partial **(খ) Transitive** (গ) Multi-valued (ঘ) Join
+5. 2NF-এ থাকতে হলে টেবিলকে অবশ্যই কোন নরমাল ফর্মে থাকতে হবে?
+   - **(ক) 1NF** (খ) 3NF (গ) BCNF (ঘ) কোনোটিই নয়
+6. Partial Dependency বলতে কী বোঝায়?
+   - (ক) টোটাল কি-র ওপর ডিপেন্ডেন্ট **(খ) কি-র একটি পর্শন বা সাবসেটের ওপর ডিপেন্ডেন্ট** (গ) নন-প্রাইম এট্রিবিউটের ওপর ডিপেন্ডেন্ট (ঘ) কোনোটিই নয়
+7. 1NF-এর প্রধান শর্ত কী?
+   - **(ক) প্রতি সেলে এটমিক (Atomic) ভ্যালু থাকতে হবে** (খ) প্রাইমারি কি থাকতে হবে (গ) ডুপ্লিকেট কলাম থাকতে হবে (ঘ) ফরেন কি থাকতে হবে
+8. $R(A, B, C)$ তে $A -> B, B -> C$ হলে এটি কোন ডিপেন্ডেন্সি?
+   - (ক) Partial **(খ) Transitive** (গ) Trivial (ঘ) Multi-valued
+9. BCNF-এ $X -> Y$ হলে $X$ কে কী হতে হবে?
+   - **(ক) Super Key** (খ) Prime Attribute (গ) Candidate Key (ঘ) Foreign Key
+10. লসলেস জয়েন (Lossless Join) চেক করার জন্য কী বের করা জরুরি?
+    - **(ক) কমন কলাম যাতে অন্তত একটি টেবিলের কি হয়** (খ) সব ডাটা ডিলিট করা (গ) নতুন টেবিল তৈরি (ঘ) ইনডেক্সিং
 
-### P2: Composite key partial dependency detect
-Relation: (StudentID, CourseID, StudentName, CourseName)  
-**Solution:** StudentName depends only on StudentID; CourseName only on CourseID → 2NF violation।
-
-### P3: 3NF decomposition
-Relation: (EmpID, EmpName, DeptID, DeptName)  
-**Solution:** DeptName depends on DeptID, not EmpID → split Employees + Departments।
-
-### P4: BCNF check
-R(A,B,C), FD: A→B, B→A, A→C  
-**Solution:** A and B candidate keys; determinants candidate key → BCNF satisfied।
-
-### P5: Lossless decomposition short test
-R(XYZ), split R1(XY), R2(YZ)  
-**Solution:** common attribute Y যদি key-কে functionally determine করে context অনুযায়ী, lossless হতে পারে; formal chase method explain।
-
----
-
-## 7. Summary
-- FD logic + NF ladder clear
-- practical decomposition mindset তৈরি
-
----
-
-## Navigation
-- 🏠 [Master Index](00-master-index.md)
-- ⬅️ [Chapter 04](04-advanced-sql-subquery-cte-window.md)
-- ➡️ Chapter 06 — Transactions & Concurrency
+#### Written Checklist
+1. $R(A, B, C, D, E)$ এবং $F = \{A \rightarrow BC, CD \rightarrow E, B \rightarrow D, E \rightarrow A\}$ হলে সব **Candidate Key** বের করো।
+   - *Explaining Proof:*
+     - $A^+ = \{A, B, C, D, E\}$ (A সব খুঁজে পায়)
+     - $E^+ = \{E, A, B, C, D\}$ (E সব খুঁজে পায়) 
+     - $(CD)^+ = \{C, D, E, A, B\}$ (CD সব খুঁজে পায়)
+     - $(BC)^+ = \{B, C, D, E, A\}$ (BC সব খুঁজে পায়)
+     - **Candidate Keys:** $\{A, E, CD, BC\}$।
+2. কেন 2NF-এ পারশিয়াল ডিপেন্ডেন্সি (Partial Dependency) অ্যালাউ করা হয় না?
+   - *Reasoning:* পারশিয়াল ডিপেন্ডেন্সি থাকলে টেবিলের কোনো একটি কলাম কি-র একটা অংশের ওপর নির্ভর করে। ফলে যদি কি-র ওই অংশটি চেঞ্জ হয় বা ডিলিট হয়, ডাটা ইনকনসিস্টেন্ট হয়ে যায়। যেমন: (Roll, Subject) -> Marks এবং Roll -> Address। এখানে Address শুধু Roll এর উপর ডিপেন্ডেন্ট, যা পারশিয়াল।
+3. **Difference between 3NF and BCNF with Example.**
+   - *Proof:* 3NF-এ $X \rightarrow Y$ হলে $X$ সুপার কি অথবা $Y$ প্রাইম এট্রিবিউট। BCNF-এ $X$ অবশ্যই সুপার কি। ধরুন $R(S, T, J)$ এবং $SJ \rightarrow T, T \rightarrow J$। এটি 3NF-এ আছে কারণ $J$ প্রাইম। কিন্তু BCNF-এ নেই কারণ $T$ সুপার কি নয়।
+4. **Normalization Anomaly** বলতে কী বোঝ? ৩টি অ্যানোমালি উদাহরণসহ ব্যাখ্যা করো।
+   - *Details:* Insertion (ডাটা ইনসার্টে বাধা), Update (একই ডাটা অনেক জায়গায় আপডেট), Deletion (অপ্রয়োজনীয় ডাটা ডিলিট হওয়ার সময় দরকারি ডাটা হারানো)।
+5. **Closure Algorithm** ব্যবহার করে দেখাও যে কীভাবে নির্ধারণ করা যায় একটি ডিপেন্ডেন্সি সেটে আছে কি না।
+   - *Method:* ধরি চেক করব $A \rightarrow D$ আছে কি না। আমরা $A^+$ বের করব। যদি ক্লোজার সেটে $D$ থাকে, তবে ডিপেন্ডেন্সি ভ্যালিড।
 
