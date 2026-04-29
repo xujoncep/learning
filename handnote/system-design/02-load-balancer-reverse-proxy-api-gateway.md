@@ -1,57 +1,90 @@
-# Chapter 02 — Load Balancer, Reverse Proxy, API Gateway
+﻿# Chapter 02 — Load Balancer & Consistent Hashing 🌐
 
-## Concepts
-- Load Balancer: traffic multiple servers এ distribute
-- Reverse Proxy: client থেকে backend hide + central entry
-- API Gateway: auth, routing, rate limit, aggregation
+# Topic 5: Load Balancer (LB) Internals
+Load Balancer আপনার ট্রাফিককে মাল্টিপল সার্ভারে ভাগ করে দেয়।
 
-```mermaid
-flowchart LR
-  U[Client] --> G[Gateway/Proxy]
-  G --> S1[Service A]
-  G --> S2[Service B]
-```
+### 5.1 LB Routing Algorithms
+1.  **Round Robin:** একে একে সবার কাছে পাঠায়।
+2.  **Least Connection:** যার কাছে কাজ কম তার কাছে পাঠায়।
+3.  **IP Hashing:** নির্দিষ্ট ইউজারকে সবসময় নির্দিষ্ট সার্ভারে পাঠায়।
 
-## LB Algorithms
-- Round Robin
-- Least Connections
-- Weighted Round Robin
-- Hash-based routing
+---
 
-## MCQ (15)
-1. Reverse proxy sits? → server side ✅
-2. API gateway কাজ? → cross-cutting policy ✅
-3. Sticky session drawback? → uneven load ✅
-4. Health check দরকার? → unhealthy node বাদ দিতে ✅
-5. TLS termination কোথায় common? → LB/Proxy ✅
-6. L4 vs L7 difference? → transport vs application awareness ✅
-7. Weighted LB use-case? → heterogeneous servers ✅
-8. Gateway SPOF avoid? → multiple instances ✅
-9. Retry সব error-এ safe? → না ✅
-10. Circuit breaker কোথায় useful? → downstream failure isolation ✅
-11. Health check type? → active/passive ✅
-12. Blue-green deploy-এ LB role? → traffic switch ✅
-13. L7 routing supports? → path/header based routing ✅
-14. Reverse proxy + cache possible? → হ্যাঁ ✅
-15. API gateway auth centralization লাভ? → consistency ✅
+# Topic 6: Consistent Hashing (The Real Hero)
+সাধারণ Hashing ($server = request\_id \% n$) এ যদি ১টি সার্ভার বাড়ে বা কমে, তাহলে **Cache Miss** ১০০% হয়ে যায়। Consistent Hashing এটি সমাধান করে।
 
-## Written (5) with Solution
-### Problem 1: L4 vs L7 compare
-**Solution:** L4 fast/simple transport-level; L7 application-aware routing/policy rich।
+### 6.1 The Hash Ring
+- সার্ভার এবং রিকোয়েস্ট উভয়কেই একটি সার্কুলার রিং-এ বসানো হয়।
+- কোনো সার্ভার ডিলিট হলে শুধু সেই সার্ভারের আগের ডাটাগুলো এফেক্টেড হয়।
+- **Virtual Nodes:** সার্ভারগুলোকে রিং-এ সুষমভাবে বন্টন করার জন্য ভার্চুয়াল নোড ব্যবহার করা হয়।
 
-### Problem 2: Gateway বনাম direct service call
-**Solution:** gateway central policy দেয় but extra hop যোগ হয়।
+---
 
-### Problem 3: Zero downtime deployment
-**Solution:** new pool warmup → health pass → gradual traffic shift → old pool drain।
+# Topic 7: API Gateway vs Reverse Proxy
+দুটো দেখতে এক মনে হলেও এদের কাজ আলাদা। 
+- **Reverse Proxy (e.g., Nginx):** মূলত ব্যাকএন্ড সার্ভারকে মাস্ক করে এবং লোড ব্যালেন্সিং করে।
+- **API Gateway (e.g., Kong, AWS Gateway):** অথেন্টিকেশন, রেট লিমিটিং এবং এপিআই কম্পোজিশন করে।
 
-### Problem 4: Sticky session কখন দরকার?
-**Solution:** legacy session-in-memory app-এ; modern approach external session store better।
+### Trade-offs:
+- **Pros:** সিকিউরিটি বাড়ে, কল ক্লায়েন্ট থেকে সিম্প্লিফাইড হয়।
+- **Cons:** এটি নিজেই একটি **Single Point of Failure** হতে পারে এবং নেটওয়ার্ক লেটেন্সি সামান্য বাড়িয়ে দেয়।
 
-### Problem 5: Reverse proxy TLS termination benefit
-**Solution:** cert management centralize, backend plain/internal TLS simplify, offload crypto।
+---
 
-## Navigation
-- 🏠 [Master Index](00-master-index.md)
-- ⬅️ [Chapter 01](01-design-fundamentals-nfr-capacity.md)
-- ➡️ [Chapter 03](03-caching-patterns-distributed-cache.md)
+### 🧠 Practice Zone (Design & MCQ)
+
+#### MCQ Drill (10+ Questions)
+1. OSI মডেলের কোন লেভেলে Load Balancer কাজ করতে পারে?
+   - (ক) Layer 4 (Transport) (খ) Layer 7 (Application) **(গ) Both** (ঘ) None
+2. Consistent Hashing-এর প্রধান সুবিধা কী?
+   - (ক) স্পিড বাড়ানো **(খ) মিনিমাল ডাটা রিলোকেশন** (গ) সিকিউরিটি (ঘ) স্টোরেজ কমানো
+3. Nginx নিচের কোনটির উদাহরণ?
+   - **(ক) Reverse Proxy** (খ) Forward Proxy (গ) Database (ঘ) OS
+4. ৪টি নোডের একটি রিং-এ Consistent Hashing এ ১টি নোড অ্যাড করলে গড়ে কতটুকু ডাটা মুভ হবে?
+   - (ক) ১০০% **(খ) ২৫% (১/n)** (গ) ৫০% (ঘ) মুভ হবে না
+5. Layer 7 Load Balancing এর সুবিধা কোনটি?
+   - (ক) এটি খুব ফাস্ট **(খ) কন্টেন্ট বেসড রাউটিং (উদা: /api বনাম /video)** (গ) লো মেমরি (ঘ) সহজ কনফিগারেশন
+6. 'Sticky Sessions' সাধারণত কোথায় সেট করা হয়?
+   - **(ক) Load Balancer** (খ) Database (গ) Frontend (ঘ) CPU
+7. API Gateway-এর প্রধান কাজ কোনটি?
+   - (ক) ডাটা স্টোর করা **(খ) অথেন্টিকেশন ও রেট লিমিটিং** (গ) কোড কম্পাইল করা (ঘ) গ্রাফিক্স রেন্ডার করা
+8. Consistent Hashing এ 'Hotspot' প্রবলেম কীভাবে কমানো যায়?
+   - (ক) ক্যাশ বাড়িয়ে (খ) ব্যান্ডউইথ বাড়িয়ে **(গ) Virtual Nodes ব্যবহার করে** (ঘ) সার্ভার কমিয়ে
+9. Reverse Proxy কেন ব্যবহার করা হয়?
+   - (ক) ক্লায়েন্টের আইপি লুকাতে **(খ) ব্যাকএন্ডের আইপি লুকাতে** (গ) ইন্টারনেট স্পিড বাড়াতে (ঘ) গেম খেলতে
+10. 'Health Check' লজিক কোথায় থাকে?
+    - **(ক) Load Balancer** (খ) Browser (গ) SSD (ঘ) RAM
+
+#### Interview Case Study & Written (10+ Questions)
+
+1. **Virtual Nodes Walkthrough:** কনসিস্টেন্ট হ্যাশিং-এ ভার্চুয়াল নোড কেন দরকার?
+   - **Explain:** যদি সার্ভারগুলোর হ্যাশ ভ্যালু রিং-এ খুব কাছাকাছি পড়ে যায়, তবে একটি সার্ভার অনেক বেশি লোড পাবে। ভার্চুয়াল নোড সার্ভারগুলোকে রিং-এর সব জায়গায় ছড়িয়ে দেয় (Redistribution), ফলে লোড সুষম হয়।
+
+2. **L4 vs L7 Load Balancer:** কখন কোনটি ব্যবহার করবেন?
+   - **Answer:** L4 (TCP/UDP) ব্যবহার করুন যখন আপনার শুধু হাই-থ্রুপুট রিশাফল দরকার (যেমন গেমিং)। L7 (HTTP) ব্যবহার করুন যখন আপনার হেডার বা কুকি দেখে ট্রাফিক স্লাইস করতে হবে (যেমন মাইক্রোসার্ভিস)।
+
+3. **Consistent Hashing Math:** ১০টি নোডের একটি ক্লাস্টারে ১০০টি কী (keys) আছে। ১টি নোড ফেল করলে আনুমানিক কতটি কী-এর পজিশন বদলাবে?
+   - **Result:** আনুমানিক $100 / 10 = 10$ টি কী। এটিই সাধারণ হ্যাশিং থেকে এর শ্রেষ্ঠত্ব ($n-1$ মুভমেন্ট লাগে না)।
+
+4. **Nginx vs HAProxy:** লোড ব্যালেন্সার হিসেবে এদের পার্থক্য কী?
+   - **Trade-off:** Nginx ওয়েভ সার্ভার হিসেবেও কাজ করে, কন্টেন্ট ক্যাশ করতে পারে। HAProxy বিশেষভাবে শুধুমাত্র লোড ব্যালেন্সিং-এর জন্য অপ্টিমাইজড এবং খুবই ফাস্ট।
+
+5. **Rate Limiting at API Gateway:** কেন এটি গেটওয়ে লেভেলে করা ভালো?
+   - **Answer:** সার্ভিস লেভেলে যাওয়ার আগেই আনওয়ান্টেড রিকোয়েস্ট ব্লক করে ব্যাকএন্ড সার্ভারকে ডোজ (DoS) অ্যাটাক থেকে রক্ষা করা যায়।
+
+6. **SSL Termination:** এটি লোড ব্যালেন্সারে কেন করা হয়?
+   - **Pros:** ব্যাকএন্ড সার্ভারগুলোকে হেভি SSL হ্যান্ডশেক থেকে মুক্তি দেয় (Offloading), ফলে তারা বিজনেস লজিকে ফোকাস করতে পারে।
+
+7. **The "Thundering Herd" Problem:** লোড ব্যালেন্সার কীভাবে এটি সামলাবে?
+   - **Scenario:** অনেক রিকোয়েস্ট একসাথে রি-স্টার্ট হওয়া সার্ভারে আছড়ে পড়লে। লোড ব্যালেন্সার 'Slow Start' অ্যালগরিদম ব্যবহার করে ধীরে ধীরে ট্রাফিক বাড়াবে।
+
+8. **Weighted Round Robin:** এটি কখন দরকার?
+   - **Answer:** যদি আপনার ক্লাস্টারে কিছু সার্ভার শক্তিশালী (বেশি RAM/CPU) আর কিছু দুর্বল হয়, তখন শক্তিশালীগুলোকে বেশি ওয়েট দেওয়া হয়।
+
+9. **Reverse Proxy Security:** এটি কীভাবে DDoS প্রিভেন্ট করে?
+   - **Answer:** এটি ইউজারের রিকোয়েস্ট ফিল্টার করতে পারে এবং সোর্স আইপি ব্লক করার ফিচার দিয়ে ব্যাকএন্ডকে শিল্ড করে।
+
+10. **Consistent Hashing Implement:** আপনি কি ডাটাবেস শার্ডিং-এ এটি ব্যবহার করবেন?
+    - **Answer:** অবশ্যই! ডাটাবেস নোড বাড়ানো বা কমানোর সময় ডাটা মাইগ্রেশন কস্ট (Re-sharding cost) কমানোর জন্য এটিই গোল্ড স্ট্যান্ডার্ড।
+
+---
