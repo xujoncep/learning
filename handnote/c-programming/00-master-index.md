@@ -1,35 +1,16 @@
 # C Programming — Master Index 💻
-
-> C Programming-র সব chapter একসাথে। প্রতিটা chapter independent — যেকোনোটা থেকে শুরু করতে পারো।
-
----
-
-## 📚 Course Overview
-
-এই course-এ মোট **8টা chapter** আছে — fundamentals থেকে advanced topics পর্যন্ত। প্রতিটা chapter-এ concept + code examples + MCQ + written problems + traps + summary।
-
-## 📖 Chapters
-
-| # | Chapter | What you'll learn |
+``n> C Programming-র সব chapter একসাথে। প্রতিটা chapter independent — যেকোনোটা থেকে শুরু করতে পারো।
+``n---
+``n## 📚 Course Overview
+``nএই course-এ মোট **7টা chapter** আছে — foundations থেকে শুরু করে প্রফেশনাল লেভেলের advanced topics এবং BD Job Exam প্রিপারেশন পর্যন্ত। প্রতিটা chapter-এ concept + code examples + Bangladesh Job Exam Special (C, C#, Java, Python) + MCQ + written questions + summary।
+``n## 📖 Chapters
+``n| # | Chapter | What you'll learn |
 |---|---------|-------------------|
-| 01 | [Fundamentals](01-fundamentals.md) | Data types, operators, format specifiers, type casting, conditionals — C-র ভিত্তি। |
-| 02 | [Control Flow](02-control-flow.md) | Loops, break/continue/goto, pattern printing, function basics, recursion। |
-| 03 | [Functions — Deep Dive](03-functions-deep.md) | Storage classes, scope, lifetime — function-এর internals। |
-| 04 | [Arrays & Strings](04-arrays-strings.md) | 1D / 2D array, matrix, string basics, advanced string problems। |
-| 05 | [Pointers](05-pointers.md) | Pointer basics, pointer-array-string, pointer-to-pointer, dynamic memory। |
-| 06 | [Structures, Unions & File I/O](06-structures-unions.md) | Structure, union, enum, typedef, sizeof, file operations। |
-| 07 | [Math, Search & Sort](07-math-search-sort.md) | Number system, series, digit manipulation, linear/binary search, basic sorts। |
-| 08 | [Data Structures & Advanced](08-data-structures-advanced.md) | Linked list, stack, queue, bitwise, preprocessor, output-prediction। |
-
----
-
-## 🎯 কীভাবে এই course ব্যবহার করবেন
-
-1. **প্রথমবার পড়ছ?** — Chapter 01 থেকে শুরু করো, প্রতিটা chapter পরপর শেষ করো।
-2. **Revision করছ?** — সরাসরি যেই chapter দরকার সেটা খুলে পড়ো।
-3. **Job exam preparation?** — প্রতিটা chapter-এর MCQ + tricky parts অংশটা focus করে পড়ো।
-4. **Concept gap?** — সংশ্লিষ্ট chapter-এর "Concept" + "Code Examples" দেখো।
-
-## 📝 Note
-
-এই course-টা আগে একটা single handbook ছিল। Course format-এ split করা হয়েছে যাতে navigation সহজ হয়, প্রতি chapter বুঝে নেওয়া যায়, এবং sidebar-এ সব chapter দেখা যায়।
+| 01 | [Foundations & Logic Control](01-fundamentals.md) | Data types, operators, flow control (Loops, Conditions) — C-র ভিত্তি ও যৌক্তিক প্রবাহ। |
+| 02 | [Functions & Memory Architecture](02-functions-architecture.md) | Storage classes, scope, lifetime, stack vs heap basics — function-এর internals। |
+| 03 | [Data Containers (Arrays, Strings & Math)](03-data-containers.md) | 1D/2D array, matrix, string manipulation এবং গাণিতিক সমস্যার সমাধান। |
+| 04 | [Pointer Mastery & Dynamic Memory](04-pointer-mastery.md) | Pointer basics, arithmetic, pointer-to-pointer, function pointer এবং Dynamic Memory (Heap)। |
+| 05 | [Structures, Memory Alignment & Unions](05-structs-unions.md) | User-defined data types, ttypedef, enum, এবং memory alignment। |
+| 06 | [File I/O, CLI & Preprocessor](06-file-cli.md) | Advanced File I/O, Command Line Arguments (argc/argv), এবং Preprocessor directives। |
+| 07 | [Data Structures & Algorithm Essentials](07-dsa-essentials.md) | Linked List, Stack, Queue basics এবং Sorting/Searching algorithms। |
+``n
