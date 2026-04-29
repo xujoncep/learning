@@ -75,34 +75,35 @@
 ## LEVEL C: Advanced
 
 ### Q21: Thrashing কীভাবে detect/mitigate?
-**Answer:** high page fault rate + low CPU utilization; mitigation: working set control, multiprogramming degree reduce।
+**Ans:** High page fault rate + Low CPU utilization দেখা দিলে বুঝতে হবে সিস্টেম থ্র্যাশিং করছে। 
+- **Under the Hood:** ওএস তখন শুধু এক পেজ সোয়্যাপ করে অন্যটা আনতে ব্যস্ত থাকে, রিয়েল কাজ (CPU) কিছুই হয় না। 
+- **Mitigation:** "Degree of Multiprogramming" কমানো (মানে কিছু প্রসেস সাসপেন্ড করা) অথবা র‍্যাম বাড়ানো।
+
+---
 
 ### Q22: TLB miss হলে কী হয়?
-**Answer:** page table walk হয়; translation latency বাড়ে।
+**Ans:** একে "Translation Lookaside Buffer" বলে। মিস হলে ওএসকে মেইন মেমোরির "Page Table" চেক করতে হয়। 
+- **Logic:** TLB হলো পেজ টেবিলের ক্যাশ। মিস হওয়া মানে মেমোরি এক্সেস টাইম দ্বিগুণ হওয়া।
 
-### Q23: 2PL আর serializability সম্পর্ক?
-**Answer:** strict 2PL conflict-serializable schedules enforce করে।
+---
 
-### Q24: Deadlock detection vs prevention tradeoff?
-**Answer:** prevention conservative resource utilization কমাতে পারে; detection flexible but recovery overhead আছে।
+### Q23: "How to detect a deadlock in a running production server?"
+**Ans:** 
+- **Resource Allocation Graph (RAG):** সিস্টেমে রিসোর্স অ্যালোকেশন এবং রিকোয়েস্টের একটি সাইকেল তৈরি হয়েছে কি না তা চেক করা।
+- **OS Tools:** লিনাক্সে `top`, `ps` বা ডাটাবেসের ক্ষেত্রে `SHOW ENGINE INNODB STATUS` দিয়ে লকিং অবস্থা দেখা।
+- **Practical Fix:** ডেডলক হলে সাধারণত ওএস (বা প্রোগ্রামার) যেকোনো একটি প্রসেস কিল করে রিসোর্স ফ্রি করে দেয়।
 
-### Q25: Copy-on-write fork optimization কী?
-**Answer:** fork-এর পর pages initially share হয়; write হলে only তখন copy হয়।
+---
 
-### Q26: Kernel threads vs user threads in blocking I/O?
-**Answer:** user-level thread model-এ blocking syscall পুরো process block করতে পারে; kernel thread model এ অন্য thread run করতে পারে।
+### Q24: Virtual Memory র‍্যামের চেয়ে বড় হলে কী হবে?
+**Ans:** এটি সম্ভব, কিন্তু প্রোসেস স্লো হয়ে যাবে।
+- **Deep Dive:** ওএস ডিস্কের একটি অংশ (Swap/Page file) ব্যবহার করে র‍্যাম হিসেবে। যেহেতু ডিস্ক র‍্যামের চেয়ে হাজার গুণ স্লো, তাই সিস্টেম "I/O bound" হয়ে যাবে। একেই আমরা কম্পিউটার 'হ্যাঙ' করা বলি।
 
-### Q27: SCAN vs C-SCAN fairness?
-**Answer:** C-SCAN waiting time distribution আরও uniform।
+---
 
-### Q28: Journaling file system লাভ?
-**Answer:** crash-এর পরে metadata consistency দ্রুত recover হয়।
-
-### Q29: Hypervisor Type-1 vs Type-2?
-**Answer:** Type-1 bare-metal (better isolation/perf), Type-2 host OS উপর run (more convenient)।
-
-### Q30: Container vs VM selection guideline?
-**Answer:** fast deployment + low overhead চাইলে container; strong isolation + custom kernel চাইলে VM।
+### Q25: Journaling file system লাভ?
+**Ans:** Crash-এর পরে metadata consistency দ্রুত recover হয়। 
+- **Why?**: এক্সট্রা রাইট কেন করছি? কারণ এটি একটি 'Log' রাখে। হুট করে পাওয়ার চলে গেলে ওএস লগ দেখে বুঝতে পারে কোন ফাইলটি ঠিকমতো রাইট হয়নি, পুরো ডিস্ক স্ক্যান করে এরর খুঁজতে হয় না।
 
 ---
 
@@ -115,11 +116,18 @@ Given:
 - P3(AT=2, BT=1)
 
 **Ask:** FCFS আর SJF-এ avg WT compare করো।  
-**Expected:** SJF-এ avg WT কম হওয়া দেখাতে হবে।
+**Expected:** SJF-এ avg WT কম হওয়া দেখাতে হবে। (Logic: Short jobs are cleared early, reducing wait time for later jobs).
 
 ### Task 2: Synchronization pseudo fix
 Shared counter increment code-এ race condition আছে।  
-**Expected fix:** lock/unlock critical section।
+**Expected fix:** `lock()` এবং `unlock()` ফাংশন দিয়ে Critical Section প্রটেক্ট করা। কেন? যাতে এক থ্রেড যখন রাইট করছে তখন অন্য থ্রেড ইন্টারফেয়ার না করে।
+
+---
+
+## 🚀 Scenario Debugging Challenge
+- **Memory Leak in Loop:** যদি `malloc()` করে `free()` না হয়, তবে র‍্যাম এক সময় শেষ হয়ে যাবে।
+- **Starvation Example:** হাই প্রায়োরিটি প্রসেস বারবার আসলে লো প্রায়োরিটি প্রসেসর ভাগ্য কি? (Ans: **Aging** ব্যবহার করে তার প্রায়োরিটি বাড়াতে হবে)।
+- **Zombie vs Orphan Process:** জম্বি প্রসেস মেমোরি খায় না, কিন্তু প্রসেস আইডি (PID) স্লট দখল করে রাখে। অনেক জম্বি থাকলে নতুন প্রসেস শুরু হবে না।
 
 ### Task 3: Page replacement reasoning
 Reference string দিয়ে FIFO vs LRU page fault compare।  

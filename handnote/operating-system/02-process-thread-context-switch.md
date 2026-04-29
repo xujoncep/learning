@@ -1,103 +1,160 @@
-# Chapter 02 — Process, Thread & Context Switch
+# 02 — Processes & Threads: Deep Dive
 
-> Process/thread fundamentals + lifecycle + context switching + interview-oriented practice।
-
----
-
-## 1. Process vs Thread
-
-| বিষয় | Process | Thread |
-|---|---|---|
-| Definition | running program instance | process-এর execution unit |
-| Address space | আলাদা | same process memory share |
-| Creation cost | বেশি | কম |
-| Context switch cost | বেশি | তুলনামূলক কম |
-| Failure impact | isolated | same process threads affected হতে পারে |
+> Process creation, Threads vs Processes, এবং Context Switching-এর গাণিতিক বিশ্লেষণ।
 
 ---
 
-## 2. Process States
+## Core Mechanics: Processes vs Threads
+
+### ১. Process (Heavyweight)
+একটি প্রোগ্রাম যখন রান করে তখন তাকে **Process** বলে। এর নিজস্ব address space, text, data, and stack থাকে।
+- **Creation:** `fork()` system call দিয়ে লিনাক্সে process তৈরি হয়।
+- **Isolation:** এক প্রসেস অন্য প্রসেসের মেমোরিতে সরাসরি হাত দিতে পারে না।
+
+### ২. Thread (Lightweight)
+একটি প্রসেসের ভিতর অনেকগুলো independent execution path থাকতে পারে, যাদের **Thread** বলে।
+- **Shared Memory:** একই প্রসেসের থ্রেডগুলো Code, Data, এবং Open files শেয়ার করে।
+- **Stack:** প্রতিটি থ্রেডের নিজস্ব Stack এবং Registers থাকে।
 
 ```mermaid
-flowchart LR
-    N[New] --> R[Ready]
-    R --> RU[Running]
-    RU --> W[Waiting/Blocked]
-    W --> R
-    RU --> T[Terminated]
+graph TD
+    subgraph Process
+    A[Code Segment]
+    B[Data Segment]
+    C[Heap]
+    D[Thread 1: Stack + Reg]
+    E[Thread 2: Stack + Reg]
+    end
 ```
 
 ---
 
-## 3. PCB (Process Control Block)
+## Numerical: Context Switching Math (Part 2)
 
-PCB সাধারণত রাখে:
-- PID
-- Process state
-- Program counter
-- CPU registers
-- Scheduling info (priority, queue pointer)
-- Memory info (page table pointer)
-- I/O status info
+**Problem:** 
+একটি প্রসেসর প্রতি ৫ms পর পর Context switch করে। প্রতিটি সুইচ করতে ১ms সময় লাগে। ১ সেকেন্ডের মধ্যে CPU কতটুকু প্রডাক্টিভ কাজ (Utilized) করে?
 
----
-
-## 4. Thread Model
-
-### Single-threaded process
-- একটাই control flow
-
-### Multi-threaded process
-- একাধিক parallel/overlapped execution path
-- একই code segment, data segment share
-- প্রতি thread-এর own stack + registers
-
-```mermaid
-flowchart TD
-    P[Process]
-    P --> C[Code - Shared]
-    P --> D[Data/Heap - Shared]
-    P --> T1[Thread 1 Stack/Registers]
-    P --> T2[Thread 2 Stack/Registers]
-    P --> T3[Thread 3 Stack/Registers]
-```
+**Calculation:**
+- মোট সময় = ১০০০ ms
+- একটি সাইকেল = ৫ ms (run) + ১ ms (switch) = ৬ ms।
+- সাইকেল সংখ্যা = $1000 / 6 \approx 166$ বার।
+- প্রডাক্টিভ কাজ = $166 \times 5 = 830 \text{ ms}$।
+- **CPU Utilization:** $(830 / 1000) \times 100 = 83\%$।
 
 ---
 
-## 5. Context Switch
+## MCQs (Practice Set)
 
-Context switch = CPU এক execution entity (process/thread) থেকে অন্যটিতে যাওয়ার সময়:
-1. old context save
-2. scheduler next নির্বাচন
-3. new context restore
+1. **কোনটি থ্রেডগুলো শেয়ার করে না?**
+   - (A) Address Space
+   - (B) Files
+   - (C) Stack
+   - (D) Code
+   - **Ans: C**
 
-### কেন switch হয়?
-- time quantum শেষ
-- I/O wait
-- higher priority process arrival
-- interrupt
+2. **Linux-এ নতুন প্রসেস তৈরিতে কোন syscall ব্যবহৃত হয়?**
+   - (A) create()
+   - (B) fork()
+   - (C) start()
+   - (D) process()
+   - **Ans: B**
 
-### Overhead
-Context switch productive computation না; তাই excessive switching performance কমায়।
+3. **fork() কল করলে child প্রসেস এ রিটার্ন ভ্যালু কত হয়?**
+   - (A) 0
+   - (B) -1
+   - (C) Child PID
+   - (D) Parent PID
+   - **Ans: A**
+
+4. **Multi-threading-এর সব বড় সুবিধা কী?**
+   - (A) Isolation
+   - (B) Resource Sharing
+   - (C) No Context Switch
+   - (D) Low Memory usage
+   - **Ans: B**
+
+5. **Zombie Process কী?**
+   - (A) শেষ হয়ে গেছে কিন্তু parent হারায়নি
+   - (B) যে প্রসেস অনেক মেমোরি নেয়
+   - (C) যে প্রসেস চলতে চলতে থেমে যায়
+   - (D) Parent ছাড়া প্রসেস
+   - **Ans: A**
+
+6. **Orphan Process-কে কে অ্যাডপ্ট করে?**
+   - (A) OS
+   - (B) Init Process (PID 1)
+   - (C) Root
+   - (D) Hardware
+   - **Ans: B**
+
+7. **Context Switch-এর সময় CPU কোন মোডে থাকে?**
+   - (A) User mode
+   - (B) Kernel mode
+   - (C) Standby mode
+   - (D) Input mode
+   - **Ans: B**
+
+8. **নিচের কোনটি Lightweight Process?**
+   - (A) Fork
+   - (B) Thread
+   - (C) Shell
+   - (D) Daemon
+   - **Ans: B**
+
+9. **Context Switching Overhead কমানোর উপায় কী?**
+   - (A) বড় কোয়ান্টাম টাইম
+   - (B) ছোট RAM
+   - (C) বেশি হার্ডডিস্ক
+   - (D) কম প্রসেস রান করা
+   - **Ans: A**
+
+10. **Thread Control Block (TCB)-এ কী থাকে না?**
+    - (A) Thread ID
+    - (B) Register set
+    - (C) Global data
+    - (D) Thread State
+    - **Ans: C** (এটি প্রসেস লেভেলে থাকে)
 
 ---
 
-## 6. User Thread vs Kernel Thread (short)
+## Written Problems
 
-| Model | Pros | Cons |
-|---|---|---|
-| User-level thread | fast create/switch | blocking syscall পুরো process block করতে পারে |
-| Kernel-level thread | true parallelism + better scheduling | higher overhead |
+1. **Describe the Process States (5-state model).**
+   - **Solution:** 
+     1. New: Process তৈরি হচ্ছে।
+     2. Ready: RAM-এ আছে, CPU পাওয়ার অপেক্ষায়।
+     3. Running: CPU-তে instruction রান করছে।
+     4. Waiting: I/O বা অন্য ইভেন্টের অপেক্ষায়।
+     5. Terminated: কাজ শেষ।
+
+2. **fork() কেন ব্যবহার করা হয়? একটি ডায়াগ্রামে দেখাও।**
+   - **Solution:** Parent প্রসেস হুবহু নিজের একটি কপি (Child) তৈরি করতে fork ব্যবহার করে। 
+   - `if(fork() == 0)` হলে সেটি child।
+
+3. **Threads vs Processes পার্থক্য ছক করে দেখাও।**
+   - **Solution:** Process-এর isolation বেশি কিন্তু context switch costly; Thread-এর overhead কম কিন্তু synchronization কঠিন।
+
+4. **What is Pre-emptive vs Non-preemptive scheduling?**
+   - **Solution:** Pre-emptive-এ OS জোর করে CPU কেড়ে নিতে পারে (যেমন: Round Robin), Non-preemptive-এ প্রসেস নিজে না ছাড়লে নেওয়া যায় না (যেমন: FCFS)।
+
+5. **PCB এবং TCB-র রিলেশন কী?**
+   - **Solution:** প্রতিটি PCB-র আন্ডারে একাধিক TCB থাকতে পারে যদি প্রসেসটি multi-threaded হয়।
 
 ---
 
-## 7. Basic C Snippet (conceptual)
+## Job Exam Special (BPSC/Bank)
 
-```c
-#include <stdio.h>
-#include <pthread.h>
+- **Exam Note:** "Ready to Running" ট্রানজিশন কে হ্যান্ডেল করে?—**Dispatcher**।
+- **Bank Logic:** থ্রেড শেয়ারিং এবং fork() রিটার্ন ভ্যালু থেকে অনেকবার প্রশ্ন এসেছে।
 
-void* worker(void* arg) {
+---
+
+## Interview Traps
+
+- **Trap 1:** "গুগল ক্রেম কি multi-process নাকি multi-thread?" এটি মূলত multi-process (প্রতিটি ট্যাব আলাদা প্রসেস) সিকিউরিটির জন্য।
+- **Trap 2:** "Thread কি প্রসেসের চেয়ে ফাস্ট রান করে?" না, কোড রান করার স্পিড এক, কিন্তু সুইচিং এবং ক্রিয়েশন ফাস্ট।
+- **Trap 3:** "Zombie process মেমোরি লিক করে?" না, এটি শুধু PCB-র একটি এন্ট্রি ব্লক করে রাখে।
+
     printf("Thread running: %d\n", *(int*)arg);
     return NULL;
 }

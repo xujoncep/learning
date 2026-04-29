@@ -1,51 +1,33 @@
-# Operating System — Master Index
+# Operating System — Master Index (Gold Standard)
 
-> Process, thread, scheduling, memory, file system, security — complete OS roadmap।
+> OS-এর প্রতিটি অধ্যায়ে থাকবে Core Mechanics, Numerical Walkthroughs, MCQs, Written Problems এবং Interview Traps।
 
 ---
 
-## Course Overview
+## Course Roadmap
 
-এই course-এ মোট **8টি chapter** থাকবে। লক্ষ্য:
-- concept clear করা
-- problem solving (numerical + theory)
-- exam + interview ready করা
+এই কোর্সের প্রতিটি অধ্যায় এমনভাবে সাজানো হয়েছে যাতে GATE, BPSC এবং Bank Job-এর সব ধরণের প্রশ্ন কাভার করা যায়।
 
 ---
 
 ## Chapters
 
-| # | Chapter | What you'll learn |
+| # | Chapter | Key Focus |
 |---|---|---|
-| 01 | [OS Fundamentals & System Calls](01-os-fundamentals-system-calls.md) | OS role, kernel, user mode, syscall, boot basics |
-| 02 | Process & Thread | PCB, context switch, states, multithreading models |
-| 03 | CPU Scheduling | FCFS, SJF, SRTF, Priority, RR + numerical |
-| 04 | Synchronization | critical section, mutex, semaphore, monitor |
-| 05 | Deadlock | conditions, RAG, detection/prevention/avoidance |
-| 06 | Memory Management | paging, segmentation, virtual memory, replacement |
-| 07 | File System & I/O | disk layout, allocation, inode/NTFS basics |
-| 08 | Protection, Security & Virtualization | access control, threats, VM, containers |
-| 09 | [Interview Prep (Beginner to Advanced)](09-interview-beginner-to-advanced.md) | rapid Q&A ladder + practical interview tasks |
+| 01 | [OS Fundamentals: Kernel vs User Mode](01-os-fundamentals-system-calls.md) | Dual Mode, Syscalls, PCB, Context Switching Math |
+| 02 | [Processes & Threads: Deep Dive](02-process-thread-context-switch.md) | fork(), Threads, Context Switch Overhead |
+| 03 | [CPU Scheduling: Optimization & Gantt Chart](03-cpu-scheduling-algorithms.md) | SRTF, Round Robin, TAT/WT Calculation |
+| 04 | [Process Synchronization: Peterson & Semaphores](04-synchronization-critical-section.md) | Critical Section, Semaphores, Classic Problems |
+| 05 | [Deadlock: Banker's Algorithm & Prevention](05-deadlock-detection-prevention-avoidance.md) | 4 Conditions, Banker's Safety Sequence |
+| 06 | [Memory Management: Paging & OS Internals](06-memory-management-paging-virtual-memory.md) | Paging Math, TLB, Page Replacement |
+| 07 | [File System & Disk Management: Inode & Storage](07-file-system-io-disk-management.md) | Inode pointers, Disk Scheduling (SCAN) |
+| 08 | [Virtualization & Containers: Docker Deep Dive](08-protection-security-virtualization-containers.md) | Type 1 vs 2, Namespace/Cgroups, Docker internals |
+| 09 | [Interview Mastery: Beginner to Advanced](09-interview-beginner-to-advanced.md) | Full Review and Interview Q&A |
 
 ---
 
-## Study Flow
+## Final Goal
+- **What:** Understanding OS from bottom-up.
+- **Why:** To master system-level programming and crack competitive exams.
+- **Toolbox:** Mermaid diagrams, LaTeX formulas, and simplified Bengali context.
 
-1. Chapter 01–02: core foundation  
-2. Chapter 03–05: scheduling + concurrency + deadlock  
-3. Chapter 06–08: memory, file system, security, modern runtime
-
----
-
-## Practice Rules
-
-- প্রতিটি chapter শেষে:
-  - 15+ MCQ (solution সহ)
-  - 5+ written সমস্যা (step-by-step solution সহ)
-  - diagram/table summary
-
----
-
-## Navigation
-
-- ➡️ Next: [Chapter 01 — OS Fundamentals & System Calls](01-os-fundamentals-system-calls.md)

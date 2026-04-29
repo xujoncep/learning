@@ -1,23 +1,171 @@
-# Chapter 01 — OS Fundamentals & System Calls
+# 01 — OS Fundamentals: Kernel vs User Mode
 
-> Operating System কী করে, kernel/user mode, system call flow, boot basics।
-
----
-
-## 1. Operating System কী?
-
-Operating System (OS) হলো user application আর hardware-এর মাঝে **resource manager + control layer**।
-
-### OS-এর প্রধান কাজ
-- Process management
-- Memory management
-- File system management
-- I/O device management
-- Security & protection
+> Operating System-এর core mechanics, privilege levels, system calls এবং Context Switching-এর গাণিতিক ব্যাখ্যা।
 
 ---
 
-## 2. User Mode vs Kernel Mode
+## Core Mechanics: User Mode vs Kernel Mode
+
+Computer-এর security এবং stability নিশ্চিত করার জন্য modern OS-এ hardware level-এ **Dual Mode Operation** থাকে।
+
+### ১. User Mode (Mode Bit = 1)
+- যখন কোনো application (যেমন: Chrome, VS Code) রান করে, তখন সেটি User Mode-এ থাকে।
+- এখানে application সরাসরি hardware access করতে পারে না।
+- Restricted memory access থাকে।
+
+### ২. Kernel Mode (Mode Bit = 0)
+- এর অন্য নাম **Privileged Mode** বা **Supervisor Mode**।
+- Hardware (RAM, CPU, Disk) এর উপর full control থাকে।
+- OS Kernel এখানে রান করে।
+
+### System Call Workflow
+যখন কোনো application hardware resource চায় (যেমন: File read), তখন সে **System Call** trigger করে। এটি mode bit-কে 1 থেকে 0-তে চেইঞ্জ করে kernel mode-এ সুইচ করে।
+
+```mermaid
+sequenceDiagram
+    participant U as User Application
+    participant K as Kernel Mode
+    participant H as Hardware
+    Note over U: App needs data (read file)
+    U->>K: Trap / System Call
+    Note over K: Mode Bit: 1 -> 0
+    K->>H: Access Disk
+    H-->>K: Data Response
+    K->>U: Return Data
+    Note over U: Mode Bit: 0 -> 1
+```
+
+---
+
+## PCB & Context Switching Math
+
+### Process Control Block (PCB)
+প্রতিটি process-এর details সেভ করার জন্য RAM-এ একটি data structure থাকে যাকে **PCB** বলে।
+- **PID:** Process ID
+- **Program Counter:** পরের instruction-এর address।
+- **Registers:** বর্তমান execution state।
+- **Process State:** Ready, Running, Waiting ইত্যাদি।
+
+### Context Switching Overhead calculation
+ধরা যাক, CPU process $P_1$ থেকে $P_2$-তে সুইচ করছে। এই সময়ের মধ্যে CPU কোনো productive কাজ করে না।
+
+**Formula:**
+$$\text{CPU Utilization} = \frac{\text{Total Process Execute Time}}{\text{Total Time (Execute + Switch)}} \times 100$$
+
+**Problem:** একটি CPU ১০ms ধরে execution করে এবং Context switch করতে ২ms সময় নেয়। CPU utilization কত?
+**Solution:**
+$$\text{Total Time} = 10 + 2 = 12 \text{ ms}$$
+$$\text{Utilization} = \frac{10}{12} \times 100 = 83.33\%$$
+
+---
+
+## MCQs (Practice Set)
+
+1. **System Call কীসের মাধ্যমে hardware access করে?**
+   - (A) User application
+   - (B) Kernel interface
+   - (C) Pointer
+   - (D) API only
+   - **Ans: B**
+
+2. **Privileged instructions কোন মোডে রান করে?**
+   - (A) User mode
+   - (B) Kernel mode
+   - (C) Both
+   - (D) RAM mode
+   - **Ans: B**
+
+3. **PCB-র মধ্যে নিচের কোনটি থাকে না?**
+   - (A) Program Counter
+   - (B) CPU Scheduling info
+   - (C) Process State
+   - (D) Desktop Background Image
+   - **Ans: D**
+
+4. **Context switching-এর সময় hardware mode bit কী হয়?**
+   - (A) Always 1
+   - (B) Always 0
+   - (C) 1 থেকে 0 বা উল্টোটা (State অনুযায়ী)
+   - (D) অপরিবর্তিত থাকে
+   - **Ans: C**
+
+5. **Mode Bit-এর মান '0' বলতে কী বোঝায়?**
+   - (A) User mode
+   - (B) Kernel mode
+   - (C) Error
+   - (D) Idle
+   - **Ans: B**
+
+6. **System Call-কে আর কী নামে ডাকা হয়?**
+   - (A) Direct Call
+   - (B) Trap
+   - (C) Signal
+   - (D) Interrupt
+   - **Ans: B**
+
+7. **নীচের কোনটি OS-এর কাজ নয়?**
+   - (A) Window management
+   - (B) Graphics designing
+   - (C) File handling
+   - (D) Resource allocation
+   - **Ans: B**
+
+8. **PCB কোথায় সংরক্ষিত থাকে?**
+   - (A) Registers
+   - (B) Main Memory (RAM)
+   - (C) Cache
+   - (D) Hard Disk
+   - **Ans: B**
+
+9. **Dispatcher কী করে?**
+   - (A) Process create করে
+   - (B) Context Switch হ্যান্ডেল করে
+   - (C) Process terminate করে
+   - (D) Memory allocate করে
+   - **Ans: B**
+
+10. **Dual mode কেন দরকার?**
+    - (A) Speed বাড়ানোর জন্য
+    - (B) System protection-এর জন্য
+    - (C) Memory কমানোর জন্য
+    - (D) GUI-এর জন্য
+    - **Ans: B**
+
+---
+
+## Written Problems
+
+1. **Explain the lifecycle of a System Call.**
+   - **Solution:** User program syscall library call করে -> CPU trap generate করে -> Mode bit 0 হয় -> Kernel specific routine execute করে -> কাজ শেষে mode bit 1 করে result পাঠায়।
+
+2. **What happens during a Context Switch?**
+   - **Solution:** Current process-এর state PCB-তে save করা হয়, পরবর্তী process-এর state PCB থেকে রিড করে CPU register-এ লোড করা হয়। এই সময়ে CPU idle থাকে।
+
+3. **Difference between Monolithic vs Microkernel.**
+   - **Solution:** Monolithic-এ সব service kernel mode-এ থাকে (Fast but risky), Microkernel-এ শুধু essential service kernel-এ থাকে (Stable but more context switching)।
+
+4. **Booting process (POST to Kernel load) সংক্ষেপে লেখ।**
+   - **Solution:** Power on -> BIOS/UEFI starts -> POST (Hardware check) -> MBR/GPT থেকে Bootloader লোড হয় -> Kernel RAM-এ লোড হয় -> System initialize হয়।
+
+5. **Context Switch time যদি ২০% হয়, এবং total process run time ১০০ms হয়, তবে overhead কত?**
+   - **Solution:** Overhead = $100 \times 0.20 = 20 \text{ ms}$।
+
+---
+
+## Job Exam Special (BPSC/Bank)
+
+- **BPSC Pattern:** System calls-এর types (Process control, File management, Device management) থেকে প্রশ্ন আসে।
+- **Bank Pattern:** Shell vs Kernel-এর পার্থক্য এবং PCB-র contents মুখস্থ রাখা জরুরি।
+- **Important Key:** Context switching overhead একটি critical resource consumption task।
+
+---
+
+## Interview Traps
+
+- **Trap 1:** "সব কি system call দিয়ে হয়?" না, math execution kernel মোডে যাওয়ার দরকার নেই। 
+- **Trap 2:** "Context switch কি multitasking বাড়ায়?" এটি illusion দেয়, আসলে যত বেশি switch তত CPU utilization কম।
+- **Trap 3:** "Software Interrupt আর System call কি এক?" হ্যাঁ, syscall হলো এক ধরণের software interrupt বা trap।
+
 
 ```mermaid
 flowchart TD
