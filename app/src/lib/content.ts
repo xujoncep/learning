@@ -89,7 +89,15 @@ const SECTION_META: Record<string, SectionMeta> = {
     description:
       'NFR, capacity, load balancer, caching, sharding, queue, consistency, observability — beginner থেকে interview-ready system design।',
   },
-  root: { title: 'Handbooks', icon: '📚', order: 7 },
+  'cyber-security-bd-bank': {
+    title: 'Cyber Security (BB IT Exam)',
+    icon: '🔐',
+    order: 7,
+    gated: true,
+    description:
+      'Bangladesh Bank IT/AD IT exam-এর জন্য cyber security written question + answer — CIA, SSL/TLS, SWIFT, MFA, BB Framework v1.0 (2026), e-KYC সহ ২৮টি high-priority topic।',
+  },
+  root: { title: 'Handbooks', icon: '📚', order: 8 },
 };
 
 export function isGatedSection(section: string | undefined): boolean {

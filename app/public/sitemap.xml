@@ -139,6 +139,60 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://learning-hub-3gw.pages.dev/docs/cyber-security-bd-bank/00-master-index</loc>
+    <lastmod>2026-04-30</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://learning-hub-3gw.pages.dev/docs/cyber-security-bd-bank/01-fundamentals</loc>
+    <lastmod>2026-04-30</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://learning-hub-3gw.pages.dev/docs/cyber-security-bd-bank/02-network-security</loc>
+    <lastmod>2026-04-30</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://learning-hub-3gw.pages.dev/docs/cyber-security-bd-bank/03-banking-payment</loc>
+    <lastmod>2026-04-30</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://learning-hub-3gw.pages.dev/docs/cyber-security-bd-bank/04-threats-attacks</loc>
+    <lastmod>2026-04-30</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://learning-hub-3gw.pages.dev/docs/cyber-security-bd-bank/05-cryptography-forensics</loc>
+    <lastmod>2026-04-30</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://learning-hub-3gw.pages.dev/docs/cyber-security-bd-bank/06-cloud-api-security</loc>
+    <lastmod>2026-04-30</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://learning-hub-3gw.pages.dev/docs/cyber-security-bd-bank/07-ekyc-biometrics</loc>
+    <lastmod>2026-04-30</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://learning-hub-3gw.pages.dev/docs/cyber-security-bd-bank/08-compliance-regulatory</loc>
+    <lastmod>2026-04-30</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://learning-hub-3gw.pages.dev/docs/dbms/00-master-index</loc>
     <lastmod>2026-04-30</lastmod>
     <changefreq>monthly</changefreq>
@@ -428,6 +482,12 @@
   </url>
   <url>
     <loc>https://learning-hub-3gw.pages.dev/sections/computer-networking</loc>
+    <lastmod>2026-04-30</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://learning-hub-3gw.pages.dev/sections/cyber-security-bd-bank</loc>
     <lastmod>2026-04-30</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
