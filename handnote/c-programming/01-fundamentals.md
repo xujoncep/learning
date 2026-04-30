@@ -1,22 +1,22 @@
 # Chapter 01 — Foundations & Logic Control — C Programming 💻
-`> Data types, operators, format specifiers, flow control (Loops, Conditions) — C-র ভিত্তি ও যৌক্তিক প্রবাহ।
-`---
-# LEVEL 1: FOUNDATIONS & LOGIC CONTROL
-`*C Programming এর মৌলিক ভিত্তি ও প্রোগ্রামের প্রবাহ নিয়ন্ত্রণ — এই অংশ না বুঝলে পরের কিছুই বোঝা যাবে না*
-`---
+> Data types, operators, format specifiers, flow control (Loops, Conditions) — C-র ভিত্তি ও যৌক্তিক প্রবাহ।
 ---
-`# Topic 1: Data Types, Variables & Constants
-`<div align="center">
-`*"C তে প্রতিটি data এর একটি type আছে — type না জানলে memory বোঝা যায় না"*
-`</div>
-`---
-`## 📖 1.1 ধারণা (Concept)
-`C programming এ প্রতিটি variable এর একটি **data type** থাকতে হয়। Data type তিনটি গুরুত্বপূর্ণ বিষয় নির্ধারণ করে:
-`- **কত byte memory** নেবে — memory management এর জন্য জরুরি
+# LEVEL 1: FOUNDATIONS & LOGIC CONTROL
+*C Programming এর মৌলিক ভিত্তি ও প্রোগ্রামের প্রবাহ নিয়ন্ত্রণ — এই অংশ না বুঝলে পরের কিছুই বোঝা যাবে না*
+---
+---
+# Topic 1: Data Types, Variables & Constants
+<div align="center">
+*"C তে প্রতিটি data এর একটি type আছে — type না জানলে memory বোঝা যায় না"*
+</div>
+---
+## 📖 1.1 ধারণা (Concept)
+C programming এ প্রতিটি variable এর একটি **data type** থাকতে হয়। Data type তিনটি গুরুত্বপূর্ণ বিষয় নির্ধারণ করে:
+- **কত byte memory** নেবে — memory management এর জন্য জরুরি
 - **কী ধরনের data** store করবে — পূর্ণসংখ্যা, দশমিক, না character
 - **কত range** এর মধ্যে value রাখতে পারবে — overflow এড়ানোর জন্য
-`### Data Types এর শ্রেণীবিভাগ
-````
+### Data Types এর শ্রেণীবিভাগ
+```
 Data Types in C
 ├── Primary (Built-in)
 │   ├── int          → পূর্ণসংখ্যা (4 bytes)
@@ -42,9 +42,9 @@ Data Types in C
     ├── Union
     └── Enum
 ```
-`### Size & Range Table
-`> **এই table টি মুখস্থ করুন — পরীক্ষায় সবচেয়ে বেশি আসে!**
-````
+### Size & Range Table
+> **এই table টি মুখস্থ করুন — পরীক্ষায় সবচেয়ে বেশি আসে!**
+```
 ┌──────────────────┬───────┬──────────────────────────────────┐
 │   Data Type      │ Size  │         Range                    │
 ├──────────────────┼───────┼──────────────────────────────────┤
@@ -61,13 +61,13 @@ Data Types in C
 │ long double      │ 12/16B│ even larger precision             │
 └──────────────────┴───────┴──────────────────────────────────┘
 ```
-`> **মনে রাখার সূত্র:** n bit signed range = **-2^(n-1)** to **2^(n-1) - 1**
+> **মনে রাখার সূত্র:** n bit signed range = **-2^(n-1)** to **2^(n-1) - 1**
 >
 > **উদাহরণ:** char = 8 bit → -2⁷ to 2⁷-1 → **-128 to 127**
-`---
-`## 📖 1.2 Variables (চলক)
-`Variable হলো memory তে একটি **নামযুক্ত স্থান** যেখানে data store করা হয়। ভাবুন এটি একটি **লেবেলযুক্ত বাক্স** — বাক্সের নাম = variable name, ভেতরের জিনিস = value।
-````c
+---
+## 📖 1.2 Variables (চলক)
+Variable হলো memory তে একটি **নামযুক্ত স্থান** যেখানে data store করা হয়। ভাবুন এটি একটি **লেবেলযুক্ত বাক্স** — বাক্সের নাম = variable name, ভেতরের জিনিস = value।
+```c
 /* ═══════════════════════════════════════════
    Variable Declaration & Initialization
    ═══════════════════════════════════════════ */
@@ -80,8 +80,8 @@ int marks = 90;
 float gpa = 3.75;
 char grade = 'A';
 ```
-`### Variable Naming Rules
-````
+### Variable Naming Rules
+```
 ✅ Valid Names                 ❌ Invalid Names
 ─────────────────             ──────────────────────────────
 int age;                      int 2name;       → সংখ্যা দিয়ে শুরু নয়
@@ -90,11 +90,11 @@ int student1;                 int float;       → keyword ব্যবহার
 int MAX_VALUE;                int my-name;     → hyphen ব্যবহার নয়
 int __;                       int @price;      → special char নয়
 ```
-`> **মনে রাখুন:** C হলো **case-sensitive** — `Age`, `age`, `AGE` তিনটি সম্পূর্ণ **আলাদা** variable।
-`---
-`## 📖 1.3 Constants (ধ্রুবক)
-`যে value **একবার set করলে আর পরিবর্তন করা যায় না** — সেটাই constant। দুই উপায়ে constant তৈরি করা যায়:
-````c
+> **মনে রাখুন:** C হলো **case-sensitive** — `Age`, `age`, `AGE` তিনটি সম্পূর্ণ **আলাদা** variable।
+---
+## 📖 1.3 Constants (ধ্রুবক)
+যে value **একবার set করলে আর পরিবর্তন করা যায় না** — সেটাই constant। দুই উপায়ে constant তৈরি করা যায়:
+```c
 /* ═══════════════════════════════════
    Way 1: const keyword
    ═══════════════════════════════════ */
@@ -106,15 +106,15 @@ const int MAX = 100;
 #define PI 3.14159
 #define MAX_SIZE 100
 ```
-`### const vs #define — পার্থক্য
-`| Feature | `const` | `#define` |
+### const vs #define — পার্থক্য
+| Feature | `const` | `#define` |
 |---------|---------|-----------|
 | **Type checking** | ✅ হ্যাঁ (compiler check করে) | ❌ না (just text replace) |
 | **Memory** | নেয় (একটি variable) | নেয় না (compile time text replace) |
 | **Scope** | Block scope (নিয়ন্ত্রিত) | File scope (সব জায়গায়) |
 | **Debugging** | সহজ (debugger এ দেখা যায়) | কঠিন (replace হয়ে যায়) |
-`### Literal Constants — পরীক্ষায় Trap!
-````c
+### Literal Constants — পরীক্ষায় Trap!
+```c
 /* ═══════════════════════════════════
    Integer Literals — বিভিন্ন base এ
    ═══════════════════════════════════ */
@@ -133,10 +133,10 @@ double g = 3.14;   /* ⚠️ Double literal — default! (NOT float!) */
 char ch = 'A';     /* Character literal — ASCII 65 */
 char nl = '\n';    /* Escape sequence — newline */
 ```
-`---
-`## 💻 1.4 Code Examples
-`### Example 1: sizeof Operator — প্রতিটি type এর size দেখা
-````c
+---
+## 💻 1.4 Code Examples
+### Example 1: sizeof Operator — প্রতিটি type এর size দেখা
+```c
 #include `stdio.h`
 `int main() {
     printf("╔═══════════════════════════════════╗\n");
@@ -153,8 +153,8 @@ char nl = '\n';    /* Escape sequence — newline */
 `    return 0;
 }
 ```
-`### Example 2: Overflow — কী হয় range ছাড়িয়ে গেলে?
-````c
+### Example 2: Overflow — কী হয় range ছাড়িয়ে গেলে?
+```c
 #include `stdio.h`
 `int main() {
     /* ═══════ signed char overflow ═══════ */
@@ -174,11 +174,11 @@ char nl = '\n';    /* Escape sequence — newline */
 `    return 0;
 \}
 ```
-`> **Overflow Rule:**
+> **Overflow Rule:**
 > - **signed** overflow → **negative** হয়ে যায় (wrap around)
 > - **unsigned** overflow → **0** থেকে আবার শুরু (circular)
-`### Example 3: #define Macro Trap — সবচেয়ে common mistake
-````c
+### Example 3: #define Macro Trap — সবচেয়ে common mistake
+```c
 #include `stdio.h`
 `#define SQUARE(x)    x * x          /* ❌ ভুল way! */
 #define SQUARE_OK(x) ((x) * (x))   /* ✅ সঠিক way! */
@@ -192,120 +192,120 @@ char nl = '\n';    /* Escape sequence — newline */
 `    return 0;
 \}
 ```
-`> **Rule:** `#define` macro তে parameter এর চারপাশে সবসময় **`((x))`** bracket দিন!
-`---
-`## ❓ 1.5 MCQ Problems with Solutions
-`---
-`**MCQ 1:** `sizeof(char)` এর value কত?
-`| Option | Answer |
+> **Rule:** `#define` macro তে parameter এর চারপাশে সবসময় **`((x))`** bracket দিন!
+---
+## ❓ 1.5 MCQ Problems with Solutions
+---
+**MCQ 1:** `sizeof(char)` এর value কত?
+| Option | Answer |
 |--------|--------|
 | (a) 0 | |
 | (b) **1** | ✅ |
 | (c) 2 | |
 | (d) Compiler dependent | |
-`> **ব্যাখ্যা:** C standard অনুযায়ী `sizeof(char)` সবসময় **1 byte** — এটি guaranteed। কোনো system এ এটি ভিন্ন হতে পারে না।
-`---
-`**MCQ 2:** নিচের কোডের output কী?
+> **ব্যাখ্যা:** C standard অনুযায়ী `sizeof(char)` সবসময় **1 byte** — এটি guaranteed। কোনো system এ এটি ভিন্ন হতে পারে না।
+---
+**MCQ 2:** নিচের কোডের output কী?
 ```c
 int x = 5.9;
 printf("%d", x);
 ```
-`| Option | Answer |
+| Option | Answer |
 |--------|--------|
 | (a) 5.9 | |
 | (b) 6 | |
 | (c) **5** | ✅ |
 | (d) Error | |
-`> **ব্যাখ্যা:** `5.9` (double) → `int` এ **implicit type casting** হয়। দশমিক অংশ **কেটে যায়** (truncation)। এটি **round হয় না** — 5.9 → 5, 5.1 → 5, 5.999 → 5।
-`---
-`**MCQ 3:** `unsigned char` এর range কত?
-`| Option | Answer |
+> **ব্যাখ্যা:** `5.9` (double) → `int` এ **implicit type casting** হয়। দশমিক অংশ **কেটে যায়** (truncation)। এটি **round হয় না** — 5.9 → 5, 5.1 → 5, 5.999 → 5।
+---
+**MCQ 3:** `unsigned char` এর range কত?
+| Option | Answer |
 |--------|--------|
 | (a) -128 to 127 | |
 | (b) 0 to 127 | |
 | (c) **0 to 255** | ✅ |
 | (d) 0 to 256 | |
-`> **ব্যাখ্যা:** 8 bit, unsigned → 0 to 2⁸-1 = **0 to 255**। signed char হলে -128 to 127 (option a)।
-`---
-`**MCQ 4:** নিচের কোডের output কী?
+> **ব্যাখ্যা:** 8 bit, unsigned → 0 to 2⁸-1 = **0 to 255**। signed char হলে -128 to 127 (option a)।
+---
+**MCQ 4:** নিচের কোডের output কী?
 ```c
 char c = 127;
 `c = c + 1;
 printf("%d", c);
 ```
-`| Option | Answer |
+| Option | Answer |
 |--------|--------|
 | (a) 128 | |
 | (b) **-128** | ✅ |
 | (c) 0 | |
 | (d) Undefined | |
-`> **ব্যাখ্যা:** char এর max = 127। +1 করলে **overflow** → -128 এ **wrap around**। এটি 2's complement system এর বৈশিষ্ট্য।
-`---
-`**MCQ 5:** নিচের কোডের output কী?
+> **ব্যাখ্যা:** char এর max = 127। +1 করলে **overflow** → -128 এ **wrap around**। এটি 2's complement system এর বৈশিষ্ট্য।
+---
+**MCQ 5:** নিচের কোডের output কী?
 ```c
 printf("%d", sizeof(3.14));
 ```
-`| Option | Answer |
+| Option | Answer |
 |--------|--------|
 | (a) 4 | |
 | (b) **8** | ✅ |
 | (c) 10 | |
 | (d) Error | |
-`> **ব্যাখ্যা:** `3.14` by default **double** literal (NOT float!)। `sizeof(double)` = **8 bytes**। float চাইলে `3.14f` লিখতে হবে — তখন `sizeof(3.14f)` = 4।
-`---
-`**MCQ 6:** `int a = 010;` — `a` এর value কত?
-`| Option | Answer |
+> **ব্যাখ্যা:** `3.14` by default **double** literal (NOT float!)। `sizeof(double)` = **8 bytes**। float চাইলে `3.14f` লিখতে হবে — তখন `sizeof(3.14f)` = 4।
+---
+**MCQ 6:** `int a = 010;` — `a` এর value কত?
+| Option | Answer |
 |--------|--------|
 | (a) 10 | |
 | (b) **8** | ✅ |
 | (c) 2 | |
 | (d) Error | |
-`> **ব্যাখ্যা:** `0` দিয়ে শুরু = **octal** number! `010` (octal) = 1×8 + 0×1 = **8** (decimal)। এটি পরীক্ষায় অত্যন্ত common trap!
-`---
-`**MCQ 7:** নিচের কোডের output কী?
+> **ব্যাখ্যা:** `0` দিয়ে শুরু = **octal** number! `010` (octal) = 1×8 + 0×1 = **8** (decimal)। এটি পরীক্ষায় অত্যন্ত common trap!
+---
+**MCQ 7:** নিচের কোডের output কী?
 ```c
 int a;
 printf("%d", a);
 ```
-`| Option | Answer |
+| Option | Answer |
 |--------|--------|
 | (a) 0 | |
 | (b) **Garbage value** | ✅ |
 | (c) Error | |
 | (d) NULL | |
-`> **ব্যাখ্যা:** **Local variable** initialize না করলে **garbage value** (memory তে আগে যা ছিল)। কিন্তু **global** বা **static** variable হলে default **0** হয়।
-`---
-`**MCQ 8:** `const int x = 10; x = 20;` — কী হবে?
-`| Option | Answer |
+> **ব্যাখ্যা:** **Local variable** initialize না করলে **garbage value** (memory তে আগে যা ছিল)। কিন্তু **global** বা **static** variable হলে default **0** হয়।
+---
+**MCQ 8:** `const int x = 10; x = 20;` — কী হবে?
+| Option | Answer |
 |--------|--------|
 | (a) x = 20 | |
 | (b) x = 10 | |
 | (c) **Compilation error** | ✅ |
 | (d) Runtime error | |
-`> **ব্যাখ্যা:** `const` variable এর value পরিবর্তন করার চেষ্টা করলে **compile time** এ error আসবে, runtime এ নয়।
-`---
-`**MCQ 9:** নিচের কোনটি valid variable name?
-`| Option | Answer |
+> **ব্যাখ্যা:** `const` variable এর value পরিবর্তন করার চেষ্টা করলে **compile time** এ error আসবে, runtime এ নয়।
+---
+**MCQ 9:** নিচের কোনটি valid variable name?
+| Option | Answer |
 |--------|--------|
 | (a) `2ndPlace` | |
 | (b) **`_result`** | ✅ |
 | (c) `my var` | |
 | (d) `int` | |
-`> **ব্যাখ্যা:** (a) সংখ্যা দিয়ে শুরু ❌, (c) space আছে ❌, (d) keyword ❌। শুধু (b) underscore দিয়ে শুরু — valid ✅।
-`---
-`**MCQ 10:** `#define` ও `const` এর মূল পার্থক্য কী?
-`| Option | Answer |
+> **ব্যাখ্যা:** (a) সংখ্যা দিয়ে শুরু ❌, (c) space আছে ❌, (d) keyword ❌। শুধু (b) underscore দিয়ে শুরু — valid ✅।
+---
+**MCQ 10:** `#define` ও `const` এর মূল পার্থক্য কী?
+| Option | Answer |
 |--------|--------|
 | (a) #define memory allocate করে | |
 | (b) **const type safe, #define type safe নয়** | ✅ |
 | (c) দুটো একই জিনিস | |
 | (d) const শুধু integer এ কাজ করে | |
-`> **ব্যাখ্যা:** `const` = variable, compiler **type checking** করে (safe)। `#define` = text replacement, কোনো type checking **নেই** (unsafe)।
-`---
-`## ✍️ 1.6 Written Problems with Solutions
-`---
-`### Problem 1: User Input — integer, float, char
-````c
+> **ব্যাখ্যা:** `const` = variable, compiler **type checking** করে (safe)। `#define` = text replacement, কোনো type checking **নেই** (unsafe)।
+---
+## ✍️ 1.6 Written Problems with Solutions
+---
+### Problem 1: User Input — integer, float, char
+```c
 #include `stdio.h`
 `int main() {
     int age;
@@ -327,9 +327,9 @@ printf("%d", a);
 `    return 0;
 \}
 ```
-`---
-`### Problem 2: Swap Without Third Variable
-````c
+---
+### Problem 2: Swap Without Third Variable
+```c
 #include `stdio.h`
 `int main() {
     int a = 10, b = 20;
@@ -347,9 +347,9 @@ printf("%d", a);
 `    return 0;
 \}
 ```
-`---
-`### Problem 3: Demonstrate Overflow Behavior
-````c
+---
+### Problem 3: Demonstrate Overflow Behavior
+```c
 #include `stdio.h`
 #include <limits.h>
 `int main() {
@@ -373,9 +373,9 @@ printf("%d", a);
 `    return 0;
 \}
 ```
-`---
-`## ⚠️ 1.7 Tricky Parts & Common Mistakes
-`| # | Trap | বিবরণ | Fix |
+---
+## ⚠️ 1.7 Tricky Parts & Common Mistakes
+| # | Trap | বিবরণ | Fix |
 |---|------|-------|-----|
 | 1 | **Octal literal** | `int x = 010;` → x = **8**, NOT 10! Leading `0` = octal | Octal না চাইলে leading 0 দেবেন না |
 | 2 | **Default = double** | `3.14` = double (8B), NOT float (4B)। `sizeof(3.14)` = **8** | Float চাইলে `3.14f` লিখুন |
@@ -387,30 +387,30 @@ printf("%d", a);
 | 8 | **sizeof array** | `int arr[10]; sizeof(arr)` = **40** bytes, NOT 4 | 40 / sizeof(int) = 10 elements |
 | 9 | **Hex literal** | `0xA` = 10, `0xFF` = 255, `0x10` = **16** (NOT 10!) | 0x prefix = hexadecimal |
 | 10 | **Escape in char** | `'\0'` = 0 (null), `'0'` = **48** (ASCII zero) | '\0' ≠ '0'! |
-`---
-`## 📝 1.8 Summary
-`> **প্রতিটি point মনোযোগ দিয়ে পড়ুন — exam এ এখান থেকেই প্রশ্ন হয়:**
-`- **`char`** = 1 byte (সবসময়), **`int`** = 4 bytes, **`float`** = 4 bytes, **`double`** = 8 bytes। এই size গুলো মুখস্থ রাখা **বাধ্যতামূলক** কারণ sizeof related প্রশ্ন প্রায় সব exam এ আসে।
-`- **`signed`** (default) ধনাত্মক ও ঋণাত্মক উভয় দিকে range দেয়; **`unsigned`** শুধু ধনাত্মক দিকে range **দ্বিগুণ** করে। `unsigned char` = 0 to 255, `signed char` = -128 to 127 — মোট value count (256) কিন্তু same!
-`- **Range মনে রাখার সূত্র:** n bit signed = **-2^(n-1) to 2^(n-1)-1**। এই একটি formula দিয়ে যেকোনো type এর range বের করা যায় — `char` (8 bit), `short` (16 bit), `int` (32 bit)।
-`- **Literal prefix** মনে রাখুন: `0` দিয়ে শুরু = **octal** (base 8), `0x` দিয়ে শুরু = **hexadecimal** (base 16), `0b` দিয়ে শুরু = **binary** (base 2)। `010` = 8 (decimal) — এটি সবচেয়ে common trap!
-`- **`3.14` by default `double`**, NOT float! `sizeof(3.14)` = **8**। float চাইলে `3.14f` suffix দিতে হবে — `sizeof(3.14f)` = **4**। এই পার্থক্য পরীক্ষায় প্রায়ই আসে।
-`- **`const`** হলো type-safe constant যা memory তে variable হিসেবে থাকে; **`#define`** হলো preprocessor text replacement যা compile time এ code এ paste হয়ে যায়। `const` ব্যবহার **বেশি নিরাপদ** কারণ compiler type checking করতে পারে।
-`- **Local variable** initialize না করলে **garbage value** থাকে (stack memory র random content); কিন্তু **global** বা **static** variable automatically **0** দিয়ে initialize হয়। এটি `auto` vs `static` storage class এর পার্থক্য।
-`- **Overflow** হলে value **wrap around** করে — signed variable এ positive overflow → **negative** হয়ে যায়, unsigned variable এ overflow → **0** থেকে আবার শুরু হয়। `char 127+1 = -128`, `unsigned char 255+1 = 0`।
-`- `scanf` এ **`" %c"`** — `%c` এর আগে **space character** না দিলে আগের input এর leftover **newline (`\n`)** character পড়ে ফেলে এবং user কে input দেওয়ার সুযোগ দেয় না। এটি beginners এর **সবচেয়ে common bug**।
-`- **Integer division** সবসময় দশমিক অংশ **কেটে ফেলে** (truncation, NOT rounding): `5/2 = 2`, `7/3 = 2`, `-7/2 = -3`। Float result পেতে **কমপক্ষে একটি operand** কে float/double এ **cast** করতে হবে: `(float)5/2 = 2.5`।
-`- `#define` **macro** তে parameter এর চারপাশে **bracket না দিলে** unexpected result আসে: `#define SQ(x) x*x` → `SQ(2+3)` = `2+3*2+3` = 11 (চাই 25!)। Fix: `#define SQ(x) ((x)*(x))`।
-`---
 ---
-`# Topic 2: Operators
-`<div align="center">
-`*"Operator বুঝলে expression বোঝা যায় — expression বুঝলে code পড়া যায়"*
-`</div>
-`---
-`## 📖 2.1 ধারণা (Concept)
-`Operator হলো **বিশেষ symbol** যা variable বা value এর উপর নির্দিষ্ট **operation** সম্পাদন করে। C তে **15 ধরনের** operator আছে।
-````
+## 📝 1.8 Summary
+> **প্রতিটি point মনোযোগ দিয়ে পড়ুন — exam এ এখান থেকেই প্রশ্ন হয়:**
+- **`char`** = 1 byte (সবসময়), **`int`** = 4 bytes, **`float`** = 4 bytes, **`double`** = 8 bytes। এই size গুলো মুখস্থ রাখা **বাধ্যতামূলক** কারণ sizeof related প্রশ্ন প্রায় সব exam এ আসে।
+- **`signed`** (default) ধনাত্মক ও ঋণাত্মক উভয় দিকে range দেয়; **`unsigned`** শুধু ধনাত্মক দিকে range **দ্বিগুণ** করে। `unsigned char` = 0 to 255, `signed char` = -128 to 127 — মোট value count (256) কিন্তু same!
+- **Range মনে রাখার সূত্র:** n bit signed = **-2^(n-1) to 2^(n-1)-1**। এই একটি formula দিয়ে যেকোনো type এর range বের করা যায় — `char` (8 bit), `short` (16 bit), `int` (32 bit)।
+- **Literal prefix** মনে রাখুন: `0` দিয়ে শুরু = **octal** (base 8), `0x` দিয়ে শুরু = **hexadecimal** (base 16), `0b` দিয়ে শুরু = **binary** (base 2)। `010` = 8 (decimal) — এটি সবচেয়ে common trap!
+- **`3.14` by default `double`**, NOT float! `sizeof(3.14)` = **8**। float চাইলে `3.14f` suffix দিতে হবে — `sizeof(3.14f)` = **4**। এই পার্থক্য পরীক্ষায় প্রায়ই আসে।
+- **`const`** হলো type-safe constant যা memory তে variable হিসেবে থাকে; **`#define`** হলো preprocessor text replacement যা compile time এ code এ paste হয়ে যায়। `const` ব্যবহার **বেশি নিরাপদ** কারণ compiler type checking করতে পারে।
+- **Local variable** initialize না করলে **garbage value** থাকে (stack memory র random content); কিন্তু **global** বা **static** variable automatically **0** দিয়ে initialize হয়। এটি `auto` vs `static` storage class এর পার্থক্য।
+- **Overflow** হলে value **wrap around** করে — signed variable এ positive overflow → **negative** হয়ে যায়, unsigned variable এ overflow → **0** থেকে আবার শুরু হয়। `char 127+1 = -128`, `unsigned char 255+1 = 0`।
+- `scanf` এ **`" %c"`** — `%c` এর আগে **space character** না দিলে আগের input এর leftover **newline (`\n`)** character পড়ে ফেলে এবং user কে input দেওয়ার সুযোগ দেয় না। এটি beginners এর **সবচেয়ে common bug**।
+- **Integer division** সবসময় দশমিক অংশ **কেটে ফেলে** (truncation, NOT rounding): `5/2 = 2`, `7/3 = 2`, `-7/2 = -3`। Float result পেতে **কমপক্ষে একটি operand** কে float/double এ **cast** করতে হবে: `(float)5/2 = 2.5`।
+- `#define` **macro** তে parameter এর চারপাশে **bracket না দিলে** unexpected result আসে: `#define SQ(x) x*x` → `SQ(2+3)` = `2+3*2+3` = 11 (চাই 25!)। Fix: `#define SQ(x) ((x)*(x))`।
+---
+---
+# Topic 2: Operators
+<div align="center">
+*"Operator বুঝলে expression বোঝা যায় — expression বুঝলে code পড়া যায়"*
+</div>
+---
+## 📖 2.1 ধারণা (Concept)
+Operator হলো **বিশেষ symbol** যা variable বা value এর উপর নির্দিষ্ট **operation** সম্পাদন করে। C তে **15 ধরনের** operator আছে।
+```
 Operators in C (Category-wise)
 ├── 1. Arithmetic          →  +   -   *   /   %
 ├── 2. Relational          →  ==  !=  >   <   >=  <=
@@ -424,9 +424,9 @@ Operators in C (Category-wise)
 ├── 10. Pointer            →  &   *
 └── 11. Member Access      →  .   ->
 ```
-`---
-`## 📖 2.2 Arithmetic Operators
-````c
+---
+## 📖 2.2 Arithmetic Operators
+```c
 #include `stdio.h`
 `int main() {
     int a = 17, b = 5;
@@ -442,11 +442,11 @@ Operators in C (Category-wise)
 `    return 0;
 }
 ```
-`> **Modulus (`%`) Rule:** sign সবসময় **left operand (dividend)** follow করে। `-7 % 2 = -1` (not +1)
-`---
-`## 📖 2.3 Short-Circuit Evaluation
-`> **এটি exam এর সবচেয়ে important topic — প্রায় প্রতিটি পরীক্ষায় আসে!**
-````c
+> **Modulus (`%`) Rule:** sign সবসময় **left operand (dividend)** follow করে। `-7 % 2 = -1` (not +1)
+---
+## 📖 2.3 Short-Circuit Evaluation
+> **এটি exam এর সবচেয়ে important topic — প্রায় প্রতিটি পরীক্ষায় আসে!**
+```c
 #include `stdio.h`
 `int main() {
     int a = 0, b = 5;
@@ -468,16 +468,16 @@ Operators in C (Category-wise)
 `    return 0;
 }
 ```
-````
+```
 Short-Circuit Summary:
 ━━━━━━━━━━━━━━━━━━━━━
 &&  →  LEFT = false  →  RIGHT completely SKIPPED  →  result = 0
 ||  →  LEFT = true   →  RIGHT completely SKIPPED  →  result = 1
-`⚠️ Side effects (++, --, function call) ডানদিকে থাকলে execute নাও হতে পারে!
+⚠️ Side effects (++, --, function call) ডানদিকে থাকলে execute নাও হতে পারে!
 ```
-`---
-`## 📖 2.4 Increment/Decrement — সবচেয়ে Tricky
-````c
+---
+## 📖 2.4 Increment/Decrement — সবচেয়ে Tricky
+```c
 #include `stdio.h`
 `int main() {
     int a = 5;
@@ -495,15 +495,15 @@ Short-Circuit Summary:
 `    return 0;
 }
 ```
-````
+```
 মনে রাখার কৌশল:
 ━━━━━━━━━━━━━━━━━
 ++a  →  "PRE  = আগে বাড়াও"  →  new value ব্যবহার হয়
 a++  →  "POST = পরে বাড়াও"   →  old value ব্যবহার হয়
 ```
-`---
-`## 📖 2.5 Operator Precedence Table
-````
+---
+## 📖 2.5 Operator Precedence Table
+```
 Precedence (High → Low):
 ═══════════════════════════════════════════════════════════
  1.   ()  []  ->  .                        Postfix
@@ -523,99 +523,99 @@ Precedence (High → Low):
 15.   ,                                    Comma
 ═══════════════════════════════════════════════════════════
 ```
-`> **মনে রাখার কৌশল:** "**U**nary **M**ultiply **A**dd **S**hift — **R**elate **E**qual — **B**it **A**nd **X**or **O**r — **L**ogic **T**ernary **A**ssign **C**omma"
-`---
-`## ❓ 2.6 MCQ Problems
-`---
-`**MCQ 1:** `5 + 3 * 2` এর value কত?
-`| Option | Answer |
+> **মনে রাখার কৌশল:** "**U**nary **M**ultiply **A**dd **S**hift — **R**elate **E**qual — **B**it **A**nd **X**or **O**r — **L**ogic **T**ernary **A**ssign **C**omma"
+---
+## ❓ 2.6 MCQ Problems
+---
+**MCQ 1:** `5 + 3 * 2` এর value কত?
+| Option | Answer |
 |--------|--------|
 | (a) 16 | |
 | (b) **11** | ✅ |
 | (c) 10 | |
 | (d) 13 | |
-`> **ব্যাখ্যা:** `*` precedence `+` এর চেয়ে বেশি। 3×2=6, তারপর 5+6=**11**
-`---
-`**MCQ 2:** নিচের কোডের output কী?
+> **ব্যাখ্যা:** `*` precedence `+` এর চেয়ে বেশি। 3×2=6, তারপর 5+6=**11**
+---
+**MCQ 2:** নিচের কোডের output কী?
 ```c
 int a = 0, b = 10;
 int c = a && ++b;
 printf("%d %d", b, c);
 ```
-`| Option | Answer |
+| Option | Answer |
 |--------|--------|
 | (a) 11 0 | |
 | (b) **10 0** | ✅ |
 | (c) 11 1 | |
 | (d) 10 1 | |
-`> **ব্যাখ্যা:** **Short-circuit!** a=0 (false) → `&&` এর ডানদিক (`++b`) সম্পূর্ণ **skip**! b = 10 (unchanged), c = 0
-`---
-`**MCQ 3:** `int x = (2, 3, 4);` — x এর value?
-`| Option | Answer |
+> **ব্যাখ্যা:** **Short-circuit!** a=0 (false) → `&&` এর ডানদিক (`++b`) সম্পূর্ণ **skip**! b = 10 (unchanged), c = 0
+---
+**MCQ 3:** `int x = (2, 3, 4);` — x এর value?
+| Option | Answer |
 |--------|--------|
 | (a) 2 | |
 | (b) 3 | |
 | (c) **4** | ✅ |
 | (d) Error | |
-`> **ব্যাখ্যা:** Comma operator **সবশেষ expression এর value** return করে। (2, 3, 4) → **4**
-`---
-`**MCQ 4:** `-7 % 2` এর value কত?
-`| Option | Answer |
+> **ব্যাখ্যা:** Comma operator **সবশেষ expression এর value** return করে। (2, 3, 4) → **4**
+---
+**MCQ 4:** `-7 % 2` এর value কত?
+| Option | Answer |
 |--------|--------|
 | (a) 1 | |
 | (b) **-1** | ✅ |
 | (c) 0 | |
 | (d) -2 | |
-`> **ব্যাখ্যা:** Modulus sign **left operand (dividend)** follow করে। -7 negative → result = **-1**
-`---
-`**MCQ 5:** `12 & 10` এর value কত?
-`| Option | Answer |
+> **ব্যাখ্যা:** Modulus sign **left operand (dividend)** follow করে। -7 negative → result = **-1**
+---
+**MCQ 5:** `12 & 10` এর value কত?
+| Option | Answer |
 |--------|--------|
 | (a) **8** | ✅ |
 | (b) 14 | |
 | (c) 6 | |
 | (d) 2 | |
-`> **ব্যাখ্যা:** 12=`1100`, 10=`1010`, AND=`1000`=**8**
-`---
-`**MCQ 6:** `5 << 2` এর value কত?
-`| Option | Answer |
+> **ব্যাখ্যা:** 12=`1100`, 10=`1010`, AND=`1000`=**8**
+---
+**MCQ 6:** `5 << 2` এর value কত?
+| Option | Answer |
 |--------|--------|
 | (a) 10 | |
 | (b) **20** | ✅ |
 | (c) 2 | |
 | (d) 7 | |
-`> **ব্যাখ্যা:** Left shift 2 = ×2² = ×4। 5 × 4 = **20**। Rule: `a << n` = a × 2ⁿ
-`---
-`**MCQ 7:** নিচের কোডের output কী?
+> **ব্যাখ্যা:** Left shift 2 = ×2² = ×4। 5 × 4 = **20**। Rule: `a << n` = a × 2ⁿ
+---
+**MCQ 7:** নিচের কোডের output কী?
 ```c
 int a = 5;
 printf("%d", a++);
 printf(" %d", a);
 ```
-`| Option | Answer |
+| Option | Answer |
 |--------|--------|
 | (a) **5 6** | ✅ |
 | (b) 6 6 | |
 | (c) 5 5 | |
 | (d) 6 7 | |
-`> **ব্যাখ্যা:** প্রথম printf: post-increment → আগে **5** print, তারপর a=6। দ্বিতীয় printf: a=**6**।
-`---
-`**MCQ 8:** নিচের কোডের output কী?
+> **ব্যাখ্যা:** প্রথম printf: post-increment → আগে **5** print, তারপর a=6। দ্বিতীয় printf: a=**6**।
+---
+**MCQ 8:** নিচের কোডের output কী?
 ```c
 printf("%d", !0);
 printf(" %d", !5);
 printf(" %d", !!5);
 ```
-`| Option | Answer |
+| Option | Answer |
 |--------|--------|
 | (a) 0 5 5 | |
 | (b) 1 0 5 | |
 | (c) **1 0 1** | ✅ |
 | (d) 0 1 0 | |
-`> **ব্যাখ্যা:** `!0`=1 (NOT false=true), `!5`=0 (NOT true=false), `!!5`=!0=**1**
-`---
-`## ⚠️ 2.7 Tricky Parts
-`| # | Trap | বিবরণ | Fix |
+> **ব্যাখ্যা:** `!0`=1 (NOT false=true), `!5`=0 (NOT true=false), `!!5`=!0=**1**
+---
+## ⚠️ 2.7 Tricky Parts
+| # | Trap | বিবরণ | Fix |
 |---|------|-------|-----|
 | 1 | **= vs ==** | `if(a=5)` = Assignment, always true! | `if(5==a)` লিখলে ভুলে `=` দিলে error |
 | 2 | **Short-circuit** | `(0) && (++x)` → x বাড়বে না! | Side effect short-circuit এ skip হয় |
@@ -624,27 +624,27 @@ printf(" %d", !!5);
 | 5 | **== > &** | `a & b == c` = `a & (b==c)` | `(a & b) == c` bracket দিন |
 | 6 | **UB** | `x++ + ++x` = **Undefined Behavior!** | একই expression এ double modify এড়িয়ে চলুন |
 | 7 | **~x formula** | `~x = -(x+1)` | `~0`=-1, `~5`=-6, `~(-1)`=0 |
-`---
-`## 📝 2.8 Summary
-`- **Arithmetic operator `%` (modulus)** এর result এর sign সবসময় **left operand (dividend)** এর sign follow করে। `-7 % 2 = -1`, `7 % -2 = +1`। এটি জানা না থাকলে পরীক্ষায় ভুল হওয়া নিশ্চিত।
-`- **Relational operator** এর result C তে সবসময় **integer** — true = **1** (বা যেকোনো non-zero), false = **0**। C তে `bool` type নেই (C99 এ `_Bool` আছে তবে exam এ `int` হিসেবেই আসে)।
-`- **Short-circuit evaluation** হলো `&&` ও `||` এর সবচেয়ে গুরুত্বপূর্ণ বৈশিষ্ট্য: `&&` এ left side **false** হলে right side **execute হয় না**; `||` এ left side **true** হলে right side **execute হয় না**। যদি right side এ `++`, `--`, বা function call থাকে — সেগুলোও **skip** হয়ে যায়!
-`- **Pre-increment (`++a`)** আগে value বাড়ায়, তারপর ব্যবহার করে — **new value** return করে। **Post-increment (`a++`)** আগে ব্যবহার করে, তারপর বাড়ায় — **old value** return করে। মনে রাখুন: **PRE = আগে, POST = পরে**।
-`- **Ternary operator** (`condition ? true_val : false_val`) হলো if-else এর **compact version**। `max = (a > b) ? a : b;` — এক লাইনে max বের করা যায়।
-`- **Comma operator** বাম থেকে ডানে সব expression evaluate করে, কিন্তু **শেষেরটার value** return করে। তবে `=` operator এর চেয়ে precedence **কম**, তাই `a = 5, 10` → a = **5** (5 আগে assign হয়)।
-`- **`=` vs `==`** হলো C programming এর **সবচেয়ে common mistake**। `if(a = 5)` সবসময় true (a তে 5 assign হয়, 5 = non-zero = true)। Fix: `if(5 == a)` লিখুন — ভুলে `=` দিলে compiler error দেবে।
-`- **Bitwise `&`** vs **Logical `&&`** সম্পূর্ণ আলাদা operator! `6 & 3 = 2` (bit-level AND: 110 & 011 = 010), কিন্তু `6 && 3 = 1` (boolean: true AND true = true)। Exam এ confuse করার জন্য এই দুটো পাশাপাশি আসে।
-`- **`==` এর precedence `&` এর চেয়ে বেশি**, তাই `a & b == c` parse হয় `a & (b == c)` হিসেবে — `(a & b) == c` নয়! Bitwise operation এ সবসময় **explicit bracket** ব্যবহার করুন।
-`---
 ---
-`# Topic 3: Format Specifiers & printf/scanf Tricks
-`<div align="center">
-`*"printf ও scanf এর ১০টি trick জানলে exam এর ১০টি প্রশ্ন কমন পড়বে"*
-`</div>
-`---
-`## 📖 3.1 ধারণা (Concept)
-`Format specifier হলো `printf()` ও `scanf()` এ ব্যবহৃত বিশেষ code যা বলে দেয় **কোন type** এর data **কিভাবে format** করে input/output হবে।
-````
+## 📝 2.8 Summary
+- **Arithmetic operator `%` (modulus)** এর result এর sign সবসময় **left operand (dividend)** এর sign follow করে। `-7 % 2 = -1`, `7 % -2 = +1`। এটি জানা না থাকলে পরীক্ষায় ভুল হওয়া নিশ্চিত।
+- **Relational operator** এর result C তে সবসময় **integer** — true = **1** (বা যেকোনো non-zero), false = **0**। C তে `bool` type নেই (C99 এ `_Bool` আছে তবে exam এ `int` হিসেবেই আসে)।
+- **Short-circuit evaluation** হলো `&&` ও `||` এর সবচেয়ে গুরুত্বপূর্ণ বৈশিষ্ট্য: `&&` এ left side **false** হলে right side **execute হয় না**; `||` এ left side **true** হলে right side **execute হয় না**। যদি right side এ `++`, `--`, বা function call থাকে — সেগুলোও **skip** হয়ে যায়!
+- **Pre-increment (`++a`)** আগে value বাড়ায়, তারপর ব্যবহার করে — **new value** return করে। **Post-increment (`a++`)** আগে ব্যবহার করে, তারপর বাড়ায় — **old value** return করে। মনে রাখুন: **PRE = আগে, POST = পরে**।
+- **Ternary operator** (`condition ? true_val : false_val`) হলো if-else এর **compact version**। `max = (a > b) ? a : b;` — এক লাইনে max বের করা যায়।
+- **Comma operator** বাম থেকে ডানে সব expression evaluate করে, কিন্তু **শেষেরটার value** return করে। তবে `=` operator এর চেয়ে precedence **কম**, তাই `a = 5, 10` → a = **5** (5 আগে assign হয়)।
+- **`=` vs `==`** হলো C programming এর **সবচেয়ে common mistake**। `if(a = 5)` সবসময় true (a তে 5 assign হয়, 5 = non-zero = true)। Fix: `if(5 == a)` লিখুন — ভুলে `=` দিলে compiler error দেবে।
+- **Bitwise `&`** vs **Logical `&&`** সম্পূর্ণ আলাদা operator! `6 & 3 = 2` (bit-level AND: 110 & 011 = 010), কিন্তু `6 && 3 = 1` (boolean: true AND true = true)। Exam এ confuse করার জন্য এই দুটো পাশাপাশি আসে।
+- **`==` এর precedence `&` এর চেয়ে বেশি**, তাই `a & b == c` parse হয় `a & (b == c)` হিসেবে — `(a & b) == c` নয়! Bitwise operation এ সবসময় **explicit bracket** ব্যবহার করুন।
+---
+---
+# Topic 3: Format Specifiers & printf/scanf Tricks
+<div align="center">
+*"printf ও scanf এর ১০টি trick জানলে exam এর ১০টি প্রশ্ন কমন পড়বে"*
+</div>
+---
+## 📖 3.1 ধারণা (Concept)
+Format specifier হলো `printf()` ও `scanf()` এ ব্যবহৃত বিশেষ code যা বলে দেয় **কোন type** এর data **কিভাবে format** করে input/output হবে।
+```
 Format Specifier Structure:
 ═══════════════════════════
 % [flags] [width] [.precision] [length] specifier
@@ -655,8 +655,8 @@ width    → minimum field width
 length   → h, l, ll, L
 specifier → d, f, c, s, x, o, etc.
 ```
-`### Complete Specifier Table
-````
+### Complete Specifier Table
+```
 ┌────────────┬───────────────────────────┬────────────────────────┐
 │ Specifier  │ ব্যবহার                   │ Example                │
 ├────────────┼───────────────────────────┼────────────────────────┤
@@ -676,9 +676,9 @@ specifier → d, f, c, s, x, o, etc.
 │ %%         │ literal % sign            │ 100%                   │
 └────────────┴───────────────────────────┴────────────────────────┘
 ```
-`---
-`## 💻 3.2 printf() Formatting — Width, Flags, Precision
-````c
+---
+## 💻 3.2 printf() Formatting — Width, Flags, Precision
+```c
 #include `stdio.h`
 `int main() {
     /* ═══════ Width (minimum field width) ═══════ */
@@ -702,10 +702,10 @@ specifier → d, f, c, s, x, o, etc.
 `    return 0;
 }
 ```
-`---
-`## 💻 3.3 printf() Return Value — Nested printf
-`> **Exam favourite! প্রায় প্রতিটি পরীক্ষায় nested printf আসে।**
-````c
+---
+## 💻 3.3 printf() Return Value — Nested printf
+> **Exam favourite! প্রায় প্রতিটি পরীক্ষায় nested printf আসে।**
+```c
 #include `stdio.h`
 `int main() {
     /* ══════════════════════════════════════════════
@@ -735,9 +735,9 @@ specifier → d, f, c, s, x, o, etc.
 `    return 0;
 }
 ```
-`---
-`## 💻 3.4 scanf() — Input Methods Comparison
-````c
+---
+## 💻 3.4 scanf() — Input Methods Comparison
+```c
 #include `stdio.h`
 #include `string.h`
 `int main() {
@@ -765,7 +765,7 @@ specifier → d, f, c, s, x, o, etc.
 `    return 0;
 }
 ```
-````
+```
 Input Methods Comparison:
 ┌──────────────┬──────────┬──────────┬──────────────┐
 │ Method       │ Spaces?  │ Safe?    │ '\n' in str? │
@@ -776,87 +776,87 @@ Input Methods Comparison:
 │ gets()       │ ✅ reads │ ❌ NEVER! │ ❌ no       │
 │ scanf scanset│ ✅ reads │ ⚠️ no limit│ ❌ no       │
 └──────────────┴──────────┴──────────┴──────────────┘
-`⚡ Best practice: fgets() + remove '\n'
+⚡ Best practice: fgets() + remove '\n'
 ```
-`---
-`## ❓ 3.5 MCQ Problems
-`---
-`**MCQ 1:** `printf("%d", printf("Hello"))` এর output?
-`| Option | Answer |
+---
+## ❓ 3.5 MCQ Problems
+---
+**MCQ 1:** `printf("%d", printf("Hello"))` এর output?
+| Option | Answer |
 |--------|--------|
 | (a) **Hello5** | ✅ |
 | (b) 5Hello | |
 | (c) Hello | |
 | (d) 5 | |
-`> Inner printf prints **"Hello"** (returns 5), outer prints **"5"**. Output: **Hello5**
-`---
-`**MCQ 2:** `printf("%.2f", 3.14659)` এর output?
-`| Option | Answer |
+> Inner printf prints **"Hello"** (returns 5), outer prints **"5"**. Output: **Hello5**
+---
+**MCQ 2:** `printf("%.2f", 3.14659)` এর output?
+| Option | Answer |
 |--------|--------|
 | (a) 3.14 | |
 | (b) **3.15** | ✅ |
 | (c) 3.14659 | |
 | (d) 3.1 | |
-`> `.2f` = 2 decimal places। 3.14**6**59 → 6≥5 তাই round up → **3.15**
-`---
-`**MCQ 3:** `printf("%c", 65)` এর output?
-`| Option | Answer |
+> `.2f` = 2 decimal places। 3.14**6**59 → 6≥5 তাই round up → **3.15**
+---
+**MCQ 3:** `printf("%c", 65)` এর output?
+| Option | Answer |
 |--------|--------|
 | (a) 65 | |
 | (b) **A** | ✅ |
 | (c) Error | |
 | (d) 6 | |
-`> `%c` = character format। ASCII 65 = **'A'**
-`---
-`**MCQ 4:** `printf("%%d", 10)` এর output?
-`| Option | Answer |
+> `%c` = character format। ASCII 65 = **'A'**
+---
+**MCQ 4:** `printf("%%d", 10)` এর output?
+| Option | Answer |
 |--------|--------|
 | (a) 10 | |
 | (b) **%d** | ✅ |
 | (c) %10 | |
 | (d) Error | |
-`> `%%` = literal **%** print → output: **%d**। 10 ignored হয়ে যায়।
-`---
-`**MCQ 5:** নিচের কোডে কী হবে?
+> `%%` = literal **%** print → output: **%d**। 10 ignored হয়ে যায়।
+---
+**MCQ 5:** নিচের কোডে কী হবে?
 ```c
 float f = 3.14;
 printf("%d", f);
 ```
-`| Option | Answer |
+| Option | Answer |
 |--------|--------|
 | (a) 3 | |
 | (b) 3.14 | |
 | (c) **Garbage (UB)** | ✅ |
 | (d) Error | |
-`> **`%d` with float = Undefined Behavior!** Format specifier ও data type মিলতে হবে। `%d` expects int, কিন্তু float পেয়েছে — result = garbage!
-`---
-`**MCQ 6:** `scanf()` কী return করে?
-`| Option | Answer |
+> **`%d` with float = Undefined Behavior!** Format specifier ও data type মিলতে হবে। `%d` expects int, কিন্তু float পেয়েছে — result = garbage!
+---
+**MCQ 6:** `scanf()` কী return করে?
+| Option | Answer |
 |--------|--------|
 | (a) 0 always | |
 | (b) 1 always | |
 | (c) **Successfully read items এর সংখ্যা** | ✅ |
 | (d) Input string length | |
-`> `scanf("%d %d", &a, &b)` — দুটো successfully read হলে **2** return করে। একটিও fail হলে 0 বা EOF।
-`---
-`## 📝 3.6 Summary
-`- **`%d`**=int, **`%f`**=float/double(printf), **`%lf`**=double(**scanf only!**), **`%c`**=char, **`%s`**=string, **`%%`**=literal %। scanf এ double পড়তে **`%lf`** বাধ্যতামূলক, কিন্তু printf এ `%f` ই কাজ করে (double automatically promote হয়)।
-`- **printf() returns** মোট কতটি **character print** হয়েছে সেই সংখ্যা। nested printf এ **inside-out** evaluate হয় — inner printf আগে execute হয়, তার return value outer printf এ যায়। `printf("%d", printf("Hello"))` → **Hello5**
-`- **scanf() returns** successfully read হওয়া item এর **count**। Input validation এ খুবই useful: `if(scanf("%d", &n) != 1)` → invalid input handle।
-`- **`%f` default 6 decimal places** দেখায়: `printf("%f", 3.14)` → **3.140000** (NOT 3.14!)। নির্দিষ্ট decimal চাইলে precision দিন: `%.2f` → 3.14
-`- **scanf(" %c")** — `%c` এর আগে **space** দেওয়া **বাধ্যতামূলক** যদি আগে কোনো scanf থাকে। কারণ আগের input এর leftover `\n` character buffer এ থেকে যায় এবং `%c` সেটা পড়ে ফেলে — user কে input দেওয়ার সুযোগ দেয় না।
-`- **scanf("%s")** whitespace (space, tab, newline) পেলেই **থেমে যায়**। "John Doe" input দিলে শুধু "John" পড়ে। Full line পড়তে **fgets()** ব্যবহার করুন — তবে fgets শেষে **`\n` include** করে, সেটা remove করতে হবে।
-`- **Format mismatch = Undefined Behavior:** `printf("%d", 3.14f)` → **garbage!** `printf("%f", 5)` → **garbage!** Specifier ও data type অবশ্যই match করতে হবে।
-`---
+> `scanf("%d %d", &a, &b)` — দুটো successfully read হলে **2** return করে। একটিও fail হলে 0 বা EOF।
 ---
-`# Topic 4: Type Casting (Implicit & Explicit)
-`<div align="center">
-`*"Type casting না বুঝলে expression evaluation কখনো সঠিক হবে না"*
-`</div>
-`---
-`## 📖 4.1 ধারণা (Concept)
-`Type casting হলো এক **data type** থেকে অন্য **data type** এ রূপান্তর। C তে দুই ধরনের casting:
-````
+## 📝 3.6 Summary
+- **`%d`**=int, **`%f`**=float/double(printf), **`%lf`**=double(**scanf only!**), **`%c`**=char, **`%s`**=string, **`%%`**=literal %। scanf এ double পড়তে **`%lf`** বাধ্যতামূলক, কিন্তু printf এ `%f` ই কাজ করে (double automatically promote হয়)।
+- **printf() returns** মোট কতটি **character print** হয়েছে সেই সংখ্যা। nested printf এ **inside-out** evaluate হয় — inner printf আগে execute হয়, তার return value outer printf এ যায়। `printf("%d", printf("Hello"))` → **Hello5**
+- **scanf() returns** successfully read হওয়া item এর **count**। Input validation এ খুবই useful: `if(scanf("%d", &n) != 1)` → invalid input handle।
+- **`%f` default 6 decimal places** দেখায়: `printf("%f", 3.14)` → **3.140000** (NOT 3.14!)। নির্দিষ্ট decimal চাইলে precision দিন: `%.2f` → 3.14
+- **scanf(" %c")** — `%c` এর আগে **space** দেওয়া **বাধ্যতামূলক** যদি আগে কোনো scanf থাকে। কারণ আগের input এর leftover `\n` character buffer এ থেকে যায় এবং `%c` সেটা পড়ে ফেলে — user কে input দেওয়ার সুযোগ দেয় না।
+- **scanf("%s")** whitespace (space, tab, newline) পেলেই **থেমে যায়**। "John Doe" input দিলে শুধু "John" পড়ে। Full line পড়তে **fgets()** ব্যবহার করুন — তবে fgets শেষে **`\n` include** করে, সেটা remove করতে হবে।
+- **Format mismatch = Undefined Behavior:** `printf("%d", 3.14f)` → **garbage!** `printf("%f", 5)` → **garbage!** Specifier ও data type অবশ্যই match করতে হবে।
+---
+---
+# Topic 4: Type Casting (Implicit & Explicit)
+<div align="center">
+*"Type casting না বুঝলে expression evaluation কখনো সঠিক হবে না"*
+</div>
+---
+## 📖 4.1 ধারণা (Concept)
+Type casting হলো এক **data type** থেকে অন্য **data type** এ রূপান্তর। C তে দুই ধরনের casting:
+```
 Type Casting
 ├── Implicit (Automatic)
 │   └── Compiler নিজে করে — ছোট type → বড় type (safe)
@@ -864,16 +864,16 @@ Type Casting
 └── Explicit (Manual)
     └── Programmer নিজে করে — (target_type) expression
 ```
-`### Promotion Hierarchy
-````
-ছোট ──────────────────────────────────────────────────→ বড়
-`char → short → int → unsigned int → long → long long
-                                         → float → double → long double
-`⚡ Mixed expression এ ছোট type → বড় type এ PROMOTE হয়
+### Promotion Hierarchy
 ```
-`---
-`## 💻 4.2 Implicit Casting — Compiler নিজে করে
-````c
+ছোট ──────────────────────────────────────────────────→ বড়
+char → short → int → unsigned int → long → long long
+                                         → float → double → long double
+⚡ Mixed expression এ ছোট type → বড় type এ PROMOTE হয়
+```
+---
+## 💻 4.2 Implicit Casting — Compiler নিজে করে
+```c
 #include `stdio.h`
 `int main() {
     /* ══════ Case 1: int + float → float ══════ */
@@ -896,9 +896,9 @@ Type Casting
 `    return 0;
 }
 ```
-`---
-`## 💻 4.3 Explicit Casting — Cast Position Critical!
-````c
+---
+## 💻 4.3 Explicit Casting — Cast Position Critical!
+```c
 #include `stdio.h`
 `int main() {
     int a = 7, b = 2;
@@ -922,10 +922,10 @@ Type Casting
 `    return 0;
 \}
 ```
-`> **Golden Rule:** `(float)(a/b)` ≠ `(float)a/b`! Cast এর **position** result সম্পূর্ণ বদলে দেয়।
-`---
-`## 💻 4.4 signed vs unsigned — Most Dangerous Trap!
-````c
+> **Golden Rule:** `(float)(a/b)` ≠ `(float)a/b`! Cast এর **position** result সম্পূর্ণ বদলে দেয়।
+---
+## 💻 4.4 signed vs unsigned — Most Dangerous Trap!
+```c
 #include `stdio.h`
 `int main() {
     /* ═══════ signed vs unsigned comparison ═══════ */
@@ -942,74 +942,74 @@ Type Casting
 `    return 0;
 }
 ```
-`> **Critical Rule:** `signed + unsigned` comparison → signed variable **unsigned এ convert** হয়! `-1` → `4294967295` হয়ে যায়! তাই `-1 < 1u` = **FALSE!**
-`---
-`## ❓ 4.5 MCQ Problems
-`---
-`**MCQ 1:** `float c = 5 / 2;` — c এর value?
-`| Option | Answer |
+> **Critical Rule:** `signed + unsigned` comparison → signed variable **unsigned এ convert** হয়! `-1` → `4294967295` হয়ে যায়! তাই `-1 < 1u` = **FALSE!**
+---
+## ❓ 4.5 MCQ Problems
+---
+**MCQ 1:** `float c = 5 / 2;` — c এর value?
+| Option | Answer |
 |--------|--------|
 | (a) 2.5 | |
 | (b) **2.0** | ✅ |
 | (c) 3.0 | |
 | (d) Error | |
-`> `5/2` = **int/int = 2** (int division!)। তারপর 2 → **2.0** (float এ assign)
-`---
-`**MCQ 2:** `(int)3.9 + (int)3.1` এর value?
-`| Option | Answer |
+> `5/2` = **int/int = 2** (int division!)। তারপর 2 → **2.0** (float এ assign)
+---
+**MCQ 2:** `(int)3.9 + (int)3.1` এর value?
+| Option | Answer |
 |--------|--------|
 | (a) 7 | |
 | (b) **6** | ✅ |
 | (c) 7.0 | |
 | (d) Error | |
-`> `(int)3.9`=**3**, `(int)3.1`=**3**। 3+3 = **6**। Truncation, NOT rounding!
-`---
-`**MCQ 3:** `sizeof('A')` C তে কত?
-`| Option | Answer |
+> `(int)3.9`=**3**, `(int)3.1`=**3**। 3+3 = **6**। Truncation, NOT rounding!
+---
+**MCQ 3:** `sizeof('A')` C তে কত?
+| Option | Answer |
 |--------|--------|
 | (a) 1 | |
 | (b) 2 | |
 | (c) **4** | ✅ |
 | (d) 8 | |
-`> C তে character constant **int** type! `sizeof('A')` = `sizeof(int)` = **4**। (C++ এ 1 হতো — exam trap!)
-`---
-`**MCQ 4:** `-1 > 1u` — result?
-`| Option | Answer |
+> C তে character constant **int** type! `sizeof('A')` = `sizeof(int)` = **4**। (C++ এ 1 হতো — exam trap!)
+---
+**MCQ 4:** `-1 > 1u` — result?
+| Option | Answer |
 |--------|--------|
 | (a) 0 (false) | |
 | (b) **1 (true)** | ✅ |
 | (c) Error | |
 | (d) -1 | |
-`> -1 → unsigned → **4294967295** > 1 = **true!** সবচেয়ে dangerous trap।
-`---
-`**MCQ 5:** `int big = 300; char small = big;` — small এর value?
-`| Option | Answer |
+> -1 → unsigned → **4294967295** > 1 = **true!** সবচেয়ে dangerous trap।
+---
+**MCQ 5:** `int big = 300; char small = big;` — small এর value?
+| Option | Answer |
 |--------|--------|
 | (a) 300 | |
 | (b) **44** | ✅ |
 | (c) 0 | |
 | (d) Error | |
-`> char = 1 byte = 256 values। 300 % 256 = **44** (overflow wrap)
-`---
-`## 📝 4.6 Summary
-`- **Implicit casting** compiler **automatically** করে: ছোট type → বড় type (safe, widening)। **Explicit casting** programmer করে: `(type)expression` — যেকোনো direction এ force convert।
-`- C expression এ **char ও short** automatically **int** এ **promote** হয়। `char a = 10, b = 20; sizeof(a+b)` = **4** (int!), 1 নয়। এটি "integer promotion" rule — exam এ আসে।
-`- **int / int = int** — দশমিক অংশ **সম্পূর্ণ কেটে যায়**! `7/2 = 3` (not 3.5!)। Float result পেতে কমপক্ষে **একটি operand** কে cast করুন: `(float)7/2 = 3.5`।
-`- **`(float)(a/b)`** ≠ **`(float)a/b`** — cast এর **position** result সম্পূর্ণ বদলে দেয়! প্রথমটিতে int division **আগে** হয়ে যায় (3), তারপর cast হয় (3.0)। দ্বিতীয়টিতে cast **আগে** হয় (7.0), তারপর float division (3.5)।
-`- **Truncation toward zero:** `(int)3.9` = **3** (NOT 4!), `(int)-3.7` = **-3** (NOT -4!)। Truncation **round নয়** — শুধু দশমিক অংশ কেটে ফেলে, zero এর দিকে যায়।
-`- **signed vs unsigned comparison** হলো C এর **সবচেয়ে dangerous trap**: `-1 < 1u` = **FALSE!** কারণ signed -1 → unsigned convert হয়ে **4294967295** (UINT_MAX) হয়ে যায়। সবসময় **same type** এ compare করুন।
-`- **`sizeof('A')`** = **4** in C কারণ character constant এর type **int**। কিন্তু C++ এ `sizeof('A')` = **1** কারণ সেখানে type **char**। পরীক্ষায় C vs C++ confusion এর জন্য এই প্রশ্ন আসে।
-`- **float** precision ~ **7 significant digits**, **double** ~ **15 significant digits**। বড় integer (যেমন 123456789) float এ রাখলে **precision loss** হবে: `float f = 123456789;` → `123456792.0` (ভুল!)।
-`---
+> char = 1 byte = 256 values। 300 % 256 = **44** (overflow wrap)
 ---
-`# Topic 5: Conditional Statements
-`<div align="center">
-`*"if-else ও switch সঠিকভাবে না বুঝলে logic build করা অসম্ভব"*
-`</div>
-`---
-`## 📖 5.1 ধারণা (Concept)
-`Conditional statement প্রোগ্রামকে **সিদ্ধান্ত নিতে** সাহায্য করে — কোন condition সত্য হলে কোন code block execute হবে।
-````
+## 📝 4.6 Summary
+- **Implicit casting** compiler **automatically** করে: ছোট type → বড় type (safe, widening)। **Explicit casting** programmer করে: `(type)expression` — যেকোনো direction এ force convert।
+- C expression এ **char ও short** automatically **int** এ **promote** হয়। `char a = 10, b = 20; sizeof(a+b)` = **4** (int!), 1 নয়। এটি "integer promotion" rule — exam এ আসে।
+- **int / int = int** — দশমিক অংশ **সম্পূর্ণ কেটে যায়**! `7/2 = 3` (not 3.5!)। Float result পেতে কমপক্ষে **একটি operand** কে cast করুন: `(float)7/2 = 3.5`।
+- **`(float)(a/b)`** ≠ **`(float)a/b`** — cast এর **position** result সম্পূর্ণ বদলে দেয়! প্রথমটিতে int division **আগে** হয়ে যায় (3), তারপর cast হয় (3.0)। দ্বিতীয়টিতে cast **আগে** হয় (7.0), তারপর float division (3.5)।
+- **Truncation toward zero:** `(int)3.9` = **3** (NOT 4!), `(int)-3.7` = **-3** (NOT -4!)। Truncation **round নয়** — শুধু দশমিক অংশ কেটে ফেলে, zero এর দিকে যায়।
+- **signed vs unsigned comparison** হলো C এর **সবচেয়ে dangerous trap**: `-1 < 1u` = **FALSE!** কারণ signed -1 → unsigned convert হয়ে **4294967295** (UINT_MAX) হয়ে যায়। সবসময় **same type** এ compare করুন।
+- **`sizeof('A')`** = **4** in C কারণ character constant এর type **int**। কিন্তু C++ এ `sizeof('A')` = **1** কারণ সেখানে type **char**। পরীক্ষায় C vs C++ confusion এর জন্য এই প্রশ্ন আসে।
+- **float** precision ~ **7 significant digits**, **double** ~ **15 significant digits**। বড় integer (যেমন 123456789) float এ রাখলে **precision loss** হবে: `float f = 123456789;` → `123456792.0` (ভুল!)।
+---
+---
+# Topic 5: Conditional Statements
+<div align="center">
+*"if-else ও switch সঠিকভাবে না বুঝলে logic build করা অসম্ভব"*
+</div>
+---
+## 📖 5.1 ধারণা (Concept)
+Conditional statement প্রোগ্রামকে **সিদ্ধান্ত নিতে** সাহায্য করে — কোন condition সত্য হলে কোন code block execute হবে।
+```
 Conditional Statements in C
 ├── if                       → একটি condition check
 ├── if-else                  → দুটি path (true/false)
@@ -1018,10 +1018,10 @@ Conditional Statements in C
 ├── switch-case              → exact value matching
 └── Ternary (? :)            → compact if-else
 ```
-`### Flow Diagram
-````
+### Flow Diagram
+```
 if-else:                        switch:
-`    ┌──────────┐                ┌──────────────┐
+    ┌──────────┐                ┌──────────────┐
     │Condition?│                │  expression  │
     └────┬─────┘                └──────┬───────┘
     TRUE │ FALSE               ┌──┬───┴───┬──┐
@@ -1034,9 +1034,9 @@ if-else:                        switch:
            ▼                      Continue...
       Continue...
 ```
-`---
-`## 💻 5.2 if-else Ladder
-````c
+---
+## 💻 5.2 if-else Ladder
+```c
 #include `stdio.h`
 `int main() {
     int marks = 75;
@@ -1055,10 +1055,10 @@ if-else:                        switch:
 }
 /* Output: Grade: B */
 ```
-`> **Rule:** প্রথম **true** condition এর block execute হয়, **বাকি সব skip** হয়ে যায়!
-`---
-`## 💻 5.3 Dangling Else — পরীক্ষার #1 Trap
-````c
+> **Rule:** প্রথম **true** condition এর block execute হয়, **বাকি সব skip** হয়ে যায়!
+---
+## 💻 5.3 Dangling Else — পরীক্ষার #1 Trap
+```c
 #include `stdio.h`
 `int main() {
     int a = 5, b = 3;
@@ -1081,10 +1081,10 @@ if-else:                        switch:
 `    return 0;
 }
 ```
-`> **Rule:** `else` সবসময় **nearest unmatched if** এর সাথে pair হয়। Confusion এড়াতে **সবসময় `{}` braces** ব্যবহার করুন!
-`---
-`## 💻 5.4 switch-case & Fall-Through
-````c
+> **Rule:** `else` সবসময় **nearest unmatched if** এর সাথে pair হয়। Confusion এড়াতে **সবসময় `{}` braces** ব্যবহার করুন!
+---
+## 💻 5.4 switch-case & Fall-Through
+```c
 #include `stdio.h`
 `int main() {
     int x = 2;
@@ -1105,9 +1105,9 @@ if-else:                        switch:
 `    return 0;
 \}
 ```
-`> **Fall-through Rule:** `break` না দিলে match হওয়া case থেকে **নিচের সব case execute** হতে থাকে!
-`### switch Rules
-````
+> **Fall-through Rule:** `break` না দিলে match হওয়া case থেকে **নিচের সব case execute** হতে থাকে!
+### switch Rules
+```
 switch এর নিয়ম — মুখস্থ করুন:
 ══════════════════════════════
 1. expression অবশ্যই INTEGER type (int, char, enum)
@@ -1119,9 +1119,9 @@ switch এর নিয়ম — মুখস্থ করুন:
 5. duplicate case value → Compilation Error
 6. case 1+2: ও case 3: → duplicate (both = 3)!
 ```
-`---
-`## 💻 5.5 Tricky Conditions — C তে true/false
-````c
+---
+## 💻 5.5 Tricky Conditions — C তে true/false
+```c
 #include `stdio.h`
 `int main() {
     /* ══════════════════════════════════════
@@ -1151,10 +1151,10 @@ switch এর নিয়ম — মুখস্থ করুন:
 `    return 0;
 \}
 ```
-`---
-`## ❓ 5.6 MCQ Problems
-`---
-`**MCQ 1:** নিচের কোডের output?
+---
+## ❓ 5.6 MCQ Problems
+---
+**MCQ 1:** নিচের কোডের output?
 ```c
 int a = 5;
 if (a = 0)
@@ -1162,15 +1162,15 @@ if (a = 0)
 else
     printf("NO");
 ```
-`| Option | Answer |
+| Option | Answer |
 |--------|--------|
 | (a) YES | |
 | (b) **NO** | ✅ |
 | (c) Error | |
 | (d) 5 | |
-`> `a = 0` হলো **assignment** (comparison নয়!)। a তে 0 বসে, 0 = **false** → else → **"NO"**
-`---
-`**MCQ 2:** নিচের কোডের output?
+> `a = 0` হলো **assignment** (comparison নয়!)। a তে 0 বসে, 0 = **false** → else → **"NO"**
+---
+**MCQ 2:** নিচের কোডের output?
 ```c
 int x = 2;
 switch (x) \{
@@ -1180,15 +1180,15 @@ switch (x) \{
     default: printf("D");
 \}
 ```
-`| Option | Answer |
+| Option | Answer |
 |--------|--------|
 | (a) B | |
 | (b) **BCD** | ✅ |
 | (c) BD | |
 | (d) ABCD | |
-`> case 2 match → "B" → **break নেই** → fall-through → "C" → "D"। Output: **BCD**
-`---
-`**MCQ 3:** Dangling else — output?
+> case 2 match → "B" → **break নেই** → fall-through → "C" → "D"। Output: **BCD**
+---
+**MCQ 3:** Dangling else — output?
 ```c
 int x = 1, y = 0;
 if (x)
@@ -1197,24 +1197,24 @@ if (x)
 else
     printf("B");
 ```
-`| Option | Answer |
+| Option | Answer |
 |--------|--------|
 | (a) A | |
 | (b) **B** | ✅ |
 | (c) Nothing | |
 | (d) AB | |
-`> else = nearest if (`if(y)`)। x=1 → inner: y=0 → else → **"B"**
-`---
-`**MCQ 4:** `switch(3.5)` — কী হবে?
-`| Option | Answer |
+> else = nearest if (`if(y)`)। x=1 → inner: y=0 → else → **"B"**
+---
+**MCQ 4:** `switch(3.5)` — কী হবে?
+| Option | Answer |
 |--------|--------|
 | (a) Match | |
 | (b) No match | |
 | (c) **Compilation Error** | ✅ |
 | (d) Runtime Error | |
-`> switch **float/double accept করে না!** শুধু **int/char/enum**।
-`---
-`**MCQ 5:** নিচের কোডের output?
+> switch **float/double accept করে না!** শুধু **int/char/enum**।
+---
+**MCQ 5:** নিচের কোডের output?
 ```c
 int x = 5;
 switch (x) \{
@@ -1223,30 +1223,30 @@ switch (x) \{
     case 2:  printf("2");
 \}
 ```
-`| Option | Answer |
+| Option | Answer |
 |--------|--------|
 | (a) D | |
 | (b) **D12** | ✅ |
 | (c) 12 | |
 | (d) Nothing | |
-`> x=5 → কোনো case match নেই → **default** → "D" → fall-through → "1" → "2"
-`---
-`**MCQ 6:** নিচের কোডের output?
+> x=5 → কোনো case match নেই → **default** → "D" → fall-through → "1" → "2"
+---
+**MCQ 6:** নিচের কোডের output?
 ```c
 if (printf("Hello"))
     printf(" World");
 else
     printf(" C");
 ```
-`| Option | Answer |
+| Option | Answer |
 |--------|--------|
 | (a) **Hello World** | ✅ |
 | (b) Hello C | |
 | (c) Hello | |
 | (d) World | |
-`> `printf("Hello")` returns **5** (non-zero = true) → " World"
-`---
-`**MCQ 7:** নিচের কোডের output?
+> `printf("Hello")` returns **5** (non-zero = true) → " World"
+---
+**MCQ 7:** নিচের কোডের output?
 ```c
 int x = 0;
 if (x == 0)
@@ -1254,15 +1254,15 @@ if (x == 0)
     printf("B");
 printf("C");
 ```
-`| Option | Answer |
+| Option | Answer |
 |--------|--------|
 | (a) AC | |
 | (b) **ABC** | ✅ |
 | (c) A | |
 | (d) BC | |
-`> braces নেই → শুধু `printf("A")` if block এ। **"B"** ও **"C"** সবসময় execute হয়।
-`---
-`**MCQ 8:** নিচের কোডের output?
+> braces নেই → শুধু `printf("A")` if block এ। **"B"** ও **"C"** সবসময় execute হয়।
+---
+**MCQ 8:** নিচের কোডের output?
 ```c
 int a = 2;
 switch (a) \{
@@ -1272,18 +1272,18 @@ switch (a) \{
     case 4: printf("Four ");
 \}
 ```
-`| Option | Answer |
+| Option | Answer |
 |--------|--------|
 | (a) Two | |
 | (b) **Two Three** | ✅ |
 | (c) Two Three Four | |
 | (d) Two Four | |
-`> case 2 match → "Two " → **break নেই** → fall to case 3 → "Three " → **break** → stop
-`---
-`## ✍️ 5.7 Written Problems
-`---
-`### Problem 1: Leap Year Check
-````c
+> case 2 match → "Two " → **break নেই** → fall to case 3 → "Three " → **break** → stop
+---
+## ✍️ 5.7 Written Problems
+---
+### Problem 1: Leap Year Check
+```c
 #include `stdio.h`
 `int main() {
     int year;
@@ -1310,9 +1310,9 @@ switch (a) \{
 `    return 0;
 }
 ```
-`---
-`### Problem 2: Calculator with switch
-````c
+---
+### Problem 2: Calculator with switch
+```c
 #include `stdio.h`
 `int main() {
     float a, b;
@@ -1345,9 +1345,9 @@ switch (a) \{
 `    return 0;
 }
 ```
-`---
-`### Problem 3: Triangle Type Checker
-````c
+---
+### Problem 3: Triangle Type Checker
+```c
 #include `stdio.h`
 `int main() {
     int a, b, c;
@@ -1366,9 +1366,9 @@ switch (a) \{
 `    return 0;
 \}
 ```
-`---
-`## ⚠️ 5.8 Tricky Parts
-`| # | Trap | বিবরণ | Fix |
+---
+## ⚠️ 5.8 Tricky Parts
+| # | Trap | বিবরণ | Fix |
 |---|------|-------|-----|
 | 1 | **= vs ==** | `if(a=5)` = assignment, always **true** (5≠0)! | `if(5==a)` লিখুন |
 | 2 | **Dangling else** | else = **nearest** unmatched if | সবসময় `\{\}` ব্যবহার করুন |
@@ -1380,40 +1380,40 @@ switch (a) \{
 | 8 | **case variable** | `case x:` → **Error!** | case = constant only |
 | 9 | **duplicate case** | `case 3:` ও `case 1+2:` = duplicate → **Error** | unique values |
 | 10 | **printf in if** | `if(printf("Hi"))` = **true** (returns 2) | return value = char count |
-`---
-`## 📝 5.9 Summary
-`- **if-else** সবচেয়ে versatile — range check, complex condition, float comparison, nested logic — সব কিছু করতে পারে। **switch** শুধু **exact value matching** এ কাজ করে এবং শুধু **int, char, enum** type accept করে — float, string, range check কোনোটাই switch এ সম্ভব নয়।
-`- **Dangling else** হলো C এর একটি classic trap: `else` সবসময় **nearest unmatched if** এর সাথে pair হয়, indentation যাই হোক না কেন। এটি এড়ানোর একমাত্র উপায় হলো সবসময় **`{}` braces** ব্যবহার করা, এমনকি single statement if/else block এও।
-`- **switch fall-through** পরীক্ষার **#1 most common topic**: `break` না দিলে match হওয়া case থেকে **নিচের সব case ও default** execute হতে থাকে যতক্ষণ না break পাওয়া যায় বা switch block শেষ হয়। Intentional fall-through useful হতে পারে (যেমন multiple case এ same code), কিন্তু ভুলে break না দেওয়া = exam trap!
-`- C তে **true = যেকোনো non-zero value** (এমনকি -1, 0.001, '0' যার ASCII 48), আর **false = শুধুমাত্র 0** (এবং 0.0, '\0', NULL যেগুলো সব 0 এর variant)। `if(-1)` = true, `if('0')` = true, কিন্তু `if('\0')` = false — এই পার্থক্য পরীক্ষায় আসে।
-`- **`if(a = 5)`** হলো **assignment**, comparison নয়! a তে 5 assign হয়, expression এর value = 5 (non-zero = true), তাই **সবসময় true**! Fix: `if(5 == a)` লিখুন — ভুলে `=` দিলে `5 = a` → compiler error দেবে (literal এ assign অসম্ভব)।
-`- **`if(x > 5);`** — if এর পরে **semicolon** দিলে if statement **empty** হয়ে যায় (empty statement execute করে), এবং পরের line **সবসময় execute** হয় — if এর condition যাই হোক না কেন! এটি subtle bug তৈরি করে এবং exam এ trap হিসেবে আসে।
-`- **braces `{}` ছাড়া** if/else/for/while এর পরে **শুধু প্রথম statement** block এর অংশ হয়, বাকি সব statement **বাইরে** থাকে এবং **সবসময় execute** হয়। `if(x) printf("A"); printf("B");` → "B" সবসময় print হবে, x যাই হোক।
-`- **switch এ case value অবশ্যই compile-time constant** হতে হবে — variable, function call, বা runtime expression দেওয়া যায় না। `case x:` → Error! `case 5:` → OK। এছাড়া `case 1+2:` ও `case 3:` = duplicate (both 3) → Compilation Error।
-`- **default** switch এর যেকোনো position এ থাকতে পারে (শুরুতে, মাঝে, শেষে) — কিন্তু **fall-through rule সবসময় apply** হয়। default শুরুতে থাকলে এবং match না হলে default execute হবে, তারপর break না থাকলে নিচের case গুলোতেও fall-through হবে।
-`- **`printf()` return value** condition এ ব্যবহার করা যায় কারণ এটি print হওয়া character count return করে (non-zero = true)। `if(printf("Hi"))` = true (returns 2)। Exam এ printf return value + if condition combo আসে।
-`---
 ---
-`---
-`## 🔗 Navigation
-`- 🏠 Back to [C Programming — Master Index](00-master-index.md)
+## 📝 5.9 Summary
+- **if-else** সবচেয়ে versatile — range check, complex condition, float comparison, nested logic — সব কিছু করতে পারে। **switch** শুধু **exact value matching** এ কাজ করে এবং শুধু **int, char, enum** type accept করে — float, string, range check কোনোটাই switch এ সম্ভব নয়।
+- **Dangling else** হলো C এর একটি classic trap: `else` সবসময় **nearest unmatched if** এর সাথে pair হয়, indentation যাই হোক না কেন। এটি এড়ানোর একমাত্র উপায় হলো সবসময় **`{}` braces** ব্যবহার করা, এমনকি single statement if/else block এও।
+- **switch fall-through** পরীক্ষার **#1 most common topic**: `break` না দিলে match হওয়া case থেকে **নিচের সব case ও default** execute হতে থাকে যতক্ষণ না break পাওয়া যায় বা switch block শেষ হয়। Intentional fall-through useful হতে পারে (যেমন multiple case এ same code), কিন্তু ভুলে break না দেওয়া = exam trap!
+- C তে **true = যেকোনো non-zero value** (এমনকি -1, 0.001, '0' যার ASCII 48), আর **false = শুধুমাত্র 0** (এবং 0.0, '\0', NULL যেগুলো সব 0 এর variant)। `if(-1)` = true, `if('0')` = true, কিন্তু `if('\0')` = false — এই পার্থক্য পরীক্ষায় আসে।
+- **`if(a = 5)`** হলো **assignment**, comparison নয়! a তে 5 assign হয়, expression এর value = 5 (non-zero = true), তাই **সবসময় true**! Fix: `if(5 == a)` লিখুন — ভুলে `=` দিলে `5 = a` → compiler error দেবে (literal এ assign অসম্ভব)।
+- **`if(x > 5);`** — if এর পরে **semicolon** দিলে if statement **empty** হয়ে যায় (empty statement execute করে), এবং পরের line **সবসময় execute** হয় — if এর condition যাই হোক না কেন! এটি subtle bug তৈরি করে এবং exam এ trap হিসেবে আসে।
+- **braces `{}` ছাড়া** if/else/for/while এর পরে **শুধু প্রথম statement** block এর অংশ হয়, বাকি সব statement **বাইরে** থাকে এবং **সবসময় execute** হয়। `if(x) printf("A"); printf("B");` → "B" সবসময় print হবে, x যাই হোক।
+- **switch এ case value অবশ্যই compile-time constant** হতে হবে — variable, function call, বা runtime expression দেওয়া যায় না। `case x:` → Error! `case 5:` → OK। এছাড়া `case 1+2:` ও `case 3:` = duplicate (both 3) → Compilation Error।
+- **default** switch এর যেকোনো position এ থাকতে পারে (শুরুতে, মাঝে, শেষে) — কিন্তু **fall-through rule সবসময় apply** হয়। default শুরুতে থাকলে এবং match না হলে default execute হবে, তারপর break না থাকলে নিচের case গুলোতেও fall-through হবে।
+- **`printf()` return value** condition এ ব্যবহার করা যায় কারণ এটি print হওয়া character count return করে (non-zero = true)। `if(printf("Hi"))` = true (returns 2)। Exam এ printf return value + if condition combo আসে।
+---
+---
+---
+## 🔗 Navigation
+- 🏠 Back to [C Programming — Master Index](00-master-index.md)
 - ➡️ Next: [Chapter 02 — Control Flow](02-control-flow.md)
-`# Topic 6: Loops (for, while, do-while, nested)
-`<div align="center">
-`*"Loop বুঝলে repetition বোঝা যায় — repetition বুঝলে programming বোঝা যায়"*
-`</div>
-`---
-`## 📖 6.1 ধারণা (Concept)
-`Loop হলো একটি **পুনরাবৃত্তিমূলক কাঠামো** — condition true থাকা পর্যন্ত একই code block বারবার execute করে।
-````
+# Topic 6: Loops (for, while, do-while, nested)
+<div align="center">
+*"Loop বুঝলে repetition বোঝা যায় — repetition বুঝলে programming বোঝা যায়"*
+</div>
+---
+## 📖 6.1 ধারণা (Concept)
+Loop হলো একটি **পুনরাবৃত্তিমূলক কাঠামো** — condition true থাকা পর্যন্ত একই code block বারবার execute করে।
+```
 Loops in C
 ├── for       → কতবার চলবে জানা থাকলে (counter-based)
 ├── while     → condition-based, আগে check (0 বারও চলতে পারে)
 ├── do-while  → condition-based, পরে check (কমপক্ষে ১বার চলে)
 └── nested    → loop এর ভেতরে loop (pattern, matrix)
 ```
-`### তিন Loop এর তুলনা
-````
+### তিন Loop এর তুলনা
+```
 ┌─────────────┬──────────────────────┬──────────────────┬──────────────────┐
 │ Feature     │ for                  │ while            │ do-while         │
 ├─────────────┼──────────────────────┼──────────────────┼──────────────────┤
@@ -1425,9 +1425,9 @@ Loops in C
 │ Best for    │ counting, array      │ unknown count     │ menu, validation │
 └─────────────┴──────────────────────┴──────────────────┴──────────────────┘
 ```
-`---
-`## 💻 6.2 for Loop — Syntax & Variations
-````c
+---
+## 💻 6.2 for Loop — Syntax & Variations
+```c
 /*
  * for loop syntax:
  * for (initialization; condition; update) {
@@ -1473,9 +1473,9 @@ Loops in C
 `    return 0;
 }
 ```
-`---
-`## 💻 6.3 while Loop
-````c
+---
+## 💻 6.3 while Loop
+```c
 #include `stdio.h`
 `int main() {
     /* ═══════ Basic while ═══════ */
@@ -1502,9 +1502,9 @@ Loops in C
 `    return 0;
 }
 ```
-`---
-`## 💻 6.4 do-while Loop — কমপক্ষে ১ বার
-````c
+---
+## 💻 6.4 do-while Loop — কমপক্ষে ১ বার
+```c
 #include `stdio.h`
 `int main() {
     /* ═══════ Key difference: condition false থেকেও ১বার চলে ═══════ */
@@ -1534,10 +1534,10 @@ Loops in C
 `    return 0;
 }
 ```
-`> **do-while rule:** body **আগে** execute হয়, condition **পরে** check হয় — তাই condition false হলেও **কমপক্ষে ১ বার** চলবেই। `while()` এর পরে **semicolon (`;`) বাধ্যতামূলক!**
-`---
-`## 💻 6.5 Nested Loops
-````c
+> **do-while rule:** body **আগে** execute হয়, condition **পরে** check হয় — তাই condition false হলেও **কমপক্ষে ১ বার** চলবেই। `while()` এর পরে **semicolon (`;`) বাধ্যতামূলক!**
+---
+## 💻 6.5 Nested Loops
+```c
 #include `stdio.h`
 `int main() {
     /* ═══════ Multiplication Table ═══════ */
@@ -1556,119 +1556,119 @@ Loops in C
 `    return 0;
 }
 ```
-`---
-`## ❓ 6.6 MCQ Problems
-`---
-`**MCQ 1:** নিচের কোডের output কী?
+---
+## ❓ 6.6 MCQ Problems
+---
+**MCQ 1:** নিচের কোডের output কী?
 ```c
 int i;
 for (i = 0; i < 5; i++);
 printf("%d", i);
 ```
-`| Option | Answer |
+| Option | Answer |
 |--------|--------|
 | (a) 4 | |
 | (b) **5** | ✅ |
 | (c) 0 1 2 3 4 | |
 | (d) 0 | |
-`> **ব্যাখ্যা:** Semicolon = **empty body!** Loop 5 বার চলে (i: 0→4), i=5 হলে condition false → exit। printf i=**5** print করে। ⚠️ `for(int i=...)` হলে scope error হতো — এখানে `int i;` আগে declare।
-`---
-`**MCQ 2:** নিচের কোডের output কী?
+> **ব্যাখ্যা:** Semicolon = **empty body!** Loop 5 বার চলে (i: 0→4), i=5 হলে condition false → exit। printf i=**5** print করে। ⚠️ `for(int i=...)` হলে scope error হতো — এখানে `int i;` আগে declare।
+---
+**MCQ 2:** নিচের কোডের output কী?
 ```c
 int i = 0;
 while (i < 5)
     printf("%d ", i);
     i++;
 ```
-`| Option | Answer |
+| Option | Answer |
 |--------|--------|
 | (a) 0 1 2 3 4 | |
 | (b) **0 0 0 0 ... (infinite)** | ✅ |
 | (c) 1 2 3 4 5 | |
 | (d) Error | |
-`> **ব্যাখ্যা:** Braces নেই! শুধু `printf` while body তে। `i++` while এর **বাইরে** — কখনো execute হয় না → i সবসময় 0 → **infinite loop!**
-`---
-`**MCQ 3:** নিচের কোডের output কী?
+> **ব্যাখ্যা:** Braces নেই! শুধু `printf` while body তে। `i++` while এর **বাইরে** — কখনো execute হয় না → i সবসময় 0 → **infinite loop!**
+---
+**MCQ 3:** নিচের কোডের output কী?
 ```c
 int i = 10;
 do {
     printf("%d ", i);
 } while (i < 5);
 ```
-`| Option | Answer |
+| Option | Answer |
 |--------|--------|
 | (a) Nothing | |
 | (b) **10** | ✅ |
 | (c) 10 9 8 7 6 5 | |
 | (d) Infinite | |
-`> **ব্যাখ্যা:** do-while: body **আগে** execute → 10 print → condition 10<5 **false** → exit। কমপক্ষে **১ বার** চলে!
-`---
-`**MCQ 4:** নিচের কোডে কতবার "Hello" print হবে?
+> **ব্যাখ্যা:** do-while: body **আগে** execute → 10 print → condition 10<5 **false** → exit। কমপক্ষে **১ বার** চলে!
+---
+**MCQ 4:** নিচের কোডে কতবার "Hello" print হবে?
 ```c
 int i = 0;
 while (i++ < 5)
     printf("Hello\n");
 ```
-`| Option | Answer |
+| Option | Answer |
 |--------|--------|
 | (a) 4 | |
 | (b) **5** | ✅ |
 | (c) 6 | |
 | (d) Infinite | |
-`> **ব্যাখ্যা:** **Post-increment:** আগে compare, পরে বাড়ে। i=0: 0<5✅ → i=1: 1<5✅ → ... → i=4: 4<5✅ → i=5: 5<5❌ → exit। Total: **5 বার**।
-`---
-`**MCQ 5:** নিচের কোডে কতবার "Hello" print হবে?
+> **ব্যাখ্যা:** **Post-increment:** আগে compare, পরে বাড়ে। i=0: 0<5✅ → i=1: 1<5✅ → ... → i=4: 4<5✅ → i=5: 5<5❌ → exit। Total: **5 বার**।
+---
+**MCQ 5:** নিচের কোডে কতবার "Hello" print হবে?
 ```c
 int i = 0;
 while (++i < 5)
     printf("Hello\n");
 ```
-`| Option | Answer |
+| Option | Answer |
 |--------|--------|
 | (a) **4** | ✅ |
 | (b) 5 | |
 | (c) 6 | |
 | (d) 3 | |
-`> **ব্যাখ্যা:** **Pre-increment:** আগে বাড়ে, পরে compare। i=1: 1<5✅ → i=2: 2<5✅ → i=3: 3<5✅ → i=4: 4<5✅ → i=5: 5<5❌ → exit। Total: **4 বার**। (Post vs Pre = 1 difference!)
-`---
-`**MCQ 6:** `for(;;)` কী করে?
-`| Option | Answer |
+> **ব্যাখ্যা:** **Pre-increment:** আগে বাড়ে, পরে compare। i=1: 1<5✅ → i=2: 2<5✅ → i=3: 3<5✅ → i=4: 4<5✅ → i=5: 5<5❌ → exit। Total: **4 বার**। (Post vs Pre = 1 difference!)
+---
+**MCQ 6:** `for(;;)` কী করে?
+| Option | Answer |
 |--------|--------|
 | (a) Compilation error | |
 | (b) Runs once | |
 | (c) **Infinite loop** | ✅ |
 | (d) Does nothing | |
-`> **ব্যাখ্যা:** সব অংশ empty → condition **always true** → **infinite loop**। Same as `while(1)`।
-`---
-`**MCQ 7:** নিচের কোডের output কী?
+> **ব্যাখ্যা:** সব অংশ empty → condition **always true** → **infinite loop**। Same as `while(1)`।
+---
+**MCQ 7:** নিচের কোডের output কী?
 ```c
 for (int i = 0; i < 5, i < 3; i++)
     printf("%d ", i);
 ```
-`| Option | Answer |
+| Option | Answer |
 |--------|--------|
 | (a) 0 1 2 3 4 | |
 | (b) **0 1 2** | ✅ |
 | (c) 0 1 2 3 | |
 | (d) Error | |
-`> **ব্যাখ্যা:** **Comma in condition:** শেষ expression `i < 3` = actual condition! (Comma operator returns last value)
-`---
-`**MCQ 8:** নিচের কোডের output কী?
+> **ব্যাখ্যা:** **Comma in condition:** শেষ expression `i < 3` = actual condition! (Comma operator returns last value)
+---
+**MCQ 8:** নিচের কোডের output কী?
 ```c
 int i = 0, sum = 0;
 for (; i < 5; sum += i++);
 printf("sum=%d i=%d", sum, i);
 ```
-`| Option | Answer |
+| Option | Answer |
 |--------|--------|
 | (a) **sum=10 i=5** | ✅ |
 | (b) sum=15 i=5 | |
 | (c) sum=10 i=6 | |
 | (d) sum=15 i=6 | |
-`> **ব্যাখ্যা:** Empty body (semicolon)। `sum += i++`: i=0→sum=0, i=1→sum=1, i=2→sum=3, i=3→sum=6, i=4→sum=**10**। i=5 → 5<5 false → exit। sum=0+1+2+3+4=**10**, i=**5**
-`---
-`## ⚠️ 6.7 Tricky Parts
-`| # | Trap | বিবরণ | Fix |
+> **ব্যাখ্যা:** Empty body (semicolon)। `sum += i++`: i=0→sum=0, i=1→sum=1, i=2→sum=3, i=3→sum=6, i=4→sum=**10**। i=5 → 5<5 false → exit। sum=0+1+2+3+4=**10**, i=**5**
+---
+## ⚠️ 6.7 Tricky Parts
+| # | Trap | বিবরণ | Fix |
 |---|------|-------|-----|
 | 1 | **Semicolon after for/while** | `for(i=0;i<5;i++);` → **empty body!** | Semicolon remove করুন |
 | 2 | **Missing braces** | `while(i<5) printf(); i++;` → i++ **বাইরে** → infinite | `{}` braces দিন |
@@ -1678,34 +1678,34 @@ printf("sum=%d i=%d", sum, i);
 | 6 | **C99 scope** | `for(int i=0;...)` → i **loop বাইরে** accessible নয় | Declare before loop |
 | 7 | **Unsigned countdown** | `for(unsigned i=5; i>=0; i--)` → **infinite!** unsigned never <0 | signed ব্যবহার করুন |
 | 8 | **Post vs Pre in condition** | `while(i++<5)` = 5 বার, `while(++i<5)` = **4 বার** | 1 iteration difference |
-`---
-`## 📝 6.8 Summary
-`- **for loop** কতবার চলবে জানা থাকলে best — initialization, condition, update **একই লাইনে** থাকায় পড়তে সুবিধা। `for(int i=0; i<n; i++)` সবচেয়ে common pattern।
-`- **while loop** condition-based repetition এ best — কতবার চলবে জানা না থাকলে (user input, file read, digit extraction)। Condition **আগে** check হয়, তাই **0 বারও** চলতে পারে।
-`- **do-while loop** এর unique feature: body **আগে** execute হয়, condition **পরে** check হয় — ফলে condition false হলেও **কমপক্ষে ১ বার** চলে। Menu system, input validation এ best। `while()` এর পরে **semicolon বাধ্যতামূলক!**
-`- **Semicolon trap:** `for(...);` বা `while(...);` → loop body **empty** হয়ে যায়। Loop চলে কিন্তু কিছুই করে না, পরের line **loop এর বাইরে** execute হয়। সবচেয়ে common beginner bug।
-`- **Braces ছাড়া** loop body তে শুধু **প্রথম statement** থাকে। `while(x<5) a(); b();` → শুধু `a()` loop এ, `b()` বাইরে! সবসময় **`{}` ব্যবহার** করুন।
-`- **Post-increment vs Pre-increment** condition এ: `while(i++<5)` = **5 বার** (আগে compare, পরে বাড়ে), `while(++i<5)` = **4 বার** (আগে বাড়ে, পরে compare)। **1 iteration** পার্থক্য — exam এ #1 topic!
-`- **`for(;;)`** ও **`while(1)`** দুটোই **infinite loop** — break দিয়ে বের হতে হয়। `for(;;)` এ condition empty = always true।
-`- **Unsigned loop** নিচে countdown করলে `i >= 0` **সবসময় true** (unsigned never negative) → **infinite loop!** Fix: signed variable ব্যবহার করুন।
-`- **Nested loop** এ total iterations = **outer × inner**। 3×4 = 12 iterations। Pattern printing, matrix traversal — সব nested loop এ হয়।
-`---
 ---
-`# Topic 7: Break, Continue & Goto
-`<div align="center">
-`*"Break থামায়, Continue লাফায়, Goto উড়ে যায় — তিনটি Jump Statement"*
-`</div>
-`---
-`## 📖 7.1 ধারণা (Concept)
-`এই তিনটি হলো **jump statement** — program এর normal sequential flow ভেঙে অন্যত্র লাফ দেয়।
-````
+## 📝 6.8 Summary
+- **for loop** কতবার চলবে জানা থাকলে best — initialization, condition, update **একই লাইনে** থাকায় পড়তে সুবিধা। `for(int i=0; i<n; i++)` সবচেয়ে common pattern।
+- **while loop** condition-based repetition এ best — কতবার চলবে জানা না থাকলে (user input, file read, digit extraction)। Condition **আগে** check হয়, তাই **0 বারও** চলতে পারে।
+- **do-while loop** এর unique feature: body **আগে** execute হয়, condition **পরে** check হয় — ফলে condition false হলেও **কমপক্ষে ১ বার** চলে। Menu system, input validation এ best। `while()` এর পরে **semicolon বাধ্যতামূলক!**
+- **Semicolon trap:** `for(...);` বা `while(...);` → loop body **empty** হয়ে যায়। Loop চলে কিন্তু কিছুই করে না, পরের line **loop এর বাইরে** execute হয়। সবচেয়ে common beginner bug।
+- **Braces ছাড়া** loop body তে শুধু **প্রথম statement** থাকে। `while(x<5) a(); b();` → শুধু `a()` loop এ, `b()` বাইরে! সবসময় **`{}` ব্যবহার** করুন।
+- **Post-increment vs Pre-increment** condition এ: `while(i++<5)` = **5 বার** (আগে compare, পরে বাড়ে), `while(++i<5)` = **4 বার** (আগে বাড়ে, পরে compare)। **1 iteration** পার্থক্য — exam এ #1 topic!
+- **`for(;;)`** ও **`while(1)`** দুটোই **infinite loop** — break দিয়ে বের হতে হয়। `for(;;)` এ condition empty = always true।
+- **Unsigned loop** নিচে countdown করলে `i >= 0` **সবসময় true** (unsigned never negative) → **infinite loop!** Fix: signed variable ব্যবহার করুন।
+- **Nested loop** এ total iterations = **outer × inner**। 3×4 = 12 iterations। Pattern printing, matrix traversal — সব nested loop এ হয়।
+---
+---
+# Topic 7: Break, Continue & Goto
+<div align="center">
+*"Break থামায়, Continue লাফায়, Goto উড়ে যায় — তিনটি Jump Statement"*
+</div>
+---
+## 📖 7.1 ধারণা (Concept)
+এই তিনটি হলো **jump statement** — program এর normal sequential flow ভেঙে অন্যত্র লাফ দেয়।
+```
 Jump Statements
 ├── break     → loop/switch থেকে সম্পূর্ণ বের (EXIT)
 ├── continue  → বর্তমান iteration skip, পরের iteration (SKIP)
 └── goto      → যেকোনো label এ সরাসরি লাফ (JUMP) — ⚠️ avoid!
 ```
-`### Visual Comparison
-````
+### Visual Comparison
+```
 break:                           continue:
 for (i=0; i&lt;10; i++) \{           for (i=0; i&lt;10; i++) \{
     if (i==5) break; ←EXIT          if (i==5) continue; ←SKIP
@@ -1714,9 +1714,9 @@ for (i=0; i&lt;10; i++) \{           for (i=0; i&lt;10; i++) \{
 Output: 0 1 2 3 4               Output: 0 1 2 3 4 6 7 8 9
         ↑ loop শেষ                       ↑ শুধু 5 বাদ
 ```
-`---
-`## 💻 7.2 break — Loop/Switch Exit
-````c
+---
+## 💻 7.2 break — Loop/Switch Exit
+```c
 #include `stdio.h`
 `int main() {
     /* ═══════ break in loop ═══════ */
@@ -1738,10 +1738,10 @@ Output: 0 1 2 3 4               Output: 0 1 2 3 4 6 7 8 9
 `    return 0;
 }
 ```
-`> **Critical Rule:** break শুধু **nearest enclosing** loop/switch ভাঙে — **outer loop** চলতে থাকে!
-`---
-`## 💻 7.3 continue — Skip Current Iteration
-````c
+> **Critical Rule:** break শুধু **nearest enclosing** loop/switch ভাঙে — **outer loop** চলতে থাকে!
+---
+## 💻 7.3 continue — Skip Current Iteration
+```c
 #include `stdio.h`
 `int main() {
     /* ═══════ continue in for — UPDATE (i++) STILL RUNS! ═══════ */
@@ -1764,17 +1764,17 @@ Output: 0 1 2 3 4               Output: 0 1 2 3 4 6 7 8 9
 `    return 0;
 }
 ```
-````
+```
 continue → কোথায় যায়?
 ━━━━━━━━━━━━━━━━━━━━━━
 for loop    →  UPDATE (i++) এ যায়  →  ✅ Safe (i++ always runs)
 while loop  →  CONDITION check এ  →  ⚠️ manual i++ skip হতে পারে!
 do-while    →  CONDITION check এ  →  ⚠️ same risk as while
 ```
-`> **Danger:** `for` loop এ continue **safe** (update always runs), কিন্তু `while` loop এ continue দিলে **increment skip** হতে পারে → **infinite loop!**
-`---
-`## 💻 7.4 goto — Direct Jump (Avoid!)
-````c
+> **Danger:** `for` loop এ continue **safe** (update always runs), কিন্তু `while` loop এ continue দিলে **increment skip** হতে পারে → **infinite loop!**
+---
+## 💻 7.4 goto — Direct Jump (Avoid!)
+```c
 #include `stdio.h`
 `int main() {
     /* ═══════ goto — nested loop থেকে বের হওয়া (useful case) ═══════ */
@@ -1793,7 +1793,7 @@ done:
 `    return 0;
 \}
 ```
-````
+```
 goto কখন গ্রহণযোগ্য:
 ━━━━━━━━━━━━━━━━━━━━━
 ✅ Deeply nested loop (3+) থেকে exit
@@ -1804,9 +1804,9 @@ goto কখন গ্রহণযোগ্য:
 • label scope = পুরো function
 • variable declaration skip করলে UB!
 ```
-`---
-`## 💻 7.5 switch + loop — break/continue Combo
-````c
+---
+## 💻 7.5 switch + loop — break/continue Combo
+```c
 #include `stdio.h`
 `int main() {
     for (int i = 0; i &lt; 6; i++) \{
@@ -1829,11 +1829,11 @@ goto কখন গ্রহণযোগ্য:
 `    return 0;
 }
 ```
-`> **Rule:** switch ভেতরে `break` → **switch** exit। `continue` → enclosing **loop** এর next iteration!
-`---
-`## ❓ 7.6 MCQ Problems
-`---
-`**MCQ 1:** নিচের কোডের output কী?
+> **Rule:** switch ভেতরে `break` → **switch** exit। `continue` → enclosing **loop** এর next iteration!
+---
+## ❓ 7.6 MCQ Problems
+---
+**MCQ 1:** নিচের কোডের output কী?
 ```c
 for (int i = 0; i &lt; 10; i++) \{
     if (i == 5) break;
@@ -1841,15 +1841,15 @@ for (int i = 0; i &lt; 10; i++) \{
     printf("%d ", i);
 \}
 ```
-`| Option | Answer |
+| Option | Answer |
 |--------|--------|
 | (a) **0 1 2 4** | ✅ |
 | (b) 0 1 2 3 4 | |
 | (c) 0 1 2 | |
 | (d) 0 1 2 4 5 | |
-`> i=3 → continue (skip) → i=4 → print → i=5 → **break** → exit
-`---
-`**MCQ 2:** নিচের কোডের output কী?
+> i=3 → continue (skip) → i=4 → print → i=5 → **break** → exit
+---
+**MCQ 2:** নিচের কোডের output কী?
 ```c
 int i = 0;
 while (i &lt; 5) \{
@@ -1858,15 +1858,15 @@ while (i &lt; 5) \{
     i++;
 \}
 ```
-`| Option | Answer |
+| Option | Answer |
 |--------|--------|
 | (a) 0 1 2 4 | |
 | (b) 0 1 2 3 4 | |
 | (c) **0 1 2 (infinite loop)** | ✅ |
 | (d) Error | |
-`> **ব্যাখ্যা:** i=3 → continue → **i++ skip!** → i সবসময় 3 → **infinite loop!**
-`---
-`**MCQ 3:** নিচের কোডে কতবার "Hello" print হবে?
+> **ব্যাখ্যা:** i=3 → continue → **i++ skip!** → i সবসময় 3 → **infinite loop!**
+---
+**MCQ 3:** নিচের কোডে কতবার "Hello" print হবে?
 ```c
 for (int i = 0; i &lt; 3; i++) \{
     for (int j = 0; j &lt; 3; j++) \{
@@ -1875,42 +1875,42 @@ for (int i = 0; i &lt; 3; i++) \{
     \}
 \}
 ```
-`| Option | Answer |
+| Option | Answer |
 |--------|--------|
 | (a) 9 | |
 | (b) 6 | |
 | (c) **3** | ✅ |
 | (d) 1 | |
-`> **ব্যাখ্যা:** Inner: j=0→print, j=1→break। প্রতিবার 1 print। Outer 3 বার → **3** total
-`---
-`**MCQ 4:** `goto` কোথায় jump করতে পারে?
-`| Option | Answer |
+> **ব্যাখ্যা:** Inner: j=0→print, j=1→break। প্রতিবার 1 print। Outer 3 বার → **3** total
+---
+**MCQ 4:** `goto` কোথায় jump করতে পারে?
+| Option | Answer |
 |--------|--------|
 | (a) যেকোনো function এ | |
 | (b) **শুধু same function এর মধ্যে** | ✅ |
 | (c) শুধু loop এর মধ্যে | |
 | (d) শুধু নিচের দিকে | |
-`---
-`## 📝 7.7 Summary
-`- **break** loop বা switch থেকে **সম্পূর্ণ বের** করে দেয়; শুধু **nearest enclosing** loop/switch affect করে — outer loop চলতে থাকে। Multiple nested loop থেকে exit করতে **goto, flag variable, বা function return** ব্যবহার করতে হয়।
-`- **continue** বর্তমান iteration এর **বাকি code skip** করে **পরের iteration** এ চলে যায় — loop থেকে বের হয় না। `for` loop এ continue **safe** (update part always runs), কিন্তু `while` loop এ **infinite loop risk** আছে কারণ manual increment skip হতে পারে!
-`- **goto** সরাসরি যেকোনো **label** এ unconditional jump করে, কিন্তু শুধু **same function** এর মধ্যে। **99% ক্ষেত্রে avoid** করুন — শুধু **deeply nested loop exit** ও **error handling cleanup** এ acceptable।
-`- switch ভেতরে **break** → switch exit করে; **continue** → enclosing **loop** এর পরের iteration এ যায়। switch এর ভেতর continue = loop continue, NOT switch continue — এটি exam trap!
-`---
 ---
-`# Topic 8: Pattern Printing
-`<div align="center">
-`*"Pattern = nested loop + formula — row ও column এর সম্পর্ক বুঝতে পারলেই হলো"*
-`</div>
-`---
-`## 📖 8.1 ধারণা (Concept)
-`Pattern printing = **nested loop** এর সবচেয়ে practical application। প্রতিটি pattern বুঝতে হলে **row (i)** এর সাথে **space ও star count** এর formula বের করতে হয়।
-````
+## 📝 7.7 Summary
+- **break** loop বা switch থেকে **সম্পূর্ণ বের** করে দেয়; শুধু **nearest enclosing** loop/switch affect করে — outer loop চলতে থাকে। Multiple nested loop থেকে exit করতে **goto, flag variable, বা function return** ব্যবহার করতে হয়।
+- **continue** বর্তমান iteration এর **বাকি code skip** করে **পরের iteration** এ চলে যায় — loop থেকে বের হয় না। `for` loop এ continue **safe** (update part always runs), কিন্তু `while` loop এ **infinite loop risk** আছে কারণ manual increment skip হতে পারে!
+- **goto** সরাসরি যেকোনো **label** এ unconditional jump করে, কিন্তু শুধু **same function** এর মধ্যে। **99% ক্ষেত্রে avoid** করুন — শুধু **deeply nested loop exit** ও **error handling cleanup** এ acceptable।
+- switch ভেতরে **break** → switch exit করে; **continue** → enclosing **loop** এর পরের iteration এ যায়। switch এর ভেতর continue = loop continue, NOT switch continue — এটি exam trap!
+---
+---
+# Topic 8: Pattern Printing
+<div align="center">
+*"Pattern = nested loop + formula — row ও column এর সম্পর্ক বুঝতে পারলেই হলো"*
+</div>
+---
+## 📖 8.1 ধারণা (Concept)
+Pattern printing = **nested loop** এর সবচেয়ে practical application। প্রতিটি pattern বুঝতে হলে **row (i)** এর সাথে **space ও star count** এর formula বের করতে হয়।
+```
 Pattern বোঝার Master Formula:
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 Outer loop → ROW control (কতটি লাইন)
 Inner loop(s) → COLUMN control (space + star)
-`Pyramid Example (n=5):
+Pyramid Example (n=5):
 Row │ Spaces │ Stars   │ Formula
 ────┼────────┼─────────┼──────────
  1  │   4    │   1     │ spaces = n-i
@@ -1919,32 +1919,32 @@ Row │ Spaces │ Stars   │ Formula
  4  │   1    │   7     │
  5  │   0    │   9     │
 ```
-`---
-`## 💻 8.2 Essential Patterns
-`### Pattern 1: Left-Aligned Triangle
-````
+---
+## 💻 8.2 Essential Patterns
+### Pattern 1: Left-Aligned Triangle
+```
 *
 * *
 * * *
 * * * *
 * * * * *
 ```
-````c
+```c
 for (int i = 1; i <= n; i++) {
     for (int j = 1; j <= i; j++)   /* stars = i */
         printf("* ");
     printf("\n");
 }
 ```
-`### Pattern 2: Right-Aligned Triangle
-````
+### Pattern 2: Right-Aligned Triangle
+```
         *
       * *
     * * *
   * * * *
 * * * * *
 ```
-````c
+```c
 for (int i = 1; i &lt;= n; i++) \{
     for (int j = 1; j &lt;= n - i; j++)  /* spaces = n-i */
         printf("  ");
@@ -1953,15 +1953,15 @@ for (int i = 1; i &lt;= n; i++) \{
     printf("\n");
 \}
 ```
-`### Pattern 3: Pyramid
-````
+### Pattern 3: Pyramid
+```
         *
       * * *
     * * * * *
   * * * * * * *
 * * * * * * * * *
 ```
-````c
+```c
 for (int i = 1; i <= n; i++) {
     for (int j = 1; j <= n - i; j++)       /* spaces = n-i */
         printf("  ");
@@ -1970,14 +1970,14 @@ for (int i = 1; i <= n; i++) {
     printf("\n");
 }
 ```
-`### Pattern 4: Number Pyramid
-````
+### Pattern 4: Number Pyramid
+```
     1
    1 2 1
   1 2 3 2 1
  1 2 3 4 3 2 1
 ```
-````c
+```c
 for (int i = 1; i &lt;= n; i++) \{
     for (int j = 1; j &lt;= n - i; j++)
         printf(" ");
@@ -1988,8 +1988,8 @@ for (int i = 1; i &lt;= n; i++) \{
     printf("\n");
 \}
 ```
-`### Pattern 5: Diamond
-````c
+### Pattern 5: Diamond
+```c
 /* Upper half (1 to n) */
 for (int i = 1; i <= n; i++) {
     for (int j = 1; j <= n - i; j++) printf("  ");
@@ -2003,15 +2003,15 @@ for (int i = n-1; i >= 1; i--) {
     printf("\n");
 }
 ```
-`### Pattern 6: Pascal's Triangle
-````
+### Pattern 6: Pascal's Triangle
+```
          1
         1 1
        1 2 1
       1 3 3 1
      1 4 6 4 1
 ```
-````c
+```c
 for (int i = 0; i &lt; n; i++) \{
     for (int j = 0; j &lt; n - i - 1; j++)
         printf("  ");
@@ -2023,9 +2023,9 @@ for (int i = 0; i &lt; n; i++) \{
     printf("\n");
 \}
 ```
-`---
-`## 📖 8.3 Master Formula Sheet
-````
+---
+## 📖 8.3 Master Formula Sheet
+```
 ┌──────────────────────────┬──────────────┬──────────────┐
 │ Pattern                  │ Spaces       │ Stars/Nums   │
 ├──────────────────────────┼──────────────┼──────────────┤
@@ -2041,31 +2041,31 @@ for (int i = 0; i &lt; n; i++) \{
 `Diamond total rows = 2n - 1
 Pyramid stars always ODD (1, 3, 5, 7...)
 ```
-`---
-`## 📝 8.4 Summary
-`- **Outer loop = rows**, **Inner loop(s) = columns** (spaces + stars/numbers)
+---
+## 📝 8.4 Summary
+- **Outer loop = rows**, **Inner loop(s) = columns** (spaces + stars/numbers)
 - **Pyramid:** spaces = -i`, stars = **`2*i-1`** (সবসময় odd সংখ্যা)
 - **Diamond** = pyramid (1 to n) + inverted pyramid (**n-1** to 1) — middle row **একবারই**
 - **Hollow pattern:** star শুধু **edge** এ (first/last row/column), বাকি space
 - **Number pattern:** `j` print = sequential, `i` print = same number per row
 - Pattern solve কৌশল: **কাগজে row-by-row count** → formula → code
-`---
 ---
-`# Topic 9: Function Basics
-`<div align="center">
-`*"Function হলো code এর building block — reuse, modularity, readability সবকিছুর ভিত্তি"*
-`</div>
-`---
-`## 📖 9.1 ধারণা (Concept)
-`Function হলো একটি **স্বতন্ত্র code block** যা নির্দিষ্ট কাজ করে। একবার লিখে বারবার call করা যায়।
-````
+---
+# Topic 9: Function Basics
+<div align="center">
+*"Function হলো code এর building block — reuse, modularity, readability সবকিছুর ভিত্তি"*
+</div>
+---
+## 📖 9.1 ধারণা (Concept)
+Function হলো একটি **স্বতন্ত্র code block** যা নির্দিষ্ট কাজ করে। একবার লিখে বারবার call করা যায়।
+```
 Function Structure:
 ═══════════════════
-`return_type function_name(parameters) {
+return_type function_name(parameters) {
     // body
     return value;
 }
-`Example:
+Example:
   int add(int a, int b) \{
       return a + b;
   \}
@@ -2075,18 +2075,18 @@ Function Structure:
   │     └── function name
   └── return type
 ```
-`### Function এর তিন ধাপ
-````
+### Function এর তিন ধাপ
+```
 1. Declaration (Prototype) → compiler কে জানানো
    int add(int a, int b);     ← definition এর আগে call করলে দরকার
-`2. Definition → actual code লেখা
+2. Definition → actual code লেখা
    int add(int a, int b) \{ return a + b; \}
-`3. Call → function ব্যবহার করা
+3. Call → function ব্যবহার করা
    int result = add(3, 5);    ← result = 8
 ```
-`---
-`## 💻 9.2 Call by Value vs Call by Reference
-````c
+---
+## 💻 9.2 Call by Value vs Call by Reference
+```c
 #include `stdio.h`
 `/* ═══════ Call by Value — COPY, original UNCHANGED ═══════ */
 void swapByValue(int a, int b) \{
@@ -2108,10 +2108,10 @@ void swapByRef(int *a, int *b) {
 `    return 0;
 }
 ```
-`> **Golden Rule:** Value pass → **copy**, original **safe**। Pointer pass → **address**, original **change** হয়!
-`---
-`## 💻 9.3 Array as Parameter — Always by Reference!
-````c
+> **Golden Rule:** Value pass → **copy**, original **safe**। Pointer pass → **address**, original **change** হয়!
+---
+## 💻 9.3 Array as Parameter — Always by Reference!
+```c
 #include `stdio.h`
 `void doubleAll(int arr[], int size) {
     /* ⚠️ arr = pointer! sizeof(arr) = 4/8, NOT array size! */
@@ -2130,20 +2130,20 @@ void swapByRef(int *a, int *b) {
 `    return 0;
 \}
 ```
-`> **Rule:** Array function এ pass হলে **pointer** এ decay হয় — size info হারায়, original modify হয়!
-`---
-`## 💻 9.4 func() vs func(void)
-````c
+> **Rule:** Array function এ pass হলে **pointer** এ decay হয় — size info হারায়, original modify হয়!
+---
+## 💻 9.4 func() vs func(void)
+```c
 /* ⚠️ C তে func() ও func(void) আলাদা! */
 int func1();       /* C: "unspecified parameters" — ANY args accepted! */
 int func2(void);   /* C: "zero parameters" — strict, no args */
 `/* C++ তে দুটো same (both = zero params) */
 /* পরীক্ষায় এই পার্থক্য আসে! */
 ```
-`---
-`## ❓ 9.5 MCQ Problems
-`---
-`**MCQ 1:** নিচের কোডের output কী?
+---
+## ❓ 9.5 MCQ Problems
+---
+**MCQ 1:** নিচের কোডের output কী?
 ```c
 void fun(int x) \{ x = 20; \}
 int main() \{
@@ -2152,15 +2152,15 @@ int main() \{
     printf("%d", a);
 \}
 ```
-`| Option | Answer |
+| Option | Answer |
 |--------|--------|
 | (a) 20 | |
 | (b) **10** | ✅ |
 | (c) 0 | |
 | (d) Error | |
-`> **Call by value:** x = a এর **copy**। x change হলেও a = **10** unchanged!
-`---
-`**MCQ 2:** নিচের কোডের output কী?
+> **Call by value:** x = a এর **copy**। x change হলেও a = **10** unchanged!
+---
+**MCQ 2:** নিচের কোডের output কী?
 ```c
 void fun(int *p) \{ *p = 20; \}
 int main() \{
@@ -2169,15 +2169,15 @@ int main() \{
     printf("%d", a);
 \}
 ```
-`| Option | Answer |
+| Option | Answer |
 |--------|--------|
 | (a) 10 | |
 | (b) **20** | ✅ |
 | (c) Address | |
 | (d) Error | |
-`> **Call by reference:** `*p = 20` → a এর memory তে 20 লেখা → a = **20**
-`---
-`**MCQ 3:** নিচের কোডের output কী?
+> **Call by reference:** `*p = 20` → a এর memory তে 20 লেখা → a = **20**
+---
+**MCQ 3:** নিচের কোডের output কী?
 ```c
 int fun() \{
     static int count = 0;
@@ -2188,61 +2188,61 @@ int main() \{
     printf("%d %d %d", fun(), fun(), fun());
 \}
 ```
-`| Option | Answer |
+| Option | Answer |
 |--------|--------|
 | (a) 1 1 1 | |
 | (b) **1 2 3** (or 3 2 1, evaluation order UB) | ✅ |
 | (c) 0 1 2 | |
 | (d) 3 3 3 | |
-`> **static** variable persist করে। প্রতি call এ count বাড়ে। তবে argument evaluation order **unspecified**!
-`---
-`**MCQ 4:** Function prototype `int func();` C তে কী বোঝায়?
-`| Option | Answer |
+> **static** variable persist করে। প্রতি call এ count বাড়ে। তবে argument evaluation order **unspecified**!
+---
+**MCQ 4:** Function prototype `int func();` C তে কী বোঝায়?
+| Option | Answer |
 |--------|--------|
 | (a) Zero parameters | |
 | (b) **Unspecified number of parameters** | ✅ |
 | (c) One int parameter | |
 | (d) Error | |
-`> C তে `func()` = any args। `func(void)` = zero args। **C++ এ দুটো same!**
-`---
-`**MCQ 5:** Prototype আছে কিন্তু definition নেই — কী হবে?
-`| Option | Answer |
+> C তে `func()` = any args। `func(void)` = zero args। **C++ এ দুটো same!**
+---
+**MCQ 5:** Prototype আছে কিন্তু definition নেই — কী হবে?
+| Option | Answer |
 |--------|--------|
 | (a) Compilation Error | |
 | (b) Runtime Error | |
 | (c) 0 return | |
 | (d) **Linker Error** | ✅ |
-`> Prototype থাকলে compile হয়। Definition না থাকলে **linker** "undefined reference" error দেয়।
-`---
-`## 📝 9.6 Summary
-`- **Call by value** (default): argument এর **copy** পাঠায়, original **unchanged**। **Call by reference** (pointer): **address** পাঠায়, function ভেতরে original **modify** হয়। Swap function value pass এ কাজ করে না — pointer লাগে!
-`- **Array** function এ সবসময় **pointer** হিসেবে pass হয় — `sizeof(arr)` function ভেতরে = **pointer size** (4/8), array size নয়! তাই size **আলাদা parameter** এ পাঠাতে হয়। Array modify করলে **original** ও change হয়।
-`- **`func()` vs `func(void)`**: C তে `()` = **unspecified** params (any args accepted!), `(void)` = **zero** params (strict)। C++ এ দুটো same। Exam এ এই **C-specific** পার্থক্য আসে।
-`- C function **সর্বোচ্চ 1টি value** return করতে পারে। Multiple value return করতে **pointer parameter** ব্যবহার করুন: `void minMax(int arr[], int n, int *min, int *max)`।
-`- **static local variable** function call এর মধ্যে value **ধরে রাখে** — re-initialize হয় না। Counter, ID generator এ useful।
-`- Prototype **আছে** কিন্তু definition **নেই** → **Linker Error** (NOT compilation error!)। এটি compile vs link phase এর পার্থক্য — exam এ আসে।
-`---
+> Prototype থাকলে compile হয়। Definition না থাকলে **linker** "undefined reference" error দেয়।
 ---
-`# Topic 10: Recursion
-`<div align="center">
-`*"Recursion বোঝার জন্য আগে Recursion বুঝতে হবে — এটাই Recursion!"*
-`</div>
-`---
-`## 📖 10.1 ধারণা (Concept)
-`Recursion = function **নিজেই নিজেকে call** করে। প্রতিটি recursive function এ **দুটি অংশ** বাধ্যতামূলক:
-````
+## 📝 9.6 Summary
+- **Call by value** (default): argument এর **copy** পাঠায়, original **unchanged**। **Call by reference** (pointer): **address** পাঠায়, function ভেতরে original **modify** হয়। Swap function value pass এ কাজ করে না — pointer লাগে!
+- **Array** function এ সবসময় **pointer** হিসেবে pass হয় — `sizeof(arr)` function ভেতরে = **pointer size** (4/8), array size নয়! তাই size **আলাদা parameter** এ পাঠাতে হয়। Array modify করলে **original** ও change হয়।
+- **`func()` vs `func(void)`**: C তে `()` = **unspecified** params (any args accepted!), `(void)` = **zero** params (strict)। C++ এ দুটো same। Exam এ এই **C-specific** পার্থক্য আসে।
+- C function **সর্বোচ্চ 1টি value** return করতে পারে। Multiple value return করতে **pointer parameter** ব্যবহার করুন: `void minMax(int arr[], int n, int *min, int *max)`।
+- **static local variable** function call এর মধ্যে value **ধরে রাখে** — re-initialize হয় না। Counter, ID generator এ useful।
+- Prototype **আছে** কিন্তু definition **নেই** → **Linker Error** (NOT compilation error!)। এটি compile vs link phase এর পার্থক্য — exam এ আসে।
+---
+---
+# Topic 10: Recursion
+<div align="center">
+*"Recursion বোঝার জন্য আগে Recursion বুঝতে হবে — এটাই Recursion!"*
+</div>
+---
+## 📖 10.1 ধারণা (Concept)
+Recursion = function **নিজেই নিজেকে call** করে। প্রতিটি recursive function এ **দুটি অংশ** বাধ্যতামূলক:
+```
 Recursion Structure:
 ━━━━━━━━━━━━━━━━━━━
 1. Base Case     → থামার শর্ত (ছাড়া infinite → Stack Overflow!)
 2. Recursive Case → নিজেকে ছোট সমস্যা দিয়ে call
-`void recursive(params) {
+void recursive(params) {
     if (base_condition)         ← BASE: থামো!
         return;
     recursive(smaller_params);  ← RECURSIVE: ছোট করে call
 }
 ```
-`### Factorial Visualization
-````
+### Factorial Visualization
+```
 factorial(5)
 ├── 5 * factorial(4)
 │       ├── 4 * factorial(3)
@@ -2254,34 +2254,34 @@ factorial(5)
 │       └── return 4*6 = 24
 └── return 5*24 = 120
 ```
-`---
-`## 💻 10.2 Classic Recursive Functions
-`### Factorial
-````c
+---
+## 💻 10.2 Classic Recursive Functions
+### Factorial
+```c
 int factorial(int n) {
     if (n <= 1) return 1;           /* Base case */
     return n * factorial(n - 1);    /* Recursive case */
 }
 /* factorial(5) = 5 × 4 × 3 × 2 × 1 = 120 */
 ```
-`### Fibonacci
-````c
+### Fibonacci
+```c
 int fib(int n) \{
     if (n &lt;= 1) return n;                   /* Base: fib(0)=0, fib(1)=1 */
     return fib(n - 1) + fib(n - 2);        /* Two recursive calls! */
 \}
 /* ⚠️ O(2^n) — extremely slow! Use memoization or iterative */
 ```
-`### GCD (Euclidean)
-````c
+### GCD (Euclidean)
+```c
 int gcd(int a, int b) {
     if (b == 0) return a;           /* Base case */
     return gcd(b, a % b);          /* Recursive */
 }
 /* gcd(48,18) → gcd(18,12) → gcd(12,6) → gcd(6,0) → 6 */
 ```
-`### Power (Fast — O(log n))
-````c
+### Power (Fast — O(log n))
+```c
 long long power(int base, int exp) \{
     if (exp == 0) return 1;
     long long half = power(base, exp / 2);
@@ -2289,9 +2289,9 @@ long long power(int base, int exp) \{
     else return base * half * half;
 \}
 ```
-`---
-`## 💻 10.3 Head vs Tail Recursion — Output Prediction Key!
-````c
+---
+## 💻 10.3 Head vs Tail Recursion — Output Prediction Key!
+```c
 #include `stdio.h`
 `/* HEAD: call first, work after (ascending output) */
 void head(int n) {
@@ -2322,10 +2322,10 @@ void both(int n) {
 `    return 0;
 }
 ```
-`> **Exam Pattern:** print **before** call = descending, print **after** call = ascending, print **both sides** = mirror!
-`---
-`## 💻 10.4 Tower of Hanoi
-````c
+> **Exam Pattern:** print **before** call = descending, print **after** call = ascending, print **both sides** = mirror!
+---
+## 💻 10.4 Tower of Hanoi
+```c
 #include `stdio.h`
 `void hanoi(int n, char from, char to, char aux) {
     if (n == 0) return;
@@ -2339,11 +2339,11 @@ void both(int n) {
 \}
 /* Total moves = 2^n - 1 = 7 for n=3 */
 ```
-`> **Formula:** n disks → **2ⁿ - 1** moves। n=3 → 7, n=4 → 15, n=10 → 1023
-`---
-`## ❓ 10.5 MCQ Problems
-`---
-`**MCQ 1:** নিচের কোডের output কী?
+> **Formula:** n disks → **2ⁿ - 1** moves। n=3 → 7, n=4 → 15, n=10 → 1023
+---
+## ❓ 10.5 MCQ Problems
+---
+**MCQ 1:** নিচের কোডের output কী?
 ```c
 void fun(int n) {
     if (n == 0) return;
@@ -2352,15 +2352,15 @@ void fun(int n) {
 }
 int main() { fun(4); }
 ```
-`| Option | Answer |
+| Option | Answer |
 |--------|--------|
 | (a) 4 3 2 1 | |
 | (b) **1 2 3 4** | ✅ |
 | (c) 4 3 2 1 0 | |
 | (d) 0 1 2 3 4 | |
-`> **Head recursion:** call আগে, print পরে (unwinding) → **ascending**
-`---
-`**MCQ 2:** নিচের কোডের output কী?
+> **Head recursion:** call আগে, print পরে (unwinding) → **ascending**
+---
+**MCQ 2:** নিচের কোডের output কী?
 ```c
 void fun(int n) {
     if (n == 0) return;
@@ -2370,33 +2370,33 @@ void fun(int n) {
 }
 int main() { fun(3); }
 ```
-`| Option | Answer |
+| Option | Answer |
 |--------|--------|
 | (a) **3 2 1 1 2 3** | ✅ |
 | (b) 1 2 3 3 2 1 | |
 | (c) 3 2 1 | |
 | (d) 3 2 1 3 2 1 | |
-`> Print **both sides** → winding: 3 2 1, unwinding: 1 2 3 → **mirror!**
-`---
-`**MCQ 3:** Tower of Hanoi তে 4 disks → কত moves?
-`| Option | Answer |
+> Print **both sides** → winding: 3 2 1, unwinding: 1 2 3 → **mirror!**
+---
+**MCQ 3:** Tower of Hanoi তে 4 disks → কত moves?
+| Option | Answer |
 |--------|--------|
 | (a) 8 | |
 | (b) **15** | ✅ |
 | (c) 16 | |
 | (d) 4 | |
-`> Moves = 2ⁿ - 1 = 2⁴ - 1 = **15**
-`---
-`**MCQ 4:** Base case ছাড়া recursion করলে কী হয়?
-`| Option | Answer |
+> Moves = 2ⁿ - 1 = 2⁴ - 1 = **15**
+---
+**MCQ 4:** Base case ছাড়া recursion করলে কী হয়?
+| Option | Answer |
 |--------|--------|
 | (a) 0 return | |
 | (b) **Stack Overflow** | ✅ |
 | (c) Compilation Error | |
 | (d) Infinite loop (no crash) | |
-`> Stack memory শেষ → **crash** (Segmentation Fault)!
-`---
-`**MCQ 5:** নিচের কোডের output কী?
+> Stack memory শেষ → **crash** (Segmentation Fault)!
+---
+**MCQ 5:** নিচের কোডের output কী?
 ```c
 int fun(int n) {
     if (n <= 1) return n;
@@ -2404,15 +2404,15 @@ int fun(int n) {
 }
 printf("%d", fun(6));
 ```
-`| Option | Answer |
+| Option | Answer |
 |--------|--------|
 | (a) 6 | |
 | (b) **8** | ✅ |
 | (c) 13 | |
 | (d) 5 | |
-`> **Fibonacci!** 0,1,1,2,3,5,**8** (index 0-6)
-`---
-`**MCQ 6:** নিচের কোডের output কী?
+> **Fibonacci!** 0,1,1,2,3,5,**8** (index 0-6)
+---
+**MCQ 6:** নিচের কোডের output কী?
 ```c
 int fun(int n) {
     if (n == 0) return 0;
@@ -2420,15 +2420,15 @@ int fun(int n) {
 }
 printf("%d", fun(16));
 ```
-`| Option | Answer |
+| Option | Answer |
 |--------|--------|
 | (a) 4 | |
 | (b) **5** | ✅ |
 | (c) 16 | |
 | (d) 8 | |
-`> fun(16)→fun(8)+1→fun(4)+1→fun(2)+1→fun(1)+1→fun(0)+1=0+1=1 → 1+1+1+1+1 = **5** (log₂(16)+1)
-`---
-`**MCQ 7:** নিচের কোডের output কী?
+> fun(16)→fun(8)+1→fun(4)+1→fun(2)+1→fun(1)+1→fun(0)+1=0+1=1 → 1+1+1+1+1 = **5** (log₂(16)+1)
+---
+**MCQ 7:** নিচের কোডের output কী?
 ```c
 void fun(int n) {
     if (n > 0) {
@@ -2439,16 +2439,16 @@ void fun(int n) {
 }
 int main() { fun(3); }
 ```
-`| Option | Answer |
+| Option | Answer |
 |--------|--------|
 | (a) **1 2 1 3 1 2 1** | ✅ |
 | (b) 3 2 1 1 2 1 | |
 | (c) 1 2 3 2 1 | |
 | (d) 1 1 2 1 1 2 3 | |
-`> Two recursive calls → tree-like expansion → **1 2 1 3 1 2 1**
-`---
-`## 💻 10.6 Recursion vs Iteration
-````
+> Two recursive calls → tree-like expansion → **1 2 1 3 1 2 1**
+---
+## 💻 10.6 Recursion vs Iteration
+```
 ┌──────────────────┬──────────────────┬──────────────────┐
 │ Feature          │ Recursion        │ Iteration        │
 ├──────────────────┼──────────────────┼──────────────────┤
@@ -2459,38 +2459,38 @@ int main() { fun(3); }
 │ Best for         │ Tree, divide &   │ Simple counting  │
 │                  │ conquer          │ loops            │
 └──────────────────┴──────────────────┴──────────────────┘
-`Complexity:
+Complexity:
   fun(n-1)              → O(n) time, O(n) space
   fun(n/2)              → O(log n) time, O(log n) space
   fun(n-1) + fun(n-1)   → O(2^n) time! ⚠️ (Fibonacci naive)
   fun(n-1) + fun(n-2)   → O(2^n) time! ⚠️
 ```
-`---
-`## 📝 10.7 Summary
-`- Recursion = function **নিজেকে call** করে। দুটি অংশ **বাধ্যতামূলক**: **base case** (থামার শর্ত) ও **recursive case** (ছোট সমস্যায় call)। Base case ছাড়া = **infinite recursion** → **Stack Overflow** (crash!)।
-`- **Head recursion** (call আগে, print পরে) → output **ascending** (1 2 3 4)। **Tail recursion** (print আগে, call পরে) → output **descending** (4 3 2 1)। **Both sides print** → output **mirror** (3 2 1 1 2 3)। এই pattern exam এ সবচেয়ে বেশি আসে — trace করে output predict করতে হয়।
-`- **Fibonacci naive recursion** = **O(2ⁿ)** — extremely slow! fib(40) seconds লাগে। Fix: **memoization** (cache results) → O(n), বা **iterative** approach। Exam এ complexity জিজ্ঞেস করা হয়।
-`- **Tower of Hanoi** moves = **2ⁿ - 1**। n=3 → 7, n=4 → 15, n=10 → 1023। Algorithm: (1) n-1 disks move to auxiliary, (2) nth disk move to destination, (3) n-1 disks move from auxiliary to destination।
-`- **Stack depth limit** ~ 10,000 calls (system dependent)। এর বেশি → **Stack Overflow**। বড় input এ **iteration ব্যবহার** করুন। সব recursion কে iteration এ convert করা **সম্ভব**, কিন্তু Tree/Backtracking এ recursion **natural**।
-`- **Multiple recursive calls** = **exponential** complexity: `fun(n-1) + fun(n-1)` → O(2ⁿ)। **Single call** = linear: `fun(n-1)` → O(n)। **Halving call** = logarithmic: `fun(n/2)` → O(log n)। Exam এ complexity question আসে।
-`- Recursion trace করার কৌশল: **call stack** এ প্রতিটি call push করুন, base case এ pop শুরু করুন। **winding** (call going down) ও **unwinding** (returning back) দুটি phase — কোথায় print আছে সেটাই output determine করে।
-`---
 ---
-`---
-`## 🔗 Navigation
-`- 🏠 Back to [C Programming — Master Index](00-master-index.md)
+## 📝 10.7 Summary
+- Recursion = function **নিজেকে call** করে। দুটি অংশ **বাধ্যতামূলক**: **base case** (থামার শর্ত) ও **recursive case** (ছোট সমস্যায় call)। Base case ছাড়া = **infinite recursion** → **Stack Overflow** (crash!)।
+- **Head recursion** (call আগে, print পরে) → output **ascending** (1 2 3 4)। **Tail recursion** (print আগে, call পরে) → output **descending** (4 3 2 1)। **Both sides print** → output **mirror** (3 2 1 1 2 3)। এই pattern exam এ সবচেয়ে বেশি আসে — trace করে output predict করতে হয়।
+- **Fibonacci naive recursion** = **O(2ⁿ)** — extremely slow! fib(40) seconds লাগে। Fix: **memoization** (cache results) → O(n), বা **iterative** approach। Exam এ complexity জিজ্ঞেস করা হয়।
+- **Tower of Hanoi** moves = **2ⁿ - 1**। n=3 → 7, n=4 → 15, n=10 → 1023। Algorithm: (1) n-1 disks move to auxiliary, (2) nth disk move to destination, (3) n-1 disks move from auxiliary to destination।
+- **Stack depth limit** ~ 10,000 calls (system dependent)। এর বেশি → **Stack Overflow**। বড় input এ **iteration ব্যবহার** করুন। সব recursion কে iteration এ convert করা **সম্ভব**, কিন্তু Tree/Backtracking এ recursion **natural**।
+- **Multiple recursive calls** = **exponential** complexity: `fun(n-1) + fun(n-1)` → O(2ⁿ)। **Single call** = linear: `fun(n-1)` → O(n)। **Halving call** = logarithmic: `fun(n/2)` → O(log n)। Exam এ complexity question আসে।
+- Recursion trace করার কৌশল: **call stack** এ প্রতিটি call push করুন, base case এ pop শুরু করুন। **winding** (call going down) ও **unwinding** (returning back) দুটি phase — কোথায় print আছে সেটাই output determine করে।
+---
+---
+---
+## 🔗 Navigation
+- 🏠 Back to [C Programming — Master Index](00-master-index.md)
 - ⬅️ Previous: [Chapter 01 — Fundamentals](01-fundamentals.md)
 - ➡️ Next: [Chapter 03 — Functions — Deep Dive](03-functions-deep.md)
-`---
-`# 🇧🇩 Job Exam Special (Bangladesh Context)
-`> বিপিএসসি (BPSC), ব্যাংক আইটি এবং এ্যাসিস্ট্যান্ট প্রোগ্রামার পরীক্ষার বিগত বছরের প্রশ্নের লজিক ও সমাধান।
-`### Problem 01: Swapping two numbers without a temporary variable
+---
+# 🇧🇩 Job Exam Special (Bangladesh Context)
+> বিপিএসসি (BPSC), ব্যাংক আইটি এবং এ্যাসিস্ট্যান্ট প্রোগ্রামার পরীক্ষার বিগত বছরের প্রশ্নের লজিক ও সমাধান।
+### Problem 01: Swapping two numbers without a temporary variable
 **পরীক্ষা:** সোনালী ব্যাংক আইটি (২০২২), বাখরাবাদ গ্যাস (২০২৩)
-`<details>
+<details>
 <summary><b>💻 Solution in C</b></summary>
-``c
+```c
 #include `stdio.h`
-`int main() {
+int main() {
     int a = 10, b = 20;
     a = a + b;
     b = a - b;
@@ -2498,13 +2498,13 @@ int main() { fun(3); }
     printf("a = %d, b = %d", a, b);
     return 0;
 }
-`
+```
 </details>
-`<details>
+<details>
 <summary><b>💻 Solution in C#</b></summary>
-``csharp
+```csharp
 using System;
-`class Program {
+class Program {
     static void Main() {
         int a = 10, b = 20;
         a = a + b;
@@ -2513,11 +2513,11 @@ using System;
         Console.WriteLine($"a = {a}, b = {b}");
     }
 }
-`
+```
 </details>
-`<details>
+<details>
 <summary><b>💻 Solution in Java</b></summary>
-``java
+```java
 public class Main \{
     public static void main(String[] args) \{
         int a = 10, b = 20;
@@ -2527,35 +2527,35 @@ public class Main \{
         System.out.println("a = " + a + ", b = " + b);
     \}
 \}
-`
+```
 </details>
-`<details>
+<details>
 <summary><b>💻 Solution in Python</b></summary>
-``python
+```python
 a, b = 10, 20
 # Pythonic way
 a, b = b, a
 print(f"a = {a}, b = {b}")
-`
+```
 </details>
-`---
-`# ✍️ Written Questions
-`**Q1: Difference between const and #define?**
+---
+# ✍️ Written Questions
+**Q1: Difference between const and #define?**
 **Answer:** const compile time type checking করে এবং memory তে জায়গা নেয়। #define preprocessor macro, এটি শুধু text replace করে এবং type check করে না।
-`**Q2: What is implicitly type casting?**
+**Q2: What is implicitly type casting?**
 **Answer:** যখন compiler নিজে থেকে ছোট data type কে বড় টাইপে রূপান্তর করে (যেমন int থেকে float), তাকে implicit casting বলে।
-`**Q3: Explain logical vs Relational operators.**
+**Q3: Explain logical vs Relational operators.**
 **Answer:** Relational operators (<, >, ==) দুটি ভ্যালুর তুলনা করে। Logical operators (&&, ||, !) একাধিক কন্ডিশনকে একত্রিত করে লজিক তৈরি করে।
-`---
-`# 🇧🇩 Job Exam Special (Bangladesh Context)
-`> বিপিএসসি (BPSC), ব্যাংক আইটি এবং এ্যাসিস্ট্যান্ট প্রোগ্রামার পরীক্ষার বিগত বছরের প্রশ্নের লজিক ও সমাধান।
-`### Problem 01: Swapping two numbers without a temporary variable
+---
+# 🇧🇩 Job Exam Special (Bangladesh Context)
+> বিপিএসসি (BPSC), ব্যাংক আইটি এবং এ্যাসিস্ট্যান্ট প্রোগ্রামার পরীক্ষার বিগত বছরের প্রশ্নের লজিক ও সমাধান।
+### Problem 01: Swapping two numbers without a temporary variable
 **পরীক্ষা:** সোনালী ব্যাংক আইটি (২০২২), বাখরাবাদ গ্যাস (২০২৩)
-`<details>
+<details>
 <summary><b>💻 Solution in C</b></summary>
-``c
+```c
 #include `stdio.h`
-`int main() {
+int main() {
     int a = 10, b = 20;
     a = a + b;
     b = a - b;
@@ -2563,13 +2563,13 @@ print(f"a = {a}, b = {b}")
     printf("a = %d, b = %d", a, b);
     return 0;
 \}
-`
+```
 </details>
-`<details>
+<details>
 <summary><b>💻 Solution in C#</b></summary>
-``csharp
+```csharp
 using System;
-`class Program {
+class Program {
     static void Main() \{
         int a = 10, b = 20;
         a = a + b;
@@ -2578,11 +2578,11 @@ using System;
         Console.WriteLine($"a = \{a\}, b = \{b\}");
     \}
 \}
-`
+```
 </details>
-`<details>
+<details>
 <summary><b>💻 Solution in Java</b></summary>
-``java
+```java
 public class Main {
     public static void main(String[] args) {
         int a = 10, b = 20;
@@ -2592,20 +2592,20 @@ public class Main {
         System.out.println("a = " + a + ", b = " + b);
     }
 }
-`
+```
 </details>
-`<details>
+<details>
 <summary><b>💻 Solution in Python</b></summary>
-``python
+```python
 a, b = 10, 20
 a, b = b, a
 print(f"a = \{a\}, b = \{b\}")
-`
+```
 </details>
-`---
-`# ✍️ Written Questions
-`**Q1: Difference between const and #define?**
+---
+# ✍️ Written Questions
+**Q1: Difference between const and #define?**
 **Answer:** const compile time type checking করে এবং memory তে জায়গা নেয়। #define preprocessor macro, এটি শুধু text replace করে এবং type check করে না।
-`**Q2: What is implicitly type casting?**
+**Q2: What is implicitly type casting?**
 **Answer:** যখন compiler নিজে থেকে ছোট data type কে বড় টাইপে রূপান্তর করে (যেমন int থেকে float), তাকে implicit casting বলে।
 `

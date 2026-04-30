@@ -249,7 +249,7 @@ Complete binary tree, parent > children (max-heap)।
 
 #### Adjacency Matrix
 
-`V×V` matrix. `A[i][j] = 1` if edge।
+V×V` matrix. `A[i][j] = 1` if edge।
 - Space: O(V²)
 - Edge check: O(1)
 

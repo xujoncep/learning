@@ -236,7 +236,7 @@ sudo systemctl restart sshd
 
 ### 3.5 SSH Config File (Client Side Shortcut)
 
-`~/.ssh/config`:
+~/.ssh/config`:
 
 ```
 Host myserver

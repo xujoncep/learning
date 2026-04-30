@@ -1,10 +1,16 @@
 # C Programming — Master Index 💻
-``n> C Programming-র সব chapter একসাথে। প্রতিটা chapter independent — যেকোনোটা থেকে শুরু করতে পারো।
-``n---
-``n## 📚 Course Overview
-``nএই course-এ মোট **7টা chapter** আছে — foundations থেকে শুরু করে প্রফেশনাল লেভেলের advanced topics এবং BD Job Exam প্রিপারেশন পর্যন্ত। প্রতিটা chapter-এ concept + code examples + Bangladesh Job Exam Special (C, C#, Java, Python) + MCQ + written questions + summary।
-``n## 📖 Chapters
-``n| # | Chapter | What you'll learn |
+
+> C Programming-র সব chapter একসাথে। প্রতিটা chapter independent — যেকোনোটা থেকে শুরু করতে পারো।
+
+---
+
+## 📚 Course Overview
+
+এই course-এ মোট **7টা chapter** আছে — foundations থেকে শুরু করে প্রফেশনাল লেভেলের advanced topics এবং BD Job Exam প্রিপারেশন পর্যন্ত। প্রতিটা chapter-এ concept + code examples + Bangladesh Job Exam Special (C, C#, Java, Python) + MCQ + written questions + summary।
+
+## 📖 Chapters
+
+| # | Chapter | What you'll learn |
 |---|---------|-------------------|
 | 01 | [Foundations & Logic Control](01-fundamentals.md) | Data types, operators, flow control (Loops, Conditions) — C-র ভিত্তি ও যৌক্তিক প্রবাহ। |
 | 02 | [Functions & Memory Architecture](02-functions-architecture.md) | Storage classes, scope, lifetime, stack vs heap basics — function-এর internals। |
@@ -13,4 +19,4 @@
 | 05 | [Structures, Memory Alignment & Unions](05-structs-unions.md) | User-defined data types, ttypedef, enum, এবং memory alignment। |
 | 06 | [File I/O, CLI & Preprocessor](06-file-cli.md) | Advanced File I/O, Command Line Arguments (argc/argv), এবং Preprocessor directives। |
 | 07 | [Data Structures & Algorithm Essentials](07-dsa-essentials.md) | Linked List, Stack, Queue basics এবং Sorting/Searching algorithms। |
-``n
+

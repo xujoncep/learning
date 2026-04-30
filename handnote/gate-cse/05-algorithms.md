@@ -57,11 +57,11 @@ Algorithm এর speed exactly বলা কঠিন (hardware, language depend
 **সবচেয়ে খারাপ case** এর upper limit।
 
 #### Omega (Ω) — Lower bound
-`f(n) = Ω(g(n))` মানে `f(n) ≥ c × g(n)`।
+f(n) = Ω(g(n))` মানে `f(n) ≥ c × g(n)`।
 **সবচেয়ে ভালো case** এর lower limit।
 
 #### Theta (Θ) — Tight bound
-`f(n) = Θ(g(n))` মানে Big-O এবং Omega দুইটাই।
+f(n) = Θ(g(n))` মানে Big-O এবং Omega দুইটাই।
 **Actual growth rate**।
 
 #### Growth Rate Hierarchy (মুখস্থ করুন)
@@ -257,7 +257,7 @@ Character frequency অনুযায়ী variable-length prefix codes বা
 
 Capacity W, items with weight and value। Max value কীভাবে?
 
-`dp[i][w] = max(dp[i-1][w], dp[i-1][w-wt[i]] + val[i])`
+dp[i][w] = max(dp[i-1][w], dp[i-1][w-wt[i]] + val[i])`
 
 **Time:** O(n × W), **Space:** O(n × W)
 
@@ -278,7 +278,7 @@ else:
 
 Matrices A₁, A₂, ..., Aₙ multiply করার minimum scalar multiplications।
 
-`dp[i][j] = min over k of (dp[i][k] + dp[k+1][j] + dims)`
+dp[i][j] = min over k of (dp[i][k] + dp[k+1][j] + dims)`
 
 **Time:** O(n³)
 

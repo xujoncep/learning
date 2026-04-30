@@ -146,10 +146,10 @@ n+1 pigeons in n holes → at least 2 in same hole।
 
 #### Inclusion-Exclusion
 
-`|A ∪ B| = |A| + |B| - |A ∩ B|`
+|A ∪ B| = |A| + |B| - |A ∩ B|`
 
 For 3 sets:
-`|A ∪ B ∪ C| = |A|+|B|+|C| - |A∩B| - |B∩C| - |A∩C| + |A∩B∩C|`
+|A ∪ B ∪ C| = |A|+|B|+|C| - |A∩B| - |B∩C| - |A∩C| + |A∩B∩C|`
 
 ---
 
@@ -224,15 +224,15 @@ Chain rule: `d/dx [f(g(x))] = f'(g(x)) · g'(x)`
 
 #### Bayes' Theorem
 
-`P(A|B) = P(B|A) · P(A) / P(B)`
+P(A|B) = P(B|A) · P(A) / P(B)`
 
 #### Expected Value
 
-`E(X) = Σ xᵢ P(xᵢ)`
+E(X) = Σ xᵢ P(xᵢ)`
 
 #### Variance
 
-`Var(X) = E(X²) - (E(X))²`
+Var(X) = E(X²) - (E(X))²`
 
 #### Common Distributions
 
@@ -303,7 +303,7 @@ Either way Q=T if premises hold। **Yes, tautology** ✅
 
 #### PYQ 2 (GATE 2023) — Equivalence
 
-`¬(P ∨ Q) ≡ ?`
+¬(P ∨ Q) ≡ ?`
 
 **Answer:** `¬P ∧ ¬Q` (De Morgan) ✅
 
@@ -311,7 +311,7 @@ Either way Q=T if premises hold। **Yes, tautology** ✅
 
 #### PYQ 3 (GATE 2022) — Implication
 
-`P → Q` is false only when?
+P → Q` is false only when?
 
 **Answer:** P = T, Q = F ✅
 

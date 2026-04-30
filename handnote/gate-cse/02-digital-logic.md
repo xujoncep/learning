@@ -152,7 +152,7 @@ For `n` variables:
 
 #### Example
 
-`f(A,B,C) = Σm(0,1,2,5,6,7)`
+f(A,B,C) = Σm(0,1,2,5,6,7)`
 
 Plot and group:
 - m0, m1, m2: can group? not rectangular
@@ -176,7 +176,7 @@ Output = I[S]
 `Y = S'I0 + SI1`
 
 **4-to-1 MUX:**
-`Y = S1'S0'I0 + S1'S0 I1 + S1 S0'I2 + S1 S0 I3`
+Y = S1'S0'I0 + S1'S0 I1 + S1 S0'I2 + S1 S0 I3`
 
 #### Decoder
 
@@ -363,7 +363,7 @@ Now A + B + AB' = A + B(1 + A') = **A + B** ✅
 
 #### PYQ 5 (GATE 2024) — Minimization
 
-`f = Σm(0,2,4,6,8,10,12,14)`। Simplified?
+f = Σm(0,2,4,6,8,10,12,14)`। Simplified?
 
 **Solution:**
 All even minterms → all have LSB = 0 → **D' (complement of LSB)** ✅
@@ -372,7 +372,7 @@ All even minterms → all have LSB = 0 → **D' (complement of LSB)** ✅
 
 #### PYQ 6 (GATE 2022) — K-map
 
-`f(A,B,C) = Σm(0,1,3,7)`। Min SOP?
+f(A,B,C) = Σm(0,1,3,7)`। Min SOP?
 
 **Solution:**
 - m0 (000) m1 (001) → A'B'
@@ -388,7 +388,7 @@ Result: `A'B' + BC + A'C` (further combine) or minimize to `A'B' + AC + BC` poss
 
 #### PYQ 7 (GATE 2021) — Prime Implicants
 
-`f = Σm(1,3,5,7)`। Prime implicants?
+f = Σm(1,3,5,7)`। Prime implicants?
 
 **Solution:**
 All odd minterms → C=1 for all।

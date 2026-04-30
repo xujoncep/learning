@@ -169,7 +169,7 @@ Fast/Small                              Slow/Large
 
 Each memory block maps to **exactly one** cache line।
 
-`Cache line = (Block address) mod (Number of cache lines)`
+Cache line = (Block address) mod (Number of cache lines)`
 
 ##### 2. Fully Associative
 
@@ -200,10 +200,10 @@ For cache of `C` lines, block size `B`, memory `M`:
 
 #### Average Memory Access Time (AMAT)
 
-`AMAT = Hit_time + Miss_rate × Miss_penalty`
+AMAT = Hit_time + Miss_rate × Miss_penalty`
 
 Or for multi-level:
-`AMAT = h × T_cache + (1-h) × T_mem`
+AMAT = h × T_cache + (1-h) × T_mem`
 
 ---
 

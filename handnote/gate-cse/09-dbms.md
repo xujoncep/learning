@@ -245,7 +245,7 @@ FD: `CourseID → CourseName` (partial dependency!)
 
 **Violates 3NF:**
 FDs: `StudentID → DeptID`, `DeptID → DeptName`
-`StudentID → DeptName` is transitive!
+StudentID → DeptName` is transitive!
 
 **Fix:** Separate Department table।
 

@@ -132,7 +132,7 @@ Multiple frames send without waiting।
 ### 3.3 Efficiency Calculations
 
 **Bandwidth-Delay Product (BDP):**
-`BDP = B × RTT` = max bits in pipe
+BDP = B × RTT` = max bits in pipe
 
 **Efficiency:**
 ```

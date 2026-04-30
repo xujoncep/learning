@@ -170,7 +170,7 @@ For A → α | β:
 
 #### Left Recursion Removal
 
-`A → Aα | β` becomes:
+A → Aα | β` becomes:
 ```
 A → βA'
 A' → αA' | ε
@@ -369,7 +369,7 @@ Grammar LL(1) হতে কী requirement?
 
 #### PYQ 4 (GATE 2021) — Left Recursion
 
-`A → Aa | b` remove left recursion।
+A → Aa | b` remove left recursion।
 
 **Solution:**
 ```
