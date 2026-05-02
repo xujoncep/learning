@@ -97,7 +97,23 @@ const SECTION_META: Record<string, SectionMeta> = {
     description:
       'Bangladesh Bank IT/AD IT exam-এর জন্য cyber security written question + answer — CIA, SSL/TLS, SWIFT, MFA, BB Framework v1.0 (2026), e-KYC সহ ২৮টি high-priority topic।',
   },
-  root: { title: 'Handbooks', icon: '📚', order: 8 },
+  'operating-system-mcq': {
+    title: 'Operating System MCQ Practice',
+    icon: '🖥️',
+    order: 8,
+    gated: true,
+    description:
+      '৭০টা OS MCQ — Process, Scheduling, Sync, Deadlock, Memory, Virtual Memory, File System, I/O, Linux command — Bank IT, BCS, NTRCA, university viva-র জন্য fast revision।',
+  },
+  'operating-system-bd-bank': {
+    title: 'OS Written (BB IT/AME Exam)',
+    icon: '✍️',
+    order: 9,
+    gated: true,
+    description:
+      'Bangladesh Bank Officer (IT) ও AME post-এর written exam-এর জন্য ৩৩টা OS question + answer — Gantt chart math, RAG diagram, paging, LRU, RAID, boot sequence, chmod সহ complete written prep।',
+  },
+  root: { title: 'Handbooks', icon: '📚', order: 10 },
 };
 
 export function isGatedSection(section: string | undefined): boolean {
