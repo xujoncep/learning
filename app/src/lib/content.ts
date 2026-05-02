@@ -40,6 +40,97 @@ interface SectionMeta {
   description?: string;
 }
 
+export interface SubjectSection {
+  id: string;
+  label: string;
+  icon: string;
+}
+
+export interface SubjectMeta {
+  title: string;
+  icon: string;
+  order: number;
+  description: string;
+  sections: SubjectSection[];
+}
+
+const SUBJECT_META: Record<string, SubjectMeta> = {
+  dbms: {
+    title: 'Database Management System',
+    icon: '🗄️',
+    order: 1,
+    description:
+      'Relational model, SQL, Normalization, Transactions, Indexing — DBMS concepts ও MCQ practice।',
+    sections: [
+      { id: 'dbms', label: 'Concepts', icon: '📖' },
+      { id: 'dbms-mcq', label: 'MCQ Practice', icon: '✅' },
+    ],
+  },
+  'operating-system': {
+    title: 'Operating System',
+    icon: '🖥️',
+    order: 2,
+    description:
+      'Process, Scheduling, Memory, File System — OS concepts, BB written prep ও MCQ practice।',
+    sections: [
+      { id: 'operating-system', label: 'Concepts', icon: '📖' },
+      { id: 'operating-system-bd-bank', label: 'Written Questions', icon: '✍️' },
+      { id: 'operating-system-mcq', label: 'MCQ Practice', icon: '✅' },
+    ],
+  },
+  'cyber-security': {
+    title: 'Cyber Security',
+    icon: '🔐',
+    order: 3,
+    description:
+      'CIA Triad, Malware, Cryptography, BB Framework 2026 — written prep ও MCQ practice for BB IT exam।',
+    sections: [
+      { id: 'cyber-security-bd-bank', label: 'Written Questions', icon: '✍️' },
+      { id: 'cyber-security-mcq', label: 'MCQ Practice', icon: '✅' },
+    ],
+  },
+  'computer-networking': {
+    title: 'Computer Networking',
+    icon: '🌐',
+    order: 4,
+    description:
+      'OSI/TCP-IP থেকে routing, security, wireless পর্যন্ত — networking-র complete course।',
+    sections: [{ id: 'computer-networking', label: 'Concepts', icon: '📖' }],
+  },
+  'c-programming': {
+    title: 'C Programming',
+    icon: '💻',
+    order: 5,
+    description: 'C language depth-এ — fundamentals থেকে data structures পর্যন্ত।',
+    sections: [{ id: 'c-programming', label: 'Concepts', icon: '💻' }],
+  },
+  'system-design': {
+    title: 'System Design',
+    icon: '🏗️',
+    order: 6,
+    description:
+      'NFR, load balancer, caching, sharding — beginner থেকে interview-ready system design।',
+    sections: [{ id: 'system-design', label: 'Concepts', icon: '📖' }],
+  },
+  'gate-cse': {
+    title: 'GATE CSE',
+    icon: '🎓',
+    order: 7,
+    description: 'GATE CSE সব subject, PYQ-heavy approach, bilingual explanations।',
+    sections: [{ id: 'gate-cse', label: 'Course', icon: '🎓' }],
+  },
+};
+
+export function getSubjectMeta(subjectId: string): SubjectMeta | undefined {
+  return SUBJECT_META[subjectId];
+}
+
+export function getSubjects(): Array<{ id: string } & SubjectMeta> {
+  return Object.entries(SUBJECT_META)
+    .map(([id, meta]) => ({ id, ...meta }))
+    .sort((a, b) => a.order - b.order);
+}
+
 const SECTION_META: Record<string, SectionMeta> = {
   'gate-cse': {
     title: 'GATE CSE',

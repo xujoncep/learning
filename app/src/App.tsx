@@ -9,6 +9,7 @@ import { AuthCallbackPage } from '@/pages/AuthCallbackPage';
 import { DashboardPage } from '@/pages/DashboardPage';
 import { HandbooksPage } from '@/pages/HandbooksPage';
 import { CoursesIndexPage } from '@/pages/CoursesIndexPage';
+import { SubjectPage } from '@/pages/SubjectPage';
 import { AboutPage } from '@/pages/AboutPage';
 import { ProtectedRoute } from '@/lib/auth';
 
@@ -60,6 +61,16 @@ function App() {
         element={
           <Layout showSearch>
             <AboutPage />
+          </Layout>
+        }
+      />
+
+      {/* Subject hub: groups related sections (e.g., DBMS → Concepts + MCQ) */}
+      <Route
+        path="/subjects/:subjectId"
+        element={
+          <Layout showSearch>
+            <SubjectPage />
           </Layout>
         }
       />
