@@ -37,13 +37,13 @@ export function LoginPage() {
           <div className="flex-1 flex items-center">
             <div className="w-full max-w-[420px] mx-auto">
               <div className="mb-8">
-                <div className="text-[11px] uppercase tracking-[0.04em] text-ink-4">Welcome</div>
+                <div className="text-[11px] uppercase tracking-[0.04em] text-ink-4">স্বাগতম</div>
                 <h1 className="font-serif text-[44px] leading-[1.05] tracking-tight text-ink mt-2">
-                  Sign in to continue <em className="italic text-amber-700">learning</em>.
+                  পড়া শুরু করতে,<br /><em className="italic text-amber-700">sign in করো।</em>
                 </h1>
                 <p className="text-[14px] text-ink-3 mt-3 leading-relaxed">
-                  Gated courses, personal dashboard, calendar আর reading activity tracking
-                  — সব access করতে Google দিয়ে sign in করো।
+                  Course, dashboard আর reading history — সব পেতে Google account দিয়ে
+                  এক ক্লিকে ঢুকে যাও। আলাদা account খুলতে হবে না।
                 </p>
               </div>
 
@@ -53,7 +53,8 @@ export function LoginPage() {
                 onClick={() => {
                   window.location.href = apiGoogleSignInUrl();
                 }}
-                className="w-full h-12 inline-flex items-center justify-center gap-3 rounded-[8px] bg-white border border-line-2 text-[14px] font-medium text-ink hover:bg-sand-2 hover:border-line transition-all shadow-sm"
+                className="w-full h-12 inline-flex items-center justify-center gap-3 rounded-[8px] text-[14px] font-medium transition-all shadow-sm hover:brightness-95"
+                style={{ background: '#ffffff', color: '#1C1917', border: '1px solid #D0C4B0' }}
               >
                 <svg width="18" height="18" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden>
                   <path fill="#4285F4" d="M23.49 12.27c0-.79-.07-1.54-.19-2.27H12v4.51h6.44c-.28 1.48-1.13 2.74-2.4 3.58v3h3.88c2.27-2.09 3.57-5.18 3.57-8.82z" />
@@ -81,12 +82,12 @@ export function LoginPage() {
               )}
 
               <p className="text-[12.5px] text-ink-4 mt-6 leading-relaxed">
-                We only use Google sign-in to identify you across devices and keep your
-                reading history safe. No password to remember, no separate account.
+                শুধু তোমাকে চেনার জন্য Google ব্যবহার হয় — কোনো কিছু post বা share
+                করা হয় না। Password মনে রাখতে হবে না।
               </p>
 
               <p className="text-[12px] text-ink-4 text-center pt-8 border-t border-line/50 mt-8">
-                Public resources →{' '}
+                আগে দেখতে চাও? →{' '}
                 <Link to="/" className="text-amber-700 hover:underline">
                   Home
                 </Link>

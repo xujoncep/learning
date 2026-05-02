@@ -283,13 +283,15 @@ export function HomePage() {
               View all →
             </Link>
           </div>
-          <Marquee
-            items={subjects}
-            renderItem={(s, i) => (
-              <CourseCard key={i} subject={s} isAuthenticated={isAuthenticated} />
-            )}
-            speed={40}
-          />
+          <div className="max-w-[1280px] mx-auto">
+            <Marquee
+              items={subjects}
+              renderItem={(s, i) => (
+                <CourseCard key={i} subject={s} isAuthenticated={isAuthenticated} />
+              )}
+              speed={40}
+            />
+          </div>
         </div>
 
         {/* Handbooks carousel */}
@@ -300,12 +302,14 @@ export function HomePage() {
               View all →
             </Link>
           </div>
-          <Marquee
-            items={rootDocs}
-            renderItem={(d, i) => <HandbookCard key={i} doc={d} />}
-            speed={50}
-            reverse
-          />
+          <div className="max-w-[1280px] mx-auto">
+            <Marquee
+              items={rootDocs}
+              renderItem={(d, i) => <HandbookCard key={i} doc={d} />}
+              speed={50}
+              reverse
+            />
+          </div>
         </div>
       </section>
 
@@ -315,20 +319,20 @@ export function HomePage() {
       <section className="border-y border-line bg-sand-2 py-16 md:py-20">
         <div className="max-w-[1280px] mx-auto px-6 md:px-10">
           <div className="max-w-[720px] mb-10">
-            <div className="meta text-[12px] uppercase tracking-[0.04em]">Why Porhi</div>
+            <div className="meta text-[12px] uppercase tracking-[0.04em]">কেন Porhi</div>
             <h2 className="font-serif text-[32px] md:text-[42px] mt-2 leading-[1.1] tracking-[-0.02em] text-ink">
-              ব্যস্ত পেশাজীবীদের জন্য —<br />
-              <em className="italic text-amber-700">বিশ মিনিট</em>-এর পাঠ।
+              পড়ার ইচ্ছা আছে, সময় কম —<br />
+              <em className="italic text-amber-700">Porhi সেটা জানে।</em>
             </h2>
           </div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-7">
-            <Feature n="01" title="Bite-sized readings" desc="প্রতিটা reading 8–20 মিনিটের। Commute-এ পড়ো, stoplight-এ বন্ধ করো।" />
-            <Feature n="02" title="PYQ-heavy" desc="প্রতিটা chapter-এ 20-30 solved PYQ, practice problems সহ — exam pattern internalize হবে।" />
-            <Feature n="03" title="Bilingual by design" desc="Concept বাংলায়, technical keywords English-এ — দুটোরই intuition গড়ে ওঠে।" />
-            <Feature n="04" title="Mermaid diagrams" desc="Complex topics flowchart, sequence, mindmap দিয়ে visual — শুধু text না।" />
-            <Feature n="05" title="Offline-ready PWA" desc="Install করো, offline-ও পড়ো। Internet ছাড়াও study চলবে।" />
-            <Feature n="06" title="No ads, no tracking" desc="Pure learning experience — কোনো ad, কোনো upsell, কোনো dark pattern নেই।" />
+            <Feature n="০১" title="ছোট পাঠ, লম্বা অগ্রগতি" desc="প্রতিটা পাঠ ৮ থেকে ২০ মিনিটের। Commute-এ শুরু করো, বাসায় পৌঁছানোর আগেই শেষ হবে।" />
+            <Feature n="০২" title="পুরনো প্রশ্ন নতুন চোখে" desc="প্রতিটা chapter-এ ২০–৩০টা solved PYQ — শুধু answer না, কেন এটা answer সেটাও বাংলায়। Exam-এর ধরন বুঝতে বুঝতে মাথায় ঢুকে যাবে।" />
+            <Feature n="০৩" title="বাংলায় বুঝলে ভোলা কঠিন" desc="Concept বাংলায় মাথায় ঢুকলে English-এ লেখা সহজ হয়। Technical শব্দগুলো English-এই থাকে — দুই ভাষার সেতু নিজেই তৈরি হয়।" />
+            <Feature n="০৪" title="চোখে দেখলে মাথায় থাকে" desc="Flowchart, sequence diagram, mindmap — জটিল topic-কে এক ছবিতে ধরার চেষ্টা। শুধু text পড়লে ভুলে যাওয়া স্বাভাবিক।" />
+            <Feature n="০৫" title="Internet ছাড়াও চলে" desc="Phone-এ install করলে offline-ও পড়া যাবে। ট্রেনে, bus-এ, বা load-shedding-এ — পড়া থেমে থাকবে না।" />
+            <Feature n="০৬" title="কোনো ফাঁদ নেই" desc="Ad নেই, upsell নেই, email-এর পেছনে লাগবে না। একটাই উদ্দেশ্য — পড়ো, শেখো।" />
           </div>
         </div>
       </section>
@@ -340,9 +344,8 @@ export function HomePage() {
         <div
           className="rounded-[16px] border p-10 md:p-14 relative overflow-hidden grid md:grid-cols-[1.3fr_1fr] gap-10 items-center"
           style={{
-            background: 'hsl(var(--ink))',
-            color: 'hsl(var(--bg))',
-            borderColor: 'hsl(var(--ink))',
+            background: '#181410',
+            borderColor: '#2C2820',
           }}
         >
           <div
@@ -353,31 +356,28 @@ export function HomePage() {
               top: -120,
               width: 360,
               height: 360,
-              background: 'radial-gradient(closest-side, hsl(var(--amber) / 0.3), transparent 70%)',
+              background: 'radial-gradient(closest-side, rgba(217,119,6,0.28), transparent 70%)',
             }}
           />
           <div className="relative">
-            <div className="text-[12px] uppercase tracking-[0.04em] text-[#FDE68A]">Start today</div>
-            <h2
-              className="font-serif text-[32px] md:text-[44px] mt-2 tracking-[-0.02em] leading-[1.1]"
-              style={{ color: 'hsl(var(--bg))' }}
-            >
+            <div className="text-[12px] uppercase tracking-[0.04em] text-[#FDE68A]">আজই শুরু করো</div>
+            <h2 className="font-serif text-[32px] md:text-[44px] mt-2 tracking-[-0.02em] leading-[1.1] text-[#FFFBEF]">
               বিশ মিনিট আজ।<br />
               <em className="italic" style={{ color: '#FDE68A' }}>এক বছর পরে</em> তুমি আলাদা।
             </h2>
-            <p className="text-[14px] md:text-[15px] mt-4 max-w-[480px] leading-[1.55]" style={{ color: '#D8CDB3' }}>
-              Any course free — no card, no trial pressure। Sign in করো একটা shared
-              password দিয়ে, আর তোমার নাম দাও — ব্যাস।
+            <p className="text-[14px] md:text-[15px] mt-4 max-w-[480px] leading-[1.65]" style={{ color: '#C4B49A' }}>
+              Google account দিয়ে এক ক্লিকে ঢুকে যাও — আলাদা password নেই, আলাদা
+              account নেই। পড়া শুরু হোক আজই।
             </p>
           </div>
           <div className="relative flex flex-col gap-3">
             {isAuthenticated ? (
               <Link to="/dashboard" className="btn btn-lg btn-amber" style={{ height: 54 }}>
-                Go to dashboard <ArrowRight className="h-4 w-4" />
+                Dashboard খোলো <ArrowRight className="h-4 w-4" />
               </Link>
             ) : (
               <Link to="/login" className="btn btn-lg btn-amber" style={{ height: 54 }}>
-                Sign in to the course <ArrowRight className="h-4 w-4" />
+                Sign in করো <ArrowRight className="h-4 w-4" />
               </Link>
             )}
             <Link
@@ -386,14 +386,14 @@ export function HomePage() {
               style={{
                 height: 54,
                 background: 'transparent',
-                color: 'hsl(var(--bg))',
-                border: '1px solid #4a4540',
+                color: '#E7DFD1',
+                border: '1px solid #3A342E',
               }}
             >
-              Read handbooks first
+              আগে handbook পড়ি
             </Link>
-            <div className="text-[12px] mt-1 text-center" style={{ color: '#8A8072' }}>
-              ✦ Fully free · ✦ No tracking · ✦ Offline-ready
+            <div className="text-[12px] mt-1 text-center" style={{ color: '#6B6055' }}>
+              ✦ সম্পূর্ণ বিনামূল্যে · ✦ কোনো tracking নেই · ✦ Offline-ready
             </div>
           </div>
         </div>
