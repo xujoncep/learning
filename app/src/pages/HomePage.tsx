@@ -451,7 +451,7 @@ function Marquee<T>({
       }}
     >
       <div
-        className="flex gap-4 w-max px-6"
+        className="flex gap-5 w-max px-6"
         style={{
           animation: `${reverse ? 'marquee-reverse' : 'marquee'} ${speed}s linear infinite`,
         }}
@@ -491,17 +491,18 @@ function CourseCard({
   return (
     <Link
       to={to}
-      className={`group relative overflow-hidden rounded-[14px] flex flex-col bg-gradient-to-br ${config.gradient} transition-all duration-300 hover:-translate-y-1`}
+      className={`group relative overflow-hidden rounded-[16px] flex flex-col bg-gradient-to-br ${config.gradient} transition-all duration-300 hover:-translate-y-1.5`}
       style={{
-        width: 252,
+        width: 300,
+        minHeight: 260,
         border: '1px solid rgba(255,255,255,0.07)',
-        boxShadow: '0 4px 20px rgba(0,0,0,0.3)',
+        boxShadow: '0 4px 24px rgba(0,0,0,0.35)',
       }}
       onMouseEnter={(e) => {
-        e.currentTarget.style.boxShadow = `0 14px 44px -8px ${config.glow}, 0 4px 20px rgba(0,0,0,0.3)`;
+        e.currentTarget.style.boxShadow = `0 18px 50px -10px ${config.glow}, 0 4px 24px rgba(0,0,0,0.35)`;
       }}
       onMouseLeave={(e) => {
-        e.currentTarget.style.boxShadow = '0 4px 20px rgba(0,0,0,0.3)';
+        e.currentTarget.style.boxShadow = '0 4px 24px rgba(0,0,0,0.35)';
       }}
     >
       {/* Radial bloom */}
@@ -509,46 +510,58 @@ function CourseCard({
         aria-hidden
         className="absolute inset-0 pointer-events-none"
         style={{
-          background: `radial-gradient(ellipse 80% 50% at 50% -10%, ${config.glow.replace('0.5)', '0.22)')}, transparent)`,
+          background: `radial-gradient(ellipse 80% 55% at 50% -5%, ${config.glow.replace('0.5)', '0.28)')}, transparent)`,
         }}
       />
 
       {/* Monogram watermark */}
       <div
         aria-hidden
-        className="absolute top-0 right-0 font-serif italic leading-none select-none pointer-events-none"
+        className="absolute bottom-8 right-0 font-serif italic leading-none select-none pointer-events-none"
         style={{
-          fontSize: 72,
-          color: 'rgba(255,255,255,0.055)',
-          transform: 'translate(12%, -5%)',
+          fontSize: 100,
+          color: 'rgba(255,255,255,0.05)',
+          transform: 'translate(15%, 20%)',
           letterSpacing: '-0.04em',
         }}
       >
         {config.mono}
       </div>
 
-      <div className="relative p-5 flex-1 flex flex-col">
-        <span
-          className="text-[10px] px-2 py-0.5 rounded-full self-start mb-5"
-          style={{
-            background: 'rgba(255,255,255,0.09)',
-            color: 'rgba(255,255,255,0.55)',
-            border: '1px solid rgba(255,255,255,0.1)',
-          }}
-        >
-          {hasMultiple ? `${subject.sections.length} tracks` : 'Course'}
-        </span>
+      {/* Content */}
+      <div className="relative p-6 flex-1 flex flex-col">
+        {/* Badge row */}
+        <div className="flex items-center justify-between mb-6">
+          <span
+            className="text-[10.5px] px-2.5 py-1 rounded-full"
+            style={{
+              background: 'rgba(255,255,255,0.1)',
+              color: 'rgba(255,255,255,0.6)',
+              border: '1px solid rgba(255,255,255,0.12)',
+            }}
+          >
+            {hasMultiple ? `${subject.sections.length} tracks` : 'Course'}
+          </span>
+        </div>
 
-        <h3 className="font-serif text-[18px] text-white leading-[1.25] tracking-[-0.015em] flex-1">
+        {/* Title — bigger now */}
+        <h3 className="font-serif text-[21px] text-white leading-[1.2] tracking-[-0.02em] flex-1">
           {subject.title}
         </h3>
 
+        {/* Description */}
+        <p className="text-[12px] mt-2 leading-[1.6] line-clamp-2"
+          style={{ color: 'rgba(255,255,255,0.45)' }}>
+          {subject.description}
+        </p>
+
+        {/* Pills */}
         {hasMultiple && (
-          <div className="flex flex-wrap gap-1 mt-3 mb-1">
+          <div className="flex flex-wrap gap-1.5 mt-4">
             {subject.sections.map((s) => (
               <span
                 key={s.id}
-                className="text-[9.5px] px-1.5 py-0.5 rounded-full"
+                className="text-[10px] px-2 py-0.5 rounded-full"
                 style={{
                   background: config.pillBg,
                   border: `1px solid ${config.pillBorder}`,
@@ -560,17 +573,23 @@ function CourseCard({
             ))}
           </div>
         )}
+      </div>
 
+      {/* Footer */}
+      <div
+        className="relative px-6 py-4 flex items-center justify-between"
+        style={{ borderTop: '1px solid rgba(255,255,255,0.07)' }}
+      >
+        <span className="text-[11.5px]" style={{ color: 'rgba(255,255,255,0.35)' }}>
+          {hasMultiple ? 'Choose track' : 'Open course'}
+        </span>
         <div
-          className="flex items-center justify-between mt-4 pt-3"
-          style={{ borderTop: '1px solid rgba(255,255,255,0.07)' }}
+          className="h-7 w-7 rounded-full flex items-center justify-center transition-all group-hover:scale-110"
+          style={{ background: 'rgba(255,255,255,0.1)', border: '1px solid rgba(255,255,255,0.14)' }}
         >
-          <span className="text-[11px]" style={{ color: 'rgba(255,255,255,0.35)' }}>
-            {hasMultiple ? 'Choose track' : 'Open course'}
-          </span>
           <ArrowRight
-            className="h-3.5 w-3.5 group-hover:translate-x-0.5 transition-all"
-            style={{ color: 'rgba(255,255,255,0.4)' }}
+            className="h-3.5 w-3.5 transition-all group-hover:translate-x-0.5"
+            style={{ color: 'rgba(255,255,255,0.5)' }}
           />
         </div>
       </div>
@@ -582,18 +601,24 @@ function HandbookCard({ doc }: { doc: DocEntry }) {
   return (
     <Link
       to={doc.path}
-      className="group card-surface bg-surface-2 rounded-[14px] overflow-hidden flex flex-col hover:shadow-soft-2 transition-all duration-200 hover:-translate-y-1"
-      style={{ width: 220 }}
+      className="group card-surface bg-surface-2 rounded-[16px] overflow-hidden flex flex-col hover:shadow-soft-2 transition-all duration-200 hover:-translate-y-1.5"
+      style={{ width: 268, minHeight: 230 }}
     >
+      {/* Amber accent top strip */}
+      <div
+        className="h-[3px] w-full shrink-0"
+        style={{ background: 'linear-gradient(to right, hsl(var(--amber)), hsl(var(--amber-100)))' }}
+      />
+
       <div className="p-5 flex-1 flex flex-col">
-        <span className="text-[10px] text-amber-700 font-medium tracking-[0.06em] uppercase mb-3">
+        <span className="text-[10px] text-amber-700 font-medium tracking-[0.07em] uppercase mb-4">
           Handbook
         </span>
-        <h3 className="font-serif text-[16px] text-ink leading-[1.3] flex-1 group-hover:text-amber-700 transition-colors">
+        <h3 className="font-serif text-[17px] text-ink leading-[1.3] tracking-[-0.01em] flex-1 group-hover:text-amber-700 transition-colors">
           {cleanChapterTitle(doc.title)}
         </h3>
-        <p className="text-[12px] text-ink-3 mt-2 line-clamp-2 leading-[1.5]">{doc.description}</p>
-        <div className="flex items-center justify-between mt-3 pt-3 border-t border-line border-dashed">
+        <p className="text-[12px] text-ink-3 mt-3 line-clamp-3 leading-[1.6]">{doc.description}</p>
+        <div className="flex items-center justify-between mt-4 pt-3 border-t border-line border-dashed">
           <span className="text-[11px] text-ink-4">{doc.readingTime} min read</span>
           <ArrowUpRight className="h-3.5 w-3.5 text-ink-4 group-hover:text-amber-700 transition-colors" />
         </div>
