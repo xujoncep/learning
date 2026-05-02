@@ -32,7 +32,14 @@ meRoutes.get('/', async (c) => {
   const userId = c.get('userId');
   const user = await getUserById(c.env.DB, userId);
   if (!user) return c.json({ error: 'not found' }, 404);
-  return c.json({ user });
+  const admins = new Set(
+    (c.env.ADMIN_EMAILS ?? '')
+      .split(',')
+      .map((s) => s.trim().toLowerCase())
+      .filter((s) => s.length > 0),
+  );
+  const is_admin = admins.has(user.email.toLowerCase());
+  return c.json({ user: { ...user, is_admin } });
 });
 
 meRoutes.get('/bookmarks', async (c) => {

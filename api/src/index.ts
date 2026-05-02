@@ -4,6 +4,7 @@ import type { Env } from './env';
 import { authRoutes } from './routes/auth';
 import { meRoutes } from './routes/me';
 import { auditRoutes } from './routes/audit';
+import { adminRoutes } from './routes/admin';
 
 type Variables = { userId: number };
 
@@ -34,6 +35,7 @@ app.get('/', (c) => c.json({ ok: true, service: 'porhi-api' }));
 app.route('/auth', authRoutes);
 app.route('/me', meRoutes);
 app.route('/audit', auditRoutes);
+app.route('/admin', adminRoutes);
 
 app.notFound((c) => c.json({ error: 'not found' }, 404));
 app.onError((err, c) => {

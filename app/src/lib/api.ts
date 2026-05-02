@@ -9,6 +9,7 @@ export interface UserRow {
   avatar_url: string | null;
   created_at: string;
   last_seen: string;
+  is_admin?: boolean;
 }
 
 export interface ProgressItem {
@@ -219,4 +220,67 @@ export async function getDayEvents(date: string): Promise<DayEvent[]> {
 
 export async function getReadingSummary(): Promise<ReadingSummary> {
   return authedFetch<ReadingSummary>('/me/summary');
+}
+
+// ─── Admin ────────────────────────────────────────────────────────────────
+
+export interface AdminStats {
+  total_users: number;
+  active_today: number;
+  active_7d: number;
+  active_30d: number;
+  new_users_7d: number;
+  total_events: number;
+  total_bookmarks: number;
+  top_docs: Array<{ doc_slug: string; doc_title: string; visit_count: number }>;
+}
+
+export interface AdminUserRow {
+  id: number;
+  name: string;
+  email: string;
+  avatar_url: string | null;
+  created_at: string;
+  last_seen: string;
+  bookmark_count: number;
+  event_count: number;
+  progress_count: number;
+}
+
+export interface AdminUserDetail {
+  user: AdminUserRow;
+  bookmarks: Array<{ doc_slug: string; created_at: string }>;
+  recent_events: Array<{
+    doc_slug: string;
+    doc_title: string;
+    section_id: string;
+    created_at: string;
+    duration_seconds: number;
+  }>;
+  progress: Array<{
+    doc_slug: string;
+    percent: number;
+    last_section: string | null;
+    updated_at: string;
+  }>;
+}
+
+export async function getAdminStats(): Promise<AdminStats> {
+  return authedFetch<AdminStats>('/admin/stats');
+}
+
+export async function getAdminUsers(params: {
+  page?: number;
+  limit?: number;
+  search?: string;
+}): Promise<{ users: AdminUserRow[]; total: number; page: number; limit: number }> {
+  const q = new URLSearchParams();
+  if (params.page) q.set('page', String(params.page));
+  if (params.limit) q.set('limit', String(params.limit));
+  if (params.search) q.set('search', params.search);
+  return authedFetch(`/admin/users?${q.toString()}`);
+}
+
+export async function getAdminUserDetail(id: number): Promise<AdminUserDetail> {
+  return authedFetch<AdminUserDetail>(`/admin/users/${id}`);
 }

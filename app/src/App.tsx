@@ -11,7 +11,8 @@ import { HandbooksPage } from '@/pages/HandbooksPage';
 import { CoursesIndexPage } from '@/pages/CoursesIndexPage';
 import { SubjectPage } from '@/pages/SubjectPage';
 import { AboutPage } from '@/pages/AboutPage';
-import { ProtectedRoute } from '@/lib/auth';
+import { AdminPage } from '@/pages/AdminPage';
+import { ProtectedRoute, AdminRoute } from '@/lib/auth';
 
 function App() {
   return (
@@ -87,6 +88,18 @@ function App() {
 
       {/* DocPage renders its own chrome (Course vs Article); gates gate-cse internally */}
       <Route path="/docs/*" element={<DocPage />} />
+
+      {/* Admin: requires apiUser.is_admin */}
+      <Route
+        path="/admin"
+        element={
+          <AdminRoute>
+            <Layout>
+              <AdminPage />
+            </Layout>
+          </AdminRoute>
+        }
+      />
 
       <Route
         path="*"

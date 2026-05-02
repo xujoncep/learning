@@ -196,6 +196,20 @@ export function ProtectedRoute({ children }: { children: ReactNode }) {
   return <>{children}</>;
 }
 
+/** Gate to /admin: requires auth + `apiUser.is_admin`. */
+export function AdminRoute({ children }: { children: ReactNode }) {
+  const { isAuthenticated, apiUser } = useAuth();
+  const location = useLocation();
+  if (!isAuthenticated) {
+    const next = encodeURIComponent(location.pathname + location.search);
+    return <Navigate to={`/login?next=${next}`} replace />;
+  }
+  // apiUser is null while /me is loading — show nothing to prevent flash
+  if (apiUser === null) return null;
+  if (!apiUser.is_admin) return <Navigate to="/" replace />;
+  return <>{children}</>;
+}
+
 /** Pick a deterministic warm accent for an avatar based on the name. */
 export function avatarColor(name: string | null | undefined): string {
   if (!name) return 'hsl(var(--amber))';

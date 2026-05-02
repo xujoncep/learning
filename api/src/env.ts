@@ -5,4 +5,5 @@ export interface Env {
   GOOGLE_CLIENT_SECRET: string;
   FRONTEND_URL: string;
   GOOGLE_REDIRECT_URI: string;
+  ADMIN_EMAILS: string;
 }
