@@ -1,5 +1,5 @@
 import { useParams, Link, Navigate, useLocation } from 'react-router-dom';
-import { ArrowRight } from 'lucide-react';
+import { ArrowRight, BookOpen, PenLine, ListChecks, GraduationCap, type LucideIcon } from 'lucide-react';
 import { sections, isGatedSection, getSubjectMeta } from '@/lib/content';
 import { useAuth } from '@/lib/auth';
 
@@ -9,7 +9,7 @@ interface SubjectConfig {
   glowColor: string;
   pillBg: string;
   pillBorder: string;
-  pillText: string;
+  mono: string;
 }
 
 const CONFIGS: Record<string, SubjectConfig> = {
@@ -17,57 +17,57 @@ const CONFIGS: Record<string, SubjectConfig> = {
     gradient: 'from-[#1E1B4B] via-[#312E81] to-[#4338CA]',
     glow: 'rgba(99,102,241,0.55)',
     glowColor: '#6366F1',
-    pillBg: 'rgba(99,102,241,0.18)',
-    pillBorder: 'rgba(99,102,241,0.4)',
-    pillText: '#A5B4FC',
+    pillBg: 'rgba(99,102,241,0.12)',
+    pillBorder: 'rgba(99,102,241,0.3)',
+    mono: 'DB',
   },
   'operating-system': {
     gradient: 'from-[#082F49] via-[#0C4A6E] to-[#0369A1]',
     glow: 'rgba(14,165,233,0.55)',
     glowColor: '#0EA5E9',
-    pillBg: 'rgba(14,165,233,0.18)',
-    pillBorder: 'rgba(14,165,233,0.4)',
-    pillText: '#7DD3FC',
+    pillBg: 'rgba(14,165,233,0.12)',
+    pillBorder: 'rgba(14,165,233,0.3)',
+    mono: 'OS',
   },
   'cyber-security': {
     gradient: 'from-[#1C0707] via-[#450A0A] to-[#7F1D1D]',
     glow: 'rgba(239,68,68,0.55)',
     glowColor: '#EF4444',
-    pillBg: 'rgba(239,68,68,0.18)',
-    pillBorder: 'rgba(239,68,68,0.4)',
-    pillText: '#FCA5A5',
+    pillBg: 'rgba(239,68,68,0.12)',
+    pillBorder: 'rgba(239,68,68,0.3)',
+    mono: 'SEC',
   },
   'computer-networking': {
     gradient: 'from-[#022C22] via-[#064E3B] to-[#065F46]',
     glow: 'rgba(16,185,129,0.55)',
     glowColor: '#10B981',
-    pillBg: 'rgba(16,185,129,0.18)',
-    pillBorder: 'rgba(16,185,129,0.4)',
-    pillText: '#6EE7B7',
+    pillBg: 'rgba(16,185,129,0.12)',
+    pillBorder: 'rgba(16,185,129,0.3)',
+    mono: 'NET',
   },
   'c-programming': {
     gradient: 'from-[#1C0F00] via-[#451A03] to-[#78350F]',
     glow: 'rgba(245,158,11,0.55)',
     glowColor: '#F59E0B',
-    pillBg: 'rgba(245,158,11,0.18)',
-    pillBorder: 'rgba(245,158,11,0.4)',
-    pillText: '#FCD34D',
+    pillBg: 'rgba(245,158,11,0.12)',
+    pillBorder: 'rgba(245,158,11,0.3)',
+    mono: 'C',
   },
   'system-design': {
     gradient: 'from-[#130726] via-[#2E1065] to-[#5B21B6]',
     glow: 'rgba(139,92,246,0.55)',
     glowColor: '#8B5CF6',
-    pillBg: 'rgba(139,92,246,0.18)',
-    pillBorder: 'rgba(139,92,246,0.4)',
-    pillText: '#C4B5FD',
+    pillBg: 'rgba(139,92,246,0.12)',
+    pillBorder: 'rgba(139,92,246,0.3)',
+    mono: 'SYS',
   },
   'gate-cse': {
     gradient: 'from-[#0A1628] via-[#1E3A8A] to-[#1E40AF]',
     glow: 'rgba(59,130,246,0.55)',
     glowColor: '#3B82F6',
-    pillBg: 'rgba(59,130,246,0.18)',
-    pillBorder: 'rgba(59,130,246,0.4)',
-    pillText: '#93C5FD',
+    pillBg: 'rgba(59,130,246,0.12)',
+    pillBorder: 'rgba(59,130,246,0.3)',
+    mono: 'GATE',
   },
 };
 
@@ -75,9 +75,9 @@ const DEFAULT_CONFIG: SubjectConfig = {
   gradient: 'from-[#1C1917] to-[#292524]',
   glow: 'rgba(217,119,6,0.45)',
   glowColor: '#D97706',
-  pillBg: 'rgba(217,119,6,0.15)',
-  pillBorder: 'rgba(217,119,6,0.35)',
-  pillText: '#FCD34D',
+  pillBg: 'rgba(217,119,6,0.12)',
+  pillBorder: 'rgba(217,119,6,0.3)',
+  mono: '—',
 };
 
 const LABEL_DESCRIPTIONS: Record<string, string> = {
@@ -85,6 +85,13 @@ const LABEL_DESCRIPTIONS: Record<string, string> = {
   'Written Questions': 'Short ও broad written questions with model answers — exam-এ directly কাজে লাগবে।',
   'MCQ Practice': 'Option-based practice with Bangla explanation ও exam tips — fast revision।',
   Course: 'Complete course material — theory থেকে practice পর্যন্ত।',
+};
+
+const LABEL_ICONS: Record<string, LucideIcon> = {
+  Concepts: BookOpen,
+  'Written Questions': PenLine,
+  'MCQ Practice': ListChecks,
+  Course: GraduationCap,
 };
 
 function softenGlow(glow: string): string {
@@ -123,7 +130,7 @@ export function SubjectPage() {
       {/* Hero banner — full-bleed gradient */}
       <div
         className={`-mx-6 md:-mx-10 -mt-10 md:-mt-14 mb-10 px-6 md:px-10 pt-12 pb-10 relative overflow-hidden bg-gradient-to-br ${config.gradient}`}
-        style={{ borderBottom: '1px solid rgba(255,255,255,0.08)' }}
+        style={{ borderBottom: '1px solid rgba(255,255,255,0.07)' }}
       >
         {/* Glow bloom */}
         <div
@@ -134,13 +141,27 @@ export function SubjectPage() {
           }}
         />
 
+        {/* Monogram watermark */}
+        <div
+          aria-hidden
+          className="absolute bottom-0 right-0 font-serif italic leading-none select-none pointer-events-none"
+          style={{
+            fontSize: 'clamp(100px, 22vw, 160px)',
+            color: 'rgba(255,255,255,0.045)',
+            transform: 'translate(10%, 25%)',
+            letterSpacing: '-0.04em',
+          }}
+        >
+          {config.mono}
+        </div>
+
         <div className="relative max-w-[1280px] mx-auto">
           {/* Breadcrumb */}
-          <div className="text-[12.5px] mb-6" style={{ color: 'rgba(255,255,255,0.5)' }}>
+          <div className="text-[12.5px] mb-8" style={{ color: 'rgba(255,255,255,0.45)' }}>
             <Link
               to="/"
               className="hover:text-white transition-colors"
-              style={{ color: 'rgba(255,255,255,0.5)' }}
+              style={{ color: 'rgba(255,255,255,0.45)' }}
             >
               Home
             </Link>
@@ -148,7 +169,7 @@ export function SubjectPage() {
             <Link
               to="/courses"
               className="hover:text-white transition-colors"
-              style={{ color: 'rgba(255,255,255,0.5)' }}
+              style={{ color: 'rgba(255,255,255,0.45)' }}
             >
               Courses
             </Link>
@@ -156,18 +177,17 @@ export function SubjectPage() {
             <span style={{ color: 'rgba(255,255,255,0.85)' }}>{subject.title}</span>
           </div>
 
-          <div className="text-[44px] leading-none mb-3">{subject.icon}</div>
-          <h1 className="font-serif text-[36px] md:text-[48px] text-white leading-[1.05] tracking-[-0.025em]">
+          <h1 className="font-serif text-[36px] md:text-[52px] text-white leading-[1.05] tracking-[-0.025em]">
             {subject.title}
           </h1>
           <p
             className="mt-3 text-[15px] max-w-[560px] leading-relaxed"
-            style={{ color: 'rgba(255,255,255,0.58)' }}
+            style={{ color: 'rgba(255,255,255,0.52)' }}
           >
             {subject.description}
           </p>
 
-          <div className="mt-4 text-[12px]" style={{ color: 'rgba(255,255,255,0.4)' }}>
+          <div className="mt-4 text-[11.5px] tracking-wide" style={{ color: 'rgba(255,255,255,0.35)' }}>
             {subject.sections.length} tracks available
           </div>
         </div>
@@ -183,6 +203,8 @@ export function SubjectPage() {
               ? `/login?next=/sections/${subSection.id}`
               : `/sections/${subSection.id}`;
 
+          const TrackIcon = LABEL_ICONS[subSection.label] ?? BookOpen;
+
           return (
             <Link
               key={subSection.id}
@@ -191,22 +213,22 @@ export function SubjectPage() {
               style={{ borderTop: `3px solid ${config.glowColor}` }}
             >
               <div className="p-6 flex-1 flex flex-col">
-                {/* Icon in colored circle */}
+                {/* Lucide icon in styled container */}
                 <div
-                  className="h-12 w-12 rounded-[12px] flex items-center justify-center text-[24px] mb-4"
+                  className="h-11 w-11 rounded-[10px] flex items-center justify-center mb-5"
                   style={{
                     background: config.pillBg,
                     border: `1px solid ${config.pillBorder}`,
                   }}
                 >
-                  {subSection.icon}
+                  <TrackIcon className="h-5 w-5" style={{ color: config.glowColor }} />
                 </div>
 
                 <div className="text-ink-4 text-[11.5px] mb-1">
                   {sectionData ? `${sectionData.docs.length} chapters` : 'Course material'}
                 </div>
 
-                <h3 className="font-serif text-[22px] text-ink leading-[1.2] group-hover:text-amber-700 transition-colors">
+                <h3 className="font-serif text-[22px] text-ink leading-[1.2] tracking-[-0.015em] group-hover:text-amber-700 transition-colors">
                   {subSection.label}
                 </h3>
 
@@ -216,7 +238,7 @@ export function SubjectPage() {
 
                 <div className="border-t border-line border-dashed mt-4 pt-3 flex items-center justify-between">
                   <span className="text-[11.5px] text-ink-4">
-                    {gated && !isAuthenticated ? '🔒 Sign in' : 'Open →'}
+                    {gated && !isAuthenticated ? 'Sign in to start' : 'Open'}
                   </span>
                   <ArrowRight className="h-3.5 w-3.5 text-ink-4 group-hover:text-amber-700 group-hover:translate-x-0.5 transition-all" />
                 </div>

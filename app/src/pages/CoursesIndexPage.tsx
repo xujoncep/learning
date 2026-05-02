@@ -9,6 +9,7 @@ interface SubjectConfig {
   pillBg: string;
   pillBorder: string;
   pillText: string;
+  mono: string;
 }
 
 const CONFIGS: Record<string, SubjectConfig> = {
@@ -18,6 +19,7 @@ const CONFIGS: Record<string, SubjectConfig> = {
     pillBg: 'rgba(99,102,241,0.18)',
     pillBorder: 'rgba(99,102,241,0.4)',
     pillText: '#A5B4FC',
+    mono: 'DB',
   },
   'operating-system': {
     gradient: 'from-[#082F49] via-[#0C4A6E] to-[#0369A1]',
@@ -25,6 +27,7 @@ const CONFIGS: Record<string, SubjectConfig> = {
     pillBg: 'rgba(14,165,233,0.18)',
     pillBorder: 'rgba(14,165,233,0.4)',
     pillText: '#7DD3FC',
+    mono: 'OS',
   },
   'cyber-security': {
     gradient: 'from-[#1C0707] via-[#450A0A] to-[#7F1D1D]',
@@ -32,6 +35,7 @@ const CONFIGS: Record<string, SubjectConfig> = {
     pillBg: 'rgba(239,68,68,0.18)',
     pillBorder: 'rgba(239,68,68,0.4)',
     pillText: '#FCA5A5',
+    mono: 'SEC',
   },
   'computer-networking': {
     gradient: 'from-[#022C22] via-[#064E3B] to-[#065F46]',
@@ -39,6 +43,7 @@ const CONFIGS: Record<string, SubjectConfig> = {
     pillBg: 'rgba(16,185,129,0.18)',
     pillBorder: 'rgba(16,185,129,0.4)',
     pillText: '#6EE7B7',
+    mono: 'NET',
   },
   'c-programming': {
     gradient: 'from-[#1C0F00] via-[#451A03] to-[#78350F]',
@@ -46,6 +51,7 @@ const CONFIGS: Record<string, SubjectConfig> = {
     pillBg: 'rgba(245,158,11,0.18)',
     pillBorder: 'rgba(245,158,11,0.4)',
     pillText: '#FCD34D',
+    mono: 'C',
   },
   'system-design': {
     gradient: 'from-[#130726] via-[#2E1065] to-[#5B21B6]',
@@ -53,6 +59,7 @@ const CONFIGS: Record<string, SubjectConfig> = {
     pillBg: 'rgba(139,92,246,0.18)',
     pillBorder: 'rgba(139,92,246,0.4)',
     pillText: '#C4B5FD',
+    mono: 'SYS',
   },
   'gate-cse': {
     gradient: 'from-[#0A1628] via-[#1E3A8A] to-[#1E40AF]',
@@ -60,6 +67,7 @@ const CONFIGS: Record<string, SubjectConfig> = {
     pillBg: 'rgba(59,130,246,0.18)',
     pillBorder: 'rgba(59,130,246,0.4)',
     pillText: '#93C5FD',
+    mono: 'GATE',
   },
 };
 
@@ -69,6 +77,7 @@ const DEFAULT_CONFIG: SubjectConfig = {
   pillBg: 'rgba(217,119,6,0.15)',
   pillBorder: 'rgba(217,119,6,0.35)',
   pillText: '#FCD34D',
+  mono: '—',
 };
 
 function softenGlow(glow: string): string {
@@ -105,7 +114,7 @@ export function CoursesIndexPage() {
 
       {/* Grid */}
       <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5 mt-10">
-        {subjects.map(({ id, title, icon, description, sections: subSections }) => {
+        {subjects.map(({ id, title, description, sections: subSections }) => {
           const hasMultiple = subSections.length > 1;
           const isGated = subSections.some((s) => isGatedSection(s.id));
           const config = CONFIGS[id] ?? DEFAULT_CONFIG;
@@ -122,17 +131,17 @@ export function CoursesIndexPage() {
               to={to}
               className={`group relative overflow-hidden rounded-[16px] flex flex-col transition-all duration-300 hover:-translate-y-1.5 bg-gradient-to-br ${config.gradient}`}
               style={{
-                border: '1px solid rgba(255,255,255,0.08)',
-                boxShadow: '0 4px 24px rgba(0,0,0,0.3)',
+                border: '1px solid rgba(255,255,255,0.07)',
+                boxShadow: '0 4px 24px rgba(0,0,0,0.35)',
               }}
               onMouseEnter={(e) => {
                 e.currentTarget.style.boxShadow = `0 20px 60px -12px ${config.glow}, 0 4px 24px rgba(0,0,0,0.4)`;
               }}
               onMouseLeave={(e) => {
-                e.currentTarget.style.boxShadow = '0 4px 24px rgba(0,0,0,0.3)';
+                e.currentTarget.style.boxShadow = '0 4px 24px rgba(0,0,0,0.35)';
               }}
             >
-              {/* Radial glow bloom at top center */}
+              {/* Radial glow bloom */}
               <div
                 aria-hidden
                 className="absolute inset-0 pointer-events-none"
@@ -141,55 +150,66 @@ export function CoursesIndexPage() {
                 }}
               />
 
+              {/* Large monogram watermark — top right decorative */}
+              <div
+                aria-hidden
+                className="absolute top-0 right-0 font-serif italic leading-none select-none pointer-events-none"
+                style={{
+                  fontSize: 'clamp(72px, 18vw, 110px)',
+                  color: 'rgba(255,255,255,0.055)',
+                  transform: 'translate(12%, -8%)',
+                  letterSpacing: '-0.04em',
+                }}
+              >
+                {config.mono}
+              </div>
+
               {/* Main content */}
-              <div className="relative p-6 pb-5 flex-1 flex flex-col">
-                {/* Top badge + lock */}
-                <div className="flex items-center justify-between mb-5">
+              <div className="relative p-6 pt-5 pb-5 flex-1 flex flex-col">
+                {/* Top row: badge + lock */}
+                <div className="flex items-center justify-between mb-8">
                   <span
-                    className="text-[10.5px] px-2.5 py-1 rounded-full font-medium"
+                    className="text-[10.5px] px-2.5 py-1 rounded-full font-medium tracking-wide"
                     style={{
-                      background: 'rgba(255,255,255,0.1)',
-                      color: 'rgba(255,255,255,0.65)',
-                      border: '1px solid rgba(255,255,255,0.12)',
+                      background: 'rgba(255,255,255,0.09)',
+                      color: 'rgba(255,255,255,0.6)',
+                      border: '1px solid rgba(255,255,255,0.11)',
                     }}
                   >
                     {hasMultiple ? `${subSections.length} tracks` : 'Course'}
                   </span>
                   {isGated && !isAuthenticated && (
-                    <Lock className="h-3.5 w-3.5" style={{ color: 'rgba(255,255,255,0.35)' }} />
+                    <Lock className="h-3.5 w-3.5" style={{ color: 'rgba(255,255,255,0.3)' }} />
                   )}
                 </div>
 
-                {/* Big icon */}
-                <div className="text-[56px] leading-none mb-4">{icon}</div>
-
                 {/* Title */}
-                <h3 className="font-serif text-[21px] text-white leading-[1.2] tracking-[-0.015em]">
+                <h3 className="font-serif text-[23px] text-white leading-[1.2] tracking-[-0.02em]">
                   {title}
                 </h3>
 
                 {/* Description */}
                 <p
-                  className="text-[13px] mt-2 leading-[1.6] line-clamp-2 flex-1"
-                  style={{ color: 'rgba(255,255,255,0.52)' }}
+                  className="text-[13px] mt-2.5 leading-[1.65] line-clamp-2 flex-1"
+                  style={{ color: 'rgba(255,255,255,0.48)' }}
                 >
                   {description}
                 </p>
 
-                {/* Pills for multi-track */}
+                {/* Track pills */}
                 {hasMultiple && (
-                  <div className="flex flex-wrap gap-1.5 mt-4">
+                  <div className="flex flex-wrap gap-1.5 mt-5">
                     {subSections.map((s) => (
                       <span
                         key={s.id}
-                        className="text-[10.5px] px-2.5 py-1 rounded-full"
+                        className="text-[10.5px] px-2.5 py-1 rounded-full tracking-wide"
                         style={{
                           background: config.pillBg,
                           border: `1px solid ${config.pillBorder}`,
                           color: config.pillText,
                         }}
                       >
-                        {s.icon} {s.label}
+                        {s.label}
                       </span>
                     ))}
                   </div>
@@ -199,9 +219,12 @@ export function CoursesIndexPage() {
               {/* Footer */}
               <div
                 className="relative px-6 py-4 flex items-center justify-between"
-                style={{ borderTop: '1px solid rgba(255,255,255,0.08)' }}
+                style={{ borderTop: '1px solid rgba(255,255,255,0.07)' }}
               >
-                <span className="text-[12px]" style={{ color: 'rgba(255,255,255,0.4)' }}>
+                <span
+                  className="text-[11.5px] tracking-wide"
+                  style={{ color: 'rgba(255,255,255,0.38)' }}
+                >
                   {isGated && !isAuthenticated
                     ? 'Sign in to start'
                     : hasMultiple
@@ -209,15 +232,15 @@ export function CoursesIndexPage() {
                       : 'Open course'}
                 </span>
                 <div
-                  className="h-7 w-7 rounded-full flex items-center justify-center transition-all group-hover:scale-110"
+                  className="h-7 w-7 rounded-full flex items-center justify-center transition-all duration-200 group-hover:scale-110"
                   style={{
-                    background: 'rgba(255,255,255,0.1)',
-                    border: '1px solid rgba(255,255,255,0.15)',
+                    background: 'rgba(255,255,255,0.09)',
+                    border: '1px solid rgba(255,255,255,0.14)',
                   }}
                 >
                   <ArrowRight
                     className="h-3.5 w-3.5 transition-all group-hover:translate-x-0.5"
-                    style={{ color: 'rgba(255,255,255,0.55)' }}
+                    style={{ color: 'rgba(255,255,255,0.5)' }}
                   />
                 </div>
               </div>
