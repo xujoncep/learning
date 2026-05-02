@@ -1,16 +1,79 @@
 import { Link } from 'react-router-dom';
-import { ArrowRight, BookOpen, ChevronRight, Lock } from 'lucide-react';
+import { ArrowRight, Lock } from 'lucide-react';
 import { isGatedSection, getSubjects } from '@/lib/content';
 import { useAuth } from '@/lib/auth';
 
-const TONES = [
-  'from-amber-50 to-amber-100',
-  'from-[#E0E7F0] to-[#C8D6E8]',
-  'from-[#E7F0E3] to-[#C8DDB8]',
-  'from-[#FCE7D8] to-[#F5C9A3]',
-  'from-[#E8DFF0] to-[#CFC0DF]',
-  'from-[#F0E0D8] to-[#E0C8B0]',
-];
+interface SubjectConfig {
+  gradient: string;
+  glow: string;
+  pillBg: string;
+  pillBorder: string;
+  pillText: string;
+}
+
+const CONFIGS: Record<string, SubjectConfig> = {
+  dbms: {
+    gradient: 'from-[#1E1B4B] via-[#312E81] to-[#4338CA]',
+    glow: 'rgba(99,102,241,0.55)',
+    pillBg: 'rgba(99,102,241,0.18)',
+    pillBorder: 'rgba(99,102,241,0.4)',
+    pillText: '#A5B4FC',
+  },
+  'operating-system': {
+    gradient: 'from-[#082F49] via-[#0C4A6E] to-[#0369A1]',
+    glow: 'rgba(14,165,233,0.55)',
+    pillBg: 'rgba(14,165,233,0.18)',
+    pillBorder: 'rgba(14,165,233,0.4)',
+    pillText: '#7DD3FC',
+  },
+  'cyber-security': {
+    gradient: 'from-[#1C0707] via-[#450A0A] to-[#7F1D1D]',
+    glow: 'rgba(239,68,68,0.55)',
+    pillBg: 'rgba(239,68,68,0.18)',
+    pillBorder: 'rgba(239,68,68,0.4)',
+    pillText: '#FCA5A5',
+  },
+  'computer-networking': {
+    gradient: 'from-[#022C22] via-[#064E3B] to-[#065F46]',
+    glow: 'rgba(16,185,129,0.55)',
+    pillBg: 'rgba(16,185,129,0.18)',
+    pillBorder: 'rgba(16,185,129,0.4)',
+    pillText: '#6EE7B7',
+  },
+  'c-programming': {
+    gradient: 'from-[#1C0F00] via-[#451A03] to-[#78350F]',
+    glow: 'rgba(245,158,11,0.55)',
+    pillBg: 'rgba(245,158,11,0.18)',
+    pillBorder: 'rgba(245,158,11,0.4)',
+    pillText: '#FCD34D',
+  },
+  'system-design': {
+    gradient: 'from-[#130726] via-[#2E1065] to-[#5B21B6]',
+    glow: 'rgba(139,92,246,0.55)',
+    pillBg: 'rgba(139,92,246,0.18)',
+    pillBorder: 'rgba(139,92,246,0.4)',
+    pillText: '#C4B5FD',
+  },
+  'gate-cse': {
+    gradient: 'from-[#0A1628] via-[#1E3A8A] to-[#1E40AF]',
+    glow: 'rgba(59,130,246,0.55)',
+    pillBg: 'rgba(59,130,246,0.18)',
+    pillBorder: 'rgba(59,130,246,0.4)',
+    pillText: '#93C5FD',
+  },
+};
+
+const DEFAULT_CONFIG: SubjectConfig = {
+  gradient: 'from-[#1C1917] to-[#292524]',
+  glow: 'rgba(217,119,6,0.45)',
+  pillBg: 'rgba(217,119,6,0.15)',
+  pillBorder: 'rgba(217,119,6,0.35)',
+  pillText: '#FCD34D',
+};
+
+function softenGlow(glow: string): string {
+  return glow.replace('0.55)', '0.25)').replace('0.45)', '0.2)');
+}
 
 export function CoursesIndexPage() {
   const { isAuthenticated } = useAuth();
@@ -42,9 +105,10 @@ export function CoursesIndexPage() {
 
       {/* Grid */}
       <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5 mt-10">
-        {subjects.map(({ id, title, icon, description, sections: subSections }, i) => {
+        {subjects.map(({ id, title, icon, description, sections: subSections }) => {
           const hasMultiple = subSections.length > 1;
           const isGated = subSections.some((s) => isGatedSection(s.id));
+          const config = CONFIGS[id] ?? DEFAULT_CONFIG;
 
           const to = hasMultiple
             ? `/subjects/${id}`
@@ -56,67 +120,105 @@ export function CoursesIndexPage() {
             <Link
               key={id}
               to={to}
-              className="group card-surface bg-surface-2 overflow-hidden hover:shadow-soft-2 transition-all flex flex-col"
+              className={`group relative overflow-hidden rounded-[16px] flex flex-col transition-all duration-300 hover:-translate-y-1.5 bg-gradient-to-br ${config.gradient}`}
+              style={{
+                border: '1px solid rgba(255,255,255,0.08)',
+                boxShadow: '0 4px 24px rgba(0,0,0,0.3)',
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.boxShadow = `0 20px 60px -12px ${config.glow}, 0 4px 24px rgba(0,0,0,0.4)`;
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.boxShadow = '0 4px 24px rgba(0,0,0,0.3)';
+              }}
             >
-              {/* Banner */}
+              {/* Radial glow bloom at top center */}
               <div
-                className={`h-[160px] relative bg-gradient-to-br ${TONES[i % TONES.length]} border-b border-line overflow-hidden`}
-              >
-                <div className="absolute top-4 left-4 px-2.5 py-1 rounded-[6px] bg-surface-2/95 text-[11px] font-medium text-ink-2">
-                  {hasMultiple ? `${subSections.length} tracks` : 'Course'}
-                </div>
-                <div className="absolute top-4 right-4 w-8 h-8 rounded-[8px] bg-surface-2/90 text-ink-3 flex items-center justify-center">
-                  {isGated && !isAuthenticated ? (
-                    <Lock className="h-3.5 w-3.5" />
-                  ) : (
-                    <BookOpen className="h-3.5 w-3.5" />
+                aria-hidden
+                className="absolute inset-0 pointer-events-none"
+                style={{
+                  background: `radial-gradient(ellipse 80% 55% at 50% -10%, ${softenGlow(config.glow)}, transparent)`,
+                }}
+              />
+
+              {/* Main content */}
+              <div className="relative p-6 pb-5 flex-1 flex flex-col">
+                {/* Top badge + lock */}
+                <div className="flex items-center justify-between mb-5">
+                  <span
+                    className="text-[10.5px] px-2.5 py-1 rounded-full font-medium"
+                    style={{
+                      background: 'rgba(255,255,255,0.1)',
+                      color: 'rgba(255,255,255,0.65)',
+                      border: '1px solid rgba(255,255,255,0.12)',
+                    }}
+                  >
+                    {hasMultiple ? `${subSections.length} tracks` : 'Course'}
+                  </span>
+                  {isGated && !isAuthenticated && (
+                    <Lock className="h-3.5 w-3.5" style={{ color: 'rgba(255,255,255,0.35)' }} />
                   )}
                 </div>
-                <div className="absolute bottom-3.5 left-4 font-serif text-[44px] leading-none opacity-90">
-                  {icon}
-                </div>
-              </div>
 
-              {/* Body */}
-              <div className="p-5 flex-1 flex flex-col">
+                {/* Big icon */}
+                <div className="text-[56px] leading-none mb-4">{icon}</div>
+
+                {/* Title */}
+                <h3 className="font-serif text-[21px] text-white leading-[1.2] tracking-[-0.015em]">
+                  {title}
+                </h3>
+
+                {/* Description */}
+                <p
+                  className="text-[13px] mt-2 leading-[1.6] line-clamp-2 flex-1"
+                  style={{ color: 'rgba(255,255,255,0.52)' }}
+                >
+                  {description}
+                </p>
+
+                {/* Pills for multi-track */}
                 {hasMultiple && (
-                  <div className="flex flex-wrap gap-1.5 mb-2.5">
+                  <div className="flex flex-wrap gap-1.5 mt-4">
                     {subSections.map((s) => (
                       <span
                         key={s.id}
-                        className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-sand text-[10.5px] text-ink-3 border border-line"
+                        className="text-[10.5px] px-2.5 py-1 rounded-full"
+                        style={{
+                          background: config.pillBg,
+                          border: `1px solid ${config.pillBorder}`,
+                          color: config.pillText,
+                        }}
                       >
                         {s.icon} {s.label}
                       </span>
                     ))}
                   </div>
                 )}
+              </div>
 
-                <h3 className="font-serif text-[20px] text-ink mt-1 leading-[1.25] tracking-[-0.015em] group-hover:text-amber-700 transition-colors">
-                  {title}
-                </h3>
-
-                <p className="text-[13px] text-ink-3 mt-2 leading-[1.55] flex-1 line-clamp-3">
-                  {description}
-                </p>
-
-                <div className="border-t border-line border-dashed mt-3 pt-3 flex items-center justify-between">
-                  <span className="text-[11.5px] text-ink-4 inline-flex items-center gap-1.5">
-                    {isGated && !isAuthenticated ? (
-                      <>
-                        <Lock className="h-3 w-3" /> Sign in to start
-                      </>
-                    ) : hasMultiple ? (
-                      <>
-                        <ChevronRight className="h-3 w-3" /> Choose track
-                      </>
-                    ) : (
-                      <>
-                        <BookOpen className="h-3 w-3" /> Open course
-                      </>
-                    )}
-                  </span>
-                  <ArrowRight className="h-3.5 w-3.5 text-ink-4 group-hover:text-amber-700 group-hover:translate-x-0.5 transition-all" />
+              {/* Footer */}
+              <div
+                className="relative px-6 py-4 flex items-center justify-between"
+                style={{ borderTop: '1px solid rgba(255,255,255,0.08)' }}
+              >
+                <span className="text-[12px]" style={{ color: 'rgba(255,255,255,0.4)' }}>
+                  {isGated && !isAuthenticated
+                    ? 'Sign in to start'
+                    : hasMultiple
+                      ? 'Choose track'
+                      : 'Open course'}
+                </span>
+                <div
+                  className="h-7 w-7 rounded-full flex items-center justify-center transition-all group-hover:scale-110"
+                  style={{
+                    background: 'rgba(255,255,255,0.1)',
+                    border: '1px solid rgba(255,255,255,0.15)',
+                  }}
+                >
+                  <ArrowRight
+                    className="h-3.5 w-3.5 transition-all group-hover:translate-x-0.5"
+                    style={{ color: 'rgba(255,255,255,0.55)' }}
+                  />
                 </div>
               </div>
             </Link>
