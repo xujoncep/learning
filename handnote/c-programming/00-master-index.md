@@ -19,4 +19,9 @@
 | 05 | [Structures, Memory Alignment & Unions](05-structs-unions.md) | User-defined data types, ttypedef, enum, এবং memory alignment। |
 | 06 | [File I/O, CLI & Preprocessor](06-file-cli.md) | Advanced File I/O, Command Line Arguments (argc/argv), এবং Preprocessor directives। |
 | 07 | [Data Structures & Algorithm Essentials](07-dsa-essentials.md) | Linked List, Stack, Queue basics এবং Sorting/Searching algorithms। |
+| 10 | [BB Exam — Programming Problems (Part 1)](10-bb-programming-problems.md) | Bangladesh Bank পরীক্ষার C programming written problems — সমস্যা বোঝো, code লেখো। |
+| 11 | [BB Exam — Programming Problems (Part 2)](11-c-problems-p2.md) | আরও practical C problems — array, string, recursion। |
+| 12 | [BB Exam — Programming Problems (Part 3)](12-c-problems-p3.md) | Advanced problems — sorting, searching, pointer। |
+| 13 | [BB Exam — Programming Problems (Part 4)](13-c-problems-p4.md) | Expert-level problems — complex logic, data structures। |
+| 14 | [BB Exam — MCQ Practice (১৮০ প্রশ্ন)](14-bb-mcq-180.md) | **১৮০টা MCQ** — Output tracing, bitwise, pointer, theory। Undefined behavior থেকে sorting algorithm পর্যন্ত। |
 

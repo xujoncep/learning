@@ -85,25 +85,31 @@
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://learning-hub-3gw.pages.dev/docs/c-programming/10-bb-programming-problems</loc>
+    <loc>https://learning-hub-3gw.pages.dev/docs/c-programming-mcq/01-bb-mcq-180</loc>
     <lastmod>2026-05-02</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://learning-hub-3gw.pages.dev/docs/c-programming/11-c-problems-p2</loc>
+    <loc>https://learning-hub-3gw.pages.dev/docs/c-programming-problems/01-bb-problems-set1</loc>
     <lastmod>2026-05-02</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://learning-hub-3gw.pages.dev/docs/c-programming/12-c-problems-p3</loc>
+    <loc>https://learning-hub-3gw.pages.dev/docs/c-programming-problems/02-bb-problems-set2</loc>
     <lastmod>2026-05-02</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://learning-hub-3gw.pages.dev/docs/c-programming/13-c-problems-p4</loc>
+    <loc>https://learning-hub-3gw.pages.dev/docs/c-programming-problems/03-bb-problems-set3</loc>
+    <lastmod>2026-05-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://learning-hub-3gw.pages.dev/docs/c-programming-problems/04-bb-problems-set4</loc>
     <lastmod>2026-05-02</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
@@ -734,6 +740,18 @@
   </url>
   <url>
     <loc>https://learning-hub-3gw.pages.dev/sections/c-programming</loc>
+    <lastmod>2026-05-02</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://learning-hub-3gw.pages.dev/sections/c-programming-mcq</loc>
+    <lastmod>2026-05-02</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://learning-hub-3gw.pages.dev/sections/c-programming-problems</loc>
     <lastmod>2026-05-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>

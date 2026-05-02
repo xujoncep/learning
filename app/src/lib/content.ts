@@ -102,7 +102,11 @@ const SUBJECT_META: Record<string, SubjectMeta> = {
     icon: '💻',
     order: 5,
     description: 'C language depth-এ — fundamentals থেকে data structures পর্যন্ত।',
-    sections: [{ id: 'c-programming', label: 'Concepts', icon: '💻' }],
+    sections: [
+      { id: 'c-programming', label: 'Concepts', icon: '📖' },
+      { id: 'c-programming-problems', label: 'Programming Problems', icon: '💡' },
+      { id: 'c-programming-mcq', label: 'MCQ Practice', icon: '✅' },
+    ],
   },
   'system-design': {
     title: 'System Design',
@@ -147,6 +151,22 @@ const SECTION_META: Record<string, SectionMeta> = {
     gated: true,
     description:
       'C language depth-এ — fundamentals থেকে data structures পর্যন্ত। প্রতিটা level-এ concept, code examples, MCQ + written problems, traps।',
+  },
+  'c-programming-problems': {
+    title: 'C Programming Problems (BB Exam)',
+    icon: '💡',
+    order: 2.1,
+    gated: true,
+    description:
+      'Bangladesh Bank IT/AME/Programmer exam-এর জন্য ১০০টা C programming problem — Bangla logic ব্যাখ্যা, sample I/O, এবং exam tips সহ।',
+  },
+  'c-programming-mcq': {
+    title: 'C Programming MCQ Practice',
+    icon: '✅',
+    order: 2.2,
+    gated: true,
+    description:
+      '১৮০টা C programming MCQ — output tracing, pointer logic, operator precedence, theory — Bangladesh Bank IT exam-এর জন্য।',
   },
   'computer-networking': {
     title: 'Computer Networking',
