@@ -113,7 +113,15 @@ const SECTION_META: Record<string, SectionMeta> = {
     description:
       'Bangladesh Bank Officer (IT) ও AME post-এর written exam-এর জন্য ৩৩টা OS question + answer — Gantt chart math, RAG diagram, paging, LRU, RAID, boot sequence, chmod সহ complete written prep।',
   },
-  root: { title: 'Handbooks', icon: '📚', order: 10 },
+  'dbms-mcq': {
+    title: 'DBMS MCQ Practice',
+    icon: '🗄️',
+    order: 10,
+    gated: true,
+    description:
+      '৯০টা DBMS MCQ — Fundamentals, ER, SQL, Normalization, Transactions, Indexing, NoSQL — Bangla question + Bangla explanation, Bank IT / BCS / NTRCA / GATE-এর জন্য fast revision।',
+  },
+  root: { title: 'Handbooks', icon: '📚', order: 11 },
 };
 
 export function isGatedSection(section: string | undefined): boolean {
