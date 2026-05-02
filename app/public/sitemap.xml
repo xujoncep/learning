@@ -115,6 +115,12 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://learning-hub-3gw.pages.dev/docs/c-programming-written/01-bb-written-questions</loc>
+    <lastmod>2026-05-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://learning-hub-3gw.pages.dev/docs/computer-networking/00-master-index</loc>
     <lastmod>2026-05-02</lastmod>
     <changefreq>monthly</changefreq>
@@ -752,6 +758,12 @@
   </url>
   <url>
     <loc>https://learning-hub-3gw.pages.dev/sections/c-programming-problems</loc>
+    <lastmod>2026-05-02</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://learning-hub-3gw.pages.dev/sections/c-programming-written</loc>
     <lastmod>2026-05-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>

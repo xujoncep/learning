@@ -104,6 +104,7 @@ const SUBJECT_META: Record<string, SubjectMeta> = {
     description: 'C language depth-এ — fundamentals থেকে data structures পর্যন্ত।',
     sections: [
       { id: 'c-programming', label: 'Concepts', icon: '📖' },
+      { id: 'c-programming-written', label: 'Written Questions', icon: '✍️' },
       { id: 'c-programming-problems', label: 'Programming Problems', icon: '💡' },
       { id: 'c-programming-mcq', label: 'MCQ Practice', icon: '✅' },
     ],
@@ -152,10 +153,18 @@ const SECTION_META: Record<string, SectionMeta> = {
     description:
       'C language depth-এ — fundamentals থেকে data structures পর্যন্ত। প্রতিটা level-এ concept, code examples, MCQ + written problems, traps।',
   },
+  'c-programming-written': {
+    title: 'C Programming Written (BB Exam)',
+    icon: '✍️',
+    order: 2.1,
+    gated: true,
+    description:
+      'Bangladesh Bank IT/AME/Programmer exam-এর জন্য ২০টা C programming written question — English Q&A with Bangla সারাংশ — memory, pointers, storage classes, file handling, bitwise ops সহ।',
+  },
   'c-programming-problems': {
     title: 'C Programming Problems (BB Exam)',
     icon: '💡',
-    order: 2.1,
+    order: 2.2,
     gated: true,
     description:
       'Bangladesh Bank IT/AME/Programmer exam-এর জন্য ১০০টা C programming problem — Bangla logic ব্যাখ্যা, sample I/O, এবং exam tips সহ।',
@@ -163,7 +172,7 @@ const SECTION_META: Record<string, SectionMeta> = {
   'c-programming-mcq': {
     title: 'C Programming MCQ Practice',
     icon: '✅',
-    order: 2.2,
+    order: 2.3,
     gated: true,
     description:
       '১৮০টা C programming MCQ — output tracing, pointer logic, operator precedence, theory — Bangladesh Bank IT exam-এর জন্য।',
