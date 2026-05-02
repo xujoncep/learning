@@ -121,7 +121,15 @@ const SECTION_META: Record<string, SectionMeta> = {
     description:
       '৯০টা DBMS MCQ — Fundamentals, ER, SQL, Normalization, Transactions, Indexing, NoSQL — Bangla question + Bangla explanation, Bank IT / BCS / NTRCA / GATE-এর জন্য fast revision।',
   },
-  root: { title: 'Handbooks', icon: '📚', order: 11 },
+  'cyber-security-mcq': {
+    title: 'Cyber Security MCQ Practice',
+    icon: '🔐',
+    order: 11,
+    gated: true,
+    description:
+      '১০০টা Cyber Security MCQ — ZTA, Malware, Cryptography, BB Framework 2026, API Security, AI threats — Bangla explanation সহ, Bangladesh Bank IT / BCS / NTRCA exam-এর জন্য fast revision।',
+  },
+  root: { title: 'Handbooks', icon: '📚', order: 12 },
 };
 
 export function isGatedSection(section: string | undefined): boolean {

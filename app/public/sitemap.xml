@@ -193,6 +193,72 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://learning-hub-3gw.pages.dev/docs/cyber-security-mcq/00-master-index</loc>
+    <lastmod>2026-05-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://learning-hub-3gw.pages.dev/docs/cyber-security-mcq/01-foundations-frameworks</loc>
+    <lastmod>2026-05-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://learning-hub-3gw.pages.dev/docs/cyber-security-mcq/02-malware-swift-threats</loc>
+    <lastmod>2026-05-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://learning-hub-3gw.pages.dev/docs/cyber-security-mcq/03-attack-techniques-network</loc>
+    <lastmod>2026-05-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://learning-hub-3gw.pages.dev/docs/cyber-security-mcq/04-security-concepts-physical</loc>
+    <lastmod>2026-05-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://learning-hub-3gw.pages.dev/docs/cyber-security-mcq/05-identity-access-social</loc>
+    <lastmod>2026-05-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://learning-hub-3gw.pages.dev/docs/cyber-security-mcq/06-web-cloud-appsec</loc>
+    <lastmod>2026-05-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://learning-hub-3gw.pages.dev/docs/cyber-security-mcq/07-cryptography-protocols</loc>
+    <lastmod>2026-05-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://learning-hub-3gw.pages.dev/docs/cyber-security-mcq/08-emerging-threats-protocols</loc>
+    <lastmod>2026-05-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://learning-hub-3gw.pages.dev/docs/cyber-security-mcq/09-expert-attacks-forensics</loc>
+    <lastmod>2026-05-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://learning-hub-3gw.pages.dev/docs/cyber-security-mcq/10-ai-security-compliance</loc>
+    <lastmod>2026-05-02</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://learning-hub-3gw.pages.dev/docs/dbms/00-master-index</loc>
     <lastmod>2026-05-02</lastmod>
     <changefreq>monthly</changefreq>
@@ -656,6 +722,12 @@
   </url>
   <url>
     <loc>https://learning-hub-3gw.pages.dev/sections/cyber-security-bd-bank</loc>
+    <lastmod>2026-05-02</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://learning-hub-3gw.pages.dev/sections/cyber-security-mcq</loc>
     <lastmod>2026-05-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
