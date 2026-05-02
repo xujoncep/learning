@@ -155,6 +155,15 @@ graph TD
 - **Trap 2:** "Thread কি প্রসেসের চেয়ে ফাস্ট রান করে?" না, কোড রান করার স্পিড এক, কিন্তু সুইচিং এবং ক্রিয়েশন ফাস্ট।
 - **Trap 3:** "Zombie process মেমোরি লিক করে?" না, এটি শুধু PCB-র একটি এন্ট্রি ব্লক করে রাখে।
 
+---
+
+## Quick Code Reference — pthread example
+
+```c
+#include <pthread.h>
+#include <stdio.h>
+
+void* worker(void *arg) {
     printf("Thread running: %d\n", *(int*)arg);
     return NULL;
 }
