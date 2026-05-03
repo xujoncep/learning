@@ -20,7 +20,6 @@ interface HeaderProps {
 // and via the section pages themselves. The mobile dropdown shows all sections explicitly.
 const PUBLIC_DESKTOP_LINKS = [
   { label: 'Home', to: '/' },
-  { label: 'Courses', to: '/courses' },
   { label: 'Handbooks', to: '/handbooks' },
   { label: 'Blog', to: '/blog' },
   { label: 'About', to: '/about' },
@@ -114,40 +113,45 @@ export function Header({ onMenuClick, showMenu = false, showSearch = false }: He
                       {isAuthenticated ? 'Dashboard' : 'Home'}
                     </Link>
                   </DropdownMenu.Item>
-                  <DropdownMenu.Item asChild>
-                    <Link to="/courses" className={PRIMARY_ITEM_CLASS}>
-                      All courses
-                    </Link>
-                  </DropdownMenu.Item>
+                  {isAuthenticated && (
+                    <DropdownMenu.Item asChild>
+                      <Link to="/courses" className={PRIMARY_ITEM_CLASS}>
+                        All courses
+                      </Link>
+                    </DropdownMenu.Item>
+                  )}
                   <DropdownMenu.Item asChild>
                     <Link to="/handbooks" className={PRIMARY_ITEM_CLASS}>
                       Handbooks
                     </Link>
                   </DropdownMenu.Item>
+                  <DropdownMenu.Item asChild>
+                    <Link to="/blog" className={PRIMARY_ITEM_CLASS}>
+                      Blog
+                    </Link>
+                  </DropdownMenu.Item>
 
-                  <DropdownMenu.Separator className="my-1 h-px bg-line" />
-
-                  <DropdownMenu.Label className="px-3 py-1.5 text-[11px] font-semibold uppercase tracking-wider text-ink-4">
-                    Courses
-                  </DropdownMenu.Label>
-                  {COURSE_SECTIONS.map((s) => (
-                    <DropdownMenu.Item key={s.to} asChild>
-                      <Link to={s.to} className={COURSE_ITEM_CLASS}>
-                        {s.label}
-                      </Link>
-                    </DropdownMenu.Item>
-                  ))}
+                  {isAuthenticated && (
+                    <>
+                      <DropdownMenu.Separator className="my-1 h-px bg-line" />
+                      <DropdownMenu.Label className="px-3 py-1.5 text-[11px] font-semibold uppercase tracking-wider text-ink-4">
+                        Courses
+                      </DropdownMenu.Label>
+                      {COURSE_SECTIONS.map((s) => (
+                        <DropdownMenu.Item key={s.to} asChild>
+                          <Link to={s.to} className={COURSE_ITEM_CLASS}>
+                            {s.label}
+                          </Link>
+                        </DropdownMenu.Item>
+                      ))}
+                    </>
+                  )}
 
                   <DropdownMenu.Separator className="my-1 h-px bg-line" />
 
                   <DropdownMenu.Item asChild>
                     <Link to="/about" className={PRIMARY_ITEM_CLASS}>
                       About
-                    </Link>
-                  </DropdownMenu.Item>
-                  <DropdownMenu.Item asChild>
-                    <Link to="/blog" className={PRIMARY_ITEM_CLASS}>
-                      Blog
                     </Link>
                   </DropdownMenu.Item>
 
