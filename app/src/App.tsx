@@ -11,6 +11,7 @@ import { HandbooksPage } from '@/pages/HandbooksPage';
 import { CoursesIndexPage } from '@/pages/CoursesIndexPage';
 import { SubjectPage } from '@/pages/SubjectPage';
 import { AboutPage } from '@/pages/AboutPage';
+import BlogPage from '@/pages/BlogPage';
 import { AdminPage } from '@/pages/AdminPage';
 import { ProtectedRoute, AdminRoute } from '@/lib/auth';
 
@@ -62,6 +63,16 @@ function App() {
         element={
           <Layout showSearch>
             <AboutPage />
+          </Layout>
+        }
+      />
+
+      {/* Blog — placeholder, coming soon */}
+      <Route
+        path="/blog"
+        element={
+          <Layout showSearch>
+            <BlogPage />
           </Layout>
         }
       />
