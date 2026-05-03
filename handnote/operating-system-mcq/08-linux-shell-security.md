@@ -65,15 +65,15 @@
 
 ```mermaid
 flowchart TD
-    Root[/]
-    Root --> bin[/bin - essential commands]
-    Root --> etc[/etc - config files]
-    Root --> home[/home - user dirs]
-    Root --> var[/var - logs, mail, spool]
-    Root --> usr[/usr - user programs]
-    Root --> dev[/dev - device files]
-    Root --> tmp[/tmp - temporary]
-    Root --> proc[/proc - kernel info]
+    Root["/ root"]
+    Root --> bin["bin - essential commands"]
+    Root --> etc["etc - config files"]
+    Root --> home["home - user dirs"]
+    Root --> var["var - logs, mail, spool"]
+    Root --> usr["usr - user programs"]
+    Root --> dev["dev - device files"]
+    Root --> tmp["tmp - temporary"]
+    Root --> proc["proc - kernel info"]
 ```
 
 | Dir | কী |
@@ -202,8 +202,8 @@ man -k password           # search by keyword
 ```mermaid
 flowchart LR
     Hacker[Attacker compromises a process]
-    Hacker -->|with PoLP| Limited[Limited damage<br/>only that role's access]
-    Hacker -->|without PoLP| Total[Total system compromise<br/>root everywhere]
+    Hacker -->|with PoLP| Limited["Limited damage - only that role's access"]
+    Hacker -->|without PoLP| Total["Total system compromise - root everywhere"]
 ```
 
 > **Real incident:** 2016 Bangladesh Bank heist — SWIFT operator-এর privilege ছিল প্রয়োজনের চেয়ে বেশি। PoLP enforce থাকলে $81M loss হয়তো এড়ানো যেত।

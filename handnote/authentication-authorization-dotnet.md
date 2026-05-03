@@ -1,4 +1,4 @@
-# Authentication & Authorization — Complete Guide for .NET Developers
+﻿# Authentication & Authorization — Complete Guide for .NET Developers
 
 ## Table of Contents
 
@@ -24,9 +24,9 @@
 
 ```mermaid
 flowchart LR
-    A["Request আসলো"] --> B{"Authentication<br/>তুমি কে?"}
+    A["Request আসলো"] --> B{"Authentication<br>তুমি কে?"}
     B -->|"❌"| C["401 Unauthorized"]
-    B -->|"✅"| D{"Authorization<br/>Permission আছে?"}
+    B -->|"✅"| D{"Authorization<br>Permission আছে?"}
     D -->|"❌"| E["403 Forbidden"]
     D -->|"✅"| F["200 OK ✅"]
 ```
@@ -42,8 +42,8 @@ flowchart LR
 
 ```mermaid
 flowchart TD
-    A["ClaimsPrincipal<br/>(ব্যক্তি — আপনি)"] --> B["ClaimsIdentity 1<br/>(পরিচয়পত্র — NID)"]
-    A --> C["ClaimsIdentity 2<br/>(পরিচয়পত্র — Passport)"]
+    A["ClaimsPrincipal<br>(ব্যক্তি — আপনি)"] --> B["ClaimsIdentity 1<br>(পরিচয়পত্র — NID)"]
+    A --> C["ClaimsIdentity 2<br>(পরিচয়পত্র — Passport)"]
     B --> D["Claim: Name = Rahim"]
     B --> E["Claim: Role = Admin"]
     B --> F["Claim: Department = HR"]
@@ -82,9 +82,9 @@ sequenceDiagram
     Client->>Server: GET /api/data (No credentials)
     Server-->>Client: 401 Unauthorized (WWW-Authenticate: Basic)
 
-    Note over Client: Base64("admin:password123")<br/>= "YWRtaW46cGFzc3dvcmQxMjM="
+    Note over Client: Base64("admin:password123")<br>= "YWRtaW46cGFzc3dvcmQxMjM="
 
-    Client->>Server: GET /api/data<br/>Authorization: Basic YWRtaW46cGFzc3dvcmQxMjM=
+    Client->>Server: GET /api/data<br>Authorization: Basic YWRtaW46cGFzc3dvcmQxMjM=
     Server-->>Client: 200 OK + Data
 ```
 
@@ -132,14 +132,14 @@ sequenceDiagram
 
     Browser->>Server: POST /login (username + password)
     Note over Server: Credentials validate করে
-    Server-->>Browser: Set-Cookie: .AspNetCore.Cookies=encrypted_value; HttpOnly; Secure
+    Server-->>Browser: 200 OK + Set-Cookie header (HttpOnly Secure)
 
-    Browser->>Server: GET /api/products<br/>Cookie: .AspNetCore.Cookies=encrypted_value
+    Browser->>Server: GET /api/products (Cookie header auto-sent)
     Note over Server: Cookie decrypt করে user info বের করে
     Server-->>Browser: 200 OK + Data
 
     Browser->>Server: POST /logout
-    Server-->>Browser: Set-Cookie: .AspNetCore.Cookies=; Expires=1970-01-01
+    Server-->>Browser: Set-Cookie with expired date (cookie cleared)
 ```
 
 ### Cookie এর Important Properties
@@ -156,11 +156,11 @@ sequenceDiagram
 ```mermaid
 flowchart TD
     A["অন্য site থেকে request"] --> B{SameSite Mode?}
-    B -->|Strict| C["Cookie যাবে না ❌<br/>সবচেয়ে safe"]
+    B -->|Strict| C["Cookie যাবে না ❌<br>সবচেয়ে safe"]
     B -->|Lax| D{Request type?}
     D -->|Link click / GET| E["Cookie যাবে ✅"]
     D -->|POST / iframe| F["Cookie যাবে না ❌"]
-    B -->|None| G["Cookie সবসময় যাবে ✅<br/>Secure flag mandatory"]
+    B -->|None| G["Cookie সবসময় যাবে ✅<br>Secure flag mandatory"]
 ```
 
 ### Session vs Cookie Authentication
@@ -168,8 +168,8 @@ flowchart TD
 ```mermaid
 flowchart TD
     A[Cookie-Based Auth] --> B{Data কোথায়?}
-    B -->|Cookie তে| C["Cookie Auth<br/>Encrypted data cookie তেই<br/>.NET default এটা"]
-    B -->|Server এ| D["Session Auth<br/>Server memory/Redis এ data<br/>Cookie তে শুধু SessionId"]
+    B -->|Cookie তে| C["Cookie Auth<br>Encrypted data cookie তেই<br>.NET default এটা"]
+    B -->|Server এ| D["Session Auth<br>Server memory/Redis এ data<br>Cookie তে শুধু SessionId"]
 ```
 
 ### Sliding vs Absolute Expiration
@@ -205,7 +205,7 @@ eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsInJvbGUiOiJBZG1pbiJ9.SflKxwRJSM
 
 ```mermaid
 flowchart LR
-    A["Header<br/>(Algorithm + Type)"] --- B["Payload<br/>(User Data / Claims)"] --- C["Signature<br/>(Verification)"]
+    A["Header<br>(Algorithm + Type)"] --- B["Payload<br>(User Data / Claims)"] --- C["Signature<br>(Verification)"]
 
     style A fill:#FF6B6B,color:#fff
     style B fill:#4ECDC4,color:#fff
@@ -233,7 +233,7 @@ sequenceDiagram
 
     Note over Client: Token store করো (localStorage/cookie)
 
-    Client->>Server: GET /api/products<br/>Authorization: Bearer eyJhbG...
+    Client->>Server: GET /api/products<br>Authorization: Bearer eyJhbG...
     Note over Server: Signature valid? Expired না? Issuer ঠিক?
     Server-->>Client: 200 OK + Data
 
@@ -304,11 +304,11 @@ sequenceDiagram
 
 ```mermaid
 flowchart TD
-    A["JWT Signing"] --> B["Symmetric — HMAC<br/>একটাই key<br/>Sign ও verify দুটোতে"]
-    A --> C["Asymmetric — RSA/ECDSA<br/>দুটো key<br/>Private sign, Public verify"]
+    A["JWT Signing"] --> B["Symmetric — HMAC<br>একটাই key<br>Sign ও verify দুটোতে"]
+    A --> C["Asymmetric — RSA/ECDSA<br>দুটো key<br>Private sign, Public verify"]
 
-    B --> B1["✅ Fast<br/>❌ Key share করতে হয়<br/>🎯 Monolith / Single server"]
-    C --> C1["✅ Key share safe<br/>❌ Slower<br/>🎯 Microservices"]
+    B --> B1["✅ Fast<br>❌ Key share করতে হয়<br>🎯 Monolith / Single server"]
+    C --> C1["✅ Key share safe<br>❌ Slower<br>🎯 Microservices"]
 ```
 
 ### JWT Revocation Approaches
@@ -323,13 +323,13 @@ flowchart TD
 
 ```mermaid
 flowchart TD
-    A["Sensitive data handle<br/>করতে চাই"] --> B{"Token এ রাখতে হবে?"}
-    B -->|"না (RECOMMENDED)"| C["Token এ শুধু user ID<br/>Sensitive data API call এ আনুন"]
+    A["Sensitive data handle<br>করতে চাই"] --> B{"Token এ রাখতে হবে?"}
+    B -->|"না (RECOMMENDED)"| C["Token এ শুধু user ID<br>Sensitive data API call এ আনুন"]
     B -->|"হ্যাঁ"| D{"কতটুকু protect?"}
     D -->|"পুরো token"| E["JWE — Encrypted JWT"]
     D -->|"Specific fields"| F["Field-level encryption"]
 
-    G["কোনো token এ data<br/>রাখতে চাই না"] --> H["Opaque Token<br/>Random string, data DB তে"]
+    G["কোনো token এ data<br>রাখতে চাই না"] --> H["Opaque Token<br>Random string, data DB তে"]
 ```
 
 ### কখন ব্যবহার করবেন
@@ -354,8 +354,8 @@ flowchart TD
 flowchart TD
     A["OpenID Connect (OIDC)"] --> B["OAuth 2.0"]
     B --> C["HTTP"]
-    A -.- D["Authentication — তুমি কে?<br/>ID Token দেয়"]
-    B -.- E["Authorization — কি access পাবে?<br/>Access Token দেয়"]
+    A -.- D["Authentication — তুমি কে?<br>ID Token দেয়"]
+    B -.- E["Authorization — কি access পাবে?<br>Access Token দেয়"]
 ```
 
 ```
@@ -367,9 +367,9 @@ OIDC      = "এই app কে বলো আমি কে" + OAuth 2.0 এর �
 
 ```mermaid
 flowchart LR
-    A["Resource Owner<br/>(User — আপনি)"] -->|"Permission দেয়"| B["Client<br/>(Your App)"]
-    B -->|"Token চায়"| C["Authorization Server<br/>(Google)"]
-    C -->|"Token verify"| D["Resource Server<br/>(Google API)"]
+    A["Resource Owner<br>(User — আপনি)"] -->|"Permission দেয়"| B["Client<br>(Your App)"]
+    B -->|"Token চায়"| C["Authorization Server<br>(Google)"]
+    C -->|"Token verify"| D["Resource Server<br>(Google API)"]
 ```
 
 | Term | কে | উদাহরণ |
@@ -384,11 +384,11 @@ flowchart LR
 
 ```mermaid
 flowchart TD
-    A["OAuth 2.0 Flows"] --> B["Authorization Code<br/>✅ RECOMMENDED<br/>Server-side apps"]
-    A --> C["Authorization Code + PKCE<br/>✅ RECOMMENDED<br/>SPA / Mobile"]
-    A --> D["Client Credentials<br/>✅ Machine-to-Machine"]
-    A --> E["Resource Owner Password<br/>⚠️ Legacy only"]
-    A --> F["Implicit<br/>❌ DEPRECATED"]
+    A["OAuth 2.0 Flows"] --> B["Authorization Code<br>✅ RECOMMENDED<br>Server-side apps"]
+    A --> C["Authorization Code + PKCE<br>✅ RECOMMENDED<br>SPA / Mobile"]
+    A --> D["Client Credentials<br>✅ Machine-to-Machine"]
+    A --> E["Resource Owner Password<br>⚠️ Legacy only"]
+    A --> F["Implicit<br>❌ DEPRECATED"]
 
     style B fill:#27ae60,color:#fff
     style C fill:#27ae60,color:#fff
@@ -424,11 +424,11 @@ sequenceDiagram
 
 ```mermaid
 flowchart TD
-    A["সমস্যা"] --> B["SPA/Mobile এ client_secret<br/>safe রাখা যায় না<br/>Browser source code দেখা যায়"]
+    A["সমস্যা"] --> B["SPA/Mobile এ client_secret<br>safe রাখা যায় না<br>Browser source code দেখা যায়"]
     B --> C["PKCE Solution"]
-    C --> D["code_verifier = random string<br/>(শুধু client জানে)"]
-    C --> E["code_challenge = SHA256(verifier)<br/>(server এ পাঠায়)"]
-    C --> F["Token নিতে verifier লাগে<br/>Hacker জানে না → safe"]
+    C --> D["code_verifier = random string<br>(শুধু client জানে)"]
+    C --> E["code_challenge = SHA256(verifier)<br>(server এ পাঠায়)"]
+    C --> F["Token নিতে verifier লাগে<br>Hacker জানে না → safe"]
 ```
 
 ### ID Token vs Access Token
@@ -474,11 +474,11 @@ Microsoft এর **built-in membership system** — user registration, login, pa
 
 ```mermaid
 flowchart TD
-    A["ASP.NET Core Identity"] --> B["UserManager<br/>User CRUD"]
-    A --> C["SignInManager<br/>Login/Logout"]
-    A --> D["RoleManager<br/>Role CRUD"]
+    A["ASP.NET Core Identity"] --> B["UserManager<br>User CRUD"]
+    A --> C["SignInManager<br>Login/Logout"]
+    A --> D["RoleManager<br>Role CRUD"]
 
-    B --> E["Entity Framework Core<br/>IdentityDbContext"]
+    B --> E["Entity Framework Core<br>IdentityDbContext"]
     C --> E
     D --> E
     E --> F["SQL Server / PostgreSQL / SQLite"]
@@ -532,7 +532,7 @@ erDiagram
 
 ```mermaid
 flowchart LR
-    A["Password: MySecret@123"] -->|"PBKDF2 Hash + Salt"| B["AQAAAAIAAYag...<br/>(irreversible)"]
+    A["Password: MySecret@123"] -->|"PBKDF2 Hash + Salt"| B["AQAAAAIAAYag...<br>(irreversible)"]
     B -->|"❌ Reverse অসম্ভব"| A
 ```
 
@@ -560,9 +560,9 @@ Password change, 2FA enable — এসব security-sensitive action এ Security
 
 ```mermaid
 flowchart TD
-    A["❌ Without IdentityServer"] --> B["প্রতিটি app এ আলাদা<br/>login system<br/>আলাদা user database"]
+    A["❌ Without IdentityServer"] --> B["প্রতিটি app এ আলাদা<br>login system<br>আলাদা user database"]
 
-    C["✅ With IdentityServer"] --> D["একটি Central Auth Server<br/>সব app একই server থেকে login<br/>Single Sign-On (SSO)"]
+    C["✅ With IdentityServer"] --> D["একটি Central Auth Server<br>সব app একই server থেকে login<br>Single Sign-On (SSO)"]
 ```
 
 ### Architecture
@@ -630,7 +630,7 @@ sequenceDiagram
     Note over IS: Session আছে! আবার login লাগবে না!
     IS-->>FinanceApp: Tokens ✅ (login ছাড়াই!)
 
-    Note over User: Finance App এও logged in!<br/>আবার password দিতে হয়নি!
+    Note over User: Finance App এও logged in!<br>আবার password দিতে হয়নি!
 ```
 
 ### Discovery Document
@@ -680,10 +680,10 @@ Policy-Based:  "তুমি কি HR এর Manager, ২+ বছর experience
 
 ```mermaid
 flowchart TD
-    A["Authorization"] --> B["Role-Based<br/>Simple — Admin/User"]
-    A --> C["Claims-Based<br/>Medium — Claim value check"]
-    A --> D["Policy-Based<br/>Advanced — Custom logic"]
-    A --> E["Resource-Based<br/>নিজের data নিজে edit"]
+    A["Authorization"] --> B["Role-Based<br>Simple — Admin/User"]
+    A --> C["Claims-Based<br>Medium — Claim value check"]
+    A --> D["Policy-Based<br>Advanced — Custom logic"]
+    A --> E["Resource-Based<br>নিজের data নিজে edit"]
 
     style B fill:#3498db,color:#fff
     style C fill:#2ecc71,color:#fff
@@ -695,8 +695,8 @@ flowchart TD
 
 ```mermaid
 flowchart LR
-    A["Policy"] --> B["Requirement<br/>(কি শর্ত)"]
-    B --> C["Handler<br/>(কিভাবে check)"]
+    A["Policy"] --> B["Requirement<br>(কি শর্ত)"]
+    B --> C["Handler<br>(কিভাবে check)"]
     C --> D{"Succeed?"}
     D -->|Yes| E["✅ Access"]
     D -->|No| F["❌ Denied"]
@@ -750,9 +750,9 @@ Login করতে **দুটি ভিন্ন ধরনের proof** দি
 
 ```mermaid
 flowchart TD
-    A["Authentication Factors"] --> B["🔑 Something You KNOW<br/>Password, PIN"]
-    A --> C["📱 Something You HAVE<br/>Phone, Hardware Key"]
-    A --> D["🧬 Something You ARE<br/>Fingerprint, Face ID"]
+    A["Authentication Factors"] --> B["🔑 Something You KNOW<br>Password, PIN"]
+    A --> C["📱 Something You HAVE<br>Phone, Hardware Key"]
+    A --> D["🧬 Something You ARE<br>Fingerprint, Face ID"]
 ```
 
 **2FA = যেকোনো ২টি ভিন্ন category এর factor**
@@ -767,10 +767,10 @@ flowchart TD
 
 ```mermaid
 flowchart TD
-    A["2FA Methods"] --> B["📧 Email OTP<br/>সহজ কিন্তু slow"]
-    A --> C["📱 SMS OTP<br/>⚠️ SIM swap risk"]
-    A --> D["📲 Authenticator App (TOTP)<br/>✅ RECOMMENDED"]
-    A --> E["🔐 Hardware Key (FIDO2)<br/>সবচেয়ে secure"]
+    A["2FA Methods"] --> B["📧 Email OTP<br>সহজ কিন্তু slow"]
+    A --> C["📱 SMS OTP<br>⚠️ SIM swap risk"]
+    A --> D["📲 Authenticator App (TOTP)<br>✅ RECOMMENDED"]
+    A --> E["🔐 Hardware Key (FIDO2)<br>সবচেয়ে secure"]
     A --> F["📩 Push Notification"]
 ```
 
@@ -790,7 +790,7 @@ sequenceDiagram
     User->>Server: Email + Password
     Server-->>User: "Enter 2FA code"
 
-    Note over App: HMAC-SHA1(secret_key, current_time/30)<br/>= 847293 (30 sec valid)
+    Note over App: HMAC-SHA1(secret_key, current_time/30)<br>= 847293 (30 sec valid)
     User->>Server: Code: 847293
     Note over Server: Same calculation → 847293 ✅ Match!
     Server-->>User: Login Successful ✅
@@ -916,9 +916,9 @@ Certificate-Based Authentication এ username/password এর বদলে **dig
 
 ```mermaid
 flowchart TD
-    A["Regular TLS (HTTPS)"] --> B["শুধু Server prove করে<br/>Client: 'তুমি কি google.com?'<br/>Server: 'হ্যাঁ, এই certificate' ✅"]
+    A["Regular TLS (HTTPS)"] --> B["শুধু Server prove করে<br>Client: 'তুমি কি google.com?'<br>Server: 'হ্যাঁ, এই certificate' ✅"]
 
-    C["mTLS (Mutual TLS)"] --> D["দুজনেই prove করে<br/>Server: certificate দেখায় ✅<br/>Server: 'তোমার certificate দেখাও'<br/>Client: certificate দেখায় ✅"]
+    C["mTLS (Mutual TLS)"] --> D["দুজনেই prove করে<br>Server: certificate দেখায় ✅<br>Server: 'তোমার certificate দেখাও'<br>Client: certificate দেখায় ✅"]
 
     style A fill:#3498db,color:#fff
     style C fill:#e74c3c,color:#fff
@@ -952,7 +952,7 @@ sequenceDiagram
     Client->>Server: Client Certificate 🔐
     Note over Server: Client cert verify ✅
 
-    Note over Client,Server: 🔒 Encrypted channel established<br/>দুজনেই verified ✅✅
+    Note over Client,Server: 🔒 Encrypted channel established<br>দুজনেই verified ✅✅
 ```
 
 ### Microservices Architecture
@@ -1058,18 +1058,18 @@ Certificate expire হওয়ার আগে নতুন certificate deploy 
 
 ```mermaid
 flowchart TD
-    A["কোন Auth Method<br/>ব্যবহার করব?"] --> B{"কে access করবে?"}
+    A["কোন Auth Method<br>ব্যবহার করব?"] --> B{"কে access করবে?"}
 
-    B -->|"Human User<br/>(Browser)"| C{"App type?"}
-    C -->|"Traditional MVC"| D["Cookie Auth<br/>+ ASP.NET Identity"]
+    B -->|"Human User<br>(Browser)"| C{"App type?"}
+    C -->|"Traditional MVC"| D["Cookie Auth<br>+ ASP.NET Identity"]
     C -->|"SPA / Mobile"| E["JWT + OAuth 2.0"]
     C -->|"Multiple apps SSO"| F["IdentityServer / OIDC"]
 
-    B -->|"Developer /<br/>Third-party"| G["API Key"]
+    B -->|"Developer /<br>Third-party"| G["API Key"]
 
-    B -->|"Service /<br/>Machine"| H{"Environment?"}
+    B -->|"Service /<br>Machine"| H{"Environment?"}
     H -->|"Same network"| I["mTLS / Certificate"]
-    H -->|"Cross-network"| J["Client Credentials<br/>(OAuth 2.0)"]
+    H -->|"Cross-network"| J["Client Credentials<br>(OAuth 2.0)"]
 
     B -->|"High Security"| K["Any method + 2FA/MFA"]
 ```

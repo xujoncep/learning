@@ -1,4 +1,4 @@
-# Chapter 06 — Transactions, Concurrency & Recovery 🔄
+﻿# Chapter 06 — Transactions, Concurrency & Recovery 🔄
 
 > ACID, Two-Phase Locking, Isolation levels, Deadlock prevention (Wait-Die / Wound-Wait), Timestamp Ordering, Log-based Recovery, Checkpoint, Shadow Paging, MVCC, BASE — Bank IT / BCS / NTRCA exam-এর সবচেয়ে dense topic। ১৬টা MCQ এই এক chapter-এ।
 
@@ -68,12 +68,12 @@ stateDiagram-v2
 ```mermaid
 flowchart TD
     Sch[Schedule]
-    Sch --> Ser[Serial<br/>একটার পর একটা]
-    Sch --> Con[Concurrent<br/>interleaved]
-    Con --> Slz[Serializable<br/>= equivalent to some serial]
-    Slz --> Conf[Conflict<br/>Serializable]
-    Slz --> View[View<br/>Serializable]
-    Con --> NSlz[Non-serializable<br/>BAD]
+    Sch --> Ser[Serial<br>একটার পর একটা]
+    Sch --> Con[Concurrent<br>interleaved]
+    Con --> Slz[Serializable<br>= equivalent to some serial]
+    Slz --> Conf[Conflict<br>Serializable]
+    Slz --> View[View<br>Serializable]
+    Con --> NSlz[Non-serializable<br>BAD]
 ```
 
 | Schedule type | বৈশিষ্ট্য |
@@ -100,9 +100,9 @@ flowchart LR
 
 ```mermaid
 flowchart LR
-    Start([Txn start]) --> Grow[Growing Phase<br/>only acquire locks<br/>release nothing]
-    Grow --> Peak[Lock Point<br/>maximum locks held]
-    Peak --> Shrink[Shrinking Phase<br/>only release locks<br/>acquire nothing]
+    Start([Txn start]) --> Grow[Growing Phase<br>only acquire locks<br>release nothing]
+    Grow --> Peak[Lock Point<br>maximum locks held]
+    Peak --> Shrink[Shrinking Phase<br>only release locks<br>acquire nothing]
     Shrink --> End([Txn end])
 ```
 
@@ -126,9 +126,9 @@ flowchart LR
 
 ```mermaid
 flowchart LR
-    RU[Read Uncommitted<br/>weakest] --> RC[Read Committed]
+    RU[Read Uncommitted<br>weakest] --> RC[Read Committed]
     RC --> RR[Repeatable Read]
-    RR --> SR[Serializable<br/>strongest]
+    RR --> SR[Serializable<br>strongest]
 ```
 
 | Level | Dirty Read | Non-repeatable Read | Phantom Read |
@@ -149,13 +149,13 @@ flowchart LR
 ```mermaid
 flowchart TD
     DL[Deadlock handling]
-    DL --> Prev[Prevention<br/>structurally impossible করে দাও]
-    DL --> Av[Avoidance<br/>safe state check]
-    DL --> Det[Detection &<br/>Recovery]
+    DL --> Prev[Prevention<br>structurally impossible করে দাও]
+    DL --> Av[Avoidance<br>safe state check]
+    DL --> Det[Detection &<br>Recovery]
 
-    Prev --> WD[Wait-Die<br/>non-preemptive]
-    Prev --> WW[Wound-Wait<br/>preemptive]
-    Det --> RAG[Resource<br/>Allocation Graph]
+    Prev --> WD[Wait-Die<br>non-preemptive]
+    Prev --> WW[Wound-Wait<br>preemptive]
+    Det --> RAG[Resource<br>Allocation Graph]
 ```
 
 #### Wait-Die vs Wound-Wait (Timestamp-based prevention)
@@ -211,8 +211,8 @@ ARIES তিন phase-এ কাজ করে:
 
 ```mermaid
 flowchart LR
-    A[Analysis<br/>last checkpoint থেকে log scan,<br/>active txns + dirty pages list] --> R[Redo<br/>সব logged change replay]
-    R --> U[Undo<br/>uncommitted txns rollback<br/>using CLR]
+    A[Analysis<br>last checkpoint থেকে log scan,<br>active txns + dirty pages list] --> R[Redo<br>সব logged change replay]
+    R --> U[Undo<br>uncommitted txns rollback<br>using CLR]
 ```
 
 | Phase | কী হয় |
@@ -279,9 +279,9 @@ ACID strict consistency vs BASE eventual consistency — distributed system-এ 
 
 ```mermaid
 flowchart LR
-    T1[T1 TS=1] -- conflict --> Order[Older wins<br/>OR younger rollback]
+    T1[T1 TS=1] -- conflict --> Order[Older wins<br>OR younger rollback]
     T2[T2 TS=2] -- conflict --> Order
-    Order --> NoDL[No circular wait<br/>= No deadlock]
+    Order --> NoDL[No circular wait<br>= No deadlock]
 ```
 
 > **Trap:** 2PL (option C) serializability guarantee দেয় কিন্তু **deadlock prevent করে না**। Strict 2PL cascading rollback prevent করে কিন্তু deadlock-এর জন্যও solution না।
@@ -412,9 +412,9 @@ Crash হলে recovery system এই log scan করে:
 
 ```mermaid
 flowchart LR
-    S[Start] --> G[Growing Phase<br/>acquire only]
-    G --> LP[Lock Point<br/>peak]
-    LP --> Sh[Shrinking Phase<br/>release only]
+    S[Start] --> G[Growing Phase<br>acquire only]
+    G --> LP[Lock Point<br>peak]
+    LP --> Sh[Shrinking Phase<br>release only]
     Sh --> E[End]
 ```
 
@@ -642,14 +642,14 @@ T1 একই query দু-বার করল, প্রথমবার ৫ rows
 
 ```mermaid
 flowchart LR
-    Old[Old Page Table<br/>Shadow] --> P1[Page 1 v1]
+    Old[Old Page Table<br>Shadow] --> P1[Page 1 v1]
     Old --> P2[Page 2 v1]
 
-    New[New Page Table<br/>Current] --> P1
-    New --> P3[Page 2 v2<br/>new location!]
+    New[New Page Table<br>Current] --> P1
+    New --> P3[Page 2 v2<br>new location!]
 
     Commit[On Commit]
-    Commit --> Switch[Pointer Switch:<br/>Shadow := New]
+    Commit --> Switch[Pointer Switch:<br>Shadow := New]
 ```
 
 Updated page **নতুন location**-এ লেখা হয়, পুরনোটা untouched (shadow)। Commit হলে pointer switch — atomic operation। Crash হলে shadow page table-ই active থাকে → automatic recovery।
@@ -697,7 +697,7 @@ flowchart TD
     Req[T_i requests resource held by T_j]
     Req --> Cmp{TS T_i older?}
     Cmp -- Yes (older) --> Wait[T_i waits]
-    Cmp -- No (younger) --> Die[T_i rolls back<br/>restart with same TS]
+    Cmp -- No (younger) --> Die[T_i rolls back<br>restart with same TS]
 ```
 
 #### কেন starvation হয় না
@@ -849,8 +849,8 @@ flowchart LR
 
 ```mermaid
 flowchart LR
-    A[ACID<br/>Strong consistency<br/>RDBMS] --- T[Trade-off]
-    T --- B[BASE<br/>Eventual consistency<br/>NoSQL distributed]
+    A[ACID<br>Strong consistency<br>RDBMS] --- T[Trade-off]
+    T --- B[BASE<br>Eventual consistency<br>NoSQL distributed]
 ```
 
 | Aspect | ACID | BASE |
@@ -890,8 +890,8 @@ flowchart LR
 
 ```mermaid
 flowchart LR
-    Wr[Writer T1<br/>creates new version v2]
-    Old[v1 - committed<br/>visible to old readers]
+    Wr[Writer T1<br>creates new version v2]
+    Old[v1 - committed<br>visible to old readers]
     New[v2 - new]
 
     Wr --> New

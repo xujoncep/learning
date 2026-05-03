@@ -5,6 +5,7 @@ import { DocPage } from '@/pages/DocPage';
 import { SectionPage } from '@/pages/SectionPage';
 import { NotFoundPage } from '@/pages/NotFoundPage';
 import { LoginPage } from '@/pages/LoginPage';
+import { DevLoginPage } from '@/pages/DevLoginPage';
 import { AuthCallbackPage } from '@/pages/AuthCallbackPage';
 import { DashboardPage } from '@/pages/DashboardPage';
 import { HandbooksPage } from '@/pages/HandbooksPage';
@@ -29,6 +30,7 @@ function App() {
 
       {/* Auth routes */}
       <Route path="/login" element={<LoginPage />} />
+      <Route path="/dev-login" element={<DevLoginPage />} />
       <Route path="/auth/callback" element={<AuthCallbackPage />} />
 
       {/* Protected: dashboard */}

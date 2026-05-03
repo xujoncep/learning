@@ -27,17 +27,17 @@ Unlike Windows (which uses C:, D: drives), Linux uses a **single tree structure*
 
 ```mermaid
 flowchart TD
-    Root[/]
-    Root --> bin[/bin<br/>essential commands]
-    Root --> etc[/etc<br/>config files]
-    Root --> home[/home<br/>user dirs]
-    Root --> root[/root<br/>superuser home]
-    Root --> tmp[/tmp<br/>temporary files]
-    Root --> dev[/dev<br/>device files]
-    Root --> var[/var<br/>logs, mail, spool]
-    Root --> usr[/usr<br/>user programs]
-    Root --> proc[/proc<br/>kernel info]
-    Root --> sbin[/sbin<br/>system binaries]
+    Root["/ root"]
+    Root --> bin["bin - essential commands"]
+    Root --> etc["etc - config files"]
+    Root --> home["home - user dirs"]
+    Root --> root["root - superuser home"]
+    Root --> tmp["tmp - temporary files"]
+    Root --> dev["dev - device files"]
+    Root --> var["var - logs, mail, spool"]
+    Root --> usr["usr - user programs"]
+    Root --> proc["proc - kernel info"]
+    Root --> sbin["sbin - system binaries"]
 ```
 
 ### 2. Key Directories — Detailed
@@ -311,7 +311,7 @@ The **Shell** is a special user program that provides an **interface to use oper
 ```mermaid
 sequenceDiagram
     participant User
-    participant Shell as Shell (e.g., Bash)
+    participant Shell as "Shell (e.g. Bash)"
     participant Kernel
     participant HW as Hardware
     
