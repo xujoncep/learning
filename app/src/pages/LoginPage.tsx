@@ -13,6 +13,8 @@ export function LoginPage() {
 
   const [error] = useState<string | null>(() => {
     const code = searchParams.get('error');
+    const reason = searchParams.get('reason');
+    if (reason === 'banned') return 'Your account has been suspended. Contact support.';
     if (code === 'oauth_failed') return 'Google sign-in did not complete. Please try again.';
     if (code === 'oauth_invalid') return 'Google session was rejected. Please try again.';
     return null;

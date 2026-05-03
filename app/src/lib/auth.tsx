@@ -8,7 +8,7 @@ import {
   type ReactNode,
 } from 'react';
 import { Navigate, useLocation } from 'react-router-dom';
-import { getMe, type UserRow } from '@/lib/api';
+import { ApiError, getMe, type UserRow } from '@/lib/api';
 
 /**
  * Two auth paths coexist:
@@ -93,10 +93,25 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         if (cancelled) return;
         setApiUser(user);
       })
-      .catch(() => {
-        // authedFetch already cleared the token on 401; mirror state.
+      .catch((err: unknown) => {
+        // authedFetch already cleared the token on 401/banned; mirror state.
         if (cancelled) return;
         setApiUser(null);
+        if (err instanceof ApiError && err.code === 'banned') {
+          try {
+            localStorage.removeItem(K_AUTH);
+            localStorage.removeItem(K_NAME);
+            localStorage.removeItem(K_SINCE);
+          } catch {
+            /* noop */
+          }
+          setAuthed(false);
+          setDisplayName(null);
+          setLoggedInAt(null);
+          if (typeof window !== 'undefined' && window.location.pathname !== '/login') {
+            window.location.replace('/login?reason=banned');
+          }
+        }
       });
     return () => {
       cancelled = true;

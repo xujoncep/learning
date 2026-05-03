@@ -6,6 +6,7 @@ export interface UserRow {
   avatar_url: string | null;
   created_at: string;
   last_seen: string;
+  banned_at: string | null;
 }
 
 export interface BookmarkRow {
@@ -37,5 +38,19 @@ export interface ReadingEventRow {
   doc_title: string;
   section_id: string;
   duration_seconds: number;
+  created_at: string;
+}
+
+export type AnnouncementLevel = 'info' | 'warn' | 'success';
+
+export interface AnnouncementRow {
+  id: number;
+  title: string;
+  body: string;
+  level: AnnouncementLevel;
+  starts_at: string;
+  ends_at: string | null;
+  is_active: number;
+  created_by: number | null;
   created_at: string;
 }

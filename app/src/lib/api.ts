@@ -20,9 +20,9 @@ export interface ProgressItem {
 }
 
 export class ApiError extends Error {
-  code?: 'unauthorized';
+  code?: 'unauthorized' | 'banned';
   status: number;
-  constructor(message: string, status: number, code?: 'unauthorized') {
+  constructor(message: string, status: number, code?: 'unauthorized' | 'banned') {
     super(message);
     this.name = 'ApiError';
     this.status = status;
@@ -63,11 +63,19 @@ export async function authedFetch<T>(path: string, init?: RequestInit): Promise<
 
   if (!res.ok) {
     let message = `HTTP ${res.status}`;
+    let errorCode: string | undefined;
     try {
       const data = (await res.json()) as { error?: string };
-      if (data?.error) message = data.error;
+      if (data?.error) {
+        message = data.error;
+        errorCode = data.error;
+      }
     } catch {
       /* body wasn't JSON */
+    }
+    if (res.status === 403 && errorCode === 'banned') {
+      clearSession();
+      throw new ApiError('banned', 403, 'banned');
     }
     throw new ApiError(message, res.status);
   }
@@ -227,9 +235,13 @@ export async function getReadingSummary(): Promise<ReadingSummary> {
 export interface AdminStats {
   total_users: number;
   active_today: number;
-  active_7d: number;
-  active_30d: number;
-  new_users_7d: number;
+  active_7d?: number;
+  active_30d?: number;
+  new_users_7d?: number;
+  active_window?: number;
+  new_users_window?: number;
+  from?: string;
+  to?: string;
   total_events: number;
   total_bookmarks: number;
   top_docs: Array<{ doc_slug: string; doc_title: string; visit_count: number }>;
@@ -245,6 +257,46 @@ export interface AdminUserRow {
   bookmark_count: number;
   event_count: number;
   progress_count: number;
+  banned_at: string | null;
+}
+
+export interface AuditEntry {
+  id: number;
+  action: string;
+  target: string | null;
+  created_at: string;
+  actor_name: string | null;
+  actor_email: string | null;
+}
+
+export interface AnnouncementAdminRow {
+  id: number;
+  title: string;
+  body: string;
+  level: 'info' | 'warn' | 'success';
+  starts_at: string;
+  ends_at: string | null;
+  is_active: 0 | 1;
+  created_by: number | null;
+  created_at: string;
+  creator_name: string | null;
+}
+
+export interface ActiveAnnouncement {
+  id: number;
+  title: string;
+  body: string;
+  level: 'info' | 'warn' | 'success';
+  starts_at: string;
+  ends_at: string | null;
+  created_at: string;
+}
+
+export interface DailyAnalyticsPoint {
+  date: string;
+  events: number;
+  distinct_users: number;
+  new_users: number;
 }
 
 export interface AdminUserDetail {
@@ -269,6 +321,11 @@ export async function getAdminStats(): Promise<AdminStats> {
   return authedFetch<AdminStats>('/admin/stats');
 }
 
+export async function getAdminStatsRange(from: string, to: string): Promise<AdminStats> {
+  const q = new URLSearchParams({ from, to });
+  return authedFetch<AdminStats>(`/admin/stats?${q.toString()}`);
+}
+
 export async function getAdminUsers(params: {
   page?: number;
   limit?: number;
@@ -283,4 +340,87 @@ export async function getAdminUsers(params: {
 
 export async function getAdminUserDetail(id: number): Promise<AdminUserDetail> {
   return authedFetch<AdminUserDetail>(`/admin/users/${id}`);
+}
+
+export async function banUser(id: number): Promise<void> {
+  await authedFetch<{ ok: true }>(`/admin/users/${id}/ban`, { method: 'POST' });
+}
+
+export async function unbanUser(id: number): Promise<void> {
+  await authedFetch<{ ok: true }>(`/admin/users/${id}/unban`, { method: 'POST' });
+}
+
+export async function deleteUser(id: number): Promise<void> {
+  await authedFetch<{ ok: true }>(`/admin/users/${id}`, { method: 'DELETE' });
+}
+
+export async function getAdminAuditLog(params: {
+  page?: number;
+  limit?: number;
+}): Promise<{ entries: AuditEntry[]; total: number; page: number; limit: number }> {
+  const q = new URLSearchParams();
+  if (params.page) q.set('page', String(params.page));
+  if (params.limit) q.set('limit', String(params.limit));
+  return authedFetch(`/admin/audit-log?${q.toString()}`);
+}
+
+export async function listAdminAnnouncements(): Promise<AnnouncementAdminRow[]> {
+  const data = await authedFetch<{ announcements: AnnouncementAdminRow[] }>(
+    '/admin/announcements',
+  );
+  return data.announcements;
+}
+
+export async function createAnnouncement(data: {
+  title: string;
+  body: string;
+  level?: 'info' | 'warn' | 'success';
+  starts_at?: string;
+  ends_at?: string | null;
+}): Promise<AnnouncementAdminRow> {
+  const res = await authedFetch<{ announcement: AnnouncementAdminRow }>(
+    '/admin/announcements',
+    { method: 'POST', body: JSON.stringify(data) },
+  );
+  return res.announcement;
+}
+
+export async function updateAnnouncement(
+  id: number,
+  data: Partial<{
+    is_active: boolean;
+    title: string;
+    body: string;
+    level: 'info' | 'warn' | 'success';
+    ends_at: string | null;
+  }>,
+): Promise<AnnouncementAdminRow> {
+  const res = await authedFetch<{ announcement: AnnouncementAdminRow }>(
+    `/admin/announcements/${id}`,
+    { method: 'PATCH', body: JSON.stringify(data) },
+  );
+  return res.announcement;
+}
+
+export async function deleteAnnouncement(id: number): Promise<void> {
+  await authedFetch<{ ok: true }>(`/admin/announcements/${id}`, { method: 'DELETE' });
+}
+
+export async function getDailyAnalytics(
+  from: string,
+  to: string,
+): Promise<{ from: string; to: string; series: DailyAnalyticsPoint[] }> {
+  const q = new URLSearchParams({ from, to });
+  return authedFetch(`/admin/analytics/daily?${q.toString()}`);
+}
+
+export async function getActiveAnnouncements(): Promise<ActiveAnnouncement[]> {
+  const data = await authedFetch<{ announcements: ActiveAnnouncement[] }>(
+    '/me/announcements',
+  );
+  return data.announcements;
+}
+
+export async function dismissAnnouncement(id: number): Promise<void> {
+  await authedFetch<{ ok: true }>(`/me/announcements/${id}/dismiss`, { method: 'POST' });
 }

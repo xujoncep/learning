@@ -43,7 +43,7 @@ authRoutes.get('/google/callback', async (c) => {
     }
 
     const user = await upsertGoogleUser(c.env.DB, decoded);
-    await recordAudit(c.env.DB, user.id, 'login', null);
+    await recordAudit(c.env.DB, user.id, 'auth.login', user.email);
 
     const exp = Math.floor(Date.now() / 1000) + 7 * 24 * 3600;
     const token = await signJwt({ sub: user.id, exp }, c.env.JWT_SECRET);

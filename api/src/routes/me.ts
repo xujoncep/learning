@@ -3,7 +3,9 @@ import type { Env } from '../env';
 import { authRequired } from '../lib/auth-middleware';
 import {
   addBookmark,
+  dismissAnnouncement,
   getUserById,
+  listActiveAnnouncementsForUser,
   listBookmarks,
   listProgress,
   removeBookmark,
@@ -148,6 +150,25 @@ meRoutes.get('/summary', async (c) => {
   const userId = c.get('userId');
   const summary = await getReadingSummary(c.env.DB, userId);
   return c.json(summary);
+});
+
+// Active, undismissed announcements for the current user — drives the
+// in-app banner stack.
+meRoutes.get('/announcements', async (c) => {
+  const userId = c.get('userId');
+  const items = await listActiveAnnouncementsForUser(c.env.DB, userId);
+  return c.json({ announcements: items });
+});
+
+// Idempotent dismissal — re-clicking the X is harmless.
+meRoutes.post('/announcements/:id/dismiss', async (c) => {
+  const userId = c.get('userId');
+  const idRaw = Number(c.req.param('id'));
+  if (!Number.isFinite(idRaw) || !Number.isInteger(idRaw) || idRaw <= 0) {
+    return c.json({ error: 'invalid id' }, 400);
+  }
+  await dismissAnnouncement(c.env.DB, userId, idRaw);
+  return c.json({ ok: true });
 });
 
 meRoutes.post('/progress/:slug', async (c) => {
