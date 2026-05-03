@@ -25,10 +25,13 @@ function formatTime(iso: string): string {
   return d.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit' });
 }
 
+const INITIAL_VISIBLE = 5;
+
 export function DayDetails({ date }: Props) {
   const [events, setEvents] = useState<DayEvent[] | null>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [showAll, setShowAll] = useState(false);
 
   useEffect(() => {
     if (!date) {
@@ -106,7 +109,7 @@ export function DayDetails({ date }: Props) {
             );
           })()}
           <ul className="mt-4 space-y-2.5">
-            {events.map((e) => {
+            {(showAll ? events : events.slice(0, INITIAL_VISIBLE)).map((e) => {
               const doc = findDoc(e.doc_slug);
               const sectionMeta = getSectionMeta(e.section_id);
               const path = doc?.path ?? `/docs/${e.doc_slug}`;
@@ -141,6 +144,15 @@ export function DayDetails({ date }: Props) {
               );
             })}
           </ul>
+          {!showAll && events.length > INITIAL_VISIBLE && (
+            <button
+              type="button"
+              onClick={() => setShowAll(true)}
+              className="mt-3 w-full py-2 text-[12.5px] text-ink-3 hover:text-ink rounded-md hover:bg-sand-2 transition-colors"
+            >
+              See {events.length - INITIAL_VISIBLE} more
+            </button>
+          )}
           <div className="mt-4 pt-3 border-t border-line border-dashed text-[11.5px] text-ink-4 inline-flex items-center gap-1.5">
             <BookOpen className="h-3 w-3" /> Click any item to reopen it
           </div>

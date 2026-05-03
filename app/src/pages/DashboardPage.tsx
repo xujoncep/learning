@@ -42,6 +42,9 @@ export function DashboardPage() {
   const [selectedDate, setSelectedDate] = useState<string | null>(
     () => new Date().toISOString().slice(0, 10),
   );
+  const [showAllRecent, setShowAllRecent] = useState(false);
+
+  const RECENT_INITIAL = 5;
 
   // Tracks whether the user has a real API token (Google OAuth) vs only a
   // local-only session (the internal shared-password path used for testing).
@@ -247,7 +250,7 @@ export function DashboardPage() {
 
           {!summaryLoading && recent.length > 0 && (
             <ul className="grid md:grid-cols-2 gap-2">
-              {recent.map((r) => {
+              {(showAllRecent ? recent : recent.slice(0, RECENT_INITIAL)).map((r) => {
                 const doc = findDoc(r.doc_slug);
                 const meta = getSectionMeta(r.section_id);
                 const path = doc?.path ?? `/docs/${r.doc_slug}`;
@@ -276,6 +279,16 @@ export function DashboardPage() {
                 );
               })}
             </ul>
+          )}
+
+          {!summaryLoading && !showAllRecent && recent.length > RECENT_INITIAL && (
+            <button
+              type="button"
+              onClick={() => setShowAllRecent(true)}
+              className="mt-3 w-full py-2.5 text-[13px] text-ink-3 hover:text-ink rounded-md hover:bg-sand-2 transition-colors border border-dashed border-line"
+            >
+              See {recent.length - RECENT_INITIAL} more chapters
+            </button>
           )}
         </div>
       </div>
