@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react';
-import { Link, NavLink } from 'react-router-dom';
-import { Moon, Sun, Menu, Search, Type } from 'lucide-react';
+import { Link, NavLink, useNavigate } from 'react-router-dom';
+import { Moon, Sun, Menu, Search, Type, LogOut } from 'lucide-react';
 import * as DropdownMenu from '@radix-ui/react-dropdown-menu';
 import { useTheme } from '@/lib/theme';
 import { useFontSize } from '@/lib/font-size';
-import { useAuth } from '@/lib/auth';
+import { useAuth, avatarColor, initials } from '@/lib/auth';
 import { SearchDialog } from './SearchDialog';
 import { Logo } from './Logo';
 import { UserMenu } from './UserMenu';
@@ -52,8 +52,12 @@ const COURSE_ITEM_CLASS =
 export function Header({ onMenuClick, showMenu = false, showSearch = false }: HeaderProps) {
   const { theme, toggleTheme } = useTheme();
   const { fontSize, setFontSize } = useFontSize();
-  const { isAuthenticated } = useAuth();
+  const { isAuthenticated, displayName, logout } = useAuth();
+  const navigate = useNavigate();
   const [searchOpen, setSearchOpen] = useState(false);
+
+  const avatarBg = avatarColor(displayName);
+  const avatarLabel = initials(displayName);
 
   useEffect(() => {
     const handler = (e: KeyboardEvent) => {
@@ -155,7 +159,27 @@ export function Header({ onMenuClick, showMenu = false, showSearch = false }: He
                     </Link>
                   </DropdownMenu.Item>
 
-                  {!isAuthenticated && (
+                  {isAuthenticated ? (
+                    <>
+                      <DropdownMenu.Separator className="my-1 h-px bg-line" />
+                      <div className="px-3 py-2 flex items-center gap-2.5">
+                        <span
+                          className="h-7 w-7 shrink-0 rounded-full text-surface font-serif text-xs font-semibold flex items-center justify-center"
+                          style={{ background: avatarBg }}
+                        >
+                          {avatarLabel}
+                        </span>
+                        <span className="text-[13px] text-ink font-medium truncate">{displayName}</span>
+                      </div>
+                      <DropdownMenu.Item
+                        onSelect={() => { logout(); navigate('/'); }}
+                        className="flex items-center gap-2.5 px-3 py-2 text-sm rounded-md cursor-pointer outline-none transition-colors text-ink-3 data-[highlighted]:bg-sand-2 data-[highlighted]:text-ink"
+                      >
+                        <LogOut className="h-4 w-4" />
+                        Sign out
+                      </DropdownMenu.Item>
+                    </>
+                  ) : (
                     <>
                       <DropdownMenu.Separator className="my-1 h-px bg-line" />
                       <DropdownMenu.Item asChild>
@@ -266,9 +290,11 @@ export function Header({ onMenuClick, showMenu = false, showSearch = false }: He
             {theme === 'dark' ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
           </button>
 
-          {/* Auth CTAs */}
+          {/* Auth CTAs — avatar hidden on mobile (sign-out lives in hamburger menu) */}
           {isAuthenticated ? (
-            <UserMenu />
+            <span className="hidden md:inline-flex">
+              <UserMenu />
+            </span>
           ) : (
             <div className="hidden sm:flex items-center gap-2">
               <Link
