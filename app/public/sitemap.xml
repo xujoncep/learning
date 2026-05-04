@@ -79,37 +79,19 @@
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://learning-hub-3gw.pages.dev/docs/c-programming/04-arrays-strings</loc>
-    <lastmod>2026-05-04</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
     <loc>https://learning-hub-3gw.pages.dev/docs/c-programming/04-pointer-mastery</loc>
     <lastmod>2026-05-04</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://learning-hub-3gw.pages.dev/docs/c-programming/05-pointers</loc>
+    <loc>https://learning-hub-3gw.pages.dev/docs/c-programming/05-structures-unions</loc>
     <lastmod>2026-05-04</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://learning-hub-3gw.pages.dev/docs/c-programming/05-structs-unions</loc>
-    <lastmod>2026-05-04</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://learning-hub-3gw.pages.dev/docs/c-programming/06-file-cli</loc>
-    <lastmod>2026-05-04</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://learning-hub-3gw.pages.dev/docs/c-programming/06-structures-unions</loc>
+    <loc>https://learning-hub-3gw.pages.dev/docs/c-programming/06-file-io</loc>
     <lastmod>2026-05-04</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
@@ -121,13 +103,19 @@
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://learning-hub-3gw.pages.dev/docs/c-programming/09-interview-master</loc>
+    <loc>https://learning-hub-3gw.pages.dev/docs/c-programming/08-interview-master</loc>
     <lastmod>2026-05-04</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://learning-hub-3gw.pages.dev/docs/c-programming-mcq/01-bb-mcq-180</loc>
+    <lastmod>2026-05-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://learning-hub-3gw.pages.dev/docs/c-programming-mcq/02-file-io-mcq</loc>
     <lastmod>2026-05-04</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>

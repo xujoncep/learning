@@ -145,6 +145,13 @@ const LEGACY_SLUG_REDIRECTS: Record<string, string> = {
   'bb-dsa-sorting-searching': '/docs/bb-dsa/04-sorting-searching',
   'dsa-graph-hashing-dp': '/docs/bb-dsa/05-graph-hashing-dp',
   'bb-dsa-mcq-150': '/docs/bb-dsa/06-mcq-150',
+  // C Programming — renamed/deleted files → correct current paths
+  'c-programming/04-arrays-strings': '/docs/c-programming/03-data-containers',
+  'c-programming/05-pointers': '/docs/c-programming/04-pointer-mastery',
+  'c-programming/05-structs-unions': '/docs/c-programming/05-structures-unions',
+  'c-programming/06-structures-unions': '/docs/c-programming/05-structures-unions',
+  'c-programming/06-file-cli': '/docs/c-programming/06-file-io',
+  'c-programming/09-interview-master': '/docs/c-programming/08-interview-master',
 };
 
 export function DocPage() {

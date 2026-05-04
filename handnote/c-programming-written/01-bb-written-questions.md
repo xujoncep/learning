@@ -1026,6 +1026,75 @@ Command line argument হলো program চালানোর সময় termi
 
 ---
 
+---
+
+## Topic 21 — Linear Search vs. Binary Search
+
+> **Question:** Explain Linear Search and Binary Search algorithms. Compare their time complexity and describe when each should be used with code examples in C.
+
+### Answer
+
+**1. Linear Search**
+
+Linear Search sequentially checks each element of the array until the target is found or the list ends.
+
+```c
+int linearSearch(int arr[], int n, int target) {
+    for (int i = 0; i < n; i++) {
+        if (arr[i] == target) return i;  // found at index i
+    }
+    return -1;  // not found
+}
+```
+
+- **Works on:** Unsorted and sorted arrays
+- **Time Complexity:** O(n) — worst case scans all elements
+- **Space Complexity:** O(1)
+
+**2. Binary Search**
+
+Binary Search repeatedly divides the search space in half. The array **must be sorted**.
+
+```c
+int binarySearch(int arr[], int n, int target) {
+    int low = 0, high = n - 1;
+    while (low <= high) {
+        int mid = low + (high - low) / 2;
+        if (arr[mid] == target) return mid;
+        else if (arr[mid] < target) low = mid + 1;
+        else high = mid - 1;
+    }
+    return -1;
+}
+```
+
+- **Works on:** Sorted arrays only
+- **Time Complexity:** O(log n) — halves the search space each step
+- **Space Complexity:** O(1) iterative / O(log n) recursive
+
+**3. Comparison Table**
+
+| Feature | Linear Search | Binary Search |
+|---------|---------------|---------------|
+| Prerequisite | None (works on unsorted) | Array must be sorted |
+| Time — Best | O(1) — target at index 0 | O(1) — target is the mid |
+| Time — Worst | O(n) | O(log n) |
+| Time — Average | O(n/2) ≈ O(n) | O(log n) |
+| Space | O(1) | O(1) iterative |
+| Implementation | Simple | Slightly complex |
+| Use case | Small or unsorted data | Large sorted datasets |
+
+**4. When to Use Which**
+
+- Use **Linear Search** when the array is small, unsorted, or linked list (random access not possible).
+- Use **Binary Search** when the array is large and already sorted — it is exponentially faster (e.g., 1,000,000 elements: Linear needs 1M steps, Binary needs ~20 steps).
+
+**5. Bangla সারাংশ**
+
+Linear Search একের পর এক দেখে — সহজ কিন্তু ধীর। Binary Search প্রতিবার অর্ধেক কেটে দেয় — sorted array হলে অনেক দ্রুত। Bangladesh Bank exam-এ time complexity জিজ্ঞেস করে, তাই O(n) vs O(log n) এবং "sorted array required" — এই দুটো মনে রাখো।
+
+---
+
 ## Quick Revision Summary
 
 | # | Topic | মূল Concept |
@@ -1050,7 +1119,8 @@ Command line argument হলো program চালানোর সময় termi
 | 18 | `strlen` vs `sizeof` | Null terminator, compile vs run-time |
 | 19 | Bit-fields | Memory-efficient flags, protocol headers |
 | 20 | Command Line Args | argc, argv, atoi() |
+| 21 | Linear vs Binary Search | O(n) vs O(log n), sorted array required |
 
 ---
 
-> **শেষ কথা:** এই ২০টা topic Bangladesh Bank IT exam-এর written part-এর backbone। প্রতিটা answer-এর code নিজে compile করে দেখো, comparison table গুলা মুখস্থ করো, আর সংক্ষিপ্ত সারাংশ-এর বাংলা ব্যাখ্যা viva-তে কাজে লাগবে। Best of luck!
+> **শেষ কথা:** এই ২১টা topic Bangladesh Bank IT exam-এর written part-এর backbone। প্রতিটা answer-এর code নিজে compile করে দেখো, comparison table গুলা মুখস্থ করো, আর সংক্ষিপ্ত সারাংশ-এর বাংলা ব্যাখ্যা viva-তে কাজে লাগবে। Best of luck!
