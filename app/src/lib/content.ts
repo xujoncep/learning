@@ -131,15 +131,7 @@ const SUBJECT_META: Record<string, SubjectMeta> = {
     order: 8,
     description:
       'Arrays, Linked List, Stack, Queue, Tree, BST, Sorting, Searching, Graph, Hashing ও DP — BB IT/AME/Programmer exam-ready।',
-    url: '/docs/bb-dsa-master-index',
-    sections: [
-      { id: 'bb-dsa-arrays-linkedlist', label: 'Arrays & Linked List', icon: '📦' },
-      { id: 'bb-dsa-stack-queue', label: 'Stack & Queue', icon: '🗂️' },
-      { id: 'bb-dsa-tree-bst', label: 'Tree & BST', icon: '🌳' },
-      { id: 'bb-dsa-sorting-searching', label: 'Sorting & Searching', icon: '🔢' },
-      { id: 'dsa-graph-hashing-dp', label: 'Graph, Hashing & DP', icon: '🕸️' },
-      { id: 'bb-dsa-mcq-150', label: '150 MCQ Bank', icon: '❓' },
-    ],
+    sections: [{ id: 'bb-dsa', label: 'Full Course', icon: '📊' }],
   },
 };
 
@@ -266,7 +258,15 @@ const SECTION_META: Record<string, SectionMeta> = {
     description:
       '১০০টা Cyber Security MCQ — ZTA, Malware, Cryptography, BB Framework 2026, API Security, AI threats — Bangla explanation সহ, Bangladesh Bank IT / BCS / NTRCA exam-এর জন্য fast revision।',
   },
-  root: { title: 'Handbooks', icon: '📚', order: 12 },
+  'bb-dsa': {
+    title: 'Bangladesh Bank DSA',
+    icon: '📊',
+    order: 12,
+    gated: false,
+    description:
+      'Arrays, Linked List, Stack, Queue, Tree, BST, Sorting, Searching, Graph, Hashing ও Dynamic Programming — Bangladesh Bank IT/AME/Programmer exam-এর জন্য সম্পূর্ণ DSA course।',
+  },
+  root: { title: 'Handbooks', icon: '📚', order: 13 },
 };
 
 export function isGatedSection(section: string | undefined): boolean {

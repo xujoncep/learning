@@ -138,6 +138,13 @@ function useScrollRestore(slug: string) {
 const LEGACY_SLUG_REDIRECTS: Record<string, string> = {
   'c-programming-hand-book': '/docs/c-programming/00-master-index',
   'computer-networking-hand-book': '/docs/computer-networking/00-master-index',
+  'bb-dsa-master-index': '/docs/bb-dsa/00-master-index',
+  'bb-dsa-arrays-linkedlist': '/docs/bb-dsa/01-arrays-linkedlist',
+  'bb-dsa-stack-queue': '/docs/bb-dsa/02-stack-queue',
+  'bb-dsa-tree-bst': '/docs/bb-dsa/03-tree-bst',
+  'bb-dsa-sorting-searching': '/docs/bb-dsa/04-sorting-searching',
+  'dsa-graph-hashing-dp': '/docs/bb-dsa/05-graph-hashing-dp',
+  'bb-dsa-mcq-150': '/docs/bb-dsa/06-mcq-150',
 };
 
 export function DocPage() {
