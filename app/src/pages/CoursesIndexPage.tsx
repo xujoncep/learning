@@ -69,6 +69,14 @@ const CONFIGS: Record<string, SubjectConfig> = {
     pillText: '#93C5FD',
     mono: 'GATE',
   },
+  'bb-dsa': {
+    gradient: 'from-[#052E16] via-[#14532D] to-[#166534]',
+    glow: 'rgba(34,197,94,0.55)',
+    pillBg: 'rgba(34,197,94,0.18)',
+    pillBorder: 'rgba(34,197,94,0.4)',
+    pillText: '#86EFAC',
+    mono: 'DSA',
+  },
 };
 
 const DEFAULT_CONFIG: SubjectConfig = {
@@ -114,16 +122,18 @@ export function CoursesIndexPage() {
 
       {/* Grid */}
       <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5 mt-10">
-        {subjects.map(({ id, title, description, sections: subSections }) => {
+        {subjects.map(({ id, title, description, sections: subSections, url: customUrl }) => {
           const hasMultiple = subSections.length > 1;
           const isGated = subSections.some((s) => isGatedSection(s.id));
           const config = CONFIGS[id] ?? DEFAULT_CONFIG;
 
-          const to = hasMultiple
-            ? `/subjects/${id}`
-            : isGated && !isAuthenticated
-              ? `/login?next=/sections/${subSections[0].id}`
-              : `/sections/${subSections[0].id}`;
+          const to = customUrl
+            ? customUrl
+            : hasMultiple
+              ? `/subjects/${id}`
+              : isGated && !isAuthenticated
+                ? `/login?next=/sections/${subSections[0].id}`
+                : `/sections/${subSections[0].id}`;
 
           return (
             <Link
